@@ -1,0 +1,14 @@
+package main
+
+import (
+	"github.com/astaxie/beego"
+	"webapp/chat"
+	_ "webapp/routers"
+)
+
+func main() {
+	server := chat.NewServer("/chat")
+	go server.Listen()
+
+	beego.Run()
+}
