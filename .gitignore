@@ -1,3 +1,4 @@
 bin/
 pkg/
 src/webapp/webapp
+src/webapp/disploy.sh

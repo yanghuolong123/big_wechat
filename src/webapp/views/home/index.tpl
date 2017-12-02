@@ -13,7 +13,7 @@
         var ws;
       $(function() {
         var $ul = $('#msg-list');
-        ws = new WebSocket("ws://localhost:8080/chat");
+        ws = new WebSocket("ws://localhost:8585/chat");
         ws.onmessage = function(e) {//alert(e);
 		var msg = JSON.parse(e.data);
           $('<li>').text(msg.body).appendTo($ul);
