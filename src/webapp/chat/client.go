@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"golang.org/x/net/websocket"
 	"io"
+	"time"
+	"yhl/help"
 )
 
 const channelBufSize = 100
@@ -79,6 +81,7 @@ func (c *Client) listenRead() {
 			return
 		default:
 			var msg Message
+			msg.Createtime = time.Now().Format(help.DatetimeFormat)
 			err := websocket.JSON.Receive(c.ws, &msg)
 			fmt.Println(msg)
 			if err == io.EOF {
