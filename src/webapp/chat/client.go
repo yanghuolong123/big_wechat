@@ -88,7 +88,7 @@ func (c *Client) listenRead() {
 			} else if err != nil {
 				c.server.Err(err)
 			} else {
-				msg.Createtime = time.Now().Format(help.DatetimeFormat)
+				msg.CreateTime = time.Now().Format(help.DatetimeFormat)
 				go func(msg Message) {
 					help.MongoDb.C("messages").Insert(&msg)
 					fmt.Println(msg)

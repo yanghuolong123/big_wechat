@@ -1,16 +1,21 @@
 var ws = {};
-
 $(function() {
 	var $ul = $('#msg-list');
 	ws = new WebSocket("ws://"+ window.location.host +"/chat");
 
 	ws.onopen = function(e) {
-		console.log("open");
+	  var msg = {}
+	  msg.uid= 1;
+	  msg.gid = [1,2];
+	  msg.type = "login";
+	  ws.send(JSON.stringify(msg));
+
+	  console.log("open");
 	}
 
 	ws.onmessage = function(e) {
 	  var msg = JSON.parse(e.data);
-	  var content = "时间:"+ msg.createtime + " 内容:"+ msg.content;
+	  var content = "时间:"+ msg.createTime + " 内容:"+ msg.content;
 	  $('<li>').text(content).appendTo($ul);
 	};
 
@@ -19,6 +24,8 @@ $(function() {
 	  var msg = {};
 
 	  msg.uid= 1;
+	  msg.gid = [1,2];
+	  msg.type = "message";
 	  msg.content= content;
 	  ws.send(JSON.stringify(msg));
 

@@ -6,8 +6,13 @@ import (
 
 type Message struct {
 	Uid        int    `json:"uid"`
+	Gid        []int  `json:"gid"`
+	Type       string `json:"type"`
+	ToUid      int    `json:"toUid"`
+	NickName   string `json:"nickName"`
+	SchoolName string `json:"schoolName"`
 	Content    string `json:"content"`
-	Createtime string `json:"createtime"`
+	CreateTime string `json:"createTime"`
 }
 
 func (self *Message) String() string {
