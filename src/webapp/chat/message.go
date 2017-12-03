@@ -1,16 +1,15 @@
 package chat
 
 import (
-//"time"
+	"strconv"
 )
 
 type Message struct {
-	Author string `json:"author"`
-	Body   string `json:"body"`
-	//Createtime time.Time `json:"createtime"`
+	Uid        int    `json:"uid"`
+	Content    string `json:"content"`
 	Createtime string `json:"createtime"`
 }
 
 func (self *Message) String() string {
-	return self.Author + " says " + self.Body
+	return strconv.Itoa(self.Uid) + " says " + self.Content
 }

@@ -10,7 +10,7 @@ $(function() {
 
 	ws.onmessage = function(e) {
 	  var msg = JSON.parse(e.data);
-	  var content = "时间:"+ msg.createtime + " 内容:"+ msg.body;
+	  var content = "时间:"+ msg.createtime + " 内容:"+ msg.content;
 	  $('<li>').text(content).appendTo($ul);
 	};
 
@@ -18,8 +18,8 @@ $(function() {
 	  var content = $('#name').val();
 	  var msg = {};
 
-	  msg.author = 'yhl';
-	  msg.body = content;
+	  msg.uid= 1;
+	  msg.content= content;
 	  ws.send(JSON.stringify(msg));
 
 	  $('#name').val("");

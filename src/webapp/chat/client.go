@@ -8,7 +8,7 @@ import (
 	"yhl/help"
 )
 
-const channelBufSize = 100
+const channelBufSize int = 100
 
 var maxId int = 0
 
@@ -82,14 +82,18 @@ func (c *Client) listenRead() {
 		default:
 			var msg Message
 			err := websocket.JSON.Receive(c.ws, &msg)
-			fmt.Println(msg)
+
 			if err == io.EOF {
 				c.doneMsgCh <- true
 			} else if err != nil {
 				c.server.Err(err)
 			} else {
-
 				msg.Createtime = time.Now().Format(help.DatetimeFormat)
+				go func(msg Message) {
+					help.MongoDb.C("messages").Insert(&msg)
+					fmt.Println(msg)
+				}(msg)
+
 				c.server.SendAll(&msg)
 			}
 		}
