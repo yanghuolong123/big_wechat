@@ -81,7 +81,6 @@ func (c *Client) listenRead() {
 			return
 		default:
 			var msg Message
-			msg.Createtime = time.Now().Format(help.DatetimeFormat)
 			err := websocket.JSON.Receive(c.ws, &msg)
 			fmt.Println(msg)
 			if err == io.EOF {
@@ -89,6 +88,8 @@ func (c *Client) listenRead() {
 			} else if err != nil {
 				c.server.Err(err)
 			} else {
+
+				msg.Createtime = time.Now().Format(help.DatetimeFormat)
 				c.server.SendAll(&msg)
 			}
 		}

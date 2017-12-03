@@ -6,6 +6,8 @@ import (
 	"log"
 )
 
+const pastSize = 5
+
 type Server struct {
 	pattern   string
 	messages  []*Message
@@ -94,6 +96,10 @@ func (s *Server) Listen() {
 		case c := <-s.delCh:
 			delete(s.clients, c.id)
 		case msg := <-s.sendAllCh:
+			size := len(s.messages)
+			if size > pastSize {
+				s.messages = s.messages[1:]
+			}
 			s.messages = append(s.messages, msg)
 			s.sendAll(msg)
 		case err := <-s.errCh:
