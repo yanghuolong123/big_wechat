@@ -5,7 +5,7 @@ var sessionId;
 
 $(function() {
 	$ul = $('#msg-list');
-        sessionId = $("#sessionId").val()
+        sessionId = parseInt($("#sessionId").val());
 	if(sessionId>0) {
 		listen()
 	}
@@ -17,7 +17,7 @@ $(function() {
 	  var content = $('#name').val();
 	  var msg = {};
 
-	  msg.uid= 1;
+	  msg.uid= sessionId;
 	  msg.gid = [1,2];
 	  msg.type = "message";
 	  msg.content= content;
@@ -47,7 +47,7 @@ function listen() {
 
         ws.onopen = function(e) {
           var msg = {}
-          msg.uid= 1;
+          msg.uid= sessionId;
           msg.gid = [1,2];
           msg.type = "login";
           ws.send(JSON.stringify(msg));
