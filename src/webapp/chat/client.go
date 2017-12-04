@@ -10,8 +10,6 @@ import (
 
 const channelBufSize int = 100
 
-var maxId int = 0
-
 type Client struct {
 	id        int
 	ws        *websocket.Conn
@@ -29,11 +27,10 @@ func NewClient(ws *websocket.Conn, server *Server) *Client {
 		panic("server cannot be nil")
 	}
 
-	maxId++
 	msg := make(chan *Message, channelBufSize)
 	doneMsg := make(chan bool)
 
-	return &Client{maxId, ws, server, msg, doneMsg}
+	return &Client{0, ws, server, msg, doneMsg}
 }
 
 func (c *Client) Conn() *websocket.Conn {
@@ -94,7 +91,13 @@ func (c *Client) listenRead() {
 					fmt.Println(msg)
 				}(msg)
 
-				c.server.SendAll(&msg)
+				if msg.Type == "login" {
+					c.id = msg.Uid
+					c.server.Add(c)
+				} else if msg.Type == "message" {
+					c.server.SendAll(&msg)
+				}
+
 			}
 		}
 	}

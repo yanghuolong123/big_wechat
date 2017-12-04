@@ -1,25 +1,19 @@
+
 var ws = {};
+var $ul;
+var sessionId;
+
 $(function() {
-	var $ul = $('#msg-list');
-	ws = new WebSocket("ws://"+ window.location.host +"/chat");
-
-	ws.onopen = function(e) {
-	  var msg = {}
-	  msg.uid= 1;
-	  msg.gid = [1,2];
-	  msg.type = "login";
-	  ws.send(JSON.stringify(msg));
-
-	  console.log("open");
+	$ul = $('#msg-list');
+        sessionId = $("#sessionId").val()
+	if(sessionId>0) {
+		listen()
 	}
 
-	ws.onmessage = function(e) {
-	  var msg = JSON.parse(e.data);
-	  var content = "时间:"+ msg.createTime + " 内容:"+ msg.content;
-	  $('<li>').text(content).appendTo($ul);
-	};
-
 	$('#sendBtn').click(function(){
+	  if(sessionId==0) {
+		return
+	  }
 	  var content = $('#name').val();
 	  var msg = {};
 
@@ -30,14 +24,49 @@ $(function() {
 	  ws.send(JSON.stringify(msg));
 
 	  $('#name').val("");
-	 });
+        });
 
-	ws.onclose = function(e) {
-		console.log("close");
-	}
+	$('#login').click(function(){
+		$.post("/login", {email:"yhl27ml@163.com", password:"654321"}, function(e){
+			sessionId = e.data.Id;
+			$("#sessionId").val(e.data.Id)
+			listen()
+		});
+	});
 
-	ws.onerror = function(e) {
-		console.log("error");
-	}
+	$("#logout").click(function(){
+		$.post("/logout", function(e){
+			alert(e.msg);
+		});
+	});
+
 });
+
+function listen() {
+	ws = new WebSocket("ws://"+ window.location.host +"/chat");
+
+        ws.onopen = function(e) {
+          var msg = {}
+          msg.uid= 1;
+          msg.gid = [1,2];
+          msg.type = "login";
+          ws.send(JSON.stringify(msg));
+
+          console.log("open");
+        }
+
+        ws.onmessage = function(e) {
+          var msg = JSON.parse(e.data);
+          var content = "时间:"+ msg.createTime + " 内容:"+ msg.content;
+          $('<li>').text(content).appendTo($ul);
+        };
+
+        ws.onclose = function(e) {
+                console.log("close");
+        }
+
+        ws.onerror = function(e) {
+                console.log("error");
+        }
+}
 

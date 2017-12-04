@@ -83,7 +83,7 @@ func (s *Server) Listen() {
 		}()
 
 		client := NewClient(ws, s)
-		s.Add(client)
+		//s.Add(client)
 		client.Listen()
 	}
 	beego.Handler(s.pattern, websocket.Handler(onConnected))

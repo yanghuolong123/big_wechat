@@ -7,7 +7,13 @@
     <script src="/static/js/main.js"></script>
 </head>
 <body>
+	<input type="hidden" id="sessionId" value="{{.user.Id}}" />
+	<h3>{{.user.Username}}</h3>
 	<h2>{{.welcome}}</h2>
+	<div>
+		<input type="button" id="login" value="login" />
+		<input type="button" id="logout" value="logout" />
+	</div>
 	<input id="name" type="text"/>
 	<input type="button" id="sendBtn" value="send"/>
 	<ul id="msg-list"></ul>
