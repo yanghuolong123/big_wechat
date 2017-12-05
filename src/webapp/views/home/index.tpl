@@ -5,9 +5,9 @@
     <title>Big Wechat</title>
     <script src="/static/plugin/jquery/jquery-3.2.1.min.js"></script>
     <script src="/static/js/main.js"></script>
+    {{template "../inc/script.tpl" .}}
 </head>
 <body>
-	<input type="hidden" id="sessionId" value="{{.user.Id}}" />
 	<h3>{{.user.Username}}</h3>
 	<h2>{{.welcome}}</h2>
 	<div>

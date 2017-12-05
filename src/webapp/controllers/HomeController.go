@@ -11,11 +11,17 @@ type HomeController struct {
 }
 
 func (this *HomeController) Get() {
+	//models.CreateFollow(1, 1)
+	//models.GetFollowByUid(1)
 	//u, _ := models.GetById(1)
 	u := this.GetSession("user")
 	if u == nil {
 		//u = models.User{}
 		u = new(models.User)
+	}
+	gids := this.GetSession("gids")
+	if gids == nil {
+		gids = []int{}
 	}
 
 	help.Log.Info("===============================")
@@ -24,6 +30,7 @@ func (this *HomeController) Get() {
 
 	this.Data["welcome"] = "hello, welcome to bigwechart! thank you!"
 	this.Data["user"] = u
+	this.Data["gids"] = gids
 	this.TplName = "home/index.tpl"
 }
 
@@ -34,13 +41,22 @@ func (this *HomeController) Login() {
 	if err != nil {
 		this.SendRes(-1, err.Error(), nil)
 	}
-	this.SetSession("user", u)
+	gids := models.GetFollowByUid(u.Id)
 
-	this.SendRes(0, "success", u)
+	this.SetSession("user", u)
+	this.SetSession("gids", gids)
+
+	m := make(map[string]interface{})
+	m["user"] = u
+	m["gids"] = gids
+
+	this.SendRes(0, "success", m)
 }
 
 func (this *HomeController) Logout() {
 	this.DelSession("user")
+	this.DelSession("gids")
+
 	this.SendRes(0, "success", nil)
 }
 

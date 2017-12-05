@@ -1,11 +1,9 @@
 
 var ws = {};
 var $ul;
-var sessionId;
 
 $(function() {
 	$ul = $('#msg-list');
-        sessionId = parseInt($("#sessionId").val());
 	if(sessionId>0) {
 		listen()
 	}
@@ -18,7 +16,7 @@ $(function() {
 	  var msg = {};
 
 	  msg.uid= sessionId;
-	  msg.gid = [1,2];
+	  msg.gid = gids; 
 	  msg.type = "message";
 	  msg.content= content;
 	  ws.send(JSON.stringify(msg));
@@ -28,8 +26,8 @@ $(function() {
 
 	$('#login').click(function(){
 		$.post("/login", {email:"yhl27ml@163.com", password:"654321"}, function(e){
-			sessionId = e.data.Id;
-			$("#sessionId").val(e.data.Id)
+			sessionId = e.data.user.Id;
+			gids = e.data.gids
 			listen()
 		});
 	});
@@ -48,7 +46,7 @@ function listen() {
         ws.onopen = function(e) {
           var msg = {}
           msg.uid= sessionId;
-          msg.gid = [1,2];
+          msg.gid = gids;
           msg.type = "login";
           ws.send(JSON.stringify(msg));
 
