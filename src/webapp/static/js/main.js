@@ -25,7 +25,12 @@ $(function() {
         });
 
 	$('#login').click(function(){
-		$.post("/login", {email:"yhl27ml@163.com", password:"654321"}, function(e){
+		$.post("/login", {email:"yhl27ml@163.com", password:"123456"}, function(e){
+			if(e.code<0) {
+				alert(e.msg);
+				return;
+			}
+
 			sessionId = e.data.user.Id;
 			gids = e.data.gids
 			listen()

@@ -11,9 +11,8 @@ type HomeController struct {
 }
 
 func (this *HomeController) Get() {
-	//models.CreateFollow(1, 1)
-	//models.GetFollowByUid(1)
-	//u, _ := models.GetById(1)
+	user, _ := models.GetUserById(1)
+	fmt.Println(user)
 	u := this.GetSession("user")
 	if u == nil {
 		//u = models.User{}
@@ -61,5 +60,18 @@ func (this *HomeController) Logout() {
 }
 
 func (this *HomeController) Register() {
+	var user models.User
+	user.Group_id = 2
+	user.Username = "yhl27ml@163.com"
+	user.Password = help.Md5("123456")
+	user.Email = "yhl27ml@163.com"
+	user.Nickname = "Jason"
+	user.Mobile = "18210189803"
+	user.Avatar = "/statis/upload/avatar/1.png"
+	user.Level = 1
+	user.Status = 1
+
+	models.CreateUser(&user)
+
 	this.SendRes(0, "success", nil)
 }

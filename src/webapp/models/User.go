@@ -3,6 +3,7 @@ package models
 import (
 	"errors"
 	"github.com/astaxie/beego/orm"
+	"time"
 	"yhl/help"
 )
 
@@ -11,13 +12,20 @@ func init() {
 }
 
 type User struct {
-	Id       int
-	Username string
-	Email    string
-	Password string
+	Id         int
+	Group_id   int
+	Username   string
+	Email      string
+	Password   string
+	Nickname   string
+	Mobile     string
+	Avatar     string
+	Level      int
+	Status     int
+	Createtime time.Time
 }
 
-func GetById(id int) (user *User, err error) {
+func GetUserById(id int) (user *User, err error) {
 	o := orm.NewOrm()
 	user = &User{Id: id}
 	err = o.Read(user)
@@ -38,4 +46,11 @@ func Login(username, password string) (*User, error) {
 	}
 
 	return user, nil
+}
+
+func CreateUser(user *User) bool {
+	user.Createtime = time.Now()
+	i, _ := orm.NewOrm().Insert(user)
+
+	return i > 0
 }
