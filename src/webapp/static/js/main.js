@@ -15,8 +15,8 @@ $(function() {
 	  var content = $('#name').val();
 	  var msg = {};
 
-	  msg.uid= sessionId;
-	  msg.gid = gids; 
+	  msg.uid = sessionId;
+	  msg.gid = gid;
 	  msg.type = "message";
 	  msg.content= content;
 	  ws.send(JSON.stringify(msg));
@@ -32,8 +32,9 @@ $(function() {
 			}
 
 			sessionId = e.data.user.Id;
-			gids = e.data.gids
-			listen()
+			gid = e.data.user.Gid;
+			follow = e.data.follow;
+			listen();
 		});
 	});
 
@@ -50,8 +51,9 @@ function listen() {
 
         ws.onopen = function(e) {
           var msg = {}
-          msg.uid= sessionId;
-          msg.gid = gids;
+          msg.uid = sessionId;
+	  msg.gid = gid;
+          msg.follow = follow;
           msg.type = "login";
           ws.send(JSON.stringify(msg));
 

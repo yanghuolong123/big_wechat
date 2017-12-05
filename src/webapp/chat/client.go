@@ -12,10 +12,12 @@ const channelBufSize int = 100
 
 type Client struct {
 	id        int
+	gid       int
 	ws        *websocket.Conn
 	server    *Server
 	msgCh     chan *Message
 	doneMsgCh chan bool
+	follow    []int
 }
 
 func NewClient(ws *websocket.Conn, server *Server) *Client {
@@ -30,7 +32,7 @@ func NewClient(ws *websocket.Conn, server *Server) *Client {
 	msg := make(chan *Message, channelBufSize)
 	doneMsg := make(chan bool)
 
-	return &Client{0, ws, server, msg, doneMsg}
+	return &Client{0, 0, ws, server, msg, doneMsg, []int{}}
 }
 
 func (c *Client) Conn() *websocket.Conn {
@@ -93,6 +95,8 @@ func (c *Client) listenRead() {
 
 				if msg.Type == "login" {
 					c.id = msg.Uid
+					c.gid = msg.Gid
+					c.follow = msg.Follow
 					c.server.Add(c)
 				} else if msg.Type == "message" {
 					c.server.SendAll(&msg)

@@ -6,8 +6,9 @@ import (
 
 type Message struct {
 	Uid        int    `json:"uid"`
-	Gid        []int  `json:"gid"`
+	Gid        int    `json:"gid"`
 	Type       string `json:"type"`
+	Follow     []int  `json:"follow"`
 	ToUid      int    `json:"toUid"`
 	NickName   string `json:"nickName"`
 	SchoolName string `json:"schoolName"`

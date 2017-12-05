@@ -18,9 +18,9 @@ func (this *HomeController) Get() {
 		//u = models.User{}
 		u = new(models.User)
 	}
-	gids := this.GetSession("gids")
-	if gids == nil {
-		gids = []int{}
+	follow := this.GetSession("follow")
+	if follow == nil {
+		follow = []int{}
 	}
 
 	help.Log.Info("===============================")
@@ -29,7 +29,7 @@ func (this *HomeController) Get() {
 
 	this.Data["welcome"] = "hello, welcome to bigwechart! thank you!"
 	this.Data["user"] = u
-	this.Data["gids"] = gids
+	this.Data["follow"] = follow
 	this.TplName = "home/index.tpl"
 }
 
@@ -43,25 +43,25 @@ func (this *HomeController) Login() {
 	gids := models.GetFollowByUid(u.Id)
 
 	this.SetSession("user", u)
-	this.SetSession("gids", gids)
+	this.SetSession("follow", gids)
 
 	m := make(map[string]interface{})
 	m["user"] = u
-	m["gids"] = gids
+	m["follow"] = gids
 
 	this.SendRes(0, "success", m)
 }
 
 func (this *HomeController) Logout() {
 	this.DelSession("user")
-	this.DelSession("gids")
+	this.DelSession("follow")
 
 	this.SendRes(0, "success", nil)
 }
 
 func (this *HomeController) Register() {
 	var user models.User
-	user.Group_id = 2
+	user.Gid = 2
 	user.Username = "yhl27ml@163.com"
 	user.Password = help.Md5("123456")
 	user.Email = "yhl27ml@163.com"

@@ -68,7 +68,12 @@ func (s *Server) sendPastMessages(c *Client) {
 
 func (s *Server) sendAll(msg *Message) {
 	for _, c := range s.clients {
-		c.Write(msg)
+		for _, f := range c.follow {
+			if msg.Gid == f {
+				c.Write(msg)
+				break
+			}
+		}
 	}
 }
 

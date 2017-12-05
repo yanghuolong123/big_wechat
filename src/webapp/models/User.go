@@ -13,7 +13,7 @@ func init() {
 
 type User struct {
 	Id         int
-	Group_id   int
+	Gid        int
 	Username   string
 	Email      string
 	Password   string
