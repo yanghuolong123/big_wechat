@@ -11,7 +11,7 @@ type Message struct {
 	Follow     []int  `json:"follow"`
 	ToUid      int    `json:"toUid"`
 	NickName   string `json:"nickName"`
-	SchoolName string `json:"schoolName"`
+	GroupName  string `json:"groupName"`
 	Content    string `json:"content"`
 	CreateTime string `json:"createTime"`
 }

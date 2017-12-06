@@ -18,6 +18,8 @@ $(function() {
 	  msg.uid = sessionId;
 	  msg.gid = gid;
 	  msg.type = "message";
+	  msg.nickname = nickname;
+	  msg.groupname = groupname;
 	  msg.content= content;
 	  ws.send(JSON.stringify(msg));
 
@@ -33,7 +35,9 @@ $(function() {
 
 			sessionId = e.data.user.Id;
 			gid = e.data.user.Gid;
+			nickname = e.data.user.Nickname;
 			follow = e.data.follow;
+			groupname = e.data.group.Name;
 			listen();
 		});
 	});

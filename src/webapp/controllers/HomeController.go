@@ -22,14 +22,16 @@ func (this *HomeController) Get() {
 	if follow == nil {
 		follow = []int{}
 	}
-
-	help.Log.Info("===============================")
-	//help.Log.Info(u.Username)
-	fmt.Println(u)
+	group := this.GetSession("group")
+	if group == nil {
+		group = new(models.Group)
+	}
 
 	this.Data["welcome"] = "hello, welcome to bigwechart! thank you!"
 	this.Data["user"] = u
 	this.Data["follow"] = follow
+	this.Data["group"] = group
+
 	this.TplName = "home/index.tpl"
 }
 
@@ -41,13 +43,16 @@ func (this *HomeController) Login() {
 		this.SendRes(-1, err.Error(), nil)
 	}
 	gids := models.GetFollowByUid(u.Id)
+	group := models.GetGroupById(u.Gid)
 
 	this.SetSession("user", u)
 	this.SetSession("follow", gids)
+	this.SetSession("group", group)
 
 	m := make(map[string]interface{})
 	m["user"] = u
 	m["follow"] = gids
+	m["group"] = group
 
 	this.SendRes(0, "success", m)
 }
@@ -55,6 +60,7 @@ func (this *HomeController) Login() {
 func (this *HomeController) Logout() {
 	this.DelSession("user")
 	this.DelSession("follow")
+	this.DelSession("group")
 
 	this.SendRes(0, "success", nil)
 }
