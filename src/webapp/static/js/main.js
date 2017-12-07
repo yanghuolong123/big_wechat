@@ -2,10 +2,12 @@
 var ws = {};
 var $ul;
 
-$(function() {
+$(function() {	
 	$ul = $('#msg-list');
 	if(sessionId>0) {
 		listen()
+	} else {
+		$('#loginModal').modal({backdrop: 'static', keyboard: false});
 	}
 
 	$('#sendBtn').click(function(){
@@ -27,11 +29,14 @@ $(function() {
         });
 
 	$('#login').click(function(){
-		$.post("/login", {email:"yhl27ml@163.com", password:"123456"}, function(e){
+		var username = $("#username").val();
+		var password = $("#password").val();
+		$.post("/login", {email:username, password:password}, function(e){
 			if(e.code<0) {
 				alert(e.msg);
 				return;
 			}
+			$('#loginModal').modal('hide');
 
 			sessionId = e.data.user.Id;
 			gid = e.data.user.Gid;

@@ -68,16 +68,17 @@ func (this *HomeController) Logout() {
 func (this *HomeController) Register() {
 	var user models.User
 	user.Gid = 2
-	user.Username = "yhl27ml@163.com"
+	user.Username = "yhl27ml@126.com"
 	user.Password = help.Md5("123456")
-	user.Email = "yhl27ml@163.com"
+	user.Email = "yhl27ml@126.com"
 	user.Nickname = "Jason"
 	user.Mobile = "18210189803"
 	user.Avatar = "/statis/upload/avatar/1.png"
 	user.Level = 1
 	user.Status = 1
 
-	models.CreateUser(&user)
+	uid := models.CreateUser(&user)
+	models.CreateFollow(uid, user.Gid)
 
-	this.SendRes(0, "success", nil)
+	this.SendRes(0, "success", uid)
 }

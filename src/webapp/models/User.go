@@ -48,9 +48,9 @@ func Login(username, password string) (*User, error) {
 	return user, nil
 }
 
-func CreateUser(user *User) bool {
+func CreateUser(user *User) int {
 	user.Createtime = time.Now()
 	i, _ := orm.NewOrm().Insert(user)
 
-	return i > 0
+	return int(i)
 }

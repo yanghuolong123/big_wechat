@@ -43,13 +43,13 @@
 		<div class="form-group">
 			<div class="col-sm-offset-11">
 				<input id="sendBtn" class="btn btn-default" type="submit" value="发送">
-				<input type="button" id="login" value="login" />
-                		<input type="button" id="logout" value="logout" />
 			</div>
 		</div>
 	</div>
     </div>
 </div>
+
+{{template "/home/login.tpl" .}}
 
 <script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
 <script src="/static/plugin/jquery.mobile/jquery.mobile-1.4.5.min.js"></script>
