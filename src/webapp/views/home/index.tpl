@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>响应式 - by developer.cn.com </title>
-	<meta charset="UTF-8">
+    <title>BigWechat-最简洁的中国留学生交流群。选校、接机、买卖二手、房屋出租,轻松搞定</title>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/static/plugin/bootstrap/css/bootstrap.min.css">    
@@ -11,18 +11,16 @@
 </head>
 <body>
 <div data-role="page">
-	<div data-role="header" class="header linear-g">
-        <a href="#panel-left" data-iconpos="notext" class="glyphicon glyphicon-th-large col-xs-2 text-right"> </a>
-        <a class="text-center col-xs-8">developer.cn.com</a>
-        <a href="#panel-right" data-iconpos="notext" class="glyphicon glyphicon-user col-xs-2 text-left"> </a>
+    <div data-role="header" class="header linear-g">
+        <a href="#panel-left" data-iconpos="notext" class="glyphicon glyphicon-user col-lg-2 col-xs-2 text-right"> </a>
+	<div class="col-lg-6 input-group text-center col-xs-8">
+	      <input type="text" class="form-control" placeholder="Search for...">
+	      <span class="input-group-btn">
+		<button class="btn btn-default" type="button">Go!</button>
+	      </span>
+    	</div>
     </div>
-    <div data-role="panel" data-position="left" data-display="push" class="list-group shortcut_menu dn linear-g" id="panel-left">
-        <a href="#" class="list-group-item"><span class="glyphicon glyphicon-home"> </span> &nbsp;菜单1</a>
-        <a href="#" class="list-group-item"><span class="glyphicon glyphicon-edit"> </span> &nbsp;菜单2</a>
-        <a href="#" class="list-group-item"><span class="glyphicon glyphicon-list"> </span> &nbsp;菜单3</a>
-        <a href="#" class="list-group-item"><span class="glyphicon glyphicon-list-alt"> </span> &nbsp;菜单4</a>
-    </div>
-    <div data-role="panel" data-position="right" data-display="push" class="user_box text-center dn linear-g" id="panel-right">
+    <div data-role="panel" data-position="left" data-display="push" class="user_box text-center dn linear-g" id="panel-left">
         <div class="u_info">
             <img class="avatar" src="/static/images/avatar.png" alt="头像">
             <span class="username">developer</span>
@@ -76,17 +74,23 @@
                     </div>
                 </div>
             </li>
-        </ul>
-        <ul class="operating row text-center linear-g">
-        	<li class="col-xs-4"><a href="#"><span class="glyphicon glyphicon-tags"></span> &nbsp;标签</a></li>
-        	<li class="col-xs-4"><a href="#"><span class="glyphicon glyphicon-comment"></span> &nbsp;回复</a></li>
-        	<li class="col-xs-4"><a href="#"><span class="glyphicon glyphicon-heart"></span> &nbsp;喜欢</a></li>
-        </ul>
+        </ul>        
+	<div class="row ">
+		<div class="form-group">			
+			<textarea class="form-control"></textarea>			
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-11">
+				<input class="btn btn-default" type="submit" value="发送">
+			</div>
+		</div>
+	</div>
     </div>
 </div>
 
 <script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
 <script src="/static/plugin/jquery.mobile/jquery.mobile-1.4.5.min.js"></script>
+<script src="/static/plugin/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		/* 
