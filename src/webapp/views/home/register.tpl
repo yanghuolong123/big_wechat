@@ -1,4 +1,4 @@
-<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+<div id="registerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">      
       <div class="modal-body">
@@ -15,10 +15,7 @@
       </div>
       <div class="modal-footer">
 	<!-- <button type="button" class="btn btn-default" data-dismiss="modal">取消</button> -->
-        <button id="login" type="button" class="btn btn-primary">登陆</button>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a id="registerBtn" href="">注册</a>
-	&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="register" type="button" class="btn btn-primary">提交</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

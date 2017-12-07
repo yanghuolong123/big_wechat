@@ -35,6 +35,13 @@ func (this *HomeController) Get() {
 	this.TplName = "home/index.tpl"
 }
 
+func (this *HomeController) LoginPage() {
+	this.TplName = "home/login.tpl"
+	s, _ := this.RenderString()
+
+	this.SendRes(0, "success", s)
+}
+
 func (this *HomeController) Login() {
 	email := this.GetString("email")
 	passwd := this.GetString("password")
@@ -66,19 +73,23 @@ func (this *HomeController) Logout() {
 }
 
 func (this *HomeController) Register() {
-	var user models.User
-	user.Gid = 2
-	user.Username = "yhl27ml@126.com"
-	user.Password = help.Md5("123456")
-	user.Email = "yhl27ml@126.com"
-	user.Nickname = "Jason"
-	user.Mobile = "18210189803"
-	user.Avatar = "/statis/upload/avatar/1.png"
-	user.Level = 1
-	user.Status = 1
+	/*	var user models.User
+		user.Gid = 2
+		user.Username = "yhl27ml@126.com"
+		user.Password = help.Md5("123456")
+		user.Email = "yhl27ml@126.com"
+		user.Nickname = "Jason"
+		user.Mobile = "18210189803"
+		user.Avatar = "/statis/upload/avatar/1.png"
+		user.Level = 1
+		user.Status = 1
 
-	uid := models.CreateUser(&user)
-	models.CreateFollow(uid, user.Gid)
+		uid := models.CreateUser(&user)
+		models.CreateFollow(uid, user.Gid)
 
-	this.SendRes(0, "success", uid)
+		this.SendRes(0, "success", uid)
+	*/
+	this.TplName = "home/register.tpl"
+	s, _ := this.RenderString()
+	this.SendRes(0, "success", s)
 }

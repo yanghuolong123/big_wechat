@@ -7,7 +7,10 @@ $(function() {
 	if(sessionId>0) {
 		listen()
 	} else {
-		$('#loginModal').modal({backdrop: 'static', keyboard: false});
+		$.get("/login",function(e){
+			$("#loginPage").html(e.data);
+			$('#loginModal').modal({backdrop: 'static', keyboard: false});
+		});
 	}
 
 	$('#sendBtn').click(function(){
@@ -28,7 +31,7 @@ $(function() {
 	  $('#msgContent').val("");
         });
 
-	$('#login').click(function(){
+	$('#loginPage').on("click","#login",function(){
 		var username = $("#username").val();
 		var password = $("#password").val();
 		$.post("/login", {email:username, password:password}, function(e){
