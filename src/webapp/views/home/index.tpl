@@ -23,7 +23,7 @@
     <div data-role="panel" data-position="left" data-display="push" class="user_box text-center dn linear-g" id="panel-left">
         <div class="u_info">
             <img class="avatar" src="/static/images/avatar.png" alt="头像">
-            <span class="username">developer</span>
+            <span class="username">{{.user.Nickname}}</span>
         </div>
         <ul class="user_menu">
           <li class="menu"><a href="#"><span class="glyphicon glyphicon-cog"> </span> &nbsp;基本设置</a></li>
@@ -33,7 +33,7 @@
         </ul>
     </div>
     <div data-role="content" class="container" role="main">
-        <ul class="content-reply-box mg10">
+        <ul id="msg-list" class="content-reply-box mg10">
             <li class="odd">
                 <a class="user" href="#"><img class="img-responsive avatar_" src="/static/images/avatar-1.png" alt=""><span class="user-name">奔波儿灞</span></a>
                 <div class="reply-content-box">
@@ -77,11 +77,13 @@
         </ul>        
 	<div class="row ">
 		<div class="form-group">			
-			<textarea class="form-control"></textarea>			
+			<textarea id="msgContent" class="form-control"></textarea>			
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-11">
-				<input class="btn btn-default" type="submit" value="发送">
+				<input id="sendBtn" class="btn btn-default" type="submit" value="发送">
+				<input type="button" id="login" value="login" />
+                		<input type="button" id="logout" value="logout" />
 			</div>
 		</div>
 	</div>
@@ -91,6 +93,8 @@
 <script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
 <script src="/static/plugin/jquery.mobile/jquery.mobile-1.4.5.min.js"></script>
 <script src="/static/plugin/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/js/main.js"></script>
+    {{template "../inc/script.tpl" .}}
 <script type="text/javascript">
 	$(function(){
 		/* 

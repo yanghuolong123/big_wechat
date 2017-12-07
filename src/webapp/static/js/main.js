@@ -12,7 +12,7 @@ $(function() {
 	  if(sessionId==0) {
 		return
 	  }
-	  var content = $('#name').val();
+	  var content = $('#msgContent').val();
 	  var msg = {};
 
 	  msg.uid = sessionId;
@@ -23,7 +23,7 @@ $(function() {
 	  msg.content= content;
 	  ws.send(JSON.stringify(msg));
 
-	  $('#name').val("");
+	  $('#msgContent').val("");
         });
 
 	$('#login').click(function(){
