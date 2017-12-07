@@ -33,47 +33,8 @@
         </ul>
     </div>
     <div data-role="content" class="container" role="main">
-        <ul id="msg-list" class="content-reply-box mg10">
-            <li class="odd">
-                <a class="user" href="#"><img class="img-responsive avatar_" src="/static/images/avatar-1.png" alt=""><span class="user-name">奔波儿灞</span></a>
-                <div class="reply-content-box">
-                	<span class="reply-time">03-08 15：00</span>
-                    <div class="reply-content pr">
-                    	<span class="arrow">&nbsp;</span>
-                    	为什么小鑫的名字里有三个金呢？
-                    </div>
-                </div>
-            </li>
-            <li class="even">
-                <a class="user" href="#"><img class="img-responsive avatar_" src="/static/images/avatar-1.png" alt=""><span class="user-name">灞波儿奔</span></a>
-                <div class="reply-content-box">
-                	<span class="reply-time">03-08 15：10</span>
-                    <div class="reply-content pr">
-                    	<span class="arrow">&nbsp;</span>
-                    	他命里缺金，所以取名叫鑫，有些人命里缺水，就取名叫淼，还有些人命里缺木就叫森。
-                    </div>
-                </div>
-            </li>
-            <li class="odd">
-                <a class="user" href="#"><img class="img-responsive avatar_" src="/static/images/avatar-1.png" alt=""><span class="user-name">奔波儿灞</span></a>
-                <div class="reply-content-box">
-                	<span class="reply-time">03-08 15：20</span>
-                    <div class="reply-content pr">
-                    	<span class="arrow">&nbsp;</span>
-                    	那郭晶晶命里缺什么？
-                    </div>
-                </div>
-            </li>
-            <li class="even">
-                <a class="user" href="#"><img class="img-responsive avatar_" src="/static/images/avatar-1.png" alt=""><span class="user-name">灞波儿奔</span></a>
-                <div class="reply-content-box">
-                	<span class="reply-time">03-08 15：30</span>
-                    <div class="reply-content pr">
-                    	<span class="arrow">&nbsp;</span>
-                    	此处省略一百字...
-                    </div>
-                </div>
-            </li>
+        <ul id="msg-list" class="content-reply-box mg10">          
+           
         </ul>        
 	<div class="row ">
 		<div class="form-group">			

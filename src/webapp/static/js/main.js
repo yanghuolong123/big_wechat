@@ -66,8 +66,20 @@ function listen() {
 
         ws.onmessage = function(e) {
           var msg = JSON.parse(e.data);
-          var content = "时间:"+ msg.createTime + " 内容:"+ msg.content;
-          $('<li>').text(content).appendTo($ul);
+          var content = '<a class="user" href="#"><img class="img-responsive avatar_" src="/static/images/avatar-1.png" alt=""><span class="user-name">'+msg.nickName+'</span></a>'+
+	'<div class="reply-content-box">'+
+	'<span class="reply-time">'+msg.createTime+'</span>'+
+	'<div class="reply-content pr">'+
+	'<span class="arrow">&nbsp;</span>' +
+	msg.content +
+	'</div>'+
+	'</div>';
+	  
+	  var show = "odd";
+	  if(sessionId==msg.uid) {
+		show = "even";
+	  }	
+          $('<li class="'+show+'">').html(content).appendTo($ul);
         };
 
         ws.onclose = function(e) {
