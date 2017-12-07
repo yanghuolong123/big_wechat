@@ -16,6 +16,9 @@
       <div class="modal-footer">
 	<!-- <button type="button" class="btn btn-default" data-dismiss="modal">取消</button> -->
         <button id="login" type="button" class="btn btn-primary">登陆</button>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="">注册</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
