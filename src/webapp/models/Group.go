@@ -22,7 +22,7 @@ func GetGroupById(id int) (group *Group) {
 	return
 }
 
-func getGroupAll() (glist []Group) {
+func GetGroupAll() (glist []Group) {
 	orm.NewOrm().QueryTable("tbl_group").All(&glist)
 	return
 }

@@ -5,7 +5,7 @@
         <form>
 	  <div class="form-group">
 	    <label for="username">账号</label>
-	    <input type="email" class="form-control" id="username" placeholder="电话或邮箱">
+	    <input type="text" class="form-control" id="username" placeholder="电话或邮箱">
 	  </div>
 	  <div class="form-group">
 	    <label for="password">密码</label>
@@ -15,9 +15,9 @@
       </div>
       <div class="modal-footer">
 	<!-- <button type="button" class="btn btn-default" data-dismiss="modal">取消</button> -->
-        <button id="login" type="button" class="btn btn-primary">登陆</button>
+        <button id="loginBtn" type="button" class="btn btn-primary">登陆</button>
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a id="registerBtn" href="">注册</a>
+	<a id="registerLink" href="">注册</a>
 	&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
     </div><!-- /.modal-content -->

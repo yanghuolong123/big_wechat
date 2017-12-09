@@ -43,16 +43,13 @@
 		<div class="form-group">
 			<div class="col-sm-offset-11">
 				<input id="sendBtn" class="btn btn-default" type="submit" value="发送">
-				<input id="registerBtn" class="btn btn-default" type="submit" value="register">
-				
 			</div>
 		</div>
 	</div>
     </div>
 </div>
 
-<div id="loginPage"></div>
-<div id="registerPage"></div>
+<div id="modalPage"></div>
 
 <script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
 <script src="/static/plugin/jquery.mobile/jquery.mobile-1.4.5.min.js"></script>
@@ -71,17 +68,7 @@
 				reverse : true       //默认为false,设置为true时将导致一个反方向的转场
 			});	
 		});
-
-		$("#registerBtn").click(function(){
-			$.post("/register",function(e){
-				$("#registerPage").html(e.data);
-				$("#registerModal").modal();
-			});
-		});
 		
-		$("#registerPage").on("click","#register",function(){
-			alert(1111111);
-		});
 	});
 </script>
 </body>

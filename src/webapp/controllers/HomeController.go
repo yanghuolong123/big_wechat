@@ -42,12 +42,11 @@ func (this *HomeController) LoginPage() {
 	this.SendRes(0, "success", s)
 }
 
-func (this *HomeController) Login() {
-	email := this.GetString("email")
-	passwd := this.GetString("password")
-	u, err := models.Login(email, passwd)
+func (this *HomeController) login(username, password string) (m map[string]interface{}, err error) {
+	m = make(map[string]interface{})
+	u, err := models.Login(username, password)
 	if err != nil {
-		this.SendRes(-1, err.Error(), nil)
+		return
 	}
 	gids := models.GetFollowByUid(u.Id)
 	group := models.GetGroupById(u.Gid)
@@ -56,10 +55,21 @@ func (this *HomeController) Login() {
 	this.SetSession("follow", gids)
 	this.SetSession("group", group)
 
-	m := make(map[string]interface{})
 	m["user"] = u
 	m["follow"] = gids
 	m["group"] = group
+
+	return
+}
+
+func (this *HomeController) Login() {
+	username := this.GetString("username")
+	password := this.GetString("password")
+
+	m, err := this.login(username, password)
+	if err != nil {
+		this.SendRes(-1, err.Error(), nil)
+	}
 
 	this.SendRes(0, "success", m)
 }
@@ -72,24 +82,40 @@ func (this *HomeController) Logout() {
 	this.SendRes(0, "success", nil)
 }
 
-func (this *HomeController) Register() {
-	/*	var user models.User
-		user.Gid = 2
-		user.Username = "yhl27ml@126.com"
-		user.Password = help.Md5("123456")
-		user.Email = "yhl27ml@126.com"
-		user.Nickname = "Jason"
-		user.Mobile = "18210189803"
-		user.Avatar = "/statis/upload/avatar/1.png"
-		user.Level = 1
-		user.Status = 1
-
-		uid := models.CreateUser(&user)
-		models.CreateFollow(uid, user.Gid)
-
-		this.SendRes(0, "success", uid)
-	*/
+func (this *HomeController) RegisterPage() {
+	this.Data["groupList"] = models.GetGroupAll()
 	this.TplName = "home/register.tpl"
 	s, _ := this.RenderString()
+
 	this.SendRes(0, "success", s)
+}
+
+func (this *HomeController) Register() {
+	gid, _ := this.GetInt("group")
+	username := this.GetString("username")
+	nickname := this.GetString("nickname")
+	password := this.GetString("password")
+	repassword := this.GetString("repassword")
+	if password != repassword {
+		this.SendRes(-1, "密码输入不一致", nil)
+	}
+	loginPasswd := password
+	password = help.Md5(password)
+
+	u := models.User{
+		Gid:      gid,
+		Username: username,
+		Nickname: nickname,
+		Password: password,
+	}
+
+	uid := models.CreateUser(&u)
+	if uid <= 0 {
+		this.SendRes(-1, "注册失败", nil)
+	}
+	models.CreateFollow(uid, gid)
+
+	m, _ := this.login(username, loginPasswd)
+
+	this.SendRes(0, "success", m)
 }

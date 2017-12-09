@@ -8,8 +8,7 @@ $(function() {
 		listen()
 	} else {
 		$.get("/login",function(e){
-			$("#loginPage").html(e.data);
-			$('#loginModal').modal({backdrop: 'static', keyboard: false});
+			$("#modalPage").html(e.data).find('#loginModal').modal({backdrop: 'static', keyboard: false});
 		});
 	}
 
@@ -31,15 +30,22 @@ $(function() {
 	  $('#msgContent').val("");
         });
 
-	$('#loginPage').on("click","#login",function(){
+	$('#modalPage').on("click","#loginLink",function(){
+		$.get("/login", function(e){
+			$("#modalPage").html(e.data).find('#loginModal').modal({backdrop: 'static', keyboard: false});
+		});
+	});
+
+	$('#modalPage').on("click","#loginBtn",function(){
 		var username = $("#username").val();
 		var password = $("#password").val();
-		$.post("/login", {email:username, password:password}, function(e){
+		$.post("/login", {username:username, password:password}, function(e){
 			if(e.code<0) {
 				alert(e.msg);
 				return;
 			}
 			$('#loginModal').modal('hide');
+			$(".modal-backdrop").remove();
 
 			sessionId = e.data.user.Id;
 			gid = e.data.user.Gid;
@@ -48,6 +54,61 @@ $(function() {
 			groupname = e.data.group.Name;
 			listen();
 		});
+	});
+
+	$('#modalPage').on("click","#registerLink",function(){
+		$.get("/register", function(e){
+			$("#modalPage").html(e.data).find('#registerModal').modal({backdrop: 'static', keyboard: false});
+		});
+	});
+
+	$("#modalPage").on("click","#registerBtn",function(){
+		var group = $("#group").val();
+		if(group == "0") {
+			alert("请选择学校");
+			return false;
+		}
+		var username = $("#username").val();
+		if(username == "") {
+			alert("请填写账号");
+			return false;
+		}
+		var nickname = $("#nickname").val();
+		if(nickname == "") {
+			alert("请填写昵称");
+			return false;
+		}
+		var password = $("#password").val();
+		if(password == "") {
+			alert("请填写密码");
+			return false;
+		}
+		var repassword = $("#repassword").val();
+		if(repassword == "") {
+			alert("请填写重复密码");
+			return false;
+		}
+
+		if(password != repassword) {
+			alert("密码输入不一致");
+			return false;
+		}
+
+		$.post("/register",{group:group,username:username,nickname:nickname,password:password,repassword:repassword},function(e){
+			if(e.code<0) {
+				alert(e.msg);	
+				return false;
+			}
+			$('#registerModal').modal('hide');
+			$(".modal-backdrop").remove();
+
+			sessionId = e.data.user.Id;
+			gid = e.data.user.Gid;
+			nickname = e.data.user.Nickname;
+			follow = e.data.follow;
+			groupname = e.data.group.Name;
+			listen();
+		});	
 	});
 
 	$("#logout").click(function(){
