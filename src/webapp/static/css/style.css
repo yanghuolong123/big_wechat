@@ -41,3 +41,4 @@ li{list-style:none;}
 .footer{padding:5px 0;}
 .footer .container{ padding:0px;}
 #msg-list.container{padding:0px;overflow-y:auto; height:550px;}
+.form-group{margin-bottom: 3px;}

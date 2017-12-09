@@ -41,7 +41,7 @@
 		<div class="form-group">
 			<textarea id="msgContent" class="col-sm-10 col-sm-offset-1"></textarea>			
 			<div class="col-sm-1">
-				<input id="sendBtn" class="btn btn-default" type="submit" value="发送">
+				<input id="sendBtn" class="btn btn-default" type="button" value="发送">
 			</div>
 		</div>
 	  </div>
