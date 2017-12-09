@@ -33,6 +33,13 @@ func GetUserById(id int) (user *User, err error) {
 	return
 }
 
+func GetUserByUsername(username string) (user *User, err error) {
+	user = &User{Username: username}
+	err = orm.NewOrm().Read(user)
+
+	return
+}
+
 func Login(username, password string) (*User, error) {
 	password = help.Md5(password)
 

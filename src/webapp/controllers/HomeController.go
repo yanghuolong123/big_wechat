@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"errors"
 	"fmt"
 	"webapp/models"
 	"yhl/help"
@@ -98,6 +99,10 @@ func (this *HomeController) Register() {
 	repassword := this.GetString("repassword")
 	if password != repassword {
 		this.SendRes(-1, "密码输入不一致", nil)
+	}
+	_, err := models.GetUserByUsername(username)
+	if err != nil {
+		this.SendRes(-1, errors.New("账号已存在").Error(), nil)
 	}
 	loginPasswd := password
 	password = help.Md5(password)
