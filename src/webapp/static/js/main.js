@@ -16,7 +16,10 @@ $(function() {
 	  if(sessionId==0) {
 		return
 	  }
-	  var content = $('#msgContent').val();
+	  var content = $.trim($('#msgContent').val());
+	  if(content == "") {
+		return false;
+	  }
 	  var msg = {};
 
 	  msg.uid = sessionId;
@@ -149,6 +152,7 @@ function listen() {
 		show = "even";
 	  }	
           $('<li class="'+show+'">').html(content).appendTo($ul);
+	  $ul.animate({scrollTop:$ul.find("li:last").offset().top-$ul.offset().top+$ul.scrollTop()});
         };
 
         ws.onclose = function(e) {
