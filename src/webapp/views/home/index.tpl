@@ -38,11 +38,9 @@
         </ul>        
 	<footer class="footer navbar-fixed-bottom linear-g ">
 	  <div class="container">
-		<div class="form-group">
-			<textarea id="msgContent" class="col-sm-10 col-sm-offset-1"></textarea>			
-			<div class="col-sm-1">
-				<input id="sendBtn" class="btn btn-default" type="button" value="发送">
-			</div>
+		<div class="row sendsmg">
+			<textarea id="msgContent" class="col-md-9"></textarea>			
+			<input id="sendBtn" class="btn btn-success col-md-1" type="button" value="发送">
 		</div>
 	  </div>
 	</footer>
@@ -51,10 +49,7 @@
 
 <div id="modalPage"></div>
 
-<script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
-<script src="/static/plugin/jquery.mobile/jquery.mobile-1.4.5.min.js"></script>
-<script src="/static/plugin/bootstrap/js/bootstrap.min.js"></script>
-    {{template "../inc/script.tpl" .}}
-<script src="/static/js/main.js"></script>
+{{template "../inc/script.tpl" .}}
+
 </body>
 </html>
