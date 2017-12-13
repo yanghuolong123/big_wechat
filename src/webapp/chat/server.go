@@ -3,14 +3,15 @@ package chat
 import (
 	"github.com/astaxie/beego"
 	"golang.org/x/net/websocket"
+	"labix.org/v2/mgo/bson"
 	"log"
+	"yhl/help"
 )
 
 const pastSize = 5
 
 type Server struct {
 	pattern   string
-	messages  []*Message
 	clients   map[int]*Client
 	addCh     chan *Client
 	delCh     chan *Client
@@ -20,7 +21,6 @@ type Server struct {
 }
 
 func NewServer(pattern string) *Server {
-	messages := []*Message{}
 	clients := make(map[int]*Client)
 	addCh := make(chan *Client)
 	delCh := make(chan *Client)
@@ -30,7 +30,6 @@ func NewServer(pattern string) *Server {
 
 	return &Server{
 		pattern,
-		messages,
 		clients,
 		addCh,
 		delCh,
@@ -61,8 +60,11 @@ func (s *Server) Err(err error) {
 }
 
 func (s *Server) sendPastMessages(c *Client) {
-	for _, msg := range s.messages {
-		c.Write(msg)
+	pasMsg := []*Message{}
+	help.MongoDb.C("messages").Find(bson.M{"type": "message", "gid": bson.M{"$in": c.follow}}).Sort("-createtime").Limit(3).All(&pasMsg)
+
+	for i := len(pasMsg) - 1; i >= 0; i-- {
+		c.Write(pasMsg[i])
 	}
 }
 
@@ -101,11 +103,6 @@ func (s *Server) Listen() {
 		case c := <-s.delCh:
 			delete(s.clients, c.id)
 		case msg := <-s.sendAllCh:
-			size := len(s.messages)
-			if size > pastSize {
-				s.messages = s.messages[1:]
-			}
-			s.messages = append(s.messages, msg)
 			s.sendAll(msg)
 		case err := <-s.errCh:
 			log.Println("Error:", err.Error())
