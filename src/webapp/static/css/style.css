@@ -43,5 +43,6 @@ li{list-style:none;}
 #msg-list.container{padding:0px;overflow-y:auto; height:550px;}
 #msg-list li{padding-right:5px;}
 .form-group{margin-bottom: 3px;}
-#sendBtn{height:41px;vertical-align:text-bottom;}
+#sendBtn{height:41px;vertical-align:text-bottom;margin-bottom:2px;}
+#msgContent{height:42px;}
 .sendsmg {padding-left:25px;}

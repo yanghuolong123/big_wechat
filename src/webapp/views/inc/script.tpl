@@ -7,5 +7,14 @@ var gid={{.user.Gid}};
 var follow={{.follow}};
 var nickname={{.user.Nickname}}
 var groupname={{.group.Name}}
+
+$(function(){
+	$('input[type="text"],textarea').on('click', function () {
+  		var target = this;
+  		setTimeout(function(){
+        		target.scrollIntoViewIfNeeded();
+      		},400);
+	});
+});
 </script>
 <script src="/static/js/main.js"></script>

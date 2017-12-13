@@ -4,7 +4,7 @@
     <title>BigWechat-最简洁的中国留学生交流群。选校、接机、买卖二手、房屋出租,轻松搞定</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="/static/plugin/bootstrap/css/bootstrap.min.css">    
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">    
     <link rel="stylesheet" type="text/css" href="/static/css/jquery.mobile.flatui.css" />
