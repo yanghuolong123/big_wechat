@@ -28,7 +28,6 @@ func (this *HomeController) Get() {
 		group = new(models.Group)
 	}
 
-	this.Data["welcome"] = "hello, welcome to bigwechart! thank you!"
 	this.Data["user"] = u
 	this.Data["follow"] = follow
 	this.Data["group"] = group

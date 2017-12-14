@@ -10,5 +10,6 @@ func main() {
 	server := chat.NewServer("/chat")
 	go server.Listen()
 
+	beego.SetStaticPath("/upload", "uploads")
 	beego.Run()
 }

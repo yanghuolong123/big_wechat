@@ -12,4 +12,6 @@ func init() {
 	beego.Router("/logout", &controllers.HomeController{}, "post:Logout")
 	beego.Router("/register", &controllers.HomeController{}, "post:Register")
 	beego.Router("/register", &controllers.HomeController{}, "get:RegisterPage")
+
+	beego.Router("/addgroup", &controllers.AddGroupController{})
 }
