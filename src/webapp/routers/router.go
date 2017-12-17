@@ -14,4 +14,7 @@ func init() {
 	beego.Router("/register", &controllers.HomeController{}, "get:RegisterPage")
 
 	beego.Router("/addgroup", &controllers.AddGroupController{})
+
+	beego.Router("/wechat", &controllers.WechatController{}, "get,post:Index")
+
 }
