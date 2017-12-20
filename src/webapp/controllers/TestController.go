@@ -7,11 +7,11 @@ import (
 	"yhl/wechat"
 )
 
-type AddGroupController struct {
+type TestController struct {
 	help.BaseController
 }
 
-func (this *AddGroupController) Get() {
+func (this *TestController) Get() {
 	/*cache := help.Cache
 	token := cache.Get("access_token_")
 
@@ -36,10 +36,10 @@ func (this *AddGroupController) Get() {
 	this.Data["welcome"] = "welcome to add group, accessToken:"
 	qrImgUrl := wechat.GetTmpStrQrImg("login_123")
 	this.Data["qrImgUrl"] = qrImgUrl
-	this.TplName = "addGroup/index.tpl"
+	this.TplName = "test/index.tpl"
 }
 
-func (this *AddGroupController) Post() {
+func (this *TestController) Post() {
 
 	this.SendRes(0, "success", nil)
 }
