@@ -2,3 +2,4 @@ bin/
 pkg/
 src/webapp/webapp
 src/webapp/disploy.sh
+src/webapp/conf/app.conf
