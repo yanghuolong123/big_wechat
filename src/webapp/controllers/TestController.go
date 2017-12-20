@@ -2,7 +2,7 @@ package controllers
 
 import (
 	//	"time"
-	"fmt"
+	//	"fmt"
 	"yhl/help"
 	"yhl/wechat"
 )
@@ -30,9 +30,9 @@ func (this *TestController) Get() {
 	m["text"] = map[string]string{"content": "Hello World!"}
 	wechat.SendMsg(m)
 	wechat.SendTextMsg("oTbmFxG5r1WRrHdb32O5y2aSAIkc", "I love you")
-	*/
 	userinfo := wechat.GetWxUserinfo("oTbmFxG5r1WRrHdb32O5y2aSAIkc", "")
 	fmt.Println(userinfo)
+	*/
 	this.Data["welcome"] = "welcome to add group, accessToken:"
 	qrImgUrl := wechat.GetTmpStrQrImg("login_123")
 	this.Data["qrImgUrl"] = qrImgUrl
