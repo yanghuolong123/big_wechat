@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ../../
 CURDIR=`pwd`
 OLDGOPATH="$GOPATH"
 echo "当前路径："$CURDIR
