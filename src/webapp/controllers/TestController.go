@@ -36,11 +36,15 @@ func (this *TestController) Get() {
 	fmt.Println(userinfo)
 	*/
 	pg := models.PrivateGroup{}
-	pg.Gid = 2
-	pg.Uid = 1
-	pg.Name = "aaa"
-	pg.Introduction = "sss"
-	flag := models.CreatePrivateGroup(&pg)
+	pg.Id = 1
+	//pg.Gid = 2
+	//pg.Uid = 1
+	//pg.Name = "aaa"
+	pg.Introduction = "aaaaaaaaaaasss"
+	pg.Qrcode = "aaaaaaa"
+	pg.Ower_qrcode = "bbbb"
+	//flag := models.CreatePrivateGroup(&pg)
+	flag := models.UpdatePrivateGroup(&pg)
 	fmt.Println("================= flag:", flag)
 	this.Data["welcome"] = "welcome to add group, accessToken:"
 	qrImgUrl := wechat.GetTmpStrQrImg("login_123")

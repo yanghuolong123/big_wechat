@@ -28,3 +28,13 @@ func CreatePrivateGroup(pg *PrivateGroup) bool {
 	i, _ := orm.NewOrm().Insert(pg)
 	return i > 0
 }
+
+func UpdatePrivateGroup(pg *PrivateGroup) bool {
+	if pg.Id <= 0 {
+		return false
+	}
+
+	i, _ := orm.NewOrm().Update(pg)
+
+	return i > 0
+}
