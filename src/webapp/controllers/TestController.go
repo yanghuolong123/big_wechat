@@ -35,10 +35,13 @@ func (this *TestController) Get() {
 	userinfo := wechat.GetWxUserinfo("oTbmFxG5r1WRrHdb32O5y2aSAIkc", "")
 	fmt.Println(userinfo)
 	*/
-	accessToken := wechat.GetAccessToken()
-	fmt.Println(accessToken)
-	userinfo := wechat.GetWxUserinfo("oou4Vw0zizge_p2gQhYT0UL5Kwbk", "")
-	fmt.Println(userinfo)
+	pg := models.PrivateGroup{}
+	pg.Gid = 2
+	pg.Uid = 1
+	pg.Name = "aaa"
+	pg.Introduction = "sss"
+	flag := models.CreatePrivateGroup(&pg)
+	fmt.Println("================= flag:", flag)
 	this.Data["welcome"] = "welcome to add group, accessToken:"
 	qrImgUrl := wechat.GetTmpStrQrImg("login_123")
 	this.Data["qrImgUrl"] = qrImgUrl
