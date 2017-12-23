@@ -1,2 +1,7 @@
 @CHARSET "UTF-8";
-.head{}
+/* ====   首页样式*/
+.home .head{padding-top: 15px;}
+.home .logo img{height: 50px; width: 150px;}
+.home .head h3.title{margin-top: 5px; }
+.home .box1{margin-top: 25px;}
+.home .tips{margin-top: 10px;}

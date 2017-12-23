@@ -15,7 +15,6 @@ func (this *PrivateGroupController) Get() {
 	fmt.Println(pgroups)
 
 	this.Data["pgroups"] = pgroups
-	this.Data["welcome"] = "welcome to add group, accessToken:"
 	this.TplName = "privateGroup/index.tpl"
 }
 
