@@ -38,3 +38,20 @@ func UpdatePrivateGroup(pg *PrivateGroup) bool {
 
 	return i > 0
 }
+
+func GetPrivateGroupById(id int) (pg *PrivateGroup) {
+	pg = &PrivateGroup{Id: id}
+	orm.NewOrm().Read(pg)
+
+	return
+}
+
+func GetPrivateGroupByGid(gid int) (pg_slice []PrivateGroup) {
+	orm.NewOrm().QueryTable("tbl_private_group").Filter("gid", gid).All(&pg_slice)
+	return
+}
+
+func GetPrivateGroupByLimit(limit int) (pg_slice []PrivateGroup) {
+	orm.NewOrm().QueryTable("tbl_private_group").Limit(limit).OrderBy("-createtime").All(&pg_slice)
+	return
+}

@@ -10,7 +10,7 @@ func init() {
 	// 微信接入
 	beego.Router("/wechat", &controllers.WechatController{}, "get,post:Index")
 
-	beego.Router("/", &controllers.HomeController{})
+	beego.Router("/home", &controllers.HomeController{})
 
 	// test
 	beego.Router("/login", &controllers.TestController{}, "post:Login")
@@ -19,6 +19,6 @@ func init() {
 	beego.Router("/register", &controllers.TestController{}, "post:Register")
 	beego.Router("/register", &controllers.TestController{}, "get:RegisterPage")
 
-	beego.Router("/addgroup", &controllers.AddGroupController{})
+	beego.Router("/", &controllers.PrivateGroupController{})
 
 }
