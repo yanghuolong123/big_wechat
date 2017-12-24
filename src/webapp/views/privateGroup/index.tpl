@@ -17,7 +17,7 @@
  						<h3 class="title text-muted">北美留学生的微信群</h3>	 					
 	 				</div>
 	  				<div class="col-md-2 user">
-                                  <button type="button" class="btn btn-info">
+                                  <button type="button" class="btn btn-info" id="loginBtn">
                                     <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 登录
                                   </button>
                               </div>
@@ -52,7 +52,10 @@
 				</div>
 	 		</div>	 	         
 	 	</div>
+
+            <div id="modalPage"></div>
              <script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
-	 	<script src="/static/plugin/bootstrap/js/bootstrap.min.js"></script>	 	
+	 	<script src="/static/plugin/bootstrap/js/bootstrap.min.js"></script>
+            <script src="/static/js/addwechat.js"></script> 	
 	 </body>
 </html>

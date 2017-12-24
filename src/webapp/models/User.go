@@ -14,6 +14,7 @@ func init() {
 type User struct {
 	Id         int
 	Gid        int
+	Openid     string
 	Username   string
 	Email      string
 	Password   string
@@ -29,6 +30,14 @@ func GetUserById(id int) (user *User, err error) {
 	o := orm.NewOrm()
 	user = &User{Id: id}
 	err = o.Read(user)
+
+	return
+}
+
+func GetUserByOpenid(openid string) (user *User, err error) {
+	o := orm.NewOrm()
+	user = &User{Openid: openid}
+	err = o.Read(user, "Openid")
 
 	return
 }

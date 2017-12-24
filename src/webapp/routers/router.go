@@ -13,12 +13,14 @@ func init() {
 	beego.Router("/home", &controllers.HomeController{})
 
 	// test
-	beego.Router("/login", &controllers.TestController{}, "post:Login")
-	beego.Router("/login", &controllers.TestController{}, "get:LoginPage")
-	beego.Router("/logout", &controllers.TestController{}, "post:Logout")
+	//beego.Router("/login", &controllers.TestController{}, "post:Login")
+	//beego.Router("/login", &controllers.TestController{}, "get:LoginPage")
+	//beego.Router("/logout", &controllers.TestController{}, "post:Logout")
 	beego.Router("/register", &controllers.TestController{}, "post:Register")
 	beego.Router("/register", &controllers.TestController{}, "get:RegisterPage")
 
 	beego.Router("/", &controllers.PrivateGroupController{})
+	beego.Router("/login", &controllers.LoginController{}, "post:LoginPost")
+	beego.Router("/login", &controllers.LoginController{}, "get:LoginGet")
 
 }

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"webapp/models"
 	"yhl/help"
-	"yhl/wechat"
+	//	"yhl/wechat"
 )
 
 type TestController struct {
@@ -31,24 +31,30 @@ func (this *TestController) Get() {
 	m["msgtype"] = "text"
 	m["text"] = map[string]string{"content": "Hello World!"}
 	wechat.SendMsg(m)
-	wechat.SendTextMsg("oou4Vw0zizge_p2gQhYT0UL5Kwbk", "I love you")
-	userinfo := wechat.GetWxUserinfo("oTbmFxG5r1WRrHdb32O5y2aSAIkc", "")
+	wechat.SendTextMsg("oou4Vw0zizge_p2gQhYT0UL5Kwbk", "I love eou")
+	userinfo := wechat.GetWxUserinfo("oou4Vw0zizge_p2gQhYT0UL5Kwbk", "")
 	fmt.Println(userinfo)
 	*/
-	pg := models.PrivateGroup{}
-	pg.Id = 1
-	//pg.Gid = 2
-	//pg.Uid = 1
-	//pg.Name = "aaa"
-	pg.Introduction = "aaaaaaaaaaasss"
-	pg.Qrcode = "aaaaaaa"
-	pg.Ower_qrcode = "bbbb"
-	//flag := models.CreatePrivateGroup(&pg)
-	flag := models.UpdatePrivateGroup(&pg)
-	fmt.Println("================= flag:", flag)
-	this.Data["welcome"] = "welcome to add group, accessToken:"
-	qrImgUrl := wechat.GetTmpStrQrImg("login_123")
-	this.Data["qrImgUrl"] = qrImgUrl
+	/*	userinfo := wechat.GetWxUserinfo("oou4Vw0zizge_p2gQhYT0UL5Kwbk", "")
+		fmt.Println(userinfo)
+		pg := models.PrivateGroup{}
+		pg.Id = 1
+		//pg.Gid = 2
+		//pg.Uid = 1
+		//pg.Name = "aaa"
+		pg.Introduction = "aaaaaaaaaaasss"
+		pg.Qrcode = "aaaaaaa"
+		pg.Ower_qrcode = "bbbb"
+		//flag := models.CreatePrivateGroup(&pg)
+		flag := models.UpdatePrivateGroup(&pg)
+		fmt.Println("================= flag:", flag)
+		this.Data["welcome"] = "welcome to add group, accessToken:"
+		qrImgUrl := wechat.GetTmpStrQrImg("login_123")
+		this.Data["qrImgUrl"] = qrImgUrl
+	*/
+	user, err := models.GetUserByOpenid("oou4Vw0zizge_p2gQhYT0UL5Kwbk")
+	//user, err := models.GetUserById(3)
+	fmt.Println(user, err)
 	this.TplName = "test/index.tpl"
 }
 
