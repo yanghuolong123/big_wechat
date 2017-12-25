@@ -18,7 +18,14 @@ func (this *PrivateGroupController) Get() {
 	this.TplName = "privateGroup/index.tpl"
 }
 
-func (this *PrivateGroupController) Post() {
+func (this *PrivateGroupController) CreateGet() {
+	user := this.GetSession("user")
+	this.Data["user"] = user
+	this.Layout = "layout/addwechat.tpl"
+	this.TplName = "privateGroup/create.tpl"
+}
+
+func (this *PrivateGroupController) CreatePost() {
 
 	this.SendRes(0, "success", nil)
 }

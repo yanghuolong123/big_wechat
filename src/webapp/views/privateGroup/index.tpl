@@ -35,7 +35,7 @@
                               <input type="text"  class="form-control" id="exampleInputName2" placeholder="Jane Doe">
                             </div>
                             <div class="col-md-1">
-                              <a href="#" class="btn btn-success" role="button">发布群</a>
+                              <a href="/pg/create" class="btn btn-success" role="button">发布群</a>
                             </div>                            
                         </div>
 	 			<div class="tips ">

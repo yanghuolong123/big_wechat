@@ -5,3 +5,13 @@
 .home .head h3.title{margin-top: 5px; }
 .home .box1{margin-top: 25px;}
 .home .tips{margin-top: 10px;}
+
+/* ======= layout css */
+.page-header{margin-top: 10px;}
+.page-header .logo img{height: 50px; width: 150px;}
+.head-left  {margin-top: 25px; }
+
+
+/*===== /pg/create css */
+.create_pg .title h4{color: #2fb09d;}
+.create_pg .title p{margin-top: 10px;}
