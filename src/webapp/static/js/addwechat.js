@@ -12,7 +12,7 @@ $(function(){
 			            }
 			            
 			            clearInterval(timer);
-			            
+			            window.location = "/";
 			            
 			        });
 			}, 1000);

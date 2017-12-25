@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
@@ -75,9 +76,9 @@ func scanLogin(msgBody *wechat.MsgBody) {
 	expire := 18000
 
 	user, err := models.GetUserByOpenid(msgBody.FromUserName)
-	fmt.Println("============== user, err:", user, err)
 	if err == nil {
-		cache.Put(msgBody.EventKey, user, time.Duration(expire)*time.Second)
+		b, _ := json.Marshal(*user)
+		cache.Put(msgBody.EventKey, b, time.Duration(expire)*time.Second)
 		return
 	}
 
@@ -89,8 +90,8 @@ func scanLogin(msgBody *wechat.MsgBody) {
 			Avatar:   userinfo["headimgurl"].(string),
 		}
 		models.CreateUser(&u)
-		e := cache.Put(msgBody.EventKey, u, time.Duration(expire)*time.Second)
-		fmt.Println("=========== e:", e)
+		b, _ := json.Marshal(u)
+		cache.Put(msgBody.EventKey, b, time.Duration(expire)*time.Second)
 	}
 
 }

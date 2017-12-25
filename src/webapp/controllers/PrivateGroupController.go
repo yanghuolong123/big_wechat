@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"webapp/models"
 	"yhl/help"
 )
@@ -12,9 +11,10 @@ type PrivateGroupController struct {
 
 func (this *PrivateGroupController) Get() {
 	pgroups := models.GetPrivateGroupByLimit(16)
-	fmt.Println(pgroups)
+	user := this.GetSession("user")
 
 	this.Data["pgroups"] = pgroups
+	this.Data["user"] = user
 	this.TplName = "privateGroup/index.tpl"
 }
 

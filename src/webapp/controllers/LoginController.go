@@ -1,10 +1,10 @@
 package controllers
 
 import (
-	"fmt"
+	"encoding/json"
 	"strconv"
 	"time"
-	//	"webapp/models"
+	"webapp/models"
 	"yhl/help"
 	"yhl/wechat"
 )
@@ -29,13 +29,14 @@ func (this *LoginController) LoginPost() {
 	sceneId := this.GetString("sceneId")
 	cache := help.Cache
 	c := cache.Get(sceneId)
-	fmt.Println(c)
 	if c != nil {
-		u := c.([]uint8)
+		u := models.User{}
+		json.Unmarshal([]byte(c.([]uint8)), &u)
+		this.SetSession("user", u)
 		this.SendRes(0, "success", u)
 	}
 
-	this.SendRes(0, "failed", nil)
+	this.SendRes(-1, "failed", nil)
 }
 
 func (this *LoginController) LogOut() {

@@ -17,10 +17,16 @@
  						<h3 class="title text-muted">北美留学生的微信群</h3>	 					
 	 				</div>
 	  				<div class="col-md-2 user">
-                                  <button type="button" class="btn btn-info" id="loginBtn">
-                                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 登录
-                                  </button>
-                              </div>
+                                          {{if .user}}
+                                            <button type="button" class="btn btn-info">
+                                              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  {{.user.Nickname}}
+                                            </button>                                            
+                                          {{else}}
+                                            <button type="button" class="btn btn-info" id="loginBtn">
+                                              <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 登录
+                                            </button>
+                                          {{end}}                                          
+                                      </div>
 	 			</div>
 	 		</div>
 	 		<div class="content">
