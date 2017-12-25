@@ -1,6 +1,6 @@
 <div class="create_pg">
 	<div class="row title">
-		<div class="col-md-2 col-md-offset-1">
+		<div class="col-md-offset-1 col-md-1">
 			<h4 class="text-primary">发布群</h4>
 		</div>
 		<div class="col-md-6">
