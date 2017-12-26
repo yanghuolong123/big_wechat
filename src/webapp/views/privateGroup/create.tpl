@@ -36,12 +36,12 @@
 	      	<div class="uploadimg col-sm-2">
 	      		<input type="hidden" value="" name="qrcode">	      
 		    	<input type="file" name="qrcode_file" style="display: none" id="qrcode_file">
-                                       	<a role="button" href="#" class="upload_btns" onclick="uploadFile(this);return false;" id="file_qrcode_upload">上传群二维码</a>
+                                       	<a role="button" href="javascript:;" class="upload_btns" onclick="uploadFile(this);return false;" id="file_qrcode_upload">上传群二维码</a>
 	      	</div>
 	      	<div class="uploadimg col-sm-2">
 	      		<input type="hidden" value="" name="ower_qrcode">	      
 		    	<input type="file" name="ower_qrcode_file" style="display: none" id="qrcode_file">
-                                       	<a role="button" href="#" class="upload_btns" onclick="uploadFile(this);return false;" id="file_ower_qrcode_upload">上传群主二维码</a>	      	
+                                       	<a role="button" href="javascript:;" class="upload_btns" onclick="uploadFile(this);return false;" id="file_ower_qrcode_upload">上传群主二维码</a>	      	
 	      	</div>
 	      	</div>
 	      	<div class="row">

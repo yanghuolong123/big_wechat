@@ -20,5 +20,7 @@
 .create_pg .uploadimg {background: rgba(0, 0, 0, 0) url("/static/images/ico-photo.png") no-repeat scroll center 26px / 46px 41px; border: 1px solid #30aacb; height: 130px;  margin: 16px;    overflow: hidden;  width: 160px;}
 .create_pg .upload_btns {color: #30aacb;display: block; font-size: 16px; height: 44px; padding-top: 86px; position: relative; text-align: center; width: 100%;}
 .create_pg .wechat_id_label{text-align: left;}
+.create_pg .active {background-position: center center; background-size: cover; border-color: #efefef;}
+
 
 

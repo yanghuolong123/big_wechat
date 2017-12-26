@@ -1,5 +1,6 @@
 bin/
 pkg/
 src/webapp/webapp
+src/webapp/uploads/
 src/webapp/disploy.sh
 src/webapp/conf/app.conf
