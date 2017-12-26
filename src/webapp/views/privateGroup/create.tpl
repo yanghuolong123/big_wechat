@@ -9,29 +9,34 @@
 	</div>
 	<form class="form-horizontal">
 	  <div class="form-group">
-	    <label for="inputEmail3" class="col-sm-2 control-label">应用范围</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="inputEmail3" placeholder="请输入学校关键字或简称">
+	    <label for="school" class="col-sm-2 control-label">应用范围</label>
+	    <div class="col-sm-6">
+	      <input type="text" class="form-control" id="school" placeholder="请输入学校关键字或简称">
 	    </div>
 	  </div>
 	  <div class="form-group">
-	    <label for="inputPassword3" class="col-sm-2 control-label">群名称</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="inputPassword3" placeholder="">
+	    <label for="name" class="col-sm-2 control-label">群名称</label>
+	    <div class="col-sm-6">
+	      <input type="text" class="form-control" id="name" placeholder="">
 	    </div>
 	  </div>
+	  <div class="form-group">
+	    <label for="introduction" class="col-sm-2 control-label">补充介绍</label>
+	    <div class="col-sm-6">	    
+	      <textarea class="form-control"  id="introduction" rows="3" placeholder="可补充群名称中未包含的信息、关键字等"></textarea>
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="uploadfile" class="col-sm-4 control-label">上传联系信息 (以下三项至少填一项)</label>	   
+	  </div>
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10">	    
+	      aaaaa
+	    </div>
+	  </div>	  
 	  <div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
-	      <div class="checkbox">
-	        <label>
-	          <input type="checkbox"> Remember me
-	        </label>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <div class="col-sm-offset-2 col-sm-10">
-	      <button type="submit" class="btn btn-default">Sign in</button>
+	      <button type="submit" class="btn btn-success">发布</button>
 	    </div>
 	  </div>
 	</form>
