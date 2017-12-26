@@ -1,4 +1,6 @@
 @CHARSET "UTF-8";
+/*===== 公用样式 */
+
 /* ====   首页样式*/
 .home .head{padding-top: 15px;}
 .home .logo img{height: 50px; width: 150px;}

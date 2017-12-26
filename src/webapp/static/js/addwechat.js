@@ -27,16 +27,13 @@ function uploadFile(obj) {
 				$this.parent().css( 'background-image', 'url(/' +  e.data + ')' );
 				$this.parent().addClass('active');
 				$upload .prev().val(e.data);
-				//$this.parent().children('a').html('<span>重新上传</span>');
-				//alert(e.data);
-
-				//$('.logo').css( 'background-image', 'url(' + rs.data.fileUrl + ')' );
 			}
 		});		
 	  });
 }
 
 $(function(){
+
 	$("#loginBtn").click(function(){
 		$.get("/login", function(e){
 			$("#modalPage").html(e.data).find('#loginModal').modal({backdrop: 'static', keyboard: false});
@@ -54,4 +51,44 @@ $(function(){
 			}, 1000);
 		});
 	});
+
+
+	$("#create_pg_btn").click(function(){
+		$this = $(this);
+		var gid = 1;// $("#gid").val();
+		var name = $.trim($("#name").val());
+		var introduction = $("#introduction").val();
+		var qrcode = $("#qrcode").val();
+		var ower_qrcode = $("#ower_qrcode").val();
+		var wechat_id = $.trim($("#wechat_id").val());
+
+		var flag = true;
+		$(".error_tips").html("");
+		if (gid=="") {
+			$(".error_tips").append("<p>应用范围为必填项。</p>");
+			flag = false;
+		}
+		if (name=="") {
+			$(".error_tips").append("<p>群名称为必填项。</p>");
+			flag = false;
+		}
+		if(qrcode == "" && ower_qrcode=="" && wechat_id == "") {
+			$(".error_tips").append("<p>上传联系信息至少要填一项。</p>");
+			flag = false;
+		}
+
+		if (!flag) {
+			return false;
+		}
+
+		$this.attr("disabled","disabled");
+		$.post("/pg/create", {gid:gid, name:name, introduction:introduction,qrcode:qrcode, ower_qrcode:ower_qrcode, wechat_id:wechat_id}, function(e){
+			$this.removeAttr("disabled");
+			if(e.code<0) {
+				$(".error_tips").append(e.msg);
+				return false;
+			}
+		});
+	});
+
 });
