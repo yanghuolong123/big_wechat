@@ -11,6 +11,7 @@
 	  <div class="form-group">
 	    <label for="school" class="col-sm-2 control-label">应用范围</label>
 	    <div class="col-sm-6">
+	      <input type="hidden" name="gid" id="gid" value="">
 	      <input type="text" class="form-control" id="school" placeholder="请输入学校关键字或简称">
 	    </div>
 	  </div>
@@ -30,13 +31,30 @@
 	    <label for="uploadfile" class="col-sm-4 control-label">上传联系信息 (以下三项至少填一项)</label>	   
 	  </div>
 	  <div class="form-group">
-	    <div class="col-sm-offset-2 col-sm-10">	    
-	      aaaaa
+	    <div class="col-sm-offset-2 col-sm-10">	 
+	    	<div class="row">
+	      	<div class="uploadimg col-sm-2">
+	      		<input type="hidden" value="" name="qrcode">	      
+		    	<input type="file" name="qrcode_file" style="display: none" id="qrcode_file">
+                                       	<a role="button" href="#" class="upload_btns" onclick="uploadFile(this);return false;" id="file_qrcode_upload">上传群二维码</a>
+	      	</div>
+	      	<div class="uploadimg col-sm-2">
+	      		<input type="hidden" value="" name="ower_qrcode">	      
+		    	<input type="file" name="ower_qrcode_file" style="display: none" id="qrcode_file">
+                                       	<a role="button" href="#" class="upload_btns" onclick="uploadFile(this);return false;" id="file_ower_qrcode_upload">上传群主二维码</a>	      	
+	      	</div>
+	      	</div>
+	      	<div class="row">
+	      		<label for="wechat_id" class="col-sm-2 control-label wechat_id_label">群主微信号</label>
+	      		<div class="col-sm-4">
+	      			<input type="text" class=" form-control" id="wechat_id" placeholder="">
+	      		</div>	      		
+	      	</div>
 	    </div>
 	  </div>	  
 	  <div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
-	      <button type="submit" class="btn btn-success">发布</button>
+	      <button type="submit" class="btn btn-success btn-lg">发布</button>
 	    </div>
 	  </div>
 	</form>
