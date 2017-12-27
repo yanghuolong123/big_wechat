@@ -62,6 +62,13 @@ func (this *PrivateGroupController) User() {
 }
 
 func (this *PrivateGroupController) View() {
+	id, _ := this.GetInt("id")
+	pg := models.GetPrivateGroupById(int(id))
+	group := models.GetGroupById(pg.Gid)
+
+	this.Data["pg"] = pg
+	this.Data["group"] = group
+
 	this.Layout = "layout/addwechat.tpl"
 	this.TplName = "privateGroup/view.tpl"
 }
