@@ -18,9 +18,9 @@
 	 				</div>
 	  				<div class="col-md-2 user">
                                           {{if .user}}
-                                            <button type="button" class="btn btn-info">
+                                            <a  href="/pg/user" class="btn btn-info">
                                               <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  {{.user.Nickname}}
-                                            </button>                                            
+                                            </a>                                            
                                           {{else}}
                                             <button type="button" class="btn btn-info" id="loginBtn">
                                               <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 登录
@@ -47,10 +47,10 @@
                               {{range .pgroups}}
   					<div class="col-xs-6 col-md-3">                              
     						<div class="thumbnail">
-      							<img src="" alt="{{.Name}}">
+      							<a href="/pg/view?id={{.Id}}"><img src="{{.Qrcode}}" alt="{{.Name}}"></a>
       							<div class="caption">
-        							  <h3>{{.Name}}</h3>
-       							  <p>{{.Introduction}}</p>
+        							 <h4>{{.Name}}</h4>
+       							         <p class="text-muted">{{.Introduction}}</p>
       							</div>
     						</div>
   					</div>  					

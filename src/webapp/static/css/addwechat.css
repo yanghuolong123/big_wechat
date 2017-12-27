@@ -7,6 +7,9 @@
 .home .head h3.title{margin-top: 5px; }
 .home .box1{margin-top: 25px;}
 .home .tips{margin-top: 10px;}
+.home .list img{width: 250px; height: 250px;}
+.home .list .caption h4{color: #2fb09d;}
+.home .list .caption p{height: 35px; overflow: hidden;}
 
 /* ======= layout css */
 .page-header{margin-top: 10px;}
@@ -26,8 +29,12 @@
 
 
 /*======== /pg/user css */
-.user_home .table td {border-bottom: 1px solid #ddd; border-top: 0px; color: #777;}
-.user_home .table td a{text-align: right;}
-.user_home .title{margin-bottom: 40px;}
-.user_home .title h4{color: #2fb09d;}
+.user_pg .table td {border-bottom: 1px solid #ddd; border-top: 0px; color: #777;}
+.user_pg .table td a{text-align: right;}
+.user_pg .title{margin-bottom: 40px;}
+.user_pg .title h4{color: #2fb09d;}
+
+
+/*===== /pg/view css */
+
 

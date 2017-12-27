@@ -60,3 +60,8 @@ func (this *PrivateGroupController) User() {
 	this.Layout = "layout/addwechat.tpl"
 	this.TplName = "privateGroup/user.tpl"
 }
+
+func (this *PrivateGroupController) View() {
+	this.Layout = "layout/addwechat.tpl"
+	this.TplName = "privateGroup/view.tpl"
+}
