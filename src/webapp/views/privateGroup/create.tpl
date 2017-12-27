@@ -12,19 +12,19 @@
 	    <label for="school" class="col-sm-2 control-label">应用范围</label>
 	    <div class="col-sm-6">
 	      <input type="hidden" name="gid" id="gid" value="">
-	      <input type="text" class="form-control" id="school" placeholder="请输入学校关键字或简称，必填">
+	      <input type="text" class="form-control" id="school"  maxlength="100" placeholder="请输入学校关键字或简称，必填">
 	    </div>
 	  </div>
 	  <div class="form-group">
 	    <label for="name" class="col-sm-2 control-label">群名称</label>
 	    <div class="col-sm-6">
-	      <input type="text" class="form-control" id="name" placeholder="必填">
+	      <input type="text" class="form-control" id="name" maxlength="55" placeholder="必填">
 	    </div>
 	  </div>
 	  <div class="form-group">
 	    <label for="introduction" class="col-sm-2 control-label">补充介绍</label>
 	    <div class="col-sm-6">	    
-	      <textarea class="form-control"  id="introduction" rows="3" placeholder="可补充群名称中未包含的信息、关键字等"></textarea>
+	      <textarea class="form-control"  id="introduction" rows="3" maxlength="200" placeholder="可补充群名称中未包含的信息、关键字等"></textarea>
 	    </div>
 	  </div>
 	  <div class="form-group">
@@ -47,7 +47,7 @@
 	      	<div class="row">
 	      		<label for="wechat_id" class="col-sm-2 control-label wechat_id_label">群主微信号</label>
 	      		<div class="col-sm-4">
-	      			<input type="text" class=" form-control" id="wechat_id" placeholder="">
+	      			<input type="text" class=" form-control" id="wechat_id" maxlength="50" placeholder="">
 	      		</div>	      		
 	      	</div>
 	    </div>

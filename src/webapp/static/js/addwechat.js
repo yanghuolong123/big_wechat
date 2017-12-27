@@ -88,6 +88,8 @@ $(function(){
 				$(".error_tips").append(e.msg);
 				return false;
 			}
+
+			window.location = "/";
 		});
 	});
 

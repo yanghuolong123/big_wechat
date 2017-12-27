@@ -25,4 +25,9 @@
 .create_pg .active {background-position: center center; background-size: cover; border-color: #efefef;}
 
 
+/*======== /pg/user css */
+.user_home .table td {border-bottom: 1px solid #ddd; border-top: 0px; color: #777;}
+.user_home .table td a{text-align: right;}
+.user_home .title{margin-bottom: 40px;}
+.user_home .title h4{color: #2fb09d;}
 

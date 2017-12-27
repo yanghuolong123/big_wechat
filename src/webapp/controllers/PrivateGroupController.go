@@ -26,6 +26,37 @@ func (this *PrivateGroupController) CreateGet() {
 }
 
 func (this *PrivateGroupController) CreatePost() {
+	user := this.GetSession("user")
+	if user == nil {
+		this.SendRes(-1, "请先登录", nil)
+	}
+	gid, _ := this.GetInt("gid")
+	name := this.GetString("name")
+	introduction := this.GetString("introduction")
+	qrcode := this.GetString("qrcode")
+	ower_qrcode := this.GetString("ower_qrcode")
+	wechat_id := this.GetString("wechat_id")
+
+	if name == "" || gid <= 0 || (qrcode == "" && ower_qrcode == "" && wechat_id == "") {
+		this.SendRes(-1, "参数错误", nil)
+	}
+
+	pg := models.PrivateGroup{}
+	pg.Gid = int(gid)
+	pg.Uid = user.(models.User).Id
+	pg.Name = name
+	pg.Introduction = introduction
+	pg.Qrcode = qrcode
+	pg.Ower_qrcode = ower_qrcode
+	pg.Wechat_id = wechat_id
+
+	models.CreatePrivateGroup(&pg)
 
 	this.SendRes(0, "success", nil)
+}
+
+func (this *PrivateGroupController) User() {
+
+	this.Layout = "layout/addwechat.tpl"
+	this.TplName = "privateGroup/user.tpl"
 }
