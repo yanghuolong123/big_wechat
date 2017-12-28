@@ -1,5 +1,6 @@
 @CHARSET "UTF-8";
 /*===== 公用样式 */
+ul,li{margin: 0px; padding: 0px;list-style-type: none;}
 
 /* ====   首页样式*/
 .home .head{padding-top: 15px;}
@@ -36,5 +37,14 @@
 
 
 /*===== /pg/view css */
-
+.view_pg{}
+.view_pg .viewinfo{ color: #777; }
+.view_pg .viewinfo h4{color: #2fb09d;}
+.view_pg .viewinfo a.glink{color: #777; text-decoration: underline; vertical-align: bottom; margin-right: 10px;}
+.view_pg  p.desc{margin-top: 25px;}
+.view_pg .qrcode img{width: 180px; height: 180px;}
+.view_pg .qrcode p.qr1{ margin-top: 5px; margin-left: 55px; }
+.view_pg .qrcode p.qr2{ margin-top: 5px; width: 180px; text-align: center; }
+.view_pg .comment_btn button{ margin-top: 10px;}
+.commentlist{ margin-top: 15px; }
 
