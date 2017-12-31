@@ -79,7 +79,7 @@ func (this *TestController) login(username, password string) (m map[string]inter
 	gids := models.GetFollowByUid(u.Id)
 	group := models.GetGroupById(u.Gid)
 
-	this.SetSession("user", u)
+	this.SetSession("user", *u)
 	this.SetSession("follow", gids)
 	this.SetSession("group", group)
 

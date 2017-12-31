@@ -21,9 +21,10 @@
 	 		<div class="content">
 	 			{{.LayoutContent}}
 	 		</div>			
-		</div>	 	
-	             	<script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
+		</div>
+		<div id="modalPage"></div>	 	
+             	<script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
 		<script src="/static/plugin/bootstrap/js/bootstrap.min.js"></script>
-	            	<script src="/static/js/addwechat.js"></script> 	
+            	<script src="/static/js/addwechat.js"></script> 	
 	 </body>
 </html>

@@ -12,6 +12,7 @@ func init() {
 type PrivateGroupReport struct {
 	Id         int
 	Uid        int
+	Pg_id      int
 	Content    string
 	Status     int
 	Createtime time.Time

@@ -93,4 +93,51 @@ $(function(){
 		});
 	});
 
+
+	$(".pgmsg-btn").click(function(){
+		var pg_id = $("#pg_id").val();
+		var content = $.trim($("#pg_msg").val());
+		if ( content=="") {
+			return false;
+		}
+
+		$.post("/pg/createPgMsg", {pg_id:pg_id,content:content}, function(e){
+			if(e.code<0) {
+				return false;
+			}
+
+			$("#pg_msg").val("");
+
+			var comments = '';
+			comments += "<li>";
+			comments += " 	<h5>"+e.data.Uid+"</h5>";
+			comments += "		<p>"+e.data.Content+"</p>";
+			comments += "		<p>"+e.data.Createtime+"</p>";
+			comments += "</li>";
+
+			$("#commentlist").prepend(comments);
+		});
+	});
+
+	$(".report_pg").click(function(){
+		$("#pgReportModal").modal({backdrop: 'static', keyboard: false});
+	});
+
+	$("#report_pg_btn").click(function(){
+		var pg_id = $("#pg_id").val();
+		var content = $.trim($("#pg_report_content").val());
+		if ( content=="") {
+			return false;
+		}
+
+		$.post("/pg/createReport", {pg_id:pg_id,content:content}, function(e){
+			if(e.code<0) {
+				return false;
+			}
+
+			$("#pg_report_content").val("");
+			$("#pgReportModal").modal('hide');
+		});
+	});
+
 });

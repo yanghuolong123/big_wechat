@@ -65,10 +65,47 @@ func (this *PrivateGroupController) View() {
 	id, _ := this.GetInt("id")
 	pg := models.GetPrivateGroupById(int(id))
 	group := models.GetGroupById(pg.Gid)
+	pgMsgs := models.GetPrivateGroupMessageByPgid(pg.Id)
 
 	this.Data["pg"] = pg
 	this.Data["group"] = group
+	this.Data["pgMsgs"] = pgMsgs
 
 	this.Layout = "layout/addwechat.tpl"
 	this.TplName = "privateGroup/view.tpl"
+}
+
+func (this *PrivateGroupController) CreatePgMsg() {
+	user := this.GetSession("user")
+	if user == nil {
+		this.SendRes(-1, "请先登录", nil)
+	}
+	content := this.GetString("content")
+	pg_id, _ := this.GetInt("pg_id")
+
+	pgm := models.PrivateGroupMessage{}
+	pgm.Uid = user.(models.User).Id
+	pgm.Pg_id = int(pg_id)
+	pgm.Content = content
+	models.CreatePrivateGroupMessage(&pgm)
+
+	this.SendRes(0, "success", pgm)
+}
+
+func (this *PrivateGroupController) CreateReport() {
+	user := this.GetSession("user")
+	if user == nil {
+		this.SendRes(-1, "请先登录", nil)
+	}
+
+	content := this.GetString("content")
+	pg_id, _ := this.GetInt("pg_id")
+
+	pgr := models.PrivateGroupReport{}
+	pgr.Uid = user.(models.User).Id
+	pgr.Pg_id = int(pg_id)
+	pgr.Content = content
+	models.CreatePrivateGroupReport(&pgr)
+
+	this.SendRes(0, "success", nil)
 }

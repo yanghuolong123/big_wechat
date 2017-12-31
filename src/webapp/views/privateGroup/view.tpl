@@ -6,7 +6,7 @@
 			</div>
 			<div class="col-md-3">
 				<a class="glink" href="/pg/list"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> {{.group.Name}}</a> 
-				<button class="btn btn-warning btn-sm">举报</button>
+				<button class="btn btn-warning btn-sm report_pg">举报</button>
 			</div>
 		</div>
 		<div>
@@ -30,19 +30,41 @@
 	<div class="comment ">
 		<h4 class="text-muted">留言</h4>
 		<div class="row">	
-			<div class="col-md-7">	 
-				<textarea class="form-control"></textarea>
+			<div class="col-md-7">	
+				<input type="hidden" id="pg_id" name="pg_id" value="{{.pg.Id}}">
+				<textarea id="pg_msg" class="form-control"></textarea>
 			</div>
 		</div>		 
 		<div class="comment_btn col-sm-offset-6">
-			<button class="btn btn-success">提交</button>
+			<button class="btn btn-success pgmsg-btn">提交</button>
 		</div>
-		<ul class="commentlist">
-			<li>
-				<h5>11</h5>
-				<p>22</p>
-				<p>33</p>
+		<ul id="commentlist">
+			{{range .pgMsgs}}
+			<li>				
+				<h5>{{.Uid}}</h5>
+				<p>{{.Content}}</p>
+				<p>{{.Createtime}}</p>				
 			</li>
+			{{end}}
 		</ul>
 	</div>
+	<div id="pgReportModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	      	<div class="">
+	               <p class="text-muted">如您认为此群不能为同学们带来便利，或有与其他影响正常交流秩序的行为，请举报。</p>
+	            </div>
+	            <div>
+	               <textarea id="pg_report_content" class="form-control" placeholder="举报理由(必填)"></textarea>
+	            </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-info" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn btn-primary" id="report_pg_btn">提交举报</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
 </div>
