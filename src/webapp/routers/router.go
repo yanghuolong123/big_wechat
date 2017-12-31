@@ -29,5 +29,7 @@ func init() {
 	beego.Router("/pg/view", &controllers.PrivateGroupController{}, "*:View")
 	beego.Router("/pg/createPgMsg", &controllers.PrivateGroupController{}, "post:CreatePgMsg")
 	beego.Router("/pg/createReport", &controllers.PrivateGroupController{}, "post:CreateReport")
+	beego.Router("/pg/list", &controllers.PrivateGroupController{}, "*:List")
+	beego.Router("/pg/unlock", &controllers.PrivateGroupController{}, "post:Unlock")
 
 }

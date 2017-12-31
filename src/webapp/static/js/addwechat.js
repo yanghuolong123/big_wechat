@@ -140,4 +140,18 @@ $(function(){
 		});
 	});
 
+	$("#unlock_group").click(function(){
+		$this = $(this);
+		var gid = $("#gid").val();
+
+		$.post("/pg/unlock",{gid:gid}, function(e){
+			if(e.code<0) {
+				return false;
+			}
+
+			$this.text("已解锁");
+			$this.attr("disabled","disabled");
+		});	
+	});
+
 });

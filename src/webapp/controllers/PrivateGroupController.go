@@ -109,3 +109,43 @@ func (this *PrivateGroupController) CreateReport() {
 
 	this.SendRes(0, "success", nil)
 }
+
+func (this *PrivateGroupController) List() {
+	user := this.GetSession("user")
+	if user == nil {
+		this.Redirect("/", 302)
+	}
+
+	gid, _ := this.GetInt("gid")
+	pgs := models.GetPrivateGroupByGid(int(gid))
+	group := models.GetGroupById(int(gid))
+	isunlock := models.IsUnlock(user.(models.User).Id, int(gid))
+
+	this.Data["pgs"] = pgs
+	this.Data["group"] = group
+	this.Data["isunlock"] = isunlock
+
+	this.Layout = "layout/addwechat.tpl"
+	this.TplName = "privateGroup/list.tpl"
+}
+
+func (this *PrivateGroupController) Unlock() {
+	user := this.GetSession("user")
+	if user == nil {
+		this.SendRes(-1, "请先登录", nil)
+	}
+
+	uid := user.(models.User).Id
+	ugs := models.GetUnlockGroupByUid(uid)
+	if len(ugs) > 1 {
+		this.SendRes(-1, "解锁超额", nil)
+	}
+
+	gid, _ := this.GetInt("gid")
+	ug := models.UnlockGroup{}
+	ug.Uid = uid
+	ug.Gid = int(gid)
+	models.CreateUnlockGroup(&ug)
+
+	this.SendRes(0, "success", nil)
+}
