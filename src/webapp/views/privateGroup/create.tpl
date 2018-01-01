@@ -4,7 +4,7 @@
 			<h4 class="text-primary">发布群</h4>
 		</div>
 		<div class="col-md-6">
-			<p class="text-muted">建立微信群人数不够，可以添加 <a href="javascript:;">小助手微信</a> 凑够3人</p>
+			<p class="text-muted">建立微信群人数不够，可以添加 <a tabindex="0" class="help_wx" role="button" data-placement="right" data-html="true" data-toggle="popover" data-trigger="focus" title="小助手微信" data-content="<span class='help_wx_qrcode'><img src='/static/images/Amy55299.jpg'/><img src='/static/images/Tom55299.jpg'/></span>">小助手微信</a> 凑够3人</p>
 		</div>
 	</div>
 	<form class="form-horizontal">

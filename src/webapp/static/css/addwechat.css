@@ -27,6 +27,8 @@ ul,li{margin: 0px; padding: 0px;list-style-type: none;}
 .create_pg .upload_btns {color: #30aacb;display: block; font-size: 16px; height: 44px; padding-top: 86px; position: relative; text-align: center; width: 100%;}
 .create_pg .wechat_id_label{text-align: left;}
 .create_pg .active {background-position: center center; background-size: cover; border-color: #efefef;}
+.create_pg a.help_wx{text-decoration: underline;}
+.create_pg .help_wx_qrcode img{width: 100px; height: 100px;}
 
 
 /*======== /pg/user css */
