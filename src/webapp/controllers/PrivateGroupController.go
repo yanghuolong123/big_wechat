@@ -56,6 +56,18 @@ func (this *PrivateGroupController) CreatePost() {
 }
 
 func (this *PrivateGroupController) User() {
+	user := this.GetSession("user")
+	if user == nil {
+		this.Redirect("/", 302)
+	}
+	u := user.(models.User)
+
+	pgs := models.GetPrivateGroupByUid(u.Id)
+	ugs := models.GetUnlockGroupByUid(u.Id)
+
+	this.Data["user"] = u
+	this.Data["pgs"] = pgs
+	this.Data["ugs"] = ugs
 
 	this.Layout = "layout/addwechat.tpl"
 	this.TplName = "privateGroup/user.tpl"

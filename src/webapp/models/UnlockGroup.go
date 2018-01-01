@@ -24,8 +24,14 @@ func CreateUnlockGroup(ug *UnlockGroup) bool {
 	return i > 0
 }
 
-func GetUnlockGroupByUid(uid int) (ugs []UnlockGroup) {
-	orm.NewOrm().QueryTable("tbl_unlock_group").Filter("uid", uid).All(&ugs)
+func GetUnlockGroupByUid(uid int) (groups []Group) {
+	var ugs []UnlockGroup
+	orm.NewOrm().QueryTable("tbl_unlock_group").Filter("uid", uid).All(&ugs, "Gid")
+	var gids []int
+	for _, ug := range ugs {
+		gids = append(gids, ug.Gid)
+	}
+	orm.NewOrm().QueryTable("tbl_group").Filter("id__in", gids).All(&groups)
 	return
 }
 

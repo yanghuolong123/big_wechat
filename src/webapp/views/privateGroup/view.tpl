@@ -41,9 +41,9 @@
 		<ul id="commentlist">
 			{{range .pgMsgs}}
 			<li>				
-				<h5>{{.Uid}}</h5>
-				<p>{{.Content}}</p>
-				<p>{{.Createtime}}</p>				
+				<h5>{{.User.Nickname}}</h5>
+				<p>{{.Pgm.Content}}</p>
+				<p>{{.Pgm.Createtime}}</p>				
 			</li>
 			{{end}}
 		</ul>

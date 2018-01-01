@@ -10,7 +10,7 @@
 			<table class="table">
 				<tr>
 					<td>
-						<span>Bob</span>
+						<span>{{.user.Nickname}}</span>
 						<a class="pull-right" href="#">编辑</a>
 					</td>
 				</tr>
@@ -23,16 +23,13 @@
 		</div>
 		<div class="col-md-6">
 			<table class="table">
+				{{range .ugs}}
 				<tr>
 					<td>
-						<span>asdaa dsdsd dds</span>
+						<span>{{.Name}}</span>
 					</td>					
 				</tr>
-				<tr>
-					<td>
-						<span>3232d sddsds</span>
-					</td>
-				</tr>
+				{{end}}
 			</table>
 		</div>
 	</div>
@@ -42,24 +39,14 @@
 		</div>
 		<div class="col-md-6">
 			<table class="table">
+				{{range .pgs}}
 				<tr>
 					<td>
-						<span>asdaa dsdsd dds </span>
+						<span>{{.Name}}</span>
 						<a class="pull-right" href="#">编辑</a>
 					</td>					
 				</tr>
-				<tr>
-					<td>
-						<span>3232d sddsds</span>
-						<a class="pull-right" href="#">编辑</a>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span>大速度发送的 撒点分</span>
-						<a class="pull-right" href="#">编辑</a>
-					</td>
-				</tr>
+				{{end}}
 			</table>
 		</div>
 	</div>

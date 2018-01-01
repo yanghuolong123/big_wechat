@@ -51,6 +51,11 @@ func GetPrivateGroupByGid(gid int) (pg_slice []PrivateGroup) {
 	return
 }
 
+func GetPrivateGroupByUid(uid int) (pg_slice []PrivateGroup) {
+	orm.NewOrm().QueryTable("tbl_private_group").Filter("uid", uid).All(&pg_slice)
+	return
+}
+
 func GetPrivateGroupByLimit(limit int) (pg_slice []PrivateGroup) {
 	orm.NewOrm().QueryTable("tbl_private_group").Limit(limit).OrderBy("-createtime").All(&pg_slice)
 	return
