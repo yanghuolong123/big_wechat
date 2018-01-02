@@ -38,34 +38,39 @@ func (this *WechatController) Index() {
 		xml.Unmarshal(body, msgBody)
 		fmt.Println(msgBody)
 
-		listen(msgBody)
-
-		/*	replyBody := &wechat.MsgBody{}
-			replyBody.ToUserName = msgBody.FromUserName
-			replyBody.FromUserName = msgBody.ToUserName
-			replyBody.CreateTime = time.Since(time.Now())
-			replyBody.MsgType = "text"
-			replyBody.Content = "回复:" + msgBody.Content
-
-			this.Data["xml"] = replyBody
+		reply := listen(msgBody)
+		if reply != nil {
+			this.Data["xml"] = reply
 			this.ServeXML()
-		*/
+		}
+
 	}
 
 	this.StopRun()
 }
 
-func listen(msgBody *wechat.MsgBody) {
+func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 	if msgBody.MsgType == "event" && msgBody.Event == "subscribe" {
+		if strings.Contains(msgBody.EventKey, "login_") {
+			msgBody.EventKey = strings.TrimLeft(msgBody.EventKey, "qrscene_")
+			scanLogin(msgBody)
+			return replyText(msgBody, "感谢您登陆!")
+		}
+
 		subscribe(msgBody)
-		return
+		return nil
 	}
 	if msgBody.MsgType == "event" && msgBody.Event == "SCAN" {
 		if strings.HasPrefix(msgBody.EventKey, "login_") {
 			scanLogin(msgBody)
-			return
+
+			return replyText(msgBody, "感谢您登陆!")
 		}
+
+		return nil
 	}
+
+	return nil
 }
 
 func subscribe(msgBody *wechat.MsgBody) {
@@ -94,4 +99,15 @@ func scanLogin(msgBody *wechat.MsgBody) {
 		cache.Put(msgBody.EventKey, b, time.Duration(expire)*time.Second)
 	}
 
+}
+
+func replyText(msgBody *wechat.MsgBody, text string) *wechat.MsgBody {
+	replyBody := &wechat.MsgBody{}
+	replyBody.ToUserName = msgBody.FromUserName
+	replyBody.FromUserName = msgBody.ToUserName
+	replyBody.CreateTime = time.Since(time.Now())
+	replyBody.MsgType = "text"
+	replyBody.Content = text
+
+	return replyBody
 }
