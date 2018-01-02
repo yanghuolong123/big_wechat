@@ -43,11 +43,12 @@
 			<li>				
 				<h5>{{.User.Nickname}}</h5>
 				<p>{{.Pgm.Content}}</p>
-				<p>{{.Pgm.Createtime}}</p>				
+				<p>{{date .Pgm.Createtime "Y-m-d H:i:s"}}</p>				
 			</li>
 			{{end}}
 		</ul>
 	</div>
+
 	<div id="pgReportModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
