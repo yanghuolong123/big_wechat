@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 /*===== 公用样式 */
 ul,li{margin: 0px; padding: 0px;list-style-type: none;}
+.alert{margin-top: 20px;}
 
 /* ====   首页样式*/
 .home .head{padding-top: 15px;}

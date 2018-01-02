@@ -123,15 +123,18 @@ func (this *PrivateGroupController) CreateReport() {
 }
 
 func (this *PrivateGroupController) List() {
+	uid := 0
 	user := this.GetSession("user")
-	if user == nil {
+	if user != nil {
+		uid = user.(models.User).Id
+	} else {
 		this.Redirect("/", 302)
 	}
 
 	gid, _ := this.GetInt("gid")
 	pgs := models.GetPrivateGroupByGid(int(gid))
 	group := models.GetGroupById(int(gid))
-	isunlock := models.IsUnlock(user.(models.User).Id, int(gid))
+	isunlock := models.IsUnlock(uid, int(gid))
 
 	this.Data["pgs"] = pgs
 	this.Data["group"] = group

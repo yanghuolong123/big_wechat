@@ -11,8 +11,8 @@
 	  <div class="form-group">
 	    <label for="school" class="col-sm-2 control-label">应用范围</label>
 	    <div class="col-sm-6">
-	      <input type="hidden" name="gid" id="gid" value="">
-	      <input type="text" class="form-control" id="school"  maxlength="100" placeholder="请输入学校关键字或简称，必填">
+	      <input type="hidden" name="gid" id="search_group" value="">
+	      <input type="text" class="form-control school" id="search"  maxlength="100" placeholder="请输入学校关键字或简称，必填" data-provide="typeahead" autocomplete="off">
 	    </div>
 	  </div>
 	  <div class="form-group">

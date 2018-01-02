@@ -5,7 +5,7 @@
 				<h4>{{.pg.Name}}</h4>
 			</div>
 			<div class="col-md-3">
-				<a class="glink" href="/pg/list?gid={{.group.Id}}"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> {{.group.Name}}</a> 
+				<a class="glink" href="/pg/list?gid={{.group.Id}}"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> {{if .group.Name}} {{.group.Name}}{{else}}{{.group.En_name}}{{end}}</a> 
 				<button class="btn btn-warning btn-sm report_pg">举报</button>
 			</div>
 		</div>

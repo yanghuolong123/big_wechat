@@ -16,12 +16,14 @@
  						<div class="logo"><a href="/"><img src="/static/images/logo10.png" /></a></div>
  						<h3 class="title text-muted">北美留学生的微信群</h3>	 					
 	 				</div>
-	  				<div class="col-md-2 user">
+	  				<div class="col-md-2 user">                                            
                                           {{if .user}}
+                                            <input type="hidden" name="uid" id="uid" value="{{.user.Id}}">
                                             <a  href="/pg/user" class="btn btn-info">
                                               <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  {{.user.Nickname}}
                                             </a>                                            
                                           {{else}}
+                                            <input type="hidden" name="uid" id="uid" value="0">
                                             <button type="button" class="btn btn-info" id="loginBtn">
                                               <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 登录
                                             </button>
@@ -32,10 +34,11 @@
 	 		<div class="content">
 	 			<div class="box1 row">
                             <div class="col-md-6">
-                              <input type="text"  class="form-control" id="pg_msg" placeholder="Jane Doe">
+                              <input type="hidden" id="search_group" name="search_group" value="" />
+                              <input type="text" id="search" class="form-control" placeholder="请输入学校关键字或简称" data-provide="typeahead" autocomplete="off" />
                             </div>
                             <div class="col-md-1">
-                              <a href="/pg/create" class="btn btn-success" role="button">发布群</a>
+                              <a href="/pg/create" id="publish_pg" class="btn btn-success" role="button">发布群</a>
                             </div>                            
                         </div>
 	 			<div class="tips ">
@@ -61,7 +64,8 @@
 
             <div id="modalPage"></div>
              <script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
-	 	<script src="/static/plugin/bootstrap/js/bootstrap.min.js"></script>
+	     <script src="/static/plugin/bootstrap/js/bootstrap.min.js"></script>
+             <script src="/static/plugin/bootstrap/js/bootstrap3-typeahead.min.js"></script>
             <script src="/static/js/addwechat.js"></script> 	
 	 </body>
 </html>

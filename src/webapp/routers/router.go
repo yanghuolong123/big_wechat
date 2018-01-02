@@ -23,6 +23,7 @@ func init() {
 	beego.Router("/uploadfile", &controllers.UploadController{}, "post:Uploadfile")
 	beego.Router("/login", &controllers.LoginController{}, "post:LoginPost")
 	beego.Router("/login", &controllers.LoginController{}, "get:LoginGet")
+	beego.Router("/search/group", &controllers.SearchController{}, "post:Group")
 	beego.Router("/pg/create", &controllers.PrivateGroupController{}, "get:CreateGet")
 	beego.Router("/pg/create", &controllers.PrivateGroupController{}, "post:CreatePost")
 	beego.Router("/pg/user", &controllers.PrivateGroupController{}, "*:User")

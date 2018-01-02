@@ -26,7 +26,7 @@
 				{{range .ugs}}
 				<tr>
 					<td>
-						<span>{{.Name}}</span>
+						<span>{{if .Name}}{{.Name}}{{else}}{{.En_name}}{{end}}</span>
 					</td>					
 				</tr>
 				{{end}}

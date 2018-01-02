@@ -55,7 +55,7 @@ $(function(){
 
 	$("#create_pg_btn").click(function(){
 		$this = $(this);
-		var gid = 1;// $("#gid").val();
+		var gid = $("#search_group").val();
 		var name = $.trim($("#name").val());
 		var introduction = $("#introduction").val();
 		var qrcode = $("#qrcode").val();
@@ -155,5 +155,54 @@ $(function(){
 	});
 
 	$('[data-toggle="popover"]').popover();
+
+	var objects = {};
+	$("#search").typeahead({
+		source: function(query, process) {
+			$.post("/search/group",{name: query}, function(e){
+				if(e.code<0) {
+					return false;
+				}
+
+				var results = [];
+				var data = e.data;
+				for (var i = 0; i < data.length; i++) {
+					if(data[i].Name!="") {
+						objects[data[i].Name] = data[i].Id;
+						results.push(data[i].Name);
+					} else if(data[i].Short_name!="") {
+						objects[data[i].Short_name] = data[i].Id;
+			                		results.push(data[i].Short_name);
+					} else {
+						objects[data[i].En_name] = data[i].Id;
+						results.push(data[i].En_name);
+					}			                 	
+			                }
+				process(results);
+			});
+		},
+		afterSelect: function (item) { 
+			$("#search_group").val(objects[item]);
+			
+			 if ( !$("#search").hasClass("school") ) {
+			 	window.location.href = "/pg/list?gid="+objects[item];
+			 }			
+		},
+	});
+
+	$("#search").focus(function(){
+		var uid = $("#uid").val();
+		if(uid<=0) {
+			$("#loginBtn").trigger("click");
+		}
+	});
+
+	$("#publish_pg").click(function(){
+		var uid = $("#uid").val();
+		if(uid<=0) {
+			$("#loginBtn").trigger("click");
+			return false;
+		} 
+	});
 
 });
