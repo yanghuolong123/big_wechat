@@ -11,7 +11,6 @@
 				<tr>
 					<td>
 						<span>{{.user.Nickname}}</span>
-						<a class="pull-right" href="#">编辑</a>
 					</td>
 				</tr>
 			</table>
@@ -29,6 +28,12 @@
 						<span>{{if .Name}}{{.Name}}{{else}}{{.En_name}}{{end}}</span>
 					</td>					
 				</tr>
+				{{else}}
+				<tr>
+					<td>
+						<span class="text-warning">您还没有解锁的学校</span>
+					</td>
+				</tr>
 				{{end}}
 			</table>
 		</div>
@@ -45,6 +50,12 @@
 						<span>{{.Name}}</span>
 						<a class="pull-right" href="#">编辑</a>
 					</td>					
+				</tr>
+				{{else}}
+				<tr>
+					<td>
+						<span class="text-warning">您还没有发布过群</span>
+					</td>
 				</tr>
 				{{end}}
 			</table>

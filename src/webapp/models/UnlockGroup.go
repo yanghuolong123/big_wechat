@@ -31,7 +31,9 @@ func GetUnlockGroupByUid(uid int) (groups []Group) {
 	for _, ug := range ugs {
 		gids = append(gids, ug.Gid)
 	}
-	orm.NewOrm().QueryTable("tbl_group").Filter("id__in", gids).All(&groups)
+	if len(gids) > 0 {
+		orm.NewOrm().QueryTable("tbl_group").Filter("id__in", gids).All(&groups)
+	}
 	return
 }
 
