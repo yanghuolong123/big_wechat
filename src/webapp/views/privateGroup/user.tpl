@@ -48,7 +48,7 @@
 				<tr>
 					<td>
 						<span>{{.Name}}</span>
-						<a class="pull-right" href="#">编辑</a>
+						<a class="pull-right" href="/pg/edit?id={{.Id}}">编辑</a>
 					</td>					
 				</tr>
 				{{else}}

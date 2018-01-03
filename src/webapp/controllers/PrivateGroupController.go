@@ -55,6 +55,59 @@ func (this *PrivateGroupController) CreatePost() {
 	this.SendRes(0, "success", nil)
 }
 
+func (this *PrivateGroupController) EditGet() {
+	user := this.GetSession("user")
+	if user == nil {
+		this.Redirect("/", 302)
+	}
+
+	id, _ := this.GetInt("id")
+	pg := models.GetPrivateGroupById(int(id))
+	group := models.GetGroupById(pg.Gid)
+
+	this.Data["user"] = user
+	this.Data["pg"] = pg
+	this.Data["group"] = group
+
+	this.Layout = "layout/addwechat.tpl"
+	this.TplName = "privateGroup/edit.tpl"
+}
+
+func (this *PrivateGroupController) EditPost() {
+	user := this.GetSession("user")
+	if user == nil {
+		this.SendRes(-1, "请先登录", nil)
+	}
+
+	id, _ := this.GetInt("id")
+	gid, _ := this.GetInt("gid")
+	name := this.GetString("name")
+	introduction := this.GetString("introduction")
+	qrcode := this.GetString("qrcode")
+	ower_qrcode := this.GetString("ower_qrcode")
+	wechat_id := this.GetString("wechat_id")
+
+	if name == "" || gid <= 0 || (qrcode == "" && ower_qrcode == "" && wechat_id == "") {
+		this.SendRes(-1, "参数错误", nil)
+	}
+
+	pg := models.GetPrivateGroupById(int(id))
+	if pg == nil {
+		this.SendRes(-1, "不存在", nil)
+	}
+	pg.Gid = int(gid)
+	pg.Uid = user.(models.User).Id
+	pg.Name = name
+	pg.Introduction = introduction
+	pg.Qrcode = qrcode
+	pg.Ower_qrcode = ower_qrcode
+	pg.Wechat_id = wechat_id
+
+	models.UpdatePrivateGroup(pg)
+
+	this.SendRes(0, "success", nil)
+}
+
 func (this *PrivateGroupController) User() {
 	user := this.GetSession("user")
 	if user == nil {

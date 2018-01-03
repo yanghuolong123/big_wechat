@@ -93,6 +93,47 @@ $(function(){
 		});
 	});
 
+	$("#edit_pg_btn").click(function(){
+		$this = $(this);
+		var id = $("#pg_id").val();
+		var gid = $("#search_group").val();
+		var name = $.trim($("#name").val());
+		var introduction = $("#introduction").val();
+		var qrcode = $("#qrcode").val();
+		var ower_qrcode = $("#ower_qrcode").val();
+		var wechat_id = $.trim($("#wechat_id").val());
+
+		var flag = true;
+		$(".error_tips").html("");
+		if (gid=="") {
+			$(".error_tips").append("<p>应用范围为必填项。</p>");
+			flag = false;
+		}
+		if (name=="") {
+			$(".error_tips").append("<p>群名称为必填项。</p>");
+			flag = false;
+		}
+		if(qrcode == "" && ower_qrcode=="" && wechat_id == "") {
+			$(".error_tips").append("<p>上传联系信息至少要填一项。</p>");
+			flag = false;
+		}
+
+		if (!flag) {
+			return false;
+		}
+
+		$this.attr("disabled","disabled");
+		$.post("/pg/edit", {id:id, gid:gid, name:name, introduction:introduction,qrcode:qrcode, ower_qrcode:ower_qrcode, wechat_id:wechat_id}, function(e){
+			$this.removeAttr("disabled");
+			if(e.code<0) {
+				$(".error_tips").append(e.msg);
+				return false;
+			}
+
+			window.location = "/";
+		});
+	});
+
 
 	$(".pgmsg-btn").click(function(){
 		var pg_id = $("#pg_id").val();

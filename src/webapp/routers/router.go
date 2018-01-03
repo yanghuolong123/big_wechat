@@ -26,6 +26,8 @@ func init() {
 	beego.Router("/search/group", &controllers.SearchController{}, "post:Group")
 	beego.Router("/pg/create", &controllers.PrivateGroupController{}, "get:CreateGet")
 	beego.Router("/pg/create", &controllers.PrivateGroupController{}, "post:CreatePost")
+	beego.Router("/pg/edit", &controllers.PrivateGroupController{}, "get:EditGet")
+	beego.Router("/pg/edit", &controllers.PrivateGroupController{}, "post:EditPost")
 	beego.Router("/pg/user", &controllers.PrivateGroupController{}, "*:User")
 	beego.Router("/pg/view", &controllers.PrivateGroupController{}, "*:View")
 	beego.Router("/pg/createPgMsg", &controllers.PrivateGroupController{}, "post:CreatePgMsg")
