@@ -50,7 +50,7 @@
                               {{range .pgroups}}
   					<div class="col-xs-6 col-md-3">                              
     						<div class="thumbnail">
-      							<a href="/pg/view?id={{.Id}}"><img src="/{{.Qrcode}}" alt="{{.Name}}"></a>
+      							<a href="/pg/view?id={{.Id}}"><img src="{{if .Qrcode}}/{{.Qrcode}}{{else}}/static/images/ico-photo.png{{end}}" alt="{{.Name}}"></a>
       							<div class="caption">
         							 <h4>{{.Name}}</h4>
        							         <p class="text-muted">{{.Introduction}}</p>
