@@ -89,7 +89,7 @@ $(function(){
 				return false;
 			}
 
-			window.location = "/";
+			window.location = "/pg/view?id="+e.data.Id;
 		});
 	});
 
@@ -130,7 +130,7 @@ $(function(){
 				return false;
 			}
 
-			window.location = "/";
+			window.location = "/pg/view?id="+id;
 		});
 	});
 

@@ -52,7 +52,7 @@ func (this *PrivateGroupController) CreatePost() {
 
 	models.CreatePrivateGroup(&pg)
 
-	this.SendRes(0, "success", nil)
+	this.SendRes(0, "success", pg)
 }
 
 func (this *PrivateGroupController) EditGet() {
@@ -105,7 +105,7 @@ func (this *PrivateGroupController) EditPost() {
 
 	models.UpdatePrivateGroup(pg)
 
-	this.SendRes(0, "success", nil)
+	this.SendRes(0, "success", pg)
 }
 
 func (this *PrivateGroupController) User() {
