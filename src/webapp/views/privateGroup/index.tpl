@@ -71,7 +71,9 @@
                           <h3 class="text-muted">请使用手机微信扫描二维码登录</h3>
                         </div>
                         <div id="login_qrcode_img" class="col-sm-offset-1 col-sm-8">
+                          <div class="center-block">
                             <span style="color: red;">加载中....<img src="/static/images/ajax-loader.gif" /></span>
+                          </div>
                         </div>
                     </div>
                     <div class="modal-footer">

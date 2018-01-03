@@ -35,9 +35,9 @@ function uploadFile(obj) {
 $(function(){
 
 	$("#loginBtn").click(function(){
+		$('#loginModal').modal({backdrop: 'static', keyboard: false});
 		$.get("/login", function(e){
 			//$("#modalPage").html(e.data).find('#loginModal').modal({backdrop: 'static', keyboard: false});
-			$('#loginModal').modal({backdrop: 'static', keyboard: false});
 			$("#login_qrcode_img").html(e.data);
 
 			var timer = setInterval(function(){
