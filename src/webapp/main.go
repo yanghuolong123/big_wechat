@@ -2,13 +2,13 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	"webapp/chat"
+	//	"webapp/chat"
 	_ "webapp/routers"
 )
 
 func main() {
-	server := chat.NewServer("/chat")
-	go server.Listen()
+	//	server := chat.NewServer("/chat")
+	//	go server.Listen()
 
 	beego.SetStaticPath("/uploads", "uploads")
 	beego.Run()

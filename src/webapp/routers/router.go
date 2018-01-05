@@ -15,7 +15,7 @@ func init() {
 	// test
 	beego.Router("/test/login", &controllers.TestController{}, "get,post:Login")
 	//beego.Router("/login", &controllers.TestController{}, "get:LoginPage")
-	//beego.Router("/logout", &controllers.TestController{}, "post:Logout")
+	beego.Router("/logout", &controllers.TestController{}, "get,post:Logout")
 	beego.Router("/register", &controllers.TestController{}, "post:Register")
 	beego.Router("/register", &controllers.TestController{}, "get:RegisterPage")
 
