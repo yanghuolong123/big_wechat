@@ -2,6 +2,7 @@
 /*===== 公用样式 */
 ul,li{margin: 0px; padding: 0px;list-style-type: none;}
 .alert{margin-top: 20px;}
+#login_img{width: 100%;}
 
 /* ====   首页样式*/
 .home .head{padding-top: 15px;}
