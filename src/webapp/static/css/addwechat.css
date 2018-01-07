@@ -13,7 +13,7 @@ ul,li{margin: 0px; padding: 0px;list-style-type: none;}
 .home .list img{width: 250px; height: 250px;}
 .home .list .caption{padding-left: 20px;}
 .home .list .caption h4{color: #2fb09d;}
-.home .list .caption p{height: 35px; overflow: hidden;}
+.home .list .caption p{height: 36px; overflow: hidden;}
 
 /* ======= layout css */
 .page-header{margin-top: 10px;}
@@ -60,6 +60,6 @@ ul,li{margin: 0px; padding: 0px;list-style-type: none;}
 .pg_list .list img{width: 250px; height: 250px;}
 .pg_list .list .caption{padding-left: 20px;}
 .pg_list .list .caption h4{color: #2fb09d;}
-.pg_list .list .caption p{height: 35px; overflow: hidden;}
+.pg_list .list .caption p{height: 36px; overflow: hidden;}
 .pg_list .title{color: #2fb09d; margin-bottom: 25px; margin-top: 30px;}
 .pg_list .unlock_group{margin: 20px 0;}
