@@ -50,7 +50,10 @@ func (this *PrivateGroupController) CreatePost() {
 	pg.Ower_qrcode = ower_qrcode
 	pg.Wechat_id = wechat_id
 
-	models.CreatePrivateGroup(&pg)
+	err := models.CreatePrivateGroup(&pg)
+	if err != nil {
+		this.SendRes(-1, err.Error(), nil)
+	}
 
 	this.SendRes(0, "success", pg)
 }
@@ -127,14 +130,20 @@ func (this *PrivateGroupController) User() {
 }
 
 func (this *PrivateGroupController) View() {
+	user := this.GetSession("user")
+	if user == nil {
+		this.Redirect("/", 302)
+	}
+
 	id, _ := this.GetInt("id")
 	pg := models.GetPrivateGroupById(int(id))
 	group := models.GetGroupById(pg.Gid)
-	pgMsgs := models.GetPrivateGroupMessageByPgid(pg.Id)
+	pgMsgs := models.GetPrivateGroupMessageVoByPgid(pg.Id)
 
 	this.Data["pg"] = pg
 	this.Data["group"] = group
 	this.Data["pgMsgs"] = pgMsgs
+	this.Data["user"] = user
 
 	this.Layout = "layout/addwechat.tpl"
 	this.TplName = "privateGroup/view.tpl"
@@ -145,6 +154,7 @@ func (this *PrivateGroupController) CreatePgMsg() {
 	if user == nil {
 		this.SendRes(-1, "请先登录", nil)
 	}
+
 	content := this.GetString("content")
 	pg_id, _ := this.GetInt("pg_id")
 
@@ -152,9 +162,14 @@ func (this *PrivateGroupController) CreatePgMsg() {
 	pgm.Uid = user.(models.User).Id
 	pgm.Pg_id = int(pg_id)
 	pgm.Content = content
-	models.CreatePrivateGroupMessage(&pgm)
+	_, err := models.CreatePrivateGroupMessage(&pgm)
+	if err != nil {
+		this.SendRes(-1, err.Error(), nil)
+	}
 
-	this.SendRes(0, "success", pgm)
+	vo := models.ConvertPrivateGroupMessageToVo(pgm)
+
+	this.SendRes(0, "success", vo)
 }
 
 func (this *PrivateGroupController) CreateReport() {
@@ -180,18 +195,20 @@ func (this *PrivateGroupController) List() {
 	user := this.GetSession("user")
 	if user != nil {
 		uid = user.(models.User).Id
-	} else {
-		this.Redirect("/", 302)
 	}
 
 	gid, _ := this.GetInt("gid")
 	pgs := models.GetPrivateGroupByGid(int(gid))
 	group := models.GetGroupById(int(gid))
-	isunlock := models.IsUnlock(uid, int(gid))
+	isunlock := false
+	if uid > 0 {
+		isunlock = models.IsUnlock(uid, int(gid))
+	}
 
 	this.Data["pgs"] = pgs
 	this.Data["group"] = group
 	this.Data["isunlock"] = isunlock
+	this.Data["user"] = user
 
 	this.Layout = "layout/addwechat.tpl"
 	this.TplName = "privateGroup/list.tpl"

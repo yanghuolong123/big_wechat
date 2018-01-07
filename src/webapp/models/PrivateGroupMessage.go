@@ -29,22 +29,34 @@ func GetPrivateGroupMessageById(id int) (pgm *PrivateGroupMessage) {
 	return
 }
 
-func CreatePrivateGroupMessage(pgm *PrivateGroupMessage) int {
+func CreatePrivateGroupMessage(pgm *PrivateGroupMessage) (int, error) {
 	pgm.Createtime = time.Now()
-	i, _ := orm.NewOrm().Insert(pgm)
+	i, err := orm.NewOrm().Insert(pgm)
 
-	return int(i)
+	return int(i), err
 }
 
-func GetPrivateGroupMessageByPgid(pg_id int) (vos []PrivateGroupMessageVo) {
-	var pgms []PrivateGroupMessage
+func GetPrivateGroupMessageByPgid(pg_id int) (pgms []PrivateGroupMessage) {
 	orm.NewOrm().QueryTable("tbl_private_group_message").Filter("pg_id", pg_id).All(&pgms)
+	return
+}
+
+func GetPrivateGroupMessageVoByPgid(pg_id int) (vos []PrivateGroupMessageVo) {
+	pgms := GetPrivateGroupMessageByPgid(pg_id)
+
 	for _, m := range pgms {
-		vo := PrivateGroupMessageVo{}
-		u, _ := GetUserById(m.Uid)
-		vo.User = *u
-		vo.Pgm = m
+		vo := ConvertPrivateGroupMessageToVo(m)
 		vos = append(vos, vo)
 	}
+
+	return
+}
+
+func ConvertPrivateGroupMessageToVo(pgm PrivateGroupMessage) (vo PrivateGroupMessageVo) {
+	vo = PrivateGroupMessageVo{}
+	u, _ := GetUserById(pgm.Uid)
+	vo.User = *u
+	vo.Pgm = pgm
+
 	return
 }

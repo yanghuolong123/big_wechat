@@ -22,21 +22,18 @@ type PrivateGroup struct {
 	Createtime   time.Time
 }
 
-func CreatePrivateGroup(pg *PrivateGroup) bool {
+func CreatePrivateGroup(pg *PrivateGroup) error {
 	pg.Createtime = time.Now()
 
-	i, _ := orm.NewOrm().Insert(pg)
-	return i > 0
+	_, err := orm.NewOrm().Insert(pg)
+
+	return err
 }
 
-func UpdatePrivateGroup(pg *PrivateGroup) bool {
-	if pg.Id <= 0 {
-		return false
-	}
+func UpdatePrivateGroup(pg *PrivateGroup) error {
+	_, err := orm.NewOrm().Update(pg)
 
-	i, _ := orm.NewOrm().Update(pg)
-
-	return i > 0
+	return err
 }
 
 func GetPrivateGroupById(id int) (pg *PrivateGroup) {

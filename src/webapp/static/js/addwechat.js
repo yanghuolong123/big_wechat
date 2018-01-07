@@ -152,9 +152,9 @@ $(function(){
 
 			var comments = '';
 			comments += "<li>";
-			comments += " 	<h5>"+e.data.Uid+"</h5>";
-			comments += "		<p>"+e.data.Content+"</p>";
-			comments += "		<p>"+e.data.Createtime+"</p>";
+			comments += " 	<h5>"+e.data.User.Nickname+"</h5>";
+			comments += "		<p>"+e.data.Pgm.Content+"</p>";
+			comments += "		<p>1秒前</p>";
 			comments += "</li>";
 
 			$("#commentlist").prepend(comments);
@@ -232,14 +232,7 @@ $(function(){
 		},
 	});
 
-	$("#search").focus(function(){
-		var uid = $("#uid").val();
-		if(uid<=0) {
-			$("#loginBtn").trigger("click");
-		}
-	});
-
-	$("#publish_pg").click(function(){
+	$("#publish_pg, .pg_list .list a").click(function(){
 		var uid = $("#uid").val();
 		if(uid<=0) {
 			$("#loginBtn").trigger("click");
