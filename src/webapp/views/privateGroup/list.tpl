@@ -1,11 +1,11 @@
 <div class="pg_list">
 	<h4 class="title">{{.group.Name}}</h4>
 	<div class="row">
-	            <div class="col-md-6">
+	            <div class="col-md-6 form-group">
 	              <input type="hidden" id="search_group" name="search_group" value="" />
 	              <input type="text"  class="form-control" id="search" placeholder="请输入学校关键字或简称" data-provide="typeahead" autocomplete="off">
 	            </div>
-	            <div class="col-md-1">
+	            <div class="col-md-1 form-group">
 	              <a href="/pg/create" id="publish_pg" class="btn btn-success" role="button">发布群</a>
 	            </div>                            
 	</div>
@@ -18,7 +18,7 @@
 		{{end}}
 		<div class="list row">
 	                  	{{range .pgs}}
-			<div class="col-xs-6 col-md-3">                              
+			<div class="col-sm-6 col-md-3">                              
 				<div class="thumbnail">
 						<a href="/pg/view?id={{.Id}}"><img src="/{{.Qrcode}}" alt="{{.Name}}"></a>
 						<div class="caption">

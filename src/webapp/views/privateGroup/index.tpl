@@ -33,13 +33,15 @@
 	 		</div>
 	 		<div class="content">
 	 			<div class="box1 row">
-                            <div class="col-md-6">
+                           
+                            <div class="col-md-6 form-group">
                               <input type="hidden" id="search_group" name="search_group" value="" />
                               <input type="text" id="search" class="form-control" placeholder="请输入学校关键字或简称" data-provide="typeahead" autocomplete="off" />
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-1 form-group">
                               <a href="/pg/create" id="publish_pg" class="btn btn-success" role="button">发布群</a>
-                            </div>                            
+                            </div>   
+                                                    
                         </div>
 	 			<div class="tips ">
                           <div class="alert alert-warning col-md-10" role="alert">
@@ -48,11 +50,11 @@
                         </div>
 	 			<div class="list row">
                               {{range .pgroups}}
-  					<div class="col-xs-6 col-md-3">                              
+  					<div class="col-sm-6 col-md-3">                              
     						<div class="thumbnail">
       							<a href="/pg/list?gid={{.Gid}}"><img src="{{if .Qrcode}}/{{.Qrcode}}{{else}}/static/images/ico-photo.png{{end}}" alt="{{.Name}}"></a>
       							<div class="caption">
-        							 <h4>{{.Name}}</h4>
+        							         <h4>{{.Name}}</h4>
        							         <p class="text-muted">{{.Introduction}}</p>
       							</div>
     						</div>
