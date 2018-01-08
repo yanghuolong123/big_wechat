@@ -1,6 +1,11 @@
 <div class="user_pg">
-	<div class="title col-md-offset-2">
-		<h4>我的账户</h4>
+	<div class="row">
+		<div class="title col-md-offset-2 col-md-2">
+			<h4>我的账户</h4>
+		</div>
+		<div class="col-md-offset-5 col-md-1">			
+			<a href="/logout" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-log-out"></span> 退出</a>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-offset-2 col-md-1">
