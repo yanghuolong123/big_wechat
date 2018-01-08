@@ -7,6 +7,7 @@ import (
 	"webapp/models"
 	"yhl/help"
 	//	"yhl/wechat"
+	"time"
 )
 
 type TestController struct {
@@ -52,9 +53,12 @@ func (this *TestController) Get() {
 		qrImgUrl := wechat.GetTmpStrQrImg("login_123")
 		this.Data["qrImgUrl"] = qrImgUrl
 	*/
-	user, err := models.GetUserByOpenid("oou4Vw0zizge_p2gQhYT0UL5Kwbk")
+	//	user, err := models.GetUserByOpenid("oou4Vw0zizge_p2gQhYT0UL5Kwbk")
 	//user, err := models.GetUserById(3)
-	fmt.Println(user, err)
+	//	fmt.Println(user, err)
+	t, _ := time.Parse(help.DatetimeFormat, "2018-01-01 20:15:32")
+	s := help.ShowTime(t)
+	fmt.Println("==== t:", s)
 	this.TplName = "test/index.tpl"
 }
 

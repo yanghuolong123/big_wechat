@@ -10,7 +10,7 @@
 			</div>
 		</div>
 		<div>
-			<span>发布时间：{{date .pg.Createtime "Y-m-d H:i:s"}}</span>
+			<span>发布时间：{{showtime .pg.Createtime}}</span>
 		</div>
 		<p class="desc">
 			{{.pg.Introduction}}
@@ -42,7 +42,7 @@
 			<li>				
 				<h5>{{.User.Nickname}}</h5>
 				<p>{{.Pgm.Content}}</p>
-				<p>{{date .Pgm.Createtime "Y-m-d H:i:s"}}</p>				
+				<p>{{showtime .Pgm.Createtime}}</p>				
 			</li>
 			{{end}}
 		</ul>

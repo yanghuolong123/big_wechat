@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/astaxie/beego"
 	//	"webapp/chat"
+	_ "webapp/init"
 	_ "webapp/routers"
 )
 
