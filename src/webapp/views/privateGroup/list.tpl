@@ -20,9 +20,9 @@
 	                  	{{range .pgs}}
 			<div class="col-sm-6 col-md-3">                              
 				<div class="thumbnail">
-						<a href="/pg/view?id={{.Id}}"><img src="/{{.Qrcode}}" alt="{{.Name}}"></a>
+						<img src="/{{.Qrcode}}" alt="{{.Name}}">
 						<div class="caption">
-						 <h4>{{.Name}}</h4>
+						        <a href="/pg/view?id={{.Id}}"><h4>{{.Name}}</h4></a>
 						         <p class="text-muted">{{.Introduction}}</p>
 						</div>
 				</div>
