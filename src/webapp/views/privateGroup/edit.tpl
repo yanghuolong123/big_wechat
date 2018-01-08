@@ -13,7 +13,7 @@
 	    <div class="col-sm-6">
 	      <input type="hidden" name="pg_id" id="pg_id" value="{{.pg.Id}}">
 	      <input type="hidden" name="gid" id="search_group" value="{{.pg.Gid}}">
-	      <input type="text" class="form-control school" id="search"  maxlength="100" value="{{.group.Name}}" placeholder="请输入学校关键字或简称，必填" data-provide="typeahead" autocomplete="off" disabled="disabled">
+	      <input type="text" class="form-control school" id="search"  maxlength="100" value="{{.group.En_name}}" placeholder="请输入学校关键字或简称，必填" data-provide="typeahead" autocomplete="off" disabled="disabled">
 	    </div>
 	  </div>
 	  <div class="form-group">
