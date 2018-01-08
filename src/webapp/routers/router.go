@@ -14,15 +14,17 @@ func init() {
 
 	// test
 	beego.Router("/test/login", &controllers.TestController{}, "get,post:Login")
-	//beego.Router("/login", &controllers.TestController{}, "get:LoginPage")
-	beego.Router("/logout", &controllers.TestController{}, "get,post:Logout")
-	beego.Router("/register", &controllers.TestController{}, "post:Register")
-	beego.Router("/register", &controllers.TestController{}, "get:RegisterPage")
+	//beego.Router("/test/login", &controllers.TestController{}, "get:LoginPage")
+	//beego.Router("/test/logout", &controllers.TestController{}, "get,post:Logout")
+	beego.Router("/test/register", &controllers.TestController{}, "post:Register")
+	beego.Router("/test/register", &controllers.TestController{}, "get:RegisterPage")
 
 	beego.Router("/", &controllers.PrivateGroupController{})
 	beego.Router("/uploadfile", &controllers.UploadController{}, "post:Uploadfile")
 	beego.Router("/login", &controllers.LoginController{}, "post:LoginPost")
 	beego.Router("/login", &controllers.LoginController{}, "get:LoginGet")
+	beego.Router("/loginByKey", &controllers.LoginController{}, "get:LoginByKey")
+	beego.Router("/logout", &controllers.LoginController{}, "get,post:Logout")
 	beego.Router("/search/group", &controllers.SearchController{}, "post:Group")
 	beego.Router("/pg/create", &controllers.PrivateGroupController{}, "get:CreateGet")
 	beego.Router("/pg/create", &controllers.PrivateGroupController{}, "post:CreatePost")

@@ -53,8 +53,10 @@ func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 	if msgBody.MsgType == "event" && msgBody.Event == "subscribe" {
 		if strings.Contains(msgBody.EventKey, "login_") {
 			msgBody.EventKey = strings.TrimLeft(msgBody.EventKey, "qrscene_")
-			scanLogin(msgBody)
-			return replyText(msgBody, "感谢您登陆!")
+			key := scanLogin(msgBody)
+			url := "http://www.addwechat.com/loginByKey?key=" + key
+
+			return replyText(msgBody, "感谢您登陆! "+url)
 		}
 
 		subscribe(msgBody)
@@ -62,9 +64,10 @@ func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 	}
 	if msgBody.MsgType == "event" && msgBody.Event == "SCAN" {
 		if strings.HasPrefix(msgBody.EventKey, "login_") {
-			scanLogin(msgBody)
+			key := scanLogin(msgBody)
+			url := "http://www.addwechat.com/loginByKey?key=" + key
 
-			return replyText(msgBody, "感谢您登陆!")
+			return replyText(msgBody, "感谢您登陆! "+url)
 		}
 
 		return nil
@@ -76,7 +79,8 @@ func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 func subscribe(msgBody *wechat.MsgBody) {
 }
 
-func scanLogin(msgBody *wechat.MsgBody) {
+func scanLogin(msgBody *wechat.MsgBody) (ekey string) {
+	ekey = msgBody.EventKey
 	cache := help.Cache
 	expire := 18000
 
@@ -99,6 +103,7 @@ func scanLogin(msgBody *wechat.MsgBody) {
 		cache.Put(msgBody.EventKey, b, time.Duration(expire)*time.Second)
 	}
 
+	return
 }
 
 func replyText(msgBody *wechat.MsgBody, text string) *wechat.MsgBody {

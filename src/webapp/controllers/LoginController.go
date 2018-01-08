@@ -39,6 +39,21 @@ func (this *LoginController) LoginPost() {
 	this.SendRes(-1, "failed", nil)
 }
 
-func (this *LoginController) LogOut() {
-	this.SendRes(0, "success", nil)
+func (this *LoginController) Logout() {
+	this.DelSession("user")
+
+	this.Redirect("/", 302)
+}
+
+func (this *LoginController) LoginByKey() {
+	key := this.GetString("key")
+	cache := help.Cache
+	c := cache.Get(key)
+	if c != nil {
+		u := models.User{}
+		json.Unmarshal([]byte(c.([]uint8)), &u)
+		this.SetSession("user", u)
+	}
+
+	this.Redirect("/", 302)
 }
