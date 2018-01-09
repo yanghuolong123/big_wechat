@@ -70,3 +70,9 @@ func CreateUser(user *User) int {
 
 	return int(i)
 }
+
+func UpdateUser(user *User) error {
+	_, err := orm.NewOrm().Update(user)
+
+	return err
+}

@@ -32,12 +32,15 @@ func init() {
 
 	beego.Router("/search/group", &controllers.SearchController{}, "post:Group")
 
+	beego.Router("/user", &controllers.UserController{}, "get:Index")
+	beego.Router("/user/edit", &controllers.UserController{}, "get:EditGet")
+	beego.Router("/user/edit", &controllers.UserController{}, "post:EditPost")
+
 	beego.Router("/", &controllers.PrivateGroupController{})
 	beego.Router("/pg/create", &controllers.PrivateGroupController{}, "get:CreateGet")
 	beego.Router("/pg/create", &controllers.PrivateGroupController{}, "post:CreatePost")
 	beego.Router("/pg/edit", &controllers.PrivateGroupController{}, "get:EditGet")
 	beego.Router("/pg/edit", &controllers.PrivateGroupController{}, "post:EditPost")
-	beego.Router("/pg/user", &controllers.PrivateGroupController{}, "*:User")
 	beego.Router("/pg/view", &controllers.PrivateGroupController{}, "*:View")
 	beego.Router("/pg/createPgMsg", &controllers.PrivateGroupController{}, "post:CreatePgMsg")
 	beego.Router("/pg/createReport", &controllers.PrivateGroupController{}, "post:CreateReport")

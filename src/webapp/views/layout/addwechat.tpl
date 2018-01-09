@@ -18,7 +18,7 @@
  					<!--<a class="btn btn-info btn-sm" href="/pg/create" role="button">发布群</a>-->
  					{{if .user}}
 		                                            <input type="hidden" name="uid" id="uid" value="{{.user.Id}}">
-		                                            <a  href="/pg/user" class="btn btn-info">
+		                                            <a  href="/user" class="btn btn-info">
 		                                              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  {{.user.Nickname}}
 		                                            </a>                                            
 		                                     {{else}}

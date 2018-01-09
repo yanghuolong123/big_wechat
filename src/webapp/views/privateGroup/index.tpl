@@ -19,7 +19,7 @@
 	  				<div class="col-md-2 user">                                            
                                           {{if .user}}
                                             <input type="hidden" name="uid" id="uid" value="{{.user.Id}}">
-                                            <a  href="/pg/user" class="btn btn-info">
+                                            <a  href="/user" class="btn btn-info">
                                               <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  {{.user.Nickname}}
                                             </a>                                            
                                           {{else}}

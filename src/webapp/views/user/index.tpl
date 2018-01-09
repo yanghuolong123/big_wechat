@@ -16,6 +16,7 @@
 				<tr>
 					<td>
 						<span>{{.user.Nickname}}</span>
+						<a class="pull-right" href="/user/edit">编辑</a>
 					</td>
 				</tr>
 			</table>
