@@ -191,6 +191,8 @@ $(function(){
 				return false;
 			}
 
+			location.reload() ;
+
 			$this.text("已解锁");
 			$this.attr("disabled","disabled");
 		});	

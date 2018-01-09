@@ -20,7 +20,13 @@
 	                  	{{range .pgs}}
 			<div class="col-sm-6 col-md-3">                              
 				<div class="thumbnail">
-						<img src="/{{.Qrcode}}" alt="{{.Name}}">
+						<a href="/pg/view?id={{.Id}}">
+							{{if $.isunlock}}
+								{{if .Qrcode}}<img src="/{{.Qrcode}}" alt="{{.Name}}">{{else}}<img src="/static/images/ico-photo.png" alt="{{.Name}}">{{end}}
+							{{else}}
+								<img src="/static/images/pglist" alt="{{.Name}}">
+							{{end}}
+						</a>
 						<div class="caption">
 						        <a href="/pg/view?id={{.Id}}"><h4>{{.Name}}</h4></a>
 						         <p class="text-muted">{{.Introduction}}</p>

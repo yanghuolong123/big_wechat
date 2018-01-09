@@ -52,7 +52,7 @@
                               {{range .pgroups}}
   					<div class="col-sm-6 col-md-3">                              
     						<div class="thumbnail">
-      							<img src="{{if .Qrcode}}/{{.Qrcode}}{{else}}/static/images/ico-photo.png{{end}}" alt="{{.Name}}">
+      							<a href="/pg/list?gid={{.Gid}}"><img src="/static/images/pgindex" alt="{{.Name}}"></a>
       							<div class="caption">
         							 <a href="/pg/list?gid={{.Gid}}"><h4>{{.Name}}</h4></a>
        							         <p class="text-muted">{{.Introduction}}</p>
