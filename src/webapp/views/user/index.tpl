@@ -1,4 +1,4 @@
-<div class="user_pg">
+<div class="user">
 	<div class="row">
 		<div class="title col-md-offset-2 col-md-2">
 			<h4>我的账户</h4>

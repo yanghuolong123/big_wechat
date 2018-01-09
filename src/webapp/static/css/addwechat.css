@@ -35,10 +35,11 @@ ul,li{margin: 0px; padding: 0px;list-style-type: none;}
 
 
 /*======== /pg/user css */
-.user_pg .table td {border-bottom: 1px solid #ddd; border-top: 0px; color: #777;}
-.user_pg .table td a{text-align: right;}
-.user_pg .title{margin-bottom: 40px;}
-.user_pg .title h4{color: #2fb09d;}
+.user .table td {border-bottom: 1px solid #ddd; border-top: 0px; color: #777;}
+.user .table td a{text-align: right;}
+.user .title{margin-bottom: 40px;}
+.user .title h4{color: #2fb09d;}
+.user label{padding-top: 10px;}
 
 
 /*===== /pg/view css */
