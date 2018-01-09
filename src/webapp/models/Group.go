@@ -13,6 +13,7 @@ type Group struct {
 	Name       string
 	En_name    string
 	Short_name string
+	Region     string
 	Introduce  string
 	Status     int
 }
