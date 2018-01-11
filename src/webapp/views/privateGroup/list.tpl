@@ -19,16 +19,14 @@
 		<div class="list row">
 	                  	{{range .pgs}}
 			<div class="col-sm-6 col-md-3">                              
-				<div class="thumbnail">
-						<a href="/pg/view?id={{.Id}}">
-							{{if $.isunlock}}
-								{{if .Qrcode}}<img src="/{{.Qrcode}}" alt="{{.Name}}">{{else}}<img src="/static/images/ico-photo.png" alt="{{.Name}}">{{end}}
-							{{else}}
-								<img src="/static/images/pglist" alt="{{.Name}}">
-							{{end}}
-						</a>
+				<div class="thumbnail">						
+						{{if $.isunlock}}
+							<a href="/pg/view?id={{.Id}}">{{if .Qrcode}}<img src="/{{.Qrcode}}" alt="{{.Name}}">{{else}}<img src="/static/images/ico-photo.png" alt="{{.Name}}">{{end}}</a>
+						{{else}}
+							<a href="/tips/pglist"><img src="/static/images/pglist" alt="{{.Name}}"></a>
+						{{end}}						
 						<div class="caption">
-						        <a href="/pg/view?id={{.Id}}"><h4>{{.Name}}</h4></a>
+						        <a href="{{if $.isunlock}}/pg/view?id={{.Id}}{{else}}/tips/pglist{{end}}"><h4>{{.Name}}</h4></a>
 						         <p class="text-muted">{{.Introduction}}</p>
 						</div>
 				</div>
