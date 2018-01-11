@@ -211,19 +211,36 @@ $(function(){
 				var results = [];
 				var data = e.data;
 				for (var i = 0; i < data.length; i++) {
-					if(data[i].Name!="") {
-						objects[data[i].Name] = data[i].Id;
-						results.push(data[i].Name);
-					} else if(data[i].Short_name!="") {
-						objects[data[i].Short_name] = data[i].Id;
-			                		results.push(data[i].Short_name);
-					} else {
+					// if(data[i].Name!="") {
+					// 	objects[data[i].Name] = data[i].Id;
+					// 	results.push(data[i].Name);
+					// } else if(data[i].Short_name!="") {
+					// 	objects[data[i].Short_name] = data[i].Id;
+			  //               		results.push(data[i].Short_name);
+					// } else {
 						objects[data[i].En_name] = data[i].Id;
-						results.push(data[i].En_name);
-					}			                 	
+						results.push(JSON.stringify(data[i]));
+					// }			                 	
 			                }
 				process(results);
 			});
+		},
+	                highlighter: function (jsonStr) {
+	                	var item = JSON.parse(jsonStr);
+	                	var  str = "<div class='media search_group'>";
+	                	str += "	<div class='media-left'>";
+	                	str += "		<img class='media-object search_logo' src='/static/images/group_logo/stanford.gif' >";
+	                	str += "	</div>";
+	                	str += "	<div class='media-body'>";
+	                	str += "		<p>"+item.En_name+"</p>";
+	                	str += "		<p class='group_region'>"+item.Region+"</p>";
+	                	str += "	</div>";
+	                	str += "</div>";
+	                	return str;
+		    },
+		updater: function (jsonStr) {
+		        var item = JSON.parse(jsonStr);
+		        return item.En_name;
 		},
 		afterSelect: function (item) { 
 			$("#search_group").val(objects[item]);
