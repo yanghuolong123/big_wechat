@@ -15,6 +15,7 @@ func (this *TipsController) Tips() {
 	msg := this.GetString("msg")
 
 	this.Data["msg"] = msg
+	this.Layout = "layout/addwechat.tpl"
 	this.TplName = "tips/tips.tpl"
 }
 

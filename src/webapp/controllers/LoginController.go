@@ -53,7 +53,8 @@ func (this *LoginController) LoginByKey() {
 		u := models.User{}
 		json.Unmarshal([]byte(c.([]uint8)), &u)
 		this.SetSession("user", u)
+		this.Redirect("/", 302)
 	}
 
-	this.Redirect("/", 302)
+	this.Redirect("/tips?msg=链接已失效", 302)
 }
