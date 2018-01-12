@@ -31,7 +31,7 @@ func GetGroupAll() (glist []Group) {
 
 func SearchGroup(name string) (groups []Group) {
 	cond := orm.NewCondition()
-	cond1 := cond.Or("short_name__icontains", name).Or("name__icontains", name)
+	cond1 := cond.Or("short_name__icontains", name).Or("en_name__icontains", name).Or("name__icontains", name)
 	orm.NewOrm().QueryTable("tbl_group").SetCond(cond1).All(&groups)
 	return
 }
