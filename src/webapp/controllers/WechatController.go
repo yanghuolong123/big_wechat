@@ -56,7 +56,7 @@ func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 			key := scanLogin(msgBody)
 			url := "http://www.addwechat.com/loginByKey?key=" + key
 
-			return replyText(msgBody, "感谢您登陆! "+url)
+			return replyText(msgBody, "登陆成功! <a href=\""+url+"\">进入AddWechat</a>")
 		}
 
 		subscribe(msgBody)
@@ -67,7 +67,7 @@ func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 			key := scanLogin(msgBody)
 			url := "http://www.addwechat.com/loginByKey?key=" + key
 
-			return replyText(msgBody, "感谢您登陆! "+url)
+			return replyText(msgBody, "登陆成功! <a href=\""+url+"\">进入AddWechat</a>")
 		}
 
 		return nil
