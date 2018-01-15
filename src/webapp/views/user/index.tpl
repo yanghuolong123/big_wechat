@@ -31,7 +31,7 @@
 				{{range .ugs}}
 				<tr>
 					<td>
-						<span>{{if .Name}}{{.Name}}{{else}}{{.En_name}}{{end}}</span>
+						<span><a class="link" href="/pg/list?gid={{.Id}}">{{if .Name}}{{.Name}}{{else}}{{.En_name}}{{end}}</a></span>
 					</td>					
 				</tr>
 				{{else}}
@@ -53,7 +53,7 @@
 				{{range .pgs}}
 				<tr>
 					<td>
-						<span>{{.Name}}</span>
+						<span><a class="link" href="/pg/view?id={{.Id}}">{{.Name}}</a></span>
 						<a class="pull-right" href="/pg/edit?id={{.Id}}">编辑</a>
 					</td>					
 				</tr>

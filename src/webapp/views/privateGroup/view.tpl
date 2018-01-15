@@ -16,15 +16,22 @@
 			{{.pg.Introduction}}
 		</p>
 		<div class="row qrcode">
-			 <div class="col-md-2 ">				 
-					 <img class="img-rounded" src="{{if .pg.Qrcode}}/{{.pg.Qrcode}}{{else}}/static/images/ico-photo.png{{end}}" alt="群二维码" />			  
-					 <p class="qr1">群二维码</p> 
+			{{if .pg.Qrcode}}
+			 <div class="col-md-2 ">				 				 
+					 <img class="img-rounded" src="/{{.pg.Qrcode}}" alt="群二维码" />			  
+					 <p class="qr1">群二维码</p> 					 
 			 </div>
-			 <div class="col-md-2">				 
-					 <img class="img-rounded" src="{{if .pg.Ower_qrcode}}/{{.pg.Ower_qrcode}}{{else}}/static/images/ico-photo.png{{end}}" alt="群主二维码" />	 
-					<p class="qr2">群主二维码/微信号: {{.pg.Wechat_id}}</p>				  
+			 {{end}}
+			 {{if .pg.Ower_qrcode}}
+			 <div class="col-md-2">				 				 
+					 <img class="img-rounded" src="/{{.pg.Ower_qrcode}}" alt="群主二维码" />	 
+					<p class="qr1">群主二维码</p>									  
 			 </div>
-		</div>		
+			 {{end}}
+		</div>	
+		{{if .pg.Wechat_id}} 
+		<p class="qr2"><label>微信号: </label> {{.pg.Wechat_id}}</p> 
+		{{end}}
 	</div>
 	<div class="comment ">
 		<h4 class="text-muted">留言</h4>

@@ -33,7 +33,8 @@ func (this *LoginController) LoginPost() {
 		u := models.User{}
 		json.Unmarshal([]byte(c.([]uint8)), &u)
 		this.SetSession("user", u)
-		this.SendRes(0, "success", u)
+		groups := models.GetUnlockGroupByUid(u.Id)
+		this.SendRes(0, "success", len(groups))
 	}
 
 	this.SendRes(-1, "failed", nil)
@@ -53,6 +54,11 @@ func (this *LoginController) LoginByKey() {
 		u := models.User{}
 		json.Unmarshal([]byte(c.([]uint8)), &u)
 		this.SetSession("user", u)
+		groups := models.GetUnlockGroupByUid(u.Id)
+
+		if len(groups) > 0 {
+			this.Redirect("/user", 302)
+		}
 		this.Redirect("/", 302)
 	}
 

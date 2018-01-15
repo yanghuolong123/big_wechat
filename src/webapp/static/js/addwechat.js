@@ -46,6 +46,11 @@ $(function(){
 			            }
 			            
 			            clearInterval(timer);
+			            if(e.data>0) {
+			            	window.location = "/user";
+			            	return;
+			            }
+
 			            window.location = "/";
 			            
 			        });
@@ -229,7 +234,7 @@ $(function(){
 	                	var item = JSON.parse(jsonStr);
 	                	var  str = "<div class='media search_group'>";
 	                	str += "	<div class='media-left'>";
-	                	str += "		<img class='media-object search_logo' src='/static/images/group_logo/stanford.gif' >";
+	                	str += "		<img class='media-object img-rounded search_logo' src='/static/images/default_group_logo.png' >";
 	                	str += "	</div>";
 	                	str += "	<div class='media-body'>";
 	                	str += "		<p>"+item.En_name+"</p>";

@@ -2,7 +2,7 @@
 /*===== 公用样式 */
 ul,li{margin: 0px; padding: 0px;list-style-type: none;}
 .alert{margin-top: 20px;}
-#login_img{width: 100%;}
+#login_img{width: 90%;}
 .search_group img.search_logo{width: 40px; height: 40px;}
 .search_group .media-body p{margin: 0px; }
 .search_group .media-body p.group_region{color: #ccc;border-bottom: 1px solid #ccc; padding-bottom: 5px;}
@@ -43,6 +43,7 @@ ul,li{margin: 0px; padding: 0px;list-style-type: none;}
 .user .title{margin-bottom: 40px;}
 .user .title h4{color: #2fb09d;}
 .user label{padding-top: 10px;}
+.user a.link{color: #777;}
 
 
 /*===== /pg/view css */
@@ -52,8 +53,8 @@ ul,li{margin: 0px; padding: 0px;list-style-type: none;}
 .view_pg .viewinfo a.glink{color: #777; text-decoration: underline; vertical-align: bottom; margin-right: 10px;}
 .view_pg  p.desc{margin-top: 25px;}
 .view_pg .qrcode img{width: 180px; height: 180px;}
-.view_pg .qrcode p.qr1{ margin-top: 5px; margin-left: 55px; }
-.view_pg .qrcode p.qr2{ margin-top: 5px; width: 180px; text-align: center; }
+.view_pg .qrcode p.qr1{ margin-top: 5px; margin-left: 50px; }
+.view_pg .comment{margin-top: 15px;}
 .view_pg .comment_btn button{ margin-top: 10px;}
 .view_pg #commentlist{ margin-top: 15px; }
 .view_pg ul#commentlist li {margin-bottom: 20px;}
