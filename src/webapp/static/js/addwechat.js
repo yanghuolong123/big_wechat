@@ -35,6 +35,7 @@ function uploadFile(obj) {
 $(function(){
 
 	$("#loginBtn").click(function(){
+		$("#login_qrcode_img").html('<h4 style="color: red;">加载中.... <img src="/static/images/loading.gif" /></h4>');
 		$('#loginModal').modal({backdrop: 'static', keyboard: false});
 		$.get("/login", function(e){
 			$("#login_qrcode_img").html(e.data);
