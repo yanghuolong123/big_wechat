@@ -37,7 +37,7 @@ func CreatePrivateGroupMessage(pgm *PrivateGroupMessage) (int, error) {
 }
 
 func GetPrivateGroupMessageByPgid(pg_id int) (pgms []PrivateGroupMessage) {
-	orm.NewOrm().QueryTable("tbl_private_group_message").Filter("pg_id", pg_id).All(&pgms)
+	orm.NewOrm().QueryTable("tbl_private_group_message").Filter("pg_id", pg_id).OrderBy("-createtime").All(&pgms)
 	return
 }
 

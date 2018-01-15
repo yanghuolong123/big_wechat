@@ -21,7 +21,7 @@
 			<div class="col-sm-6 col-md-3">                              
 				<div class="thumbnail">						
 						{{if $.isunlock}}
-							<a href="/pg/view?id={{.Id}}">{{if .Qrcode}}<img src="/{{.Qrcode}}" alt="{{.Name}}">{{else}}<img src="/static/images/ico-photo.png" alt="{{.Name}}">{{end}}</a>
+							<a href="/pg/view?id={{.Id}}">{{if .Qrcode}}<img src="/{{.Qrcode}}" alt="{{.Name}}">{{else}}<img src="/static/images/default_lack.jpg" alt="{{.Name}}">{{end}}</a>
 						{{else}}
 							<a href="/tips/pglist"><img src="/static/images/pglist" alt="{{.Name}}"></a>
 						{{end}}						
