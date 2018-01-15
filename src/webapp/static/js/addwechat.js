@@ -193,6 +193,7 @@ $(function(){
 
 		$.post("/pg/unlock",{gid:gid}, function(e){
 			if(e.code<0) {
+				prompt(e.msg);
 				return false;
 			}
 

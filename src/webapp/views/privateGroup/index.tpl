@@ -6,6 +6,7 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	    <link rel="stylesheet" type="text/css" href="/static/plugin/bootstrap/css/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" href="/static/css/common.css">
 	    <link rel="stylesheet" type="text/css" href="/static/css/addwechat.css">  
 	 </head>
 	 <body>
@@ -72,6 +73,7 @@
              <script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
 	     <script src="/static/plugin/bootstrap/js/bootstrap.min.js"></script>
              <script src="/static/plugin/bootstrap/js/bootstrap3-typeahead.min.js"></script>
+             <script src="/static/js/common.js"></script>
             <script src="/static/js/addwechat.js"></script> 	
 	 </body>
 </html>
