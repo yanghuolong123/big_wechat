@@ -266,4 +266,8 @@ $(function(){
 		} 
 	});
 
+	$("a.reback").click(function(){
+		window.history.back();
+	});
+
 });
