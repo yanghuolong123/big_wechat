@@ -234,9 +234,13 @@ $(function(){
 		},
 	                highlighter: function (jsonStr) {
 	                	var item = JSON.parse(jsonStr);
+	                	var logo_img = "/static/images/default_group_logo.png";
+	                	if($.trim(item.Logo)!="") {
+	                		logo_img = "/static/logo_img/"+item.Logo;
+	                	}
 	                	var  str = "<div class='media search_group'>";
 	                	str += "	<div class='media-left'>";
-	                	str += "		<img class='media-object img-rounded search_logo' src='/static/images/default_group_logo.png' >";
+	                	str += "		<img class='media-object img-rounded search_logo' src='"+logo_img+"' >";
 	                	str += "	</div>";
 	                	str += "	<div class='media-body'>";
 	                	str += "		<p>"+item.En_name+"</p>";

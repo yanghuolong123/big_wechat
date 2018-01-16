@@ -15,6 +15,7 @@ type Group struct {
 	Short_name string
 	Region     string
 	Introduce  string
+	Logo       string
 	Status     int
 }
 
