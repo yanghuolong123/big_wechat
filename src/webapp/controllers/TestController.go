@@ -4,17 +4,32 @@ import (
 	//	"time"
 	"errors"
 	"fmt"
+	"github.com/astaxie/beego/orm"
 	"webapp/models"
 	"yhl/help"
 	//	"yhl/wechat"
-	"time"
+	//	"time"
+	"yhl/search"
 )
 
 type TestController struct {
 	help.BaseController
 }
 
+func importGroupToEs() {
+	var glist []models.Group
+	orm.NewOrm().QueryTable("tbl_group").All(&glist)
+	fmt.Println("======== len:", len(glist))
+	for _, g := range glist {
+		m := help.StructToMap(g)
+		//	fmt.Println("============= g:", m["id"])
+		result := search.Put("/group/school/"+m["id"].(string), m)
+		fmt.Println("============ result:", result)
+	}
+}
+
 func (this *TestController) Get() {
+	go importGroupToEs()
 	/*cache := help.Cache
 	token := cache.Get("access_token_")
 
@@ -56,9 +71,19 @@ func (this *TestController) Get() {
 	//	user, err := models.GetUserByOpenid("oou4Vw0zizge_p2gQhYT0UL5Kwbk")
 	//user, err := models.GetUserById(3)
 	//	fmt.Println(user, err)
-	t, _ := time.Parse(help.DatetimeFormat, "2018-01-01 20:15:32")
-	s := help.ShowTime(t)
-	fmt.Println("==== t:", s)
+	//	t, _ := time.Parse(help.DatetimeFormat, "2018-01-01 20:15:32")
+	//	s := help.ShowTime(t)
+	//	fmt.Println("==== t:", s)
+
+	/*m := search.Get("/customer/external/1")
+	fmt.Println(m)
+	m1 := map[string]interface{}{"name": "yhl1"}
+	d1 := search.Put("/customer/external/2", m1)
+	fmt.Println(d1)
+	m2 := map[string]interface{}{"name": "yhl2"}
+	d2 := search.Put("/customer/external/3", m2)
+	fmt.Println(d2)
+	*/
 	this.TplName = "test/index.tpl"
 }
 

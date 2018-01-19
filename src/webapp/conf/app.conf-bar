@@ -18,3 +18,6 @@ redis.port = 6379
 wechat.token = *********123456
 wechat.appid = wx2705f**************8b
 wechat.secret = 63b572b*******************a66b156290
+
+es.search.host = localhost
+es.search.port = 9200
