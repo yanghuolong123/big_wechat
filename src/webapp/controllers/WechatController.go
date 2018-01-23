@@ -23,7 +23,7 @@ func (this *WechatController) Index() {
 	if wechat.Check(timestamp, nonce, signatureIn) {
 		if len(echostr) > 0 {
 			this.Ctx.WriteString(echostr)
-			help.Log.Info("===== 接入成功 ======")
+			help.Log("wx.log", "===== 接入成功 ======")
 			return
 		}
 

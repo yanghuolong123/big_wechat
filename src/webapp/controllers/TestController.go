@@ -10,6 +10,7 @@ import (
 	//	"yhl/wechat"
 	//	"time"
 	"yhl/search"
+	"yhl/wechat/wxpay"
 )
 
 type TestController struct {
@@ -28,8 +29,19 @@ func importGroupToEs() {
 	}
 }
 
+func wxPay() {
+	orderReq := new(wxpay.UnifyOrderReq)
+	orderReq.Body = "商品名"
+
+	wxpay.UnifiedOrder(orderReq)
+	fmt.Println("============= randStr:", help.RandStr(32))
+	help.Log("test.log", help.RandStr(10))
+	help.Log("test2.log", help.RandStr(10))
+}
+
 func (this *TestController) Get() {
-	go importGroupToEs()
+	go wxPay()
+	//	go importGroupToEs()
 	/*cache := help.Cache
 	token := cache.Get("access_token_")
 
