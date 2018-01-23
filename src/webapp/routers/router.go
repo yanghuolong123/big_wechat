@@ -30,6 +30,8 @@ func init() {
 	beego.Router("/loginByKey", &controllers.LoginController{}, "get:LoginByKey")
 	beego.Router("/logout", &controllers.LoginController{}, "get,post:Logout")
 
+	beego.Router("/pay/wxscan", &controllers.PayController{}, "get,post:WxScan")
+
 	beego.Router("/search/group", &controllers.SearchController{}, "post:Group")
 
 	beego.Router("/user", &controllers.UserController{}, "get:Index")

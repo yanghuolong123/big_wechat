@@ -205,7 +205,8 @@ func (this *PrivateGroupController) Unlock() {
 	uid := user.(models.User).Id
 	ugs := models.GetUnlockGroupByUid(uid)
 	if len(ugs) > 1 {
-		this.SendRes(-1, "亲，您只能解锁两所学校，可以付费解锁更多学校", nil)
+		//		this.SendRes(-1, "亲，您只能解锁两所学校，可以付费解锁更多学校", nil)
+		this.SendRes(1, "需要支付", nil)
 	}
 
 	gid, _ := this.GetInt("gid")

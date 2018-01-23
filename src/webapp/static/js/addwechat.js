@@ -198,6 +198,17 @@ $(function(){
 				return false;
 			}
 
+			if(e.code == 1) {
+				$('#unlock_pay').modal({backdrop: 'static', keyboard: false});
+				$.post("/pay/wxscan", {product_id:$("#gid").val()}, function(e){
+					if(e.code<0) {
+						prompt(e.msg);
+						return false;
+					}
+				});
+				return;
+			}
+
 			location.reload() ;
 
 			$this.text("已解锁");
