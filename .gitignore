@@ -5,3 +5,5 @@ src/webapp/uploads/
 src/webapp/disploy.sh
 src/webapp/fast-disploy.sh
 src/webapp/conf/app.conf
+src/webapp/log/
+!src/webapp/log/web.log
