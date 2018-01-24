@@ -41,7 +41,14 @@ func wxPay() {
 	orderReq.Time_expire = time.Now().Add(time.Duration(600 * time.Second)).Format(help.DatetimeNumFormat)
 	orderReq.Spbill_create_ip = help.ClientIp
 
-	wxpay.UnifiedOrder(orderReq)
+	wxRes := wxpay.UnifiedOrder(orderReq)
+	if wxRes.Return_code == "FAIL" {
+		help.Log("wxpay", help.StructToMap(wxRes))
+	}
+
+	if wxRes.Code_url != "" {
+		fmt.Println("====== code_url:", wxRes.Code_url)
+	}
 	//fmt.Println("============= randStr:", help.RandStr(32))
 	help.Log("test.log", help.RandStr(10))
 	help.Log("test2.log", help.RandStr(10))
