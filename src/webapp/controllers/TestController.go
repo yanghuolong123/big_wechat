@@ -8,7 +8,7 @@ import (
 	"webapp/models"
 	"yhl/help"
 	//	"yhl/wechat"
-	//	"time"
+	"time"
 	"yhl/search"
 	"yhl/wechat/wxpay"
 )
@@ -32,9 +32,17 @@ func importGroupToEs() {
 func wxPay() {
 	orderReq := new(wxpay.UnifyOrderReq)
 	orderReq.Body = "商品名"
+	orderReq.Out_trade_no = "233233333232"
+	orderReq.Total_fee = 100
+	orderReq.Notify_url = "pay.feichangjuzu.com/pay/"
+	orderReq.Trade_type = "NATIVE"
+	orderReq.Product_id = 22
+	orderReq.Time_start = time.Now().Format(help.DatetimeNumFormat)
+	orderReq.Time_expire = time.Now().Add(time.Duration(600 * time.Second)).Format(help.DatetimeNumFormat)
+	orderReq.Spbill_create_ip = help.ClientIp
 
 	wxpay.UnifiedOrder(orderReq)
-	fmt.Println("============= randStr:", help.RandStr(32))
+	//fmt.Println("============= randStr:", help.RandStr(32))
 	help.Log("test.log", help.RandStr(10))
 	help.Log("test2.log", help.RandStr(10))
 }
