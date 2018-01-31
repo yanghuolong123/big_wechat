@@ -199,12 +199,15 @@ $(function(){
 			}
 
 			if(e.code == 1) {
+				$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/images/loading.gif");
 				$('#unlock_pay').modal({backdrop: 'static', keyboard: false});
 				$.post("/pay/wxscan", {product_id:$("#gid").val()}, function(e){
 					if(e.code<0) {
 						prompt(e.msg);
 						return false;
 					}
+
+					$("#pay_qr_img").attr("src", e.data.qrurl).addClass("qrimg");
 				});
 				return;
 			}

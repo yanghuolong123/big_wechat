@@ -72,3 +72,4 @@ ul,li{margin: 0px; padding: 0px;list-style-type: none;}
 #unlock_pay .modal-body{padding-top: 5px;}
 #unlock_pay .center-block{text-align: center;}
 #unlock_pay .pay_amount{color: #f5a623;}
+img.qrimg{width: 250px;height: 250px;}

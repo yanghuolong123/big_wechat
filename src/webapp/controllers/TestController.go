@@ -42,6 +42,7 @@ func wxPay() {
 	orderReq.Spbill_create_ip = help.ClientIp
 
 	wxRes := wxpay.UnifiedOrder(orderReq)
+	help.Log("wxpay", wxRes)
 	if wxRes.Return_code == "FAIL" {
 		help.Log("wxpay", help.StructToMap(wxRes))
 	}
@@ -51,7 +52,7 @@ func wxPay() {
 	}
 	//fmt.Println("============= randStr:", help.RandStr(32))
 	help.Log("test.log", help.RandStr(10))
-	help.Log("test2.log", help.RandStr(10))
+	help.Log("test.log", orderReq)
 }
 
 func (this *TestController) Get() {

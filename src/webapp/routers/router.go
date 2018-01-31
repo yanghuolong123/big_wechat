@@ -31,6 +31,7 @@ func init() {
 	beego.Router("/logout", &controllers.LoginController{}, "get,post:Logout")
 
 	beego.Router("/pay/wxscan", &controllers.PayController{}, "get,post:WxScan")
+	beego.Router("/pay/qrcode", &controllers.PayController{}, "get,post:Qrcode")
 
 	beego.Router("/search/group", &controllers.SearchController{}, "post:Group")
 
