@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/astaxie/beego/orm"
 	"time"
+	"yhl/help"
 )
 
 func init() {
@@ -26,6 +27,10 @@ type Order struct {
 func CreateUnlockOrder(o *Order) bool {
 	o.Create_time = time.Now()
 
-	i, _ := orm.NewOrm().Insert(o)
+	i, err := orm.NewOrm().Insert(o)
+	if err != nil {
+		help.Log("error", err.Error())
+	}
+
 	return i > 0
 }

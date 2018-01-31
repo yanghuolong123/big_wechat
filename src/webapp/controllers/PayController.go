@@ -37,7 +37,7 @@ func (this *PayController) WxScan() {
 	orderReq := new(wxpay.UnifyOrderReq)
 	orderReq.Body = bodyName
 	orderReq.Out_trade_no = order.Orderno
-	orderReq.Total_fee = 1
+	orderReq.Total_fee = int(order.Amount * 100)
 	orderReq.Notify_url = "pay.feichangjuzu.com/pay/"
 	orderReq.Trade_type = "NATIVE"
 	orderReq.Product_id = productId
