@@ -2,6 +2,7 @@ package controllers
 
 import (
 	//	"time"
+	"encoding/xml"
 	"errors"
 	"fmt"
 	"github.com/astaxie/beego/orm"
@@ -55,8 +56,50 @@ func wxPay() {
 	help.Log("test.log", orderReq)
 }
 
+func order() {
+	o := models.GetOrderByOrderno("2018020110180392508")
+	fmt.Println("================ order:", o)
+	o.Status = 6
+	models.UpdateOrder(o)
+}
+
+func unmarsh() {
+	str := `<xml><appid><![CDATA[wx3e0b8bca5b6d6606]]></appid>
+<bank_type><![CDATA[CFT]]></bank_type>
+<cash_fee><![CDATA[1]]></cash_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<mch_id><![CDATA[1497110522]]></mch_id>
+<nonce_str><![CDATA[W3Jfld4GxARS3J5guaXM3diCwqY97vGB]]></nonce_str>
+<openid><![CDATA[oou4Vw0zizge_p2gQhYT0UL5Kwbk]]></openid>
+<out_trade_no><![CDATA[2018020116405147706]]></out_trade_no>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<sign><![CDATA[67B14CBCE6BBF308AD27B37F10BD347D]]></sign>
+<time_end><![CDATA[20180201164107]]></time_end>
+<total_fee>1</total_fee>
+<trade_type><![CDATA[NATIVE]]></trade_type>
+<transaction_id><![CDATA[4200000060201802014933684181]]></transaction_id>
+</xml>`
+
+	var notifyReq = wxpay.WXPayNotifyReq{}
+	xml.Unmarshal([]byte(str), &notifyReq)
+	fmt.Printf("%+v", notifyReq)
+	fmt.Println("=================")
+	fmt.Printf("Sign:%+v", notifyReq.Sign)
+	fmt.Println("=================")
+	//notifyReq.Sign = ""
+	signStr := wxpay.Sign(help.StructToMap(notifyReq))
+	fmt.Printf("signStr: %+v", signStr)
+	fmt.Println("=================")
+}
+
 func (this *TestController) Get() {
-	go wxPay()
+
+	go unmarsh()
+
+	//go order()
+	//	go wxPay()
 	//	go importGroupToEs()
 	/*cache := help.Cache
 	token := cache.Get("access_token_")
@@ -65,7 +108,7 @@ func (this *TestController) Get() {
 		token = "ddsdsdsdssddsds"
 		cache.Put("access_token_", token, 100*time.Second)
 	} else {
-		token = string(token.([]uint8))
+	 	token = string(token.([]uint8))
 	}
 
 	accessToken := token.(string) //wechat.GetAccessToken()

@@ -24,7 +24,7 @@ type Order struct {
 	Pay_time       time.Time
 }
 
-func CreateUnlockOrder(o *Order) bool {
+func CreateOrder(o *Order) bool {
 	o.Create_time = time.Now()
 
 	i, err := orm.NewOrm().Insert(o)
@@ -33,4 +33,24 @@ func CreateUnlockOrder(o *Order) bool {
 	}
 
 	return i > 0
+}
+
+func UpdateOrder(o *Order) bool {
+	i, err := orm.NewOrm().Update(o)
+	if err != nil {
+		help.Log("error", err.Error())
+	}
+
+	return i > 0
+}
+
+func GetOrderByOrderno(orderno string) (o *Order) {
+	o = new(Order)
+	o.Orderno = orderno
+	err := orm.NewOrm().Read(o, "orderno")
+	if err != nil {
+		help.Log("error", err.Error())
+	}
+
+	return
 }
