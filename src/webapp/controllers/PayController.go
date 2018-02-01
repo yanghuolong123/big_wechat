@@ -48,11 +48,7 @@ func (this *PayController) WxScan() {
 	wxRes := wxpay.UnifiedOrder(orderReq)
 	help.Log("wxpay", wxRes)
 	if wxRes.Return_code == "FAIL" {
-		help.Log("wxpay", "error==================================")
-	}
-
-	if wxRes.Code_url != "" {
-		fmt.Println("====== code_url:", wxRes.Code_url)
+		help.Log("error", wxRes)
 	}
 
 	v := url.Values{}
