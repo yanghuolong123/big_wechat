@@ -89,9 +89,7 @@ func (this *PayController) Notify() {
 	err := xml.Unmarshal(body, &notifyReq)
 	if err != nil {
 		help.Log("error", err.Error())
-		strResp := wxpay.ToWxRespXmlStr("FAIL", "failed to unmarshal xml")
-		this.Ctx.Output.XML(strResp, true)
-		return
+		this.SendXml(wxpay.WXPayNotifyResp{Return_code: "FAIL", Return_msg: "failed to unmarshal xml"})
 	}
 
 	notifySign := notifyReq.Sign
@@ -99,21 +97,20 @@ func (this *PayController) Notify() {
 
 	m := help.StructToMap(notifyReq)
 	signStr := wxpay.Sign(m)
-	help.Log("wxpay", "signStr:"+signStr+" reqSign:"+notifySign)
 
 	if notifySign != signStr {
-		help.Log("error", "sign error:: signStr:"+signStr+" reqSign:"+notifySign)
-		strResp := wxpay.ToWxRespXmlStr("FAIL", "failed to verify sign, please retry!")
-		this.Ctx.Output.XML(strResp, true)
-		return
+		help.Log("error", "verify sign failed || signStr:"+signStr+" reqSign:"+notifySign)
+		this.SendXml(wxpay.WXPayNotifyResp{Return_code: "FAIL", Return_msg: "failed to verify sign, please retry"})
 	}
 
 	order := models.GetOrderByOrderno(notifyReq.Out_trade_no)
-	order.Pay_time = time.Now()
-	order.Status = 1
-	order.Transaction_id = notifyReq.Transaction_id
-	models.UpdateOrder(order)
+	if order.Status < 1 {
+		order.Pay_time = time.Now()
+		order.Status = 1
+		order.Transaction_id = notifyReq.Transaction_id
+		models.UpdateOrder(order)
+	}
+	help.Log("wxpay", "============== weixin pay success! ===============")
 
-	strResp := wxpay.ToWxRespXmlStr("SUCCESS", "OK")
-	this.Ctx.Output.XML(strResp, true)
+	this.SendXml(wxpay.WXPayNotifyResp{Return_code: "SUCCESS", Return_msg: "OK!"})
 }

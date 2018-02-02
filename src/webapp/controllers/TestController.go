@@ -99,8 +99,16 @@ func unmarsh() {
 }
 
 func (this *TestController) Get() {
+	this.SendXml(wxpay.WXPayNotifyResp{Return_code: "SUCCESS", Return_msg: "OK!"})
 
-	go unmarsh()
+	/*var notifyReq wxpay.WXPayNotifyResp
+	notifyReq.Return_code = "SUCCESS"
+	notifyReq.Return_msg = "ok"
+	this.Data["xml"] = notifyReq
+	this.ServeXML()
+	*/
+
+	//	go unmarsh()
 
 	//go order()
 	//	go wxPay()
@@ -159,7 +167,7 @@ func (this *TestController) Get() {
 	d2 := search.Put("/customer/external/3", m2)
 	fmt.Println(d2)
 	*/
-	this.TplName = "test/index.tpl"
+	//this.TplName = "test/index.tpl"
 }
 
 func (this *TestController) Post() {
