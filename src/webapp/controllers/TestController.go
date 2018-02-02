@@ -70,28 +70,32 @@ func unmarsh() {
 <fee_type><![CDATA[CNY]]></fee_type>
 <is_subscribe><![CDATA[Y]]></is_subscribe>
 <mch_id><![CDATA[1497110522]]></mch_id>
-<nonce_str><![CDATA[W3Jfld4GxARS3J5guaXM3diCwqY97vGB]]></nonce_str>
+<nonce_str><![CDATA[lK3sw75HdKOw6Zv5lGABaZBGHqUp6wBv]]></nonce_str>
 <openid><![CDATA[oou4Vw0zizge_p2gQhYT0UL5Kwbk]]></openid>
-<out_trade_no><![CDATA[2018020116405147706]]></out_trade_no>
+<out_trade_no><![CDATA[2018020211255844503]]></out_trade_no>
 <result_code><![CDATA[SUCCESS]]></result_code>
 <return_code><![CDATA[SUCCESS]]></return_code>
-<sign><![CDATA[67B14CBCE6BBF308AD27B37F10BD347D]]></sign>
-<time_end><![CDATA[20180201164107]]></time_end>
+<sign><![CDATA[BAE3A2EBBD8CE52C43A0975DF7770E25]]></sign>
+<time_end><![CDATA[20180202112611]]></time_end>
 <total_fee>1</total_fee>
 <trade_type><![CDATA[NATIVE]]></trade_type>
-<transaction_id><![CDATA[4200000060201802014933684181]]></transaction_id>
+<transaction_id><![CDATA[4200000052201802025369351717]]></transaction_id>
 </xml>`
 
 	var notifyReq = wxpay.WXPayNotifyReq{}
 	xml.Unmarshal([]byte(str), &notifyReq)
+	fmt.Println("\n=================\n")
 	fmt.Printf("%+v", notifyReq)
-	fmt.Println("=================")
+	fmt.Println("\n=================\n")
 	fmt.Printf("Sign:%+v", notifyReq.Sign)
-	fmt.Println("=================")
-	//notifyReq.Sign = ""
-	signStr := wxpay.Sign(help.StructToMap(notifyReq))
+	fmt.Println("\n=================\n")
+	notifyReq.Sign = ""
+	m := help.StructToMap(notifyReq)
+	fmt.Printf("m:%+v", m)
+	fmt.Println("\n=================\n")
+	signStr := wxpay.Sign(m)
 	fmt.Printf("signStr: %+v", signStr)
-	fmt.Println("=================")
+	fmt.Println("\n=================\n")
 }
 
 func (this *TestController) Get() {
