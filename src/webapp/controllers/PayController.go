@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/xml"
+	"errors"
 	"fmt"
 	qrcode "github.com/skip2/go-qrcode"
 	"net/url"
@@ -15,9 +16,7 @@ type PayController struct {
 	help.BaseController
 }
 
-func (this *PayController) WxScan() {
-	productId, _ := this.GetInt("product_id")
-
+func prePayOrder(productId int) (resp wxpay.UnifyOrderResp, err error) {
 	group := models.GetGroupById(productId)
 	bodyName := "解锁 " + group.Name
 	if group.Name == "" {
@@ -32,7 +31,7 @@ func (this *PayController) WxScan() {
 	order.Pay_type = 1
 	order.Uid = 2
 	if !models.CreateOrder(order) {
-		this.SendRes(-1, "创建订单失败", nil)
+		return resp, errors.New("创建订单失败")
 	}
 
 	orderReq := new(wxpay.UnifyOrderReq)
@@ -47,6 +46,34 @@ func (this *PayController) WxScan() {
 	orderReq.Spbill_create_ip = help.ClientIp
 
 	wxRes := wxpay.UnifiedOrder(orderReq)
+
+	return wxRes, nil
+}
+
+func (this *PayController) Confirm() {
+	productId, _ := this.GetInt("product_id")
+
+	wxRes, err := prePayOrder(productId)
+	if err != nil {
+		this.Redirect("/tips?msg=预订单生成失败", 302)
+	}
+
+	sdk := wxpay.JsPaySdk(wxRes.Prepay_id)
+	help.Log("wxpay", sdk)
+	this.Data["sdk"] = sdk
+
+	this.Layout = "layout/addwechat.tpl"
+	this.TplName = "pay/confirm.tpl"
+}
+
+func (this *PayController) WxScan() {
+	productId, _ := this.GetInt("product_id")
+
+	wxRes, err := prePayOrder(productId)
+	if err != nil {
+		this.SendRes(-1, err.Error(), nil)
+	}
+
 	help.Log("wxpay", wxRes)
 	if wxRes.Return_code == "FAIL" {
 		help.Log("error", wxRes)
@@ -56,8 +83,8 @@ func (this *PayController) WxScan() {
 	v.Add("url", wxRes.Code_url)
 
 	m := map[string]string{}
-	m["orderno"] = order.Orderno
 	m["qrurl"] = "/pay/qrcode?" + v.Encode()
+	m["prepay_id"] = wxRes.Prepay_id
 
 	this.SendRes(0, "success", m)
 }

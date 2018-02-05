@@ -30,6 +30,7 @@ func init() {
 	beego.Router("/loginByKey", &controllers.LoginController{}, "get:LoginByKey")
 	beego.Router("/logout", &controllers.LoginController{}, "get,post:Logout")
 
+	beego.Router("/pay/confirm", &controllers.PayController{}, "get,post:Confirm")
 	beego.Router("/pay/wxscan", &controllers.PayController{}, "get,post:WxScan")
 	beego.Router("/pay/qrcode", &controllers.PayController{}, "get,post:Qrcode")
 	beego.Router("/pay/notify", &controllers.PayController{}, "*:Notify")
