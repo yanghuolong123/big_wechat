@@ -16,7 +16,7 @@ type PayController struct {
 	help.BaseController
 }
 
-func prePayOrder(productId int) (resp wxpay.UnifyOrderResp, err error) {
+func prePayOrder(productId int, trade_type, openid string) (resp wxpay.UnifyOrderResp, err error) {
 	group := models.GetGroupById(productId)
 	bodyName := "解锁 " + group.Name
 	if group.Name == "" {
@@ -39,21 +39,33 @@ func prePayOrder(productId int) (resp wxpay.UnifyOrderResp, err error) {
 	orderReq.Out_trade_no = order.Orderno
 	orderReq.Total_fee = int(order.Amount * 100)
 	orderReq.Notify_url = "addwechat.feichangjuzu.com/pay/notify"
-	orderReq.Trade_type = "NATIVE"
+	//orderReq.Trade_type = "NATIVE"
+	orderReq.Trade_type = trade_type
+	if orderReq.Trade_type == "JSAPI" {
+		orderReq.Openid = openid
+	}
 	orderReq.Product_id = productId
 	orderReq.Time_start = time.Now().Format(help.DatetimeNumFormat)
 	orderReq.Time_expire = time.Now().Add(time.Duration(600 * time.Second)).Format(help.DatetimeNumFormat)
 	orderReq.Spbill_create_ip = help.ClientIp
 
 	wxRes := wxpay.UnifiedOrder(orderReq)
+	help.Log("wxpay", wxRes)
 
 	return wxRes, nil
 }
 
 func (this *PayController) Confirm() {
 	productId, _ := this.GetInt("product_id")
+	url := this.Ctx.Input.Site() + this.Ctx.Input.URI()
 
-	wxRes, err := prePayOrder(productId)
+	openid := wxpay.GetOpenId(this.Ctx, url)
+	if openid == "" {
+		this.Redirect("/tips?msg=openid获取失败", 302)
+		return
+	}
+
+	wxRes, err := prePayOrder(productId, "JSAPI", openid)
 	if err != nil {
 		this.Redirect("/tips?msg=预订单生成失败", 302)
 	}
@@ -69,12 +81,11 @@ func (this *PayController) Confirm() {
 func (this *PayController) WxScan() {
 	productId, _ := this.GetInt("product_id")
 
-	wxRes, err := prePayOrder(productId)
+	wxRes, err := prePayOrder(productId, "NATIVE", "")
 	if err != nil {
 		this.SendRes(-1, err.Error(), nil)
 	}
 
-	help.Log("wxpay", wxRes)
 	if wxRes.Return_code == "FAIL" {
 		help.Log("error", wxRes)
 	}
