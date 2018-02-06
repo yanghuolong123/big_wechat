@@ -1,4 +1,11 @@
-微信支付
+<div class="alert alert-info" role="alert">
+	<p class="text-warning">亲, 你已经免费解锁了两所学校，超过两所需要支付</p>
+	<p class="center-block">支付金额 : <span class="pay_amount text-danger">￥2.00</span></p>
+	<br>
+	<button class="btn btn-success" type="button" onclick="pay()">立即支付</button>
+</div>
+
+
 <script type="text/javascript">
 function onBridgeReady(){
    WeixinJSBridge.invoke(
@@ -24,14 +31,16 @@ function onBridgeReady(){
    ); 
 }
 
-if (typeof WeixinJSBridge == "undefined"){
-   if( document.addEventListener ){
-       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-   }else if (document.attachEvent){
-       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
-       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-   }
-}else{
-   onBridgeReady();
-} 
+function pay() {
+	if (typeof WeixinJSBridge == "undefined"){
+	   if( document.addEventListener ){
+	       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+	   }else if (document.attachEvent){
+	       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+	       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+	   }
+	}else{
+	   onBridgeReady();
+	} 
+}
 </script>
