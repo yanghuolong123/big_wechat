@@ -199,7 +199,7 @@ $(function(){
 			}
 
 			if(e.code == 1) {
-				if(window.navigator.userAgent.match(/MicroMessenger/i) == "micromessenger"){
+				if(isWeiXin()){
 					window.location.href = "/pay/confirm?product_id="+$("#gid").val();
 				} else {					
 					$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/images/loading.gif");
