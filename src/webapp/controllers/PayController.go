@@ -74,6 +74,9 @@ func (this *PayController) Confirm() {
 	help.Log("wxpay", sdk)
 	this.Data["sdk"] = sdk
 
+	user := this.GetSession("user")
+	this.Data["user"] = user
+
 	this.Layout = "layout/addwechat.tpl"
 	this.TplName = "pay/confirm.tpl"
 }
