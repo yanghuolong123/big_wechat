@@ -223,6 +223,7 @@ $(function(){
 						            clearInterval(timer);
 						            $('#unlock_pay').modal("hide");
 						            prompt("支付解锁成功！");
+						            sleep(2000);
 				            		window.location = "/pg/list?gid="+gid;
 						            
 						        });
