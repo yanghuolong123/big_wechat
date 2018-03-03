@@ -221,6 +221,7 @@ $(function(){
 						            }
 						            
 						            clearInterval(timer);
+						            $('#unlock_pay').modal("hide");
 						            prompt("支付解锁成功！");
 				            		window.location = "/pg/list?gid="+gid;
 						            
