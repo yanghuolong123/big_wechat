@@ -223,6 +223,7 @@ func (this *PrivateGroupController) Unlock() {
 	this.SendRes(0, "success", nil)
 }
 
+// 解锁支付检测
 func (this *PrivateGroupController) CheckPayUnlock() {
 	uid, _ := this.GetInt("uid")
 	gid, _ := this.GetInt("gid")

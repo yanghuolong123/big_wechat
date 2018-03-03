@@ -22,7 +22,7 @@ func CreateUnlockGroup(uid, gid int) bool {
 	l.Gid = gid
 	l.Createtime = time.Now()
 
-	i, _ := orm.NewOrm().Insert(l)
+	i, _ := orm.NewOrm().Insert(&l)
 	return i > 0
 }
 

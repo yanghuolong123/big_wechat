@@ -99,7 +99,8 @@ func unmarsh() {
 }
 
 func (this *TestController) Get() {
-	this.SendXml(wxpay.WXPayNotifyResp{Return_code: "SUCCESS", Return_msg: "OK!"})
+	models.CreateUnlockGroup(2, 59)
+	//	this.SendXml(wxpay.WXPayNotifyResp{Return_code: "SUCCESS", Return_msg: "OK!"})
 
 	/*var notifyReq wxpay.WXPayNotifyResp
 	notifyReq.Return_code = "SUCCESS"
