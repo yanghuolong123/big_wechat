@@ -150,6 +150,7 @@ func (this *PayController) Notify() {
 		order.Status = 1
 		order.Transaction_id = notifyReq.Transaction_id
 		models.UpdateOrder(order)
+		models.CreateUnlockGroup(order.Uid, order.Product_id)
 	}
 	help.Log("wxpay", "============== weixin pay success! ===============")
 

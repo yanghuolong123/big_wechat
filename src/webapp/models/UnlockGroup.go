@@ -16,13 +16,23 @@ type UnlockGroup struct {
 	Createtime time.Time
 }
 
-func CreateUnlockGroup(ug *UnlockGroup) bool {
-	ug.Createtime = time.Now()
+func CreateUnlockGroup(uid, gid int) bool {
+	l := UnlockGroup{}
+	l.Uid = uid
+	l.Gid = gid
+	l.Createtime = time.Now()
 
-	i, _ := orm.NewOrm().Insert(ug)
-
+	i, _ := orm.NewOrm().Insert(l)
 	return i > 0
 }
+
+//func CreateUnlockGroup(ug *UnlockGroup) bool {
+//	ug.Createtime = time.Now()
+//
+//	i, _ := orm.NewOrm().Insert(ug)
+//
+//	return i > 0
+//}
 
 func GetUnlockGroupByUid(uid int) (groups []Group) {
 	var ugs []UnlockGroup

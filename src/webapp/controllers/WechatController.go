@@ -54,7 +54,8 @@ func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 		if strings.Contains(msgBody.EventKey, "login_") {
 			msgBody.EventKey = strings.TrimLeft(msgBody.EventKey, "qrscene_")
 			key := scanLogin(msgBody)
-			url := "http://www.addwechat.com/loginByKey?key=" + key
+			//url := "http://www.addwechat.com/loginByKey?key=" + key
+			url := "http://addwechat.feichangjuzu.com/loginByKey?key=" + key
 
 			return replyText(msgBody, "登陆成功! <a href=\""+url+"\">进入AddWechat</a>")
 		}

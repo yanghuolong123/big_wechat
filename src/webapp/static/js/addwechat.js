@@ -191,6 +191,7 @@ $(function(){
 	$("#unlock_group").click(function(){
 		$this = $(this);
 		var gid = $("#gid").val();
+		var uid = $("#uid").val();
 
 		$.post("/pg/unlock",{gid:gid}, function(e){
 			if(e.code<0) {
@@ -200,7 +201,7 @@ $(function(){
 
 			if(e.code == 1) {
 				if(isWeiXin()){
-					window.location.href = "/pay/confirm?product_id="+$("#gid").val();
+					window.location.href = "/pay/confirm?product_id="+gid;
 				} else {					
 					$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/images/loading.gif");
 					$('#unlock_pay').modal({backdrop: 'static', keyboard: false});
@@ -211,6 +212,21 @@ $(function(){
 						}
 
 						$("#pay_qr_img").attr("src", e.data.qrurl).addClass("qrimg");
+
+
+						var timer = setInterval(function(){
+						    $.post('/pg/checkPayUnlock', {"uid":uid,"gid":gid}, function(e){
+						            if(e.code < 0) {
+						                return false;
+						            }
+						            
+						            clearInterval(timer);
+						            prompt("支付解锁成功！");
+				            		window.location = "/pg/list?gid="+gid;
+						            
+						        });
+						}, 1000);
+
 					});
 				}
 				

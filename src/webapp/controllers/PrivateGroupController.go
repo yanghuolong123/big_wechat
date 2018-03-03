@@ -9,6 +9,7 @@ type PrivateGroupController struct {
 	help.BaseController
 }
 
+// 首页
 func (this *PrivateGroupController) Get() {
 	pgroups := models.GetPrivateGroupByLimit(16)
 	user := this.GetSession("user")
@@ -18,6 +19,7 @@ func (this *PrivateGroupController) Get() {
 	this.TplName = "privateGroup/index.tpl"
 }
 
+// 创建私群
 func (this *PrivateGroupController) CreateGet() {
 	user := this.GetSession("user")
 	this.Data["user"] = user
@@ -58,6 +60,7 @@ func (this *PrivateGroupController) CreatePost() {
 	this.SendRes(0, "success", pg)
 }
 
+// 编辑私群
 func (this *PrivateGroupController) EditGet() {
 	user := this.GetSession("user")
 	if user == nil {
@@ -111,6 +114,7 @@ func (this *PrivateGroupController) EditPost() {
 	this.SendRes(0, "success", pg)
 }
 
+// 显示私群
 func (this *PrivateGroupController) View() {
 	user := this.GetSession("user")
 	if user == nil {
@@ -131,6 +135,7 @@ func (this *PrivateGroupController) View() {
 	this.TplName = "privateGroup/view.tpl"
 }
 
+// 留言
 func (this *PrivateGroupController) CreatePgMsg() {
 	user := this.GetSession("user")
 	if user == nil {
@@ -154,6 +159,7 @@ func (this *PrivateGroupController) CreatePgMsg() {
 	this.SendRes(0, "success", vo)
 }
 
+// 举报
 func (this *PrivateGroupController) CreateReport() {
 	user := this.GetSession("user")
 	if user == nil {
@@ -172,6 +178,7 @@ func (this *PrivateGroupController) CreateReport() {
 	this.SendRes(0, "success", nil)
 }
 
+// 列表页
 func (this *PrivateGroupController) List() {
 	uid := 0
 	user := this.GetSession("user")
@@ -196,6 +203,7 @@ func (this *PrivateGroupController) List() {
 	this.TplName = "privateGroup/list.tpl"
 }
 
+// 解锁
 func (this *PrivateGroupController) Unlock() {
 	user := this.GetSession("user")
 	if user == nil {
@@ -210,10 +218,19 @@ func (this *PrivateGroupController) Unlock() {
 	}
 
 	gid, _ := this.GetInt("gid")
-	ug := models.UnlockGroup{}
-	ug.Uid = uid
-	ug.Gid = int(gid)
-	models.CreateUnlockGroup(&ug)
+	models.CreateUnlockGroup(uid, int(gid))
 
 	this.SendRes(0, "success", nil)
+}
+
+func (this *PrivateGroupController) CheckPayUnlock() {
+	uid, _ := this.GetInt("uid")
+	gid, _ := this.GetInt("gid")
+
+	is := models.IsUnlock(int(uid), int(gid))
+	if is {
+		this.SendRes(0, "success", nil)
+	}
+
+	this.SendRes(-1, "failed", nil)
 }
