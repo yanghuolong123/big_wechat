@@ -66,7 +66,8 @@ func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 	if msgBody.MsgType == "event" && msgBody.Event == "SCAN" {
 		if strings.HasPrefix(msgBody.EventKey, "login_") {
 			key := scanLogin(msgBody)
-			url := "http://www.addwechat.com/loginByKey?key=" + key
+			//url := "http://www.addwechat.com/loginByKey?key=" + key
+			url := "http://addwechat.feichangjuzu.com/loginByKey?key=" + key
 
 			return replyText(msgBody, "登陆成功! <a href=\""+url+"\">进入AddWechat</a>")
 		}

@@ -76,6 +76,7 @@ func (this *PayController) Confirm() {
 
 	user := this.GetSession("user")
 	this.Data["user"] = user
+	this.Data["gid"] = productId
 
 	this.Layout = "layout/addwechat.tpl"
 	this.TplName = "pay/confirm.tpl"
