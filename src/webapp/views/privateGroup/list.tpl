@@ -1,5 +1,5 @@
 <div class="pg_list">
-	<h4 class="title">{{.group.Name}}</h4>
+	<h4 class="title">{{if .group.En_name}}{{.group.En_name}}{{else}}{{.group.Name}}{{end}}</h4>
 	<div class="row">
 	            <div class="col-md-6 form-group">
 	              <input type="hidden" id="search_group" name="search_group" value="" />
