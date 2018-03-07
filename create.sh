@@ -8,7 +8,7 @@ echo "go原库路径："$OLDGOPATH
 export GOPATH="$CURDIR:$OLDGOPATH"
 echo "go新库路径:"$GOPATH
 
-bee new webapp
+bee new addwecaht
 
 export GOPATH="$OLDGOPATH"
 
