@@ -8,7 +8,7 @@ src/addwechat/conf/app.conf
 src/addwechat/log/
 !src/addwechat/log/web.log
 
-src/mipo/mip
+src/mipo/mipo
 src/mipo/uploads/
 src/mipo/fast-disploy.sh
 #src/mipo/conf/app.conf
