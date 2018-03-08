@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/astaxie/beego/orm"
 	"time"
+	"yhl/help"
 )
 
 func init() {
@@ -18,4 +19,49 @@ type Info struct {
 	Status      int
 	Views       int
 	Create_time time.Time
+}
+
+func CreateInfo(info *Info) bool {
+	info.Create_time = time.Now()
+	i, err := orm.NewOrm().Insert(info)
+	if err != nil {
+		help.Log("error", err.Error())
+	}
+
+	return i > 0
+}
+
+func GetInfoById(id int) *Info {
+	info := &Info{Id: id}
+
+	err := orm.NewOrm().Read(info)
+	if err != nil {
+		help.Log("error", err.Error())
+	}
+
+	return info
+}
+
+func GetInfoByEmail(email string) []Info {
+	var infos []Info
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("email", email).All(&infos)
+	if err != nil {
+		help.Log("error", err.Error())
+	}
+
+	return infos
+}
+
+func GetInfoPage(offset, size int) (infos []Info) {
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0).Limit(size, offset).All(&infos)
+	help.Error(err)
+
+	return
+}
+
+func GetInfoCount() int {
+	count, err := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0).Count()
+	help.Error(err)
+
+	return int(count)
 }

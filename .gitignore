@@ -6,11 +6,11 @@ src/addwechat/disploy.sh
 src/addwechat/fast-disploy.sh
 src/addwechat/conf/app.conf
 src/addwechat/log/
-#!src/addwechat/log/web.log
+!src/addwechat/log/web.log
 
 src/mipo/mip
 src/mipo/uploads/
 src/mipo/fast-disploy.sh
 #src/mipo/conf/app.conf
 src/mipo/log/
-#!src/mipo/log/web.log
+!src/mipo/log/web.log
