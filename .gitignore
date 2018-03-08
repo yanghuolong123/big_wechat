@@ -8,7 +8,7 @@ src/addwechat/conf/app.conf
 src/addwechat/log/
 !src/addwechat/log/web.log
 
-src/miaopost/mipo
+src/miaopost/miaopost
 src/miaopost/uploads/
 src/miaopost/fast-disploy.sh
 #src/miaopost/conf/app.conf
