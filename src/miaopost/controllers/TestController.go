@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"fmt"
-	"mipo/models"
+	"miaopost/models"
 	"yhl/help"
 )
 

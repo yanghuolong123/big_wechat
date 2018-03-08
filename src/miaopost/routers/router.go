@@ -2,7 +2,7 @@ package routers
 
 import (
 	"github.com/astaxie/beego"
-	"mipo/controllers"
+	"miaopost/controllers"
 )
 
 func init() {

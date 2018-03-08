@@ -9,7 +9,7 @@ echo "go原库路径："$OLDGOPATH
 export GOPATH="$CURDIR:$OLDGOPATH:/var/work/work_golang/mylib"
 echo "go新库路径:"$GOPATH
 
-cd ./src/mipo
+cd ./src/miaopost
 bee run
 #bee run  -gendoc=true -downdoc=true
 
