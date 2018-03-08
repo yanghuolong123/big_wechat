@@ -42,6 +42,14 @@ func GetInfoById(id int) *Info {
 	return info
 }
 
+func GetInfoByCid(cid int) []Info {
+	var infos []Info
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("cid", cid).All(&infos)
+	help.Error(err)
+
+	return infos
+}
+
 func GetInfoByEmail(email string) []Info {
 	var infos []Info
 	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("email", email).All(&infos)
@@ -53,7 +61,7 @@ func GetInfoByEmail(email string) []Info {
 }
 
 func GetInfoPage(offset, size int) (infos []Info) {
-	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0).Limit(size, offset).All(&infos)
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0).OrderBy("-create_time").Limit(size, offset).All(&infos)
 	help.Error(err)
 
 	return
