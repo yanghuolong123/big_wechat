@@ -21,14 +21,14 @@ type Info struct {
 	Create_time time.Time
 }
 
-func CreateInfo(info *Info) bool {
+func CreateInfo(info *Info) int {
 	info.Create_time = time.Now()
 	i, err := orm.NewOrm().Insert(info)
 	if err != nil {
 		help.Log("error", err.Error())
 	}
 
-	return i > 0
+	return int(i)
 }
 
 func GetInfoById(id int) *Info {

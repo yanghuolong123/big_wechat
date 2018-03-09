@@ -17,6 +17,7 @@ func (this *InfoController) Get() {
 	this.Data["cats"] = cats
 	this.Data["infos"] = infos
 
+	this.Layout = "layout/main.tpl"
 	this.TplName = "info/index.tpl"
 }
 
@@ -38,6 +39,7 @@ func (this *InfoController) CreateGet() {
 	cats := models.GetAllCategory()
 	this.Data["cats"] = cats
 
+	this.Layout = "layout/main.tpl"
 	this.TplName = "info/create.tpl"
 }
 
@@ -54,10 +56,16 @@ func (this *InfoController) CreatePost() {
 	info.Valid_day = int(valid_day)
 	info.Email = email
 
-	is := models.CreateInfo(info)
-	if is {
+	id := models.CreateInfo(info)
+	if id > 0 {
 		_ = photo
-		this.SendRes(0, "success", nil)
+		go func(id int, email string) {
+			if email == "" {
+				return
+			}
+			// todo .... 发邮件
+		}(id, email)
+		this.SendRes(0, "success", info)
 	}
 
 	this.SendRes(-1, "failed", nil)

@@ -1,0 +1,12 @@
+/**  =====  layout ====== **/
+.page-header {
+    margin-top: 10px;
+}
+
+.page-header .logo a {font-size: 30px; color: #ea6f5a;}
+.page-header  .slogan {font-size: 18px; padding-top: 15px; color: #777; }
+
+
+/** ===== create.tpl ============ **/
+.create .valid_date{ margin-top: 35px; font-size: 16px;  padding-left: 0px; color: #555;}
+.create  form label{color: #777;}
