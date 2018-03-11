@@ -53,7 +53,7 @@ func getInfoByEmail() {
 }
 
 func getInfoById() {
-	info := models.GetInfoById(2)
+	info, _ := models.GetInfoById(2)
 	fmt.Println(info)
 }
 

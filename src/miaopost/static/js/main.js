@@ -1,4 +1,6 @@
 $(function(){
+
+	// create.tpl
 	$("#create_info_btn").click(function(){
 		$this = $(this);
 		var cid = $("#cid").val();
@@ -47,4 +49,6 @@ $(function(){
 
 
 	});
+
+	
 });

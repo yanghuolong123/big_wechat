@@ -15,4 +15,5 @@ func init() {
 	beego.Router("/info/create", &controllers.InfoController{}, "get:CreateGet")
 	beego.Router("/info/create", &controllers.InfoController{}, "post:CreatePost")
 	beego.Router("/info/view", &controllers.InfoController{}, "*:View")
+	beego.Router("/info/list", &controllers.InfoController{}, "*:List")
 }

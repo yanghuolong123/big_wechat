@@ -28,6 +28,14 @@ func CreateCategory(name string) bool {
 	return i > 0
 }
 
+func GetCategoryById(id int) Category {
+	cat := Category{Id: id}
+	err := orm.NewOrm().Read(&cat)
+	help.Error(err)
+
+	return cat
+}
+
 func GetAllCategory() []Category {
 	var clist []Category
 	_, err := orm.NewOrm().QueryTable("tbl_category").Filter("status", 0).OrderBy("-sort").All(&clist)

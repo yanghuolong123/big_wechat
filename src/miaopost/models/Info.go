@@ -31,7 +31,7 @@ func CreateInfo(info *Info) int {
 	return int(i)
 }
 
-func GetInfoById(id int) *Info {
+func GetInfoById(id int) (*Info, error) {
 	info := &Info{Id: id}
 
 	err := orm.NewOrm().Read(info)
@@ -39,7 +39,7 @@ func GetInfoById(id int) *Info {
 		help.Log("error", err.Error())
 	}
 
-	return info
+	return info, err
 }
 
 func GetInfoByCid(cid int) []Info {
@@ -72,4 +72,18 @@ func GetInfoCount() int {
 	help.Error(err)
 
 	return int(count)
+}
+
+func IncInfoViews() bool {
+	num, err := orm.NewOrm().QueryTable("tbl_info").Update(orm.Params{"views": orm.ColValue(orm.ColAdd, 1)})
+	help.Error(err)
+
+	return num > 0
+}
+
+func SearchInfo(s string) (infos []Info) {
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("content__icontains", s).All(&infos)
+	help.Error(err)
+
+	return
 }

@@ -12,9 +12,9 @@ type InfoController struct {
 // 首页
 func (this *InfoController) Get() {
 	cats := models.GetAllCategory()
-	infos := models.GetInfoPage(0, 10)
-
 	this.Data["cats"] = cats
+
+	infos := models.GetInfoPage(0, 10)
 	this.Data["infos"] = infos
 
 	this.Layout = "layout/main.tpl"
@@ -25,12 +25,16 @@ func (this *InfoController) Get() {
 func (this *InfoController) List() {
 	cid, _ := this.GetInt("cid")
 
-	infos := models.GetInfoByCid(int(cid))
 	cats := models.GetAllCategory()
-
 	this.Data["cats"] = cats
+
+	infos := models.GetInfoByCid(int(cid))
 	this.Data["infos"] = infos
 
+	cat := models.GetCategoryById(int(cid))
+	this.Data["cat"] = cat
+
+	this.Layout = "layout/main1.tpl"
 	this.TplName = "info/list.tpl"
 }
 
@@ -77,12 +81,18 @@ func (this *InfoController) View() {
 	this.Data["cats"] = cats
 
 	id, _ := this.GetInt("id")
-	info := models.GetInfoById(int(id))
+	info, err := models.GetInfoById(int(id))
+	if err != nil {
+		this.Redirect("/", 302)
+	}
 	this.Data["info"] = info
 
 	photos := models.GetPhotoByInfoid(int(id))
 	this.Data["photos"] = photos
 
+	models.IncInfoViews()
+
+	this.Layout = "layout/main1.tpl"
 	this.TplName = "info/view.tpl"
 }
 
