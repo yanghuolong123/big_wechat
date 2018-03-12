@@ -15,10 +15,10 @@ func (this *InfoController) Get() {
 	this.Data["cats"] = cats
 
 	infos := models.GetInfoPage(0, 10)
-	this.Data["infos"] = infos
+	this.Data["infos"] = models.ConvertInfosToVo(infos)
 
 	this.Layout = "layout/main.tpl"
-	this.TplName = "info/index.tpl"
+	this.TplName = "info/home.tpl"
 }
 
 // 列表页
@@ -29,7 +29,7 @@ func (this *InfoController) List() {
 	this.Data["cats"] = cats
 
 	infos := models.GetInfoByCid(int(cid))
-	this.Data["infos"] = infos
+	this.Data["infos"] = models.ConvertInfosToVo(infos)
 
 	cat := models.GetCategoryById(int(cid))
 	this.Data["cat"] = cat

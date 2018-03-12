@@ -5,6 +5,23 @@
 
 .page-header a.search_cats{font-size: 14px;}
 
+/**  ===  public ===**/
+.more{font-size: 12px;}
+.info-list{margin-top: 25px;}
+.info-list .cat{font-size: 18px;}
+.info-list .meta{font-size: 13px; color: #777;}
+.info-list .meta span{margin-right: 25px;}
+.info-list .info-content{margin-top: 8px;}
+.info-list  .line{border-bottom: 1px solid #f0f0f0; margin-bottom: 20px; padding-bottom:  10px;}
+
+
+/** =============== home.tpl =============== **/
+.home{margin-left: 55px;}
+.home .cats{margin-top: 8px;}
+.home .list-head{margin-top: 25px;}
+.home .list-head .title{padding-left: 0px;}
+
+
 
 /** ===== create.tpl ============ **/
 .create .valid_date{ margin-top: 35px; font-size: 16px;  padding-left: 0px; color: #555;}
@@ -12,3 +29,5 @@
 
 
 /**  =============== view.tpl =============== **/
+.view .meta{font-size: 13px; color: #777; margin-bottom: 8px;}
+.view .meta span{margin-right: 25px;}

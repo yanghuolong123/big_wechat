@@ -1,22 +1,22 @@
 <div class="list">
-	<div class="row">
-		<div class="col-md-2">
-			<h4>{{.cat.Name}}</h4>
-		</div>
-		<div class="col-md-8">
+	<div class="row">		
+		<div class="col-md-offset-1 col-md-10 info-list">
 			{{range .infos}}
-			<div>
+			<div class="info">
 				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-8">
-						{{showtime .Create_time}} 
-						阅读({{.Views}})
-						<a href="#">建议删除</a>
+					<div class="col-md-6 cat"><span class="label label-warning">{{.Cat.Name}}</span></div>
+					<div class="col-md-4 meta">
+						<span>{{showtime .Info.Create_time}} </span>
+						<span>阅读({{.Info.Views}})</span>
+						<span><a href="#">建议删除</a></span>
 					</div>
 				</div>
-				<div>
-					{{.Content}}
-					<a href="/info/view?id={{.Id}}">read more >></a>
+				<div class="row">
+					<div class="info-content col-md-10">
+						{{.Info.Content}}
+						<a href="/info/view?id={{.Info.Id}}" class="more">more>></a>
+						<div class="line"></div>
+					</div>
 				</div>
 			</div>
 			{{end}}

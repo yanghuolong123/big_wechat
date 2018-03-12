@@ -21,6 +21,11 @@ type Info struct {
 	Create_time time.Time
 }
 
+type InfoVo struct {
+	Info Info
+	Cat  Category
+}
+
 func CreateInfo(info *Info) int {
 	info.Create_time = time.Now()
 	i, err := orm.NewOrm().Insert(info)
@@ -86,4 +91,22 @@ func SearchInfo(s string) (infos []Info) {
 	help.Error(err)
 
 	return
+}
+
+func ConvertInfoToVo(info Info) InfoVo {
+	vo := InfoVo{}
+	vo.Info = info
+	vo.Cat = GetCategoryById(info.Cid)
+
+	return vo
+}
+
+func ConvertInfosToVo(infos []Info) []InfoVo {
+	vos := []InfoVo{}
+	for _, info := range infos {
+		vo := ConvertInfoToVo(info)
+		vos = append(vos, vo)
+	}
+
+	return vos
 }
