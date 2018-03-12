@@ -79,15 +79,15 @@ func GetInfoCount() int {
 	return int(count)
 }
 
-func IncInfoViews() bool {
-	num, err := orm.NewOrm().QueryTable("tbl_info").Update(orm.Params{"views": orm.ColValue(orm.ColAdd, 1)})
+func IncInfoViews(id int) bool {
+	num, err := orm.NewOrm().QueryTable("tbl_info").Filter("id", id).Update(orm.Params{"views": orm.ColValue(orm.ColAdd, 1)})
 	help.Error(err)
 
 	return num > 0
 }
 
 func SearchInfo(s string) (infos []Info) {
-	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("content__icontains", s).OrderBy("-create_time").All(&infos)
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0).Filter("content__icontains", s).OrderBy("-create_time").All(&infos)
 	help.Error(err)
 
 	return

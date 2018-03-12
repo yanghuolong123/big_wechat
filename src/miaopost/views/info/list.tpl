@@ -8,7 +8,7 @@
 					<div class="col-md-4 meta">
 						<span>{{showtime .Info.Create_time}} </span>
 						<span>阅读({{.Info.Views}})</span>
-						<span><a href="#">建议删除</a></span>
+						<span><a href="#" onclick="suggestDel({{.Info.Id}});return false;">建议删除</a></span>
 					</div>
 				</div>
 				<div class="row">

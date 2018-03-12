@@ -87,6 +87,8 @@ func (this *InfoController) View() {
 	this.Data["cats"] = cats
 
 	id, _ := this.GetInt("id")
+	models.IncInfoViews(int(id))
+
 	info, err := models.GetInfoById(int(id))
 	if err != nil {
 		this.Redirect("/", 302)
@@ -95,8 +97,6 @@ func (this *InfoController) View() {
 
 	photos := models.GetPhotoByInfoid(int(id))
 	this.Data["photos"] = photos
-
-	models.IncInfoViews()
 
 	this.Layout = "layout/main1.tpl"
 	this.TplName = "info/view.tpl"

@@ -1,3 +1,15 @@
+
+// 建议删除
+function suggestDel(infoId) {
+	$.post("/info/suggestDel",{infoId:infoId}, function(e){
+		if(e.code<0) {
+			prompt(e.msg);
+		}
+
+		prompt("提交成功，我们会在审核后删除影响平台次序的发布。谢谢你的贡献。");
+	})
+}
+
 $(function(){
 
 	// 搜索
@@ -10,7 +22,7 @@ $(function(){
 		window.location = "/info/list?search="+sval;
 	});
 
-	// create.tpl
+	// 发布信息
 	$("#create_info_btn").click(function(){
 		$this = $(this);
 		var cid = $("#cid").val();
@@ -56,9 +68,8 @@ $(function(){
 	                        	window.location = "/info/view?id="+e.data.Id;
 	                });
 
-
-
 	});
 
 	
+
 });
