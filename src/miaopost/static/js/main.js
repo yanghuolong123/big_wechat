@@ -29,6 +29,11 @@ $(function(){
 		var info_content = $("#info_content").val();
 		var valid_day = $("#valid_day").val();
 		var email = $("#email").val();
+		var photo="";
+		for( var s=0; s<$('.img-li-new').length; s++) {
+			photo += $('.img-li-new').eq(s).attr('data-url') + ',';
+		}
+		photo=photo.substring(0,photo.length-1);
 
 		var flag = true;
 		$(".error_tips").html("");
@@ -58,7 +63,7 @@ $(function(){
 	                }
 
 	                $this.attr("disabled","disabled");
-	                $.post("/info/create", {cid:cid, content:info_content, valid_day:valid_day, email:email}, function(e){
+	                $.post("/info/create", {cid:cid, content:info_content, valid_day:valid_day, email:email,photo:photo}, function(e){
 	                	$this.removeAttr("disabled");
 	                        	if(e.code<0) {
 	                                	$(".error_tips").append(e.msg);
@@ -68,6 +73,39 @@ $(function(){
 	                        	window.location = "/info/view?id="+e.data.Id;
 	                });
 
+	});
+
+
+	// 图片上传
+	$('#imgs').on('change', function() {
+		var formData = new FormData();
+		formData.append('file', $('#imgs')[0].files[0]);				
+		$.ajax({
+			url: '/uploadfile',
+			type: 'post',
+			cache: false,
+			data: formData,
+			processData: false,
+			contentType: false,
+			success:function(rs,textStatus,jqXHR){
+				if( rs.code <0) {
+					prompt(rs.msg);
+					return false;
+				}
+
+				var upImg = rs.data;
+				if( rs.code == 0) {
+					$('.img-up-list').append('<div class="img-li img-li-new" data-url="' + upImg+ '"  data-big="' + upImg + '" style="background-image:url(/' + upImg+ ')"><i></i></div>');
+				}	
+				
+				$('.img-li i').on('click', function() {
+					$(this).parent('.img-li').remove();
+					$('.user-img').show();
+					return false;					
+				});
+							
+			}
+		});
 	});
 
 	

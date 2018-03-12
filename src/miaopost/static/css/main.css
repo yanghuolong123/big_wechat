@@ -27,6 +27,51 @@
 .create .valid_date{ margin-top: 35px; font-size: 16px;  padding-left: 0px; color: #555;}
 .create  form label{color: #777;}
 
+.img-up{margin-top: 15px;}
+
+.user-img {
+    background: rgba(0, 0, 0, 0) url("../img/ico-add.png") no-repeat scroll center center / auto 2.33rem;
+    border: 0.02rem dashed #c4c4c4;
+    display: block;
+    height: 8.45rem;
+    margin: 0;
+    overflow: hidden;
+    width: 12.04rem;
+}
+.user-img input {
+    height: 2rem;
+    left: 0;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    width: 2rem;
+}
+.img-up-list {
+    margin-left: -0.2rem;
+}
+
+.img-up-list .img-li i {
+    background: rgba(0, 0, 0, 0) url("../img/ico-x.png") no-repeat scroll center center / 100% auto;
+    border-radius: 0.4rem;
+    display: block;
+    height: 1.4rem;
+    position: absolute;
+    right: -0.3rem;
+    top: -0.2rem;
+    width: 1.4rem;
+}
+.img-up-list .img-li {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0.02rem solid #efefef;
+    float: left;
+    height:  8.45rem;
+    margin: 0 0 0.2rem 0.2rem;
+    position: relative;
+    width: 12.11rem;
+}
+
 
 /**  =============== view.tpl =============== **/
 .view .meta{font-size: 13px; color: #777; margin-bottom: 8px;}

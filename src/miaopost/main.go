@@ -7,5 +7,6 @@ import (
 )
 
 func main() {
+	beego.SetStaticPath("/uploads", "uploads")
 	beego.Run()
 }
