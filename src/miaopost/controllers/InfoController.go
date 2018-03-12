@@ -28,11 +28,17 @@ func (this *InfoController) List() {
 	cats := models.GetAllCategory()
 	this.Data["cats"] = cats
 
-	infos := models.GetInfoByCid(int(cid))
-	this.Data["infos"] = models.ConvertInfosToVo(infos)
+	infos := []models.Info{}
+	if catId := int(cid); catId > 0 {
+		infos = models.GetInfoByCid(catId)
+	}
 
-	cat := models.GetCategoryById(int(cid))
-	this.Data["cat"] = cat
+	search := this.GetString("search")
+	if search != "" {
+		infos = models.SearchInfo(search)
+	}
+
+	this.Data["infos"] = models.ConvertInfosToVo(infos)
 
 	this.Layout = "layout/main1.tpl"
 	this.TplName = "info/list.tpl"

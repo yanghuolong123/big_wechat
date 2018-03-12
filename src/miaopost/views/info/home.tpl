@@ -1,9 +1,9 @@
 <div class="home">
 	<div class="row">
 		<div class="input-group col-md-5">
-	                          <input type="text" class="form-control" placeholder="搜索, eg.单人间">
+	                          <input type="text" class="form-control"  id="search" placeholder="搜索, eg.单人间">
 	                          <span class="input-group-btn">
-	                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+	                            <button class="btn btn-default search-btn" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 	                          </span>
 	                </div>
 	</div>
@@ -37,7 +37,6 @@
 					<a href="/info/view?id={{.Info.Id}}" class="more">more>></a>
 					<div class="line"></div>
 				</div>
-
 			</div>
 		</div>
 		{{end}}

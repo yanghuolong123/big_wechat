@@ -1,5 +1,15 @@
 $(function(){
 
+	// 搜索
+	$(".search-btn").click(function(){
+		var sval = $("#search").val();
+		if(sval=="") {
+			return false;
+		}
+
+		window.location = "/info/list?search="+sval;
+	});
+
 	// create.tpl
 	$("#create_info_btn").click(function(){
 		$this = $(this);

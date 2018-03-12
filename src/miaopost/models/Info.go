@@ -87,7 +87,7 @@ func IncInfoViews() bool {
 }
 
 func SearchInfo(s string) (infos []Info) {
-	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("content__icontains", s).All(&infos)
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("content__icontains", s).OrderBy("-create_time").All(&infos)
 	help.Error(err)
 
 	return
