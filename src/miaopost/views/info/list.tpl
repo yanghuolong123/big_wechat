@@ -19,6 +19,8 @@
 					</div>
 				</div>
 			</div>
+			{{else}}
+			<div class="alert alert-warning" role="alert">亲，还没有数据哦！</div>
 			{{end}}
 		</div>
 	</div>
