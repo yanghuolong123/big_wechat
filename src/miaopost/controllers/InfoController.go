@@ -69,9 +69,11 @@ func (this *InfoController) CreatePost() {
 
 	id := models.CreateInfo(info)
 	if id > 0 {
-		plist := strings.Split(photo, ",")
-		for _, p := range plist {
-			models.CreatePhoto(id, p)
+		if photo != "" {
+			plist := strings.Split(photo, ",")
+			for _, p := range plist {
+				models.CreatePhoto(id, p)
+			}
 		}
 
 		go func(id int, email string) {
