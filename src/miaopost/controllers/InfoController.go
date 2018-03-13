@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"miaopost/models"
+	"strings"
 	"yhl/help"
 )
 
@@ -68,13 +69,18 @@ func (this *InfoController) CreatePost() {
 
 	id := models.CreateInfo(info)
 	if id > 0 {
-		_ = photo
+		plist := strings.Split(photo, ",")
+		for _, p := range plist {
+			models.CreatePhoto(id, p)
+		}
+
 		go func(id int, email string) {
 			if email == "" {
 				return
 			}
 			// todo .... 发邮件
 		}(id, email)
+
 		this.SendRes(0, "success", info)
 	}
 

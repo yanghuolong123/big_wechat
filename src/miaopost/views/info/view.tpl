@@ -14,6 +14,10 @@
 			<br>
 			<span class="text-info more">联系我时请注明来自秒Po</span>
 		</div>
+		<div class="col-md-offset-1 col-md-8 photos">
+			{{range .photos}}
+			<img src="{{.Url}}">
+			{{end}}
+		</div>
 	</div>
-	<div></div>
 </div>
