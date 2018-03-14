@@ -49,7 +49,7 @@ func GetInfoById(id int) (*Info, error) {
 
 func GetInfoByCid(cid int) []Info {
 	var infos []Info
-	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("cid", cid).All(&infos)
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("cid", cid).OrderBy("-create_time").All(&infos)
 	help.Error(err)
 
 	return infos
@@ -57,7 +57,7 @@ func GetInfoByCid(cid int) []Info {
 
 func GetInfoByEmail(email string) []Info {
 	var infos []Info
-	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("email", email).All(&infos)
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("email", email).OrderBy("-create_time").All(&infos)
 	if err != nil {
 		help.Log("error", err.Error())
 	}

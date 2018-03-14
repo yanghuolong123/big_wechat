@@ -6,7 +6,7 @@
 .content{padding-bottom: 15px;}
 
 /**  ===  public ===**/
-.more{font-size: 12px;}
+.more{font-size: 12px; font-style: italic;}
 .info-list{margin-top: 25px;}
 .info-list .cat{font-size: 18px;}
 .info-list .meta{font-size: 13px; color: #777;}

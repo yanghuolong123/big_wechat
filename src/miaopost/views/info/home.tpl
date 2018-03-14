@@ -33,8 +33,8 @@
 			</div>
 			<div class="row">
 				<div class="info-content col-md-9">
-					{{.Info.Content}}
-					<a href="/info/view?id={{.Info.Id}}" class="more">more>></a>
+					{{substr .Info.Content 0 150}} ...
+					<a href="/info/view?id={{.Info.Id}}" class="more">more ››</a>
 					<div class="line"></div>
 				</div>
 			</div>

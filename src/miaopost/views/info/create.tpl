@@ -13,7 +13,7 @@
             <div class="form-group">             
               <div class="col-sm-offset-1 col-sm-6">
                 <label>图片和文字可以只填一项</label>
-                <textarea class="form-control"  id="info_content" rows="3" maxlength="250" placeholder="添加描述"></textarea>
+                <textarea class="form-control"  id="info_content" rows="3" maxlength="2500" placeholder="添加描述"></textarea>
                 <div class="img-up">
                     <div class="img-up-list clearfix">                        
                       
