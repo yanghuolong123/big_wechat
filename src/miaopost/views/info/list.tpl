@@ -1,6 +1,6 @@
 <div class="list">
 	<div class="row">		
-		<div class="col-md-offset-1 col-md-10 info-list">
+		<div class="col-md-10 info-list">
 			{{range .infos}}
 			<div class="info">
 				<div class="row">

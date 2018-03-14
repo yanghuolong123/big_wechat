@@ -25,9 +25,15 @@
             <div class="form-group">            
               <div class=" col-sm-offset-1 col-sm-2">
                 <label>自动删除发布</label>
-                <input type="text" class="form-control"  id="valid_day" maxlength="10" placeholder=""> 
+                <div class="row">
+                  <div  class="col-md-8">
+                  <input type="text" class="form-control"  id="valid_day" maxlength="10" placeholder=""> 
+                  </div>
+                  <div class="col-md-4 valid_date">
+                    <span class="">天后</span>
+                  </div>
+                </div>
               </div>
-              <div class="col-sm-2 valid_date"><span class="">天后</span></div>
             </div>
              <div class="form-group">            
               <div class=" col-sm-offset-1 col-sm-4">
