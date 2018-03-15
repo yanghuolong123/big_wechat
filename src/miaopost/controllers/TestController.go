@@ -11,6 +11,7 @@ type TestController struct {
 }
 
 func (this *TestController) Get() {
+	go help.SendMail("yanghuolong@zhisland.com,yhl27ml@126.com", "你好，我是 Miaopost", "非常感谢你的测试哦，我们爱你哦！", "")
 	//fmt.Println(this.Ctx.Request.RemoteAddr)
 	//go createSuggest()
 	//go getPhotoByInfoid()
