@@ -110,3 +110,10 @@ func ConvertInfosToVo(infos []Info) []InfoVo {
 
 	return vos
 }
+
+func DelInfoById(id int) bool {
+	i, err := orm.NewOrm().QueryTable("tbl_info").Filter("id", id).Update(orm.Params{"status": -1})
+	help.Error(err)
+
+	return i > 0
+}

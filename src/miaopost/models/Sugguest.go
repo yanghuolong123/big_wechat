@@ -30,3 +30,17 @@ func CreateSuggest(infoId int) int {
 
 	return int(i)
 }
+
+func GetSuggestByInfoid(infoId int) (ss []Suggest) {
+	_, err := orm.NewOrm().QueryTable("tbl_suggest").Filter("info_id", infoId).OrderBy("-create_time").All(&ss)
+	help.Error(err)
+
+	return
+}
+
+func GetSuggestByInfoidAndGroupByIp(infoId int) (ss []Suggest) {
+	_, err := orm.NewOrm().QueryTable("tbl_suggest").Filter("info_id", infoId).GroupBy("ip").OrderBy("-create_time").All(&ss, "Info_id", "Ip")
+	help.Error(err)
+
+	return
+}

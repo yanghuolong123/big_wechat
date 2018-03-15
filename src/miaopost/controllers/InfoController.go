@@ -122,7 +122,12 @@ func (this *InfoController) EditPost() {
 // 建议删除
 func (this *InfoController) SuggestDel() {
 	infoId, _ := this.GetInt("infoId")
-	id := models.CreateSuggest(int(infoId))
+	iid := int(infoId)
+	id := models.CreateSuggest(iid)
+	slist := models.GetSuggestByInfoidAndGroupByIp(iid)
+	if len(slist) > 3 {
+		models.DelInfoById(iid)
+	}
 	if id > 0 {
 		this.SendRes(0, "success", nil)
 	}
