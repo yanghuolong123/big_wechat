@@ -14,6 +14,8 @@ func init() {
 	beego.Router("/", &controllers.InfoController{})
 	beego.Router("/info/create", &controllers.InfoController{}, "get:CreateGet")
 	beego.Router("/info/create", &controllers.InfoController{}, "post:CreatePost")
+	beego.Router("/info/edit", &controllers.InfoController{}, "get:EditGet")
+	beego.Router("/info/edit", &controllers.InfoController{}, "post:EditPost")
 	beego.Router("/info/view", &controllers.InfoController{}, "*:View")
 	beego.Router("/info/list", &controllers.InfoController{}, "*:List")
 	beego.Router("/info/suggestDel", &controllers.InfoController{}, "post:SuggestDel")

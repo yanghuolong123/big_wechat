@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"miaopost/models"
 	"strings"
 	"yhl/help"
@@ -80,7 +81,8 @@ func (this *InfoController) CreatePost() {
 			if email == "" {
 				return
 			}
-			// todo .... 发邮件
+			msg := "亲，欢迎您使用秒Po，您可以通过点击链接修改你发布的信息 <a href=\"http://www.miaopost.com/info/edit?id=" + fmt.Sprintf("%v", id) + "\">进入</a>"
+			help.SendMail(email, "秒Po-系统发送", msg, "html")
 		}(id, email)
 
 		this.SendRes(0, "success", info)
@@ -112,6 +114,10 @@ func (this *InfoController) View() {
 
 // 编辑
 func (this *InfoController) EditGet() {
+	code := this.GetString("code")
+	fmt.Println("========== en code1:", code)
+	code = help.DesDecrypt(code, help.DesKey)
+	fmt.Println("========== de code:", code)
 	this.TplName = "info/edit.tpl"
 }
 
