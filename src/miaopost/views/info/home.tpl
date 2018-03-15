@@ -33,7 +33,7 @@
 			</div>
 			<div class="row">
 				<div class="info-content col-md-9">
-					{{substr .Info.Content 0 150}} ...
+					{{substr .Info.Content 0 150}} {{if (.Photos|len)}}<img src="/static/img/image_s.gif">{{end}}...
 					<a href="/info/view?id={{.Info.Id}}" class="more">more ››</a>
 					<div class="line"></div>
 				</div>

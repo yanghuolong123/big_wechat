@@ -41,8 +41,8 @@ $(function(){
 			$(".error_tips").append("<p>请先选择分类</p>");
                         		flag = false;
 		}
-		if(info_content == "" || photo=="") {
-			$(".error_tips").append("<p>请添加文字描述或图片/p>");
+		if(info_content == ""  && photo=="") {
+			$(".error_tips").append("<p>请添加文字描述或图片</p>");
                         		flag = false;
 		}
 		if(valid_day!="") {

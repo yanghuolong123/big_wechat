@@ -22,8 +22,9 @@ type Info struct {
 }
 
 type InfoVo struct {
-	Info Info
-	Cat  Category
+	Info   Info
+	Cat    Category
+	Photos []Photo
 }
 
 func CreateInfo(info *Info) int {
@@ -97,6 +98,7 @@ func ConvertInfoToVo(info Info) InfoVo {
 	vo := InfoVo{}
 	vo.Info = info
 	vo.Cat = GetCategoryById(info.Cid)
+	vo.Photos = GetPhotoByInfoid(info.Id)
 
 	return vo
 }
