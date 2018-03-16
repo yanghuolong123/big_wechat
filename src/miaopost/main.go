@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	_ "miaopost/init"
 	_ "miaopost/routers"
+	_ "miaopost/task"
 )
 
 func main() {

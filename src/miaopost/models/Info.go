@@ -119,3 +119,14 @@ func DelInfoById(id int) bool {
 
 	return i > 0
 }
+
+func DelExpireInfo() bool {
+	_, err := orm.NewOrm().Raw("UPDATE `tbl_info` SET status=-1  WHERE `status`=0 and `valid_day`>0 and  `create_time` < date_sub(now(),interval `valid_day` day)").Exec()
+
+	help.Error(err)
+	if err != nil {
+		return false
+	}
+
+	return true
+}
