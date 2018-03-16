@@ -26,14 +26,16 @@ func (this *TestController) Get() {
 		pptext := help.DesDecrypt(dtext, help.DesKey)
 		fmt.Println("==== pptext:" + pptext)
 	*/
-	id := 2
-	email := "yhl27ml@126.com"
-	code := help.DesEncrypt(fmt.Sprintf("%v", id)+","+email, help.DesKey)
-	linkUrl := "http://localhost:8686/info/edit?code=" + code
-	fmt.Println("=== linkUrl:", linkUrl)
-	msg := "亲，欢迎您使用秒Po，您可以通过点击链接修改你发布的信息 <a href=\"" + linkUrl + "\">进入</a>"
-	go help.SendMail("yhl27ml@126.com", "秒Po-系统发送", msg, "html")
-	fmt.Println(msg)
+	for i := 100; i < 130; i++ {
+		id := i
+		//email := "yanghuolong@zhisland.com"
+		code := help.DesEncrypt(fmt.Sprintf("%v", id), help.DesKey)
+		linkUrl := "http://localhost:8686/info/edit?code=" + code
+		fmt.Println("=== linkUrl:", linkUrl)
+		msg := "亲，欢迎您使用秒Po，您可以通过点击链接修改你发布的信息 <a href=\"" + linkUrl + "\">进入</a>"
+		//	go help.SendMail("yhl27ml@126.com", "秒Po-系统发送", msg, "html")
+		fmt.Println(msg)
+	}
 
 	//go help.SendMail("yanghuolong@zhisland.com,yhl27ml@126.com", "你好，我是 Miaopost", "非常感谢你的测试哦，我们爱你哦！", "")
 	//fmt.Println(this.Ctx.Request.RemoteAddr)
