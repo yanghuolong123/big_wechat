@@ -23,8 +23,9 @@ $(function(){
 	});
 
 	// 发布信息
-	$("#create_info_btn").click(function(){
+	$("#create_info_btn, #edit_info_btn").click(function(){
 		$this = $(this);
+		var id = $("#info_id").val();
 		var cid = $("#cid").val();
 		var info_content = $("#info_content").val();
 		var valid_day = $("#valid_day").val();
@@ -63,7 +64,12 @@ $(function(){
 	                }
 
 	                $this.attr("disabled","disabled");
-	                $.post("/info/create", {cid:cid, content:info_content, valid_day:valid_day, email:email,photo:photo}, function(e){
+	                var url = "/info/create";
+	                if (id>0) {
+	                	url = "/info/edit";
+	                }
+
+	                $.post(url, {id:id,cid:cid, content:info_content, valid_day:valid_day, email:email,photo:photo}, function(e){
 	                	$this.removeAttr("disabled");
 	                        	if(e.code<0) {
 	                                	$(".error_tips").append(e.msg);
@@ -77,6 +83,12 @@ $(function(){
 
 
 	// 图片上传
+	$(".img-up-list").on("click", ".img-li i", function(){
+		$(this).parent('.img-li').remove();
+		$('.user-img').show();
+		return false;
+	});
+
 	$('#imgs').on('change', function() {
 		var formData = new FormData();
 		formData.append('file', $('#imgs')[0].files[0]);				
@@ -98,11 +110,11 @@ $(function(){
 					$('.img-up-list').append('<div class="img-li img-li-new" data-url="' + upImg+ '"  data-big="' + upImg + '" style="background-image:url(' + upImg+ ')"><i></i></div>');
 				}	
 				
-				$('.img-li i').on('click', function() {
-					$(this).parent('.img-li').remove();
-					$('.user-img').show();
-					return false;					
-				});
+				// $('.img-li i').on('click', function() {
+				// 	$(this).parent('.img-li').remove();
+				// 	$('.user-img').show();
+				// 	return false;					
+				// });
 							
 			}
 		});

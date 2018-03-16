@@ -37,6 +37,13 @@ func CreateInfo(info *Info) int {
 	return int(i)
 }
 
+func UpdateInfo(info *Info) error {
+	_, err := orm.NewOrm().Update(info)
+	help.Error(err)
+
+	return err
+}
+
 func GetInfoById(id int) (*Info, error) {
 	info := &Info{Id: id}
 

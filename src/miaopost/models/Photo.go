@@ -32,3 +32,10 @@ func GetPhotoByInfoid(infoId int) (photos []Photo) {
 
 	return
 }
+
+func DelPhotoByInfoid(infoId int) bool {
+	i, err := orm.NewOrm().QueryTable("tbl_photo").Filter("info_id", infoId).Delete()
+	help.Error(err)
+
+	return i > 0
+}
