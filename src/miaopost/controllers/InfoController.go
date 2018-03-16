@@ -81,7 +81,9 @@ func (this *InfoController) CreatePost() {
 			if email == "" {
 				return
 			}
-			msg := "亲，欢迎您使用秒Po，您可以通过点击链接修改你发布的信息 <a href=\"http://www.miaopost.com/info/edit?id=" + fmt.Sprintf("%v", id) + "\">进入</a>"
+			code := help.DesEncrypt(fmt.Sprintf("%v", id)+","+email, help.DesKey)
+			linkUrl := "http://www.miaopost.com/info/edit?code=" + code
+			msg := "亲，欢迎您使用秒Po，您可以通过点击链接修改你发布的信息 <a href=\"" + linkUrl + "\">进入</a>"
 			help.SendMail(email, "秒Po-系统发送", msg, "html")
 		}(id, email)
 
