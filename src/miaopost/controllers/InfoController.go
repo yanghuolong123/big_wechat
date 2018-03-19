@@ -95,8 +95,6 @@ func (this *InfoController) CreatePost() {
 
 // 展示页
 func (this *InfoController) View() {
-	cats := models.GetAllCategory()
-	this.Data["cats"] = cats
 
 	id, _ := this.GetInt("id")
 	models.IncInfoViews(int(id))
@@ -106,6 +104,9 @@ func (this *InfoController) View() {
 		this.Redirect("/", 302)
 	}
 	this.Data["info"] = info
+
+	cat := models.GetCategoryById(info.Cid)
+	this.Data["cat"] = cat
 
 	photos := models.GetPhotoByInfoid(int(id))
 	this.Data["photos"] = photos
