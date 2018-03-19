@@ -14,6 +14,7 @@
 .info-list .info-content{margin-top: 8px;}
 .info-list  .line{border-bottom: 1px solid #f0f0f0; margin-bottom: 20px; padding-bottom:  10px;}
 img.img_tip{width: 18px; height: 18px;}
+.label-tips{font-size: 12px;}
 
 
 /** =============== home.tpl =============== **/
@@ -38,6 +39,7 @@ img.img_tip{width: 18px; height: 18px;}
     margin: 0;
     overflow: hidden;
     width: 12.04rem;
+    border: 1px dashed #30aacb;
 }
 .user-img input {
     height: 2rem;

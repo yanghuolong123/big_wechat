@@ -12,7 +12,7 @@
             </div>          
             <div class="form-group">             
               <div class="col-sm-offset-1 col-sm-6">
-                <label>图片和文字可以只填一项</label>
+                <label>图片和文字 <span class="text-danger label-tips">(至少只填一项)</span></label>
                 <textarea class="form-control"  id="info_content" rows="3" maxlength="2500" placeholder="添加描述"></textarea>
                 <div class="img-up">
                     <div class="img-up-list clearfix">                        
@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">            
               <div class=" col-sm-offset-1 col-sm-2">
-                <label>自动删除发布</label>
+                <label>自动删除发布 <span class="text-danger label-tips">(建议填写)</span></label>
                 <div class="row">
                   <div  class="col-md-8">
                   <input type="text" class="form-control"  id="valid_day" maxlength="10" placeholder=""> 
@@ -37,7 +37,7 @@
             </div>
              <div class="form-group">            
               <div class=" col-sm-offset-1 col-sm-4">
-                <label>我们会发送编辑链接至邮箱</label>
+                <label>我们会发送编辑链接至邮箱 <span class="text-danger label-tips">(建议填写)</span></label>
                 <input type="text" class="form-control" id="email" maxlength="55" placeholder="邮箱地址">
               </div>
             </div>                  
@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
               <div class="col-sm-offset-1 col-sm-10">
-                <button type="button" id="create_info_btn" class="btn btn-success btn-lg">发布</button>
+                <button type="button" id="create_info_btn" class="btn btn-primary btn-lg">发布</button>
               </div>
             </div>
           </form>

@@ -83,8 +83,8 @@ func (this *InfoController) CreatePost() {
 			}
 			code := help.DesEncrypt(fmt.Sprintf("%v", id)+","+email, help.DesKey)
 			linkUrl := "http://www.miaopost.com/info/edit?code=" + code
-			msg := "亲，欢迎您使用秒Po，您可以通过点击链接修改你发布的信息 <a href=\"" + linkUrl + "\">进入</a>"
-			help.SendMail(email, "秒Po-系统发送", msg, "html")
+			msg := "亲，欢迎您使用秒Po，您可以通过点击链接修改您发布的信息 <a href=\"" + linkUrl + "\">进入</a>"
+			help.SendMail(email, "秒Po-编辑链接", msg, "html")
 		}(id, email)
 
 		this.SendRes(0, "success", info)
