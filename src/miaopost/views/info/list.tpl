@@ -4,8 +4,8 @@
 			{{range .infos}}
 			<div class="info">
 				<div class="row">
-					<div class="col-md-6 cat"><span class="label label-warning">{{.Cat.Name}}</span></div>
-					<div class="col-md-4 meta">
+					<div class="col-md-6 col-xs-3 cat"><span class="label label-warning">{{.Cat.Name}}</span></div>
+					<div class="col-md-4 col-xs-9 meta">
 						<span>{{showtime .Info.Create_time}} </span>
 						<span>阅读({{.Info.Views}})</span>
 						<span><a href="#" onclick="suggestDel({{.Info.Id}});return false;">建议删除</a></span>

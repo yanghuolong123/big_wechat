@@ -13,10 +13,10 @@
                         {{end}}
 	</div>
 	<div class="row list-head">
-		<div class="col-md-8 title">
+		<div class="col-md-8  col-xs-8 title">
 			<h4>最新发布</h3>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-2  col-xs-2">
 			<a href="/info/create" class="btn btn-primary active" role="button">发布</a>
 		</div>
 	</div>
@@ -24,8 +24,8 @@
 		{{range .infos}}
 		<div class="info">
 			<div class="row">
-				<div class="col-md-6 cat"><span class="label label-warning">{{.Cat.Name}}</span></div>
-				<div class="col-md-4 meta">
+				<div class="col-md-6 col-xs-3 cat"><span class="label label-warning">{{.Cat.Name}}</span></div>
+				<div class="col-md-4 col-xs- 9 meta">
 					<span>{{showtime .Info.Create_time}} </span>
 					<span>阅读({{.Info.Views}})</span>
 					<span><a href="#" onclick="suggestDel({{.Info.Id}});return false;">建议删除</a></span>
