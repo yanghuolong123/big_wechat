@@ -95,6 +95,8 @@ func (this *InfoController) CreatePost() {
 
 // 展示页
 func (this *InfoController) View() {
+	cats := models.GetAllCategory()
+	this.Data["cats"] = cats
 
 	id, _ := this.GetInt("id")
 	models.IncInfoViews(int(id))
