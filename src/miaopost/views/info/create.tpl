@@ -26,10 +26,10 @@
               <div class=" col-sm-offset-1 col-sm-2">
                 <label>自动删除发布 <span class="text-danger label-tips">(建议填写)</span></label>
                 <div class="row">
-                  <div  class="col-md-8">
+                  <div  class="col-md-8 col-xs-8">
                   <input type="text" class="form-control"  id="valid_day" maxlength="10" placeholder=""> 
                   </div>
-                  <div class="col-md-4 valid_date">
+                  <div class="col-md-4 col-xs-3 valid_date">
                     <span class="">天后</span>
                   </div>
                 </div>
