@@ -103,7 +103,10 @@ func (this *InfoController) View() {
 
 	info, err := models.GetInfoById(int(id))
 	if err != nil {
-		this.Redirect("/", 302)
+		this.Redirect("/tips?msg="+err.Error(), 302)
+	}
+	if info.Status < 0 {
+		this.Tips("此信息已经删除!")
 	}
 	this.Data["info"] = info
 
@@ -120,19 +123,17 @@ func (this *InfoController) View() {
 // 编辑
 func (this *InfoController) EditGet() {
 	code := this.GetString("code")
-	fmt.Println("========== en code1:", code)
 	code = help.DesDecrypt(code, help.DesKey)
-	fmt.Println("========== de code:", code)
 
 	s := strings.Split(code, ",")
 	id := help.StringToInt(s[0])
 	if id <= 0 {
-		this.Redirect("/", 302)
+		this.Redirect("/tips?msg=code不正确", 302)
 	}
 
 	info, err := models.GetInfoById(id)
 	if err != nil {
-		this.Redirect("/", 302)
+		this.Redirect("/tips?msg="+err.Error(), 302)
 	}
 	this.Data["info"] = info
 
