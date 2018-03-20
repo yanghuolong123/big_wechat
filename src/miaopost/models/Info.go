@@ -57,7 +57,7 @@ func GetInfoById(id int) (*Info, error) {
 
 func GetInfoByCid(cid int) []Info {
 	var infos []Info
-	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("cid", cid).OrderBy("-create_time").All(&infos)
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("cid", cid).Filter("status", 0).OrderBy("-create_time").All(&infos)
 	help.Error(err)
 
 	return infos
