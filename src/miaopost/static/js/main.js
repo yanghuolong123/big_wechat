@@ -6,7 +6,7 @@ function suggestDel(infoId) {
 			prompt(e.msg);
 		}
 
-		prompt("提交成功，我们会在审核后删除影响平台次序的发布。谢谢你的贡献。");
+		prompt("提交成功，我们会在审核后删除影响平台秩序的发布。谢谢你的贡献。");
 	})
 }
 
