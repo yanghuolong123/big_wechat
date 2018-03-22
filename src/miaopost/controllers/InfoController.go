@@ -48,6 +48,9 @@ func (this *InfoController) List() {
 
 // 创建页面
 func (this *InfoController) CreateGet() {
+	cid, _ := this.GetInt("cid")
+	this.Data["cid"] = int(cid)
+
 	cats := models.GetAllCategory()
 	this.Data["cats"] = cats
 

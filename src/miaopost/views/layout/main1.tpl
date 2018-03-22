@@ -31,7 +31,18 @@
                                             {{end}}
                                         </div>
                                         <div class="col-md-2">
-                                            <a href="/info/create" class="btn btn-primary active" role="button">发布</a>
+                                            <div class="dropdown">
+                                                  <button class="btn btn-primary dropdown-toggle" type="button" id="publish-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    发布    
+                                                    <span class="caret"></span>
+                                                  </button>
+                                                  <ul class="dropdown-menu" aria-labelledby="publish-btn">
+                                                    {{range .cats}}
+                                                     <li><a href="/info/create?cid={{.Id}}">{{.Name}}</a></li>
+                                                    {{end}}
+                                                  </ul>
+                                            </div>
+                                            <!--<a href="/info/create" class="btn btn-primary active" role="button">发布</a>-->
                                         </div>
                                     </div>
                                 </div>

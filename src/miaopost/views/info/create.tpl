@@ -5,7 +5,7 @@
                 <select id="cid" class="form-control">
                   <option value="">请选择分类</option>
                   {{range .cats}}
-                    <option value="{{.Id}}">{{.Name}}</option>
+                    <option value="{{.Id}}" {{if  eq .Id $.cid}}selected="selected"{{end}}>{{.Name}}</option>
                   {{end}}
                 </select>
               </div>
