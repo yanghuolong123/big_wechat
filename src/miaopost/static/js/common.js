@@ -42,3 +42,87 @@ function sleep(milliSeconds){
     var startTime = new Date().getTime(); // get the current time
     while (new Date().getTime() < startTime + milliSeconds); // hog cpu
 }
+
+/*
+ * 操作确认 modal
+ */
+var actionConfirm = function(settings) {
+    var modalId = 'fcjz-confirm-modal';
+    var modalTplHtml = '<div id="' + modalId + '" class="modal modal-default fade "> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> <h4 class="modal-title">提示</h4> </div> <div class="modal-body"> <p>One fine body…</p> </div> <div class="modal-footer"> <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button> <button type="button" class="btn btn-warning confirm-btn" data-dismiss="modal">确定</button> </div> </div></div></div>';
+    var modalEle = null;
+    if ($('#' + modalId).length == 0) {
+        $('body').append($(modalTplHtml));
+        modalEle = $('#' + modalId);
+        modalEle.modal({
+            backdrop: 'static',
+            keyboard: false,
+            show: false
+        });
+    } else {
+        modalEle = $('#' + modalId);
+    }
+    $('.modal-body', modalEle).html(settings.msg);
+    $('.confirm-btn', modalEle).off('click').on('click', function() {
+        settings['confirm']();
+        modalEle.modal('hide');
+    });
+    modalEle.modal('show');
+}
+
+/*
+ * 操作成功提示 modal
+ */
+var greeting = function(settings) {
+    var modalId = 'fcjz-greeting-modal';
+    var modalTplHtml = '<div id="' + modalId + '" class="modal modal-default fade "> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <h4 class="modal-title">操作成功</h4> </div> <div class="modal-body"> <p>One fine body…</p> </div> <div class="modal-footer">  <button type="button" class="btn btn-success confirm-btn" data-dismiss="modal">知道了</button> </div> </div></div></div>';
+    var modalEle = null;
+    if ($('#' + modalId).length == 0) {
+        $('body').append($(modalTplHtml));
+        modalEle = $('#' + modalId);
+        modalEle.modal({
+            backdrop: 'static',
+            keyboard: false,
+            show: false
+        });
+    } else {
+        modalEle = $('#' + modalId);
+    }
+    $('.modal-body', modalEle).html(settings.msg);
+    $('.modal-title', modalEle).html(settings['title'] ? settings['title'] : '操作成功');
+    if (settings['confirm']) {
+        $('.confirm-btn', modalEle).off('click').on('click', function() {
+            settings['confirm']();
+            modalEle.modal('hide');
+        });
+    }
+    modalEle.modal('show');
+}
+
+/*
+ * 操作警告
+ */
+var alerting = function(settings) {
+    var modalId = 'fcjz-alerting-modal';
+    var modalTplHtml = '<div id="' + modalId + '" class="modal modal-default fade "> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header  alert-warning"> <h4 class="modal-title">警告</h4> </div> <div class="modal-body"> <p>One fine body…</p> </div> <div class="modal-footer">  <button type="button" class="btn btn-warning confirm-btn" data-dismiss="modal">知道了</button> </div> </div></div></div>';
+    var modalEle = null;
+    if ($('#' + modalId).length == 0) {
+        $('body').append($(modalTplHtml));
+        modalEle = $('#' + modalId);
+        modalEle.modal({
+            backdrop: 'static',
+            keyboard: false,
+            show: false
+        });
+    } else {
+        modalEle = $('#' + modalId);
+    }
+    $('.modal-body', modalEle).html(settings.msg);
+    $('.modal-title', modalEle).html(settings['title'] ? settings['title'] : '警告');
+    if (settings['confirm']) {
+        $('.confirm-btn', modalEle).off('click').on('click', function() {
+            settings['confirm']();
+            modalEle.modal('hide');
+        });
+    }
+    modalEle.modal('show');
+}
