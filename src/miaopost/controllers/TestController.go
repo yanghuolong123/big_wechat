@@ -71,9 +71,9 @@ func createPhoto() {
 }
 
 func getPageInfo() {
-	infos := models.GetInfoPage(0, 2)
+	infos := models.GetInfoPage(0, 0, 2)
 	fmt.Println(infos)
-	fmt.Println(models.GetInfoCount())
+	fmt.Println(models.GetInfoCount(0))
 }
 
 func getInfoByEmail() {

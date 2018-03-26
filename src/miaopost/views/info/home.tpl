@@ -32,6 +32,8 @@
 		</div>
 	</div>
 	<div class="row">
+		<input type="hidden" id="hasMore"  value="{{.hasMore}}" />
+		<input type="hidden" id="page"  value="{{.page}}" />
 		<div class="col-md-10 info-list">
 		{{range .infos}}
 		<div class="info">

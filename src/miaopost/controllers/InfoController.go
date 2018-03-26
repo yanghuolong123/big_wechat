@@ -7,6 +7,8 @@ import (
 	"yhl/help"
 )
 
+const pageSize int = 15
+
 type InfoController struct {
 	help.BaseController
 }
@@ -16,8 +18,14 @@ func (this *InfoController) Get() {
 	cats := models.GetAllCategory()
 	this.Data["cats"] = cats
 
-	infos := models.GetInfoPage(0, 10)
+	infos := models.GetInfoPage(0, 0, pageSize)
 	this.Data["infos"] = models.ConvertInfosToVo(infos)
+	count := models.GetInfoCount(0)
+	this.Data["hasMore"] = 0
+	this.Data["page"] = 0
+	if 1*pageSize < count {
+		this.Data["hasMore"] = 1
+	}
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "info/home.tpl"
@@ -26,13 +34,23 @@ func (this *InfoController) Get() {
 // 列表页
 func (this *InfoController) List() {
 	cid, _ := this.GetInt("cid")
+	page, _ := this.GetInt("page")
 
 	cats := models.GetAllCategory()
 	this.Data["cats"] = cats
 
+	this.Data["hasMore"] = 0
+	this.Data["page"] = int(page)
+
 	infos := []models.Info{}
 	if catId := int(cid); catId > 0 {
-		infos = models.GetInfoByCid(catId)
+		count := models.GetInfoCount(catId)
+		fmt.Println("=========== count:", count)
+		infos = models.GetInfoPage(catId, int(page), pageSize)
+		if 1*pageSize < count {
+			this.Data["hasMore"] = 1
+		}
+		//infos = models.GetInfoByCid(catId)
 	}
 
 	search := this.GetString("search")
@@ -40,6 +58,7 @@ func (this *InfoController) List() {
 		infos = models.SearchInfo(search)
 	}
 
+	this.Data["cid"] = int(cid)
 	this.Data["infos"] = models.ConvertInfosToVo(infos)
 
 	this.Layout = "layout/main1.tpl"
@@ -195,4 +214,27 @@ func (this *InfoController) SuggestDel() {
 	}
 
 	this.SendRes(-1, "failed", nil)
+}
+
+// 分页列表
+func (this *InfoController) ListPage() {
+	page, _ := this.GetInt("page")
+	cid, _ := this.GetInt("cid")
+	infos := models.GetInfoPage(int(cid), int(page)*pageSize, pageSize)
+	this.Data["infos"] = models.ConvertInfosToVo(infos)
+	count := models.GetInfoCount(int(cid))
+	hasMore := 0
+	if (int(page)+1)*pageSize < count {
+		hasMore = 1
+	}
+
+	this.Data["hasMore"] = hasMore
+	this.TplName = "info/listPage.tpl"
+	s, _ := this.RenderString()
+
+	m := map[string]interface{}{}
+	m["listData"] = s
+	m["page"] = int(page)
+	m["hasMore"] = hasMore
+	this.SendRes(0, "success", m)
 }

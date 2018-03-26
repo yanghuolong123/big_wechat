@@ -121,6 +121,36 @@ $(function(){
 		});
 	});
 
+
+
+
 	
 
+});
+
+// 分页列表
+var isloading = false;
+var hasMore  = 0;
+$(window).on('scroll', function() {	
+	var windowHeight = $(window).height();
+	var bodyHeight = $(document).height();
+	var scrollHeight = $(document).scrollTop();
+	hasMore = $("#hasMore").val();
+	if (!isloading && hasMore == 1 && (scrollHeight >= ( bodyHeight - windowHeight )/2 ) && ( bodyHeight >= windowHeight ) ) {
+		isloading = true;
+		var page = parseInt($("#page").val())+1;
+		var cid = $("#cid").val();
+		$.post("/info/listPage", {cid:cid, page:page}, function(e){
+			isloading = false;
+			if( e.code<0) {
+				prompt(e.msg);
+			}
+
+			$(".info-list").append(e.data.listData);
+			$("#page").val(e.data.page);
+						
+			$("#hasMore").val(e.data.hasMore);
+			hasMore = e.data.hasMore;
+		});
+	}		
 });
