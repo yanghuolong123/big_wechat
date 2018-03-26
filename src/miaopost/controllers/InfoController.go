@@ -130,6 +130,7 @@ func (this *InfoController) View() {
 	if info.Status < 0 {
 		this.Tips("此信息已经删除!")
 	}
+	info.Content = strings.Replace(info.Content, "\n", "<br/>", -1)
 	this.Data["info"] = info
 
 	cat := models.GetCategoryById(info.Cid)

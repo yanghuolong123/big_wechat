@@ -13,7 +13,12 @@
             <div class="form-group">             
               <div class="col-sm-offset-1 col-sm-6">
                 <label>图片和文字 <span class="text-danger label-tips">(至少一项)</span></label>
-                <textarea class="form-control"  id="info_content" rows="3" maxlength="2500" placeholder="添加描述"></textarea>
+                <textarea class="form-control"  id="info_content" rows="5" maxlength="2500" placeholder="添加描述">
+描述：
+价格：
+地址：
+联系方式：
+                </textarea>
                 <div class="img-up">
                     <div class="img-up-list clearfix">                        
                       

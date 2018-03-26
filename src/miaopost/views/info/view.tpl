@@ -11,7 +11,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-offset-1 col-md-8">
-			{{.info.Content}}  
+			{{str2html .info.Content}}  
 			<br>
 			<span class="text-info more">联系我时请注明来自秒Po</span>
 		</div>
