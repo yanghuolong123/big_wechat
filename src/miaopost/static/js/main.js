@@ -82,6 +82,24 @@ $(function(){
 
 	});
 
+	// 删除信息
+	$("#del_info_btn").click(function(){
+		actionConfirm({msg:"您确定要删除您发布的此信息吗？",confirm:function(){
+			var id = $("#info_id").val();
+			$.post("/info/delete",{id:id}, function(e){
+				if(e.code<0) {
+		                                	prompt(e.msg);
+		                                	return false;
+		                        	}
+
+		                        	prompt({msg:"信息删除成功!",displayTime:3000});
+		                        	setTimeout(function(){
+		                        		window.location = "/";
+		                        	}, 2500);
+			});
+		}});		
+	});
+
 
 	// 图片上传
 	$(".img-up-list").on("click", ".img-li i", function(){

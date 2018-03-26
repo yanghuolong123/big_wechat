@@ -157,6 +157,9 @@ func (this *InfoController) EditGet() {
 	if err != nil {
 		this.Redirect("/tips?msg="+err.Error(), 302)
 	}
+	if info.Status < 0 {
+		this.Tips("此信息已被删除")
+	}
 	this.Data["info"] = info
 
 	cats := models.GetAllCategory()
@@ -237,4 +240,13 @@ func (this *InfoController) ListPage() {
 	m["page"] = int(page)
 	m["hasMore"] = hasMore
 	this.SendRes(0, "success", m)
+}
+
+// 删除发布的信息
+func (this *InfoController) Delete() {
+	id, _ := this.GetInt("id")
+	if models.DelInfoById(int(id)) {
+		this.SendRes(0, "success", nil)
+	}
+	this.SendRes(-1, "failed", nil)
 }
