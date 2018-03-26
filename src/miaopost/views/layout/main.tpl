@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
         <head>
-            <title>秒Po-北美留学生极简信息发布平台</title>
+            <title>秒Po-中国留学生极简信息发布平台</title>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -12,8 +12,8 @@
          <body>
                 <div class="container">
                         <div class="page-header row">
-                                <div class="logo col-md-1">
-                                       <a href="/">秒Po</a>
+                                <div class="logo col-md-2">
+                                       <a href="/">秒Po-UTD</a>
                                 </div>
                                 <div class="slogan col-md-10">
                                         <span>北美留学生极简信息发布平台</span>
