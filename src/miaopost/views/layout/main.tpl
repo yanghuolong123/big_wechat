@@ -16,7 +16,7 @@
                                        <a href="/">秒Po-UTD</a>
                                 </div>
                                 <div class="slogan col-md-10">
-                                        <span>北美留学生极简信息发布平台</span>
+                                        <span>中国留学生极简信息发布平台</span>
                                 </div>
                         </div>
                         <div class="content">
