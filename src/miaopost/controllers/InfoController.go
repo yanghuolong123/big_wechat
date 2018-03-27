@@ -45,7 +45,6 @@ func (this *InfoController) List() {
 	infos := []models.Info{}
 	if catId := int(cid); catId > 0 {
 		count := models.GetInfoCount(catId)
-		fmt.Println("=========== count:", count)
 		infos = models.GetInfoPage(catId, int(page), pageSize)
 		if 1*pageSize < count {
 			this.Data["hasMore"] = 1
