@@ -194,7 +194,7 @@ func (this *TestController) login(username, password string) (m map[string]inter
 
 	this.SetSession("user", *u)
 	this.SetSession("follow", gids)
-	this.SetSession("group", group)
+	this.SetSession("group", *group)
 
 	m["user"] = u
 	m["follow"] = gids

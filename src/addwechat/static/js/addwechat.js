@@ -24,7 +24,7 @@ function uploadFile(obj) {
 			processData: false,
 			contentType: false,
 			success:function(e,textStatus,jqXHR){
-				$this.parent().css( 'background-image', 'url(/' +  e.data + ')' );
+				$this.parent().css( 'background-image', 'url(' +  e.data + ')' );
 				$this.parent().addClass('active');
 				$upload .prev().val(e.data);
 			}

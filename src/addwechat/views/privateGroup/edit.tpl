@@ -35,7 +35,7 @@
 	    <div class="col-sm-offset-2 col-sm-7">	 
 	    	<div class="row">
 	    		{{if .pg.Qrcode}}
-		      	<div class="uploadimg col-sm-2 active"  style="background-image: url('/{{.pg.Qrcode}}');">
+		      	<div class="uploadimg col-sm-2 active"  style="background-image: url('{{.pg.Qrcode}}');">
 		      	{{else}}
 		      	<div class="uploadimg col-sm-2">
 		      	{{end}}
@@ -44,7 +44,7 @@
 	                                       	<a role="button" href="javascript:;" class="upload_btns" onclick="uploadFile(this);return false;" id="file_qrcode_upload">{{if .pg.Qrcode}}{{else}}上传群二维码{{end}}</a>
 		      	</div>
 		      	{{if .pg.Ower_qrcode}}
-		      	<div class="uploadimg col-sm-2 active"  style="background-image: url('/{{.pg.Ower_qrcode}}');">
+		      	<div class="uploadimg col-sm-2 active"  style="background-image: url('{{.pg.Ower_qrcode}}');">
 		      	{{else}}
 		      	<div class="uploadimg col-sm-2">
 		      	{{end}}

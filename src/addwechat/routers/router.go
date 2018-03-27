@@ -3,6 +3,7 @@ package routers
 import (
 	"addwechat/controllers"
 	"github.com/astaxie/beego"
+	"yhl/api"
 )
 
 func init() {
@@ -23,7 +24,8 @@ func init() {
 	beego.Router("/tips/pgindex", &controllers.TipsController{}, "get:PgIndex")
 	beego.Router("/tips/pglist", &controllers.TipsController{}, "get:PgList")
 
-	beego.Router("/uploadfile", &controllers.UploadController{}, "post:Uploadfile")
+	//beego.Router("/uploadfile", &controllers.UploadController{}, "post:Uploadfile")
+	beego.Router("/uploadfile", &api.UploadController{}, "post:Uploadfile")
 
 	beego.Router("/login", &controllers.LoginController{}, "post:LoginPost")
 	beego.Router("/login", &controllers.LoginController{}, "get:LoginGet")

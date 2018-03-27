@@ -18,13 +18,13 @@
 		<div class="row qrcode">
 			{{if .pg.Qrcode}}
 			 <div class="col-md-2 ">				 				 
-					 <img class="img-rounded" src="/{{.pg.Qrcode}}" alt="群二维码" />			  
+					 <img class="img-rounded" src="{{.pg.Qrcode}}" alt="群二维码" />			  
 					 <p class="qr1">群二维码</p> 					 
 			 </div>
 			 {{end}}
 			 {{if .pg.Ower_qrcode}}
 			 <div class="col-md-2">				 				 
-					 <img class="img-rounded" src="/{{.pg.Ower_qrcode}}" alt="群主二维码" />	 
+					 <img class="img-rounded" src="{{.pg.Ower_qrcode}}" alt="群主二维码" />	 
 					<p class="qr1">群主二维码</p>									  
 			 </div>
 			 {{end}}
