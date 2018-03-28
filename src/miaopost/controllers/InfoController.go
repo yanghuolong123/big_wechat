@@ -148,7 +148,7 @@ func (this *InfoController) EditGet() {
 	code = help.DesDecrypt(code, help.DesKey)
 
 	s := strings.Split(code, ",")
-	id := help.StringToInt(s[0])
+	id := help.StrToInt(s[0])
 	if id <= 0 {
 		this.Redirect("/tips?msg=code不正确", 302)
 	}
