@@ -19,7 +19,7 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="input-group">
-                                              <input type="text" class="form-control" id="search" placeholder="搜索, eg.单人间">
+                                              <input type="text" class="form-control" id="search" placeholder="搜索, eg. 室友，moving">
                                               <span class="input-group-btn">
                                                 <button class="btn btn-default search-btn" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                               </span>
