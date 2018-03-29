@@ -6,7 +6,7 @@
 			<span>{{showtime .info.Create_time}}</span>
 		</div>
 		<div class="col-md-2 col-xs-3">
-			<a href="#" onclick="suggestDel({{.Info.Id}});return false;">建议删除</a>
+			<a href="#" onclick="suggestDel({{.info.Id}});return false;">建议删除</a>
 		</div>
 	</div>
 	<div class="row">
