@@ -18,6 +18,7 @@ type Info struct {
 	Email       string
 	Status      int
 	Views       int
+	Ip          string
 	Create_time time.Time
 }
 
@@ -28,6 +29,7 @@ type InfoVo struct {
 }
 
 func CreateInfo(info *Info) int {
+	info.Ip = help.ClientIp
 	info.Create_time = time.Now()
 	i, err := orm.NewOrm().Insert(info)
 	if err != nil {
