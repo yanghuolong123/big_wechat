@@ -47,7 +47,7 @@
 			</div>
 			<div class="row">
 				<div class="info-content col-md-11">
-					{{substr .Info.Content 0 150}} {{if (.Photos|len)}}<img class="img_tip" src="/static/img/image_s.png">{{end}}...
+					{{str2html (showListInfo (substr .Info.Content 0 150))}} {{if (.Photos|len)}}<img class="img_tip" src="/static/img/image_s.png">{{end}}...
 					<a href="/info/view?id={{.Info.Id}}" class="more">more ››</a>
 					<div class="line"></div>
 				</div>
