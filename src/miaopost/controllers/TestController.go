@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"miaopost/models"
+	"time"
 	"yhl/help"
 )
 
@@ -11,6 +12,23 @@ type TestController struct {
 }
 
 func (this *TestController) Get() {
+	t := time.Now()
+	fmt.Println("========= :", t.AddDate(0, 0, -1))
+	//	begin := help.GetDateBegin(t)
+	//	end := help.GetDateEnd(t)
+	//begin := help.GetMonthBegin(t)
+	//end := help.GetMonthEnd(t)
+
+	//	pv := models.StatPv(begin, end)
+	//	fmt.Println("============ pv:", pv)
+	//	uv := models.StatUv(begin, end)
+	//	fmt.Println("============ uv:", uv)
+
+	//count := models.StatCountInfo(begin, end)
+	//fmt.Println("=============== count:", count)
+
+	_ = t
+
 	/*id := 2
 	email := "yhl27ml@126.com"
 	code := help.DesEncrypt(fmt.Sprintf("%v", id)+";"+email, help.DesKey)
