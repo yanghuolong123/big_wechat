@@ -108,3 +108,12 @@ func createCategory() {
 	models.CreateCategory("周边服务")
 	models.CreateCategory("其他")
 }
+
+func (this *TestController) DelInfo() {
+	id, _ := this.GetInt("id")
+	if models.DelInfoById(int(id)) {
+		this.Tips("删除发布信息成功！ id:" + help.ToStr(id))
+	} else {
+		this.Tips("删除操作失败!")
+	}
+}
