@@ -9,8 +9,9 @@ src/addwechat/log/
 !src/addwechat/log/web.log
 
 src/miaopost/miaopost
-src/miaopost/uploads/
-src/miaopost/fast-disploy.sh
-#src/miaopost/conf/app.conf
-src/miaopost/log/
-!src/miaopost/log/web.log
+src/miaopost/frontend/frontend
+src/miaopost/frontend/uploads/
+src/miaopost/frontend/fast-disploy.sh
+#src/miaopost/frontend/conf/app.conf
+src/miaopost/frontend/log/
+!src/miaopost/frontend/log/web.log
