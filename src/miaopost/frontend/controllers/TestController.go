@@ -5,7 +5,7 @@ import (
 	"miaopost/frontend/models"
 	"time"
 	"yhl/help"
-	//	m "yhl/model"
+	m "yhl/model"
 )
 
 type TestController struct {
@@ -13,28 +13,34 @@ type TestController struct {
 }
 
 func (this *TestController) Get() {
-	//t := time.Now()
-	t, _ := time.Parse(help.DatetimeFormat, "2018-04-03 00:10:00")
-	//local, _ := time.LoadLocation("Local")
-	//t = t.In(local)
-	fmt.Println("================= t:", t)
-	t = t.AddDate(0, 0, -1)
-	fmt.Println("================= t:", t)
-	date_begin := help.GetDateBegin(t)
-	date_end := help.GetDateEnd(t)
-	fmt.Println("========= date_begin:", date_begin)
-	fmt.Println("========= date_end:", date_end)
-	date_pv := models.StatPv(date_begin, date_end)
-	date_uv := models.StatUv(date_begin, date_end)
-	date_num := models.StatCountInfo(date_begin, date_end)
+	t := time.Now()
+	q := m.Query{}
+	q.Model = models.Info{}
+	p := help.GetPageList(q, 1, 10)
+	fmt.Println(p.String())
 
-	fmt.Println("========= date_pv:", date_pv)
-	fmt.Println("========= date_uv:", date_uv)
-	fmt.Println("========= date_num:", date_num)
-	mon_begin := help.GetMonthBegin(t)
-	mon_end := help.GetMonthEnd(t)
-	fmt.Println("========= mon_begin:", mon_begin)
-	fmt.Println("========= mon_end:", mon_end)
+	/*	t, _ := time.Parse(help.DatetimeFormat, "2018-04-03 00:10:00")
+		//local, _ := time.LoadLocation("Local")
+		//t = t.In(local)
+		fmt.Println("================= t:", t)
+		t = t.AddDate(0, 0, -1)
+		fmt.Println("================= t:", t)
+		date_begin := help.GetDateBegin(t)
+		date_end := help.GetDateEnd(t)
+		fmt.Println("========= date_begin:", date_begin)
+		fmt.Println("========= date_end:", date_end)
+		date_pv := models.StatPv(date_begin, date_end)
+		date_uv := models.StatUv(date_begin, date_end)
+		date_num := models.StatCountInfo(date_begin, date_end)
+
+		fmt.Println("========= date_pv:", date_pv)
+		fmt.Println("========= date_uv:", date_uv)
+		fmt.Println("========= date_num:", date_num)
+		mon_begin := help.GetMonthBegin(t)
+		mon_end := help.GetMonthEnd(t)
+		fmt.Println("========= mon_begin:", mon_begin)
+		fmt.Println("========= mon_end:", mon_end)
+	*/
 
 	//	q := m.Query{}
 	//	q.Model = models.Info{}
