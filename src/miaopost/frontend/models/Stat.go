@@ -9,7 +9,8 @@ import (
 )
 
 func StatCountInfo(begin, end time.Time) int {
-	i, err := orm.NewOrm().QueryTable("tbl_info").Filter("create_time__gte", begin).Filter("create_time__lt", end).Count()
+	//i, err := orm.NewOrm().QueryTable("tbl_info").Filter("create_time__gte", begin).Filter("create_time__lt", end).Count()
+	i, err := orm.NewOrm().QueryTable("tbl_info").Filter("create_time__between", begin, end).Count()
 	help.Error(err)
 
 	return int(i)
