@@ -14,10 +14,20 @@ type TestController struct {
 
 func (this *TestController) Get() {
 	t := time.Now()
+
 	q := m.Query{}
-	q.Model = models.Info{}
-	p := help.GetPageList(q, 1, 10)
+	q.Table = "tbl_info"
+	q.Condition = map[string]interface{}{"status": 0}
+	q.OrderBy = []string{"-create_time", "status"}
+	var slice []models.Info
+	q.ReturnModelList = &slice
+	p := help.GetPageList(q, 6, 6)
 	fmt.Println(p.String())
+	fmt.Println("===================")
+	infos := p.DataList.(*[]models.Info)
+	//fmt.Println("=========== info", infos)
+	//fmt.Printf("=========== info type: %T\n", infos)
+	fmt.Println(models.ConvertInfosToVo(infos))
 
 	/*	t, _ := time.Parse(help.DatetimeFormat, "2018-04-03 00:10:00")
 		//local, _ := time.LoadLocation("Local")

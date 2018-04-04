@@ -111,19 +111,19 @@ func SearchInfo(s string) (infos []Info) {
 	return
 }
 
-func ConvertInfoToVo(info Info) InfoVo {
+func ConvertInfoToVo(info *Info) InfoVo {
 	vo := InfoVo{}
-	vo.Info = info
+	vo.Info = *info
 	vo.Cat = GetCategoryById(info.Cid)
 	vo.Photos = GetPhotoByInfoid(info.Id)
 
 	return vo
 }
 
-func ConvertInfosToVo(infos []Info) []InfoVo {
+func ConvertInfosToVo(infos *[]Info) []InfoVo {
 	vos := []InfoVo{}
-	for _, info := range infos {
-		vo := ConvertInfoToVo(info)
+	for _, info := range *infos {
+		vo := ConvertInfoToVo(&info)
 		vos = append(vos, vo)
 	}
 

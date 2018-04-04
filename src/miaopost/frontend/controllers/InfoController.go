@@ -19,7 +19,7 @@ func (this *InfoController) Get() {
 	this.Data["cats"] = cats
 
 	infos := models.GetInfoPage(0, 0, pageSize)
-	this.Data["infos"] = models.ConvertInfosToVo(infos)
+	this.Data["infos"] = models.ConvertInfosToVo(&infos)
 	count := models.GetInfoCount(0)
 	this.Data["hasMore"] = 0
 	this.Data["page"] = 0
@@ -58,7 +58,7 @@ func (this *InfoController) List() {
 	}
 
 	this.Data["cid"] = int(cid)
-	this.Data["infos"] = models.ConvertInfosToVo(infos)
+	this.Data["infos"] = models.ConvertInfosToVo(&infos)
 
 	this.Layout = "layout/main1.tpl"
 	this.TplName = "info/list.tpl"
@@ -224,7 +224,7 @@ func (this *InfoController) ListPage() {
 	page, _ := this.GetInt("page")
 	cid, _ := this.GetInt("cid")
 	infos := models.GetInfoPage(int(cid), int(page)*pageSize, pageSize)
-	this.Data["infos"] = models.ConvertInfosToVo(infos)
+	this.Data["infos"] = models.ConvertInfosToVo(&infos)
 	count := models.GetInfoCount(int(cid))
 	hasMore := 0
 	if (int(page)+1)*pageSize < count {
