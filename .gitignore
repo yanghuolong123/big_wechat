@@ -17,3 +17,4 @@ src/miaopost/frontend/log/
 !src/miaopost/frontend/log/web.log
 
 src/miaopost/backend/backend
+src/miaopost/backend/fast-disploy.sh
