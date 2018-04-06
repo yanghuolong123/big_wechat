@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>北京赞德科技 | 秒Po</title>
+  <title>北京绽德科技 | 秒Po</title>
   {{template "inc/base-style.tpl" .}}
 </head>
 
@@ -15,7 +15,7 @@
       
     <section class="content-header">
       <h1>
-        北京赞德科技 -  秒Po
+        北京绽德科技 -  秒Po
         <small>数据管理平台</small>
       </h1>
       <ol class="breadcrumb">

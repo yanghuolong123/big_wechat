@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>北京赞德科技 | 秒Po后台管理</title>
+  <title>北京绽德科技 | 秒Po后台管理</title>
   {{template "inc/base-style.tpl"}}
   <link rel="stylesheet" href="/static/plugin/adminlte/plugins/iCheck/square/blue.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -16,7 +16,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="javascript:;"><b>北京赞德科技</b> - 秒Po后台</a>
+    <a href="javascript:;"><b>北京绽德科技</b> - 秒Po后台</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
