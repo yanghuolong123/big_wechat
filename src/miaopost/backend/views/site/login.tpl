@@ -66,8 +66,7 @@
     	var username = $.trim($("#username").val());
     	var password = $.trim($("#password").val());
 	 if (username=="" || password=="") {
-	    	prompt("帐号密码不能为空");     
-	    	
+	    	prompt("帐号密码不能为空");	    	
 	} else {
 	    	$.post("/login",{username:username,password:password},function(e){
 	    		if (e.code<0) {
@@ -81,23 +80,6 @@
       });
   });
 
-  // function login() {
-  //   var username = $.trim($("#username").val());
-  //   var password = $.trim($("#password").val());
-  //   if (username=="" || password=="") {
-  //   	prompt("帐号密码不能为空");     
-  //   	return false; 
-  //   } else {
-  //   	$.post("/login",{username:username,password:password},function(e){
-  //   		if (e.code<0) {
-  //   			prompt(e.msg);
-  //   			return false;
-  //   		}
-  //   		location.href = "/";
-  //   	});
-  //   }
-  //   return false;
-  //  }
 </script>
 </body>
 </html>
