@@ -147,6 +147,7 @@ $(function(){
 	}
 
 	$(".load-more").click(function(){
+		$(".loading").append("<img src=\"/static/img/loading.gif\"/>");
 		var page = parseInt($("#page").val())+1;
 		var cid = $("#cid").val();
 		$.post("/info/listPage", {cid:cid, page:page}, function(e){
@@ -154,6 +155,7 @@ $(function(){
 			if( e.code<0) {
 				prompt(e.msg);
 			}
+			$(".loading").empty();
 
 			//$(".info-list").append(e.data.listData);
 			$(".info-list .info:last").after(e.data.listData);

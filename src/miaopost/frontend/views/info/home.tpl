@@ -56,7 +56,7 @@
 		{{else}}
 			<div class="alert alert-warning col-md-10" role="alert">亲，还没有数据哦！</div>
 		{{end}}
-		<a href="javascript:;" class="load-more">查看更多 ...</a>
+		<a href="javascript:;" class="load-more">查看更多 ...<span class="loading"></span></a>
 		</div>
 	</div>
 </div>
