@@ -6,6 +6,10 @@ import (
 	"yhl/help"
 )
 
+const (
+	Footer_Nav = iota + 1
+)
+
 func init() {
 	orm.RegisterModelWithPrefix("tbl_", new(Article))
 }
@@ -20,12 +24,12 @@ type Article struct {
 	Create_time time.Time
 }
 
-func CreateArticle(article *Article) int {
+func CreateArticle(article *Article) (int, error) {
 	article.Create_time = time.Now()
 	i, err := orm.NewOrm().Insert(article)
 	help.Error(err)
 
-	return int(i)
+	return int(i), err
 }
 
 func UpdateArticle(article *Article) error {
@@ -35,12 +39,12 @@ func UpdateArticle(article *Article) error {
 	return err
 }
 
-func GetArticleById(id int) *Article {
+func GetArticleById(id int) (*Article, error) {
 	article := &Article{Id: id}
 	err := orm.NewOrm().Read(article)
 	help.Error(err)
 
-	return article
+	return article, err
 }
 
 func DelArticleById(id int) bool {
@@ -48,4 +52,12 @@ func DelArticleById(id int) bool {
 	help.Error(err)
 
 	return int(i) > 0
+}
+
+func GetArticleGroupMap() map[int]string {
+	m := map[int]string{
+		Footer_Nav: "底部导航",
+	}
+
+	return m
 }

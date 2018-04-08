@@ -3,6 +3,7 @@
 <head>
   <title>北京绽德科技 | 秒Po</title>
   {{template "inc/base-style.tpl" .}}
+  {{template "inc/base-script.tpl" .}}
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">

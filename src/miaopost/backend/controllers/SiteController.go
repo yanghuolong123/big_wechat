@@ -21,6 +21,10 @@ func (this *SiteController) Get() {
 }
 
 func (this *SiteController) LoginGet() {
+	user := this.GetSession("user")
+	if user != nil {
+		this.Redirect("/", 302)
+	}
 
 	this.TplName = "site/login.tpl"
 }

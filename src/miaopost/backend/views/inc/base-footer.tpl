@@ -7,4 +7,5 @@
 </div>
 <!-- ./wrapper -->
 
-{{template "inc/base-script.tpl" .}}
+</body>
+</html>
