@@ -1,5 +1,5 @@
 <div class="article-view row">
 
-{{.article.Content}}
+{{str2html .article.Content}}
 
 </div>
