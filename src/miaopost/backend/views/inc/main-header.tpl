@@ -27,8 +27,9 @@
               <li class="user-header">
                 <img src="/static/plugin/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 <p>
-                  
+                 {{if .user}} 
                   <small>登陆时间: {{date .user.Last_logintime "Y-m-d H:i:s"}}</small>
+		 {{end}}
                 </p>
               </li>
               

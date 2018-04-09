@@ -12,7 +12,7 @@ func init() {
 
 	beego.Router("/uploadfile", &api.UploadController{}, "post:Uploadfile")
 
-	beego.Router("/tips", &controllers.TipsController{}, "get:Tips")
+	beego.Router("/tips", &api.TipsController{}, "get:Tips")
 
 	beego.Router("/", &controllers.InfoController{})
 	beego.Router("/info/create", &controllers.InfoController{}, "get:CreateGet")
