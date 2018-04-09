@@ -25,7 +25,7 @@
                   <td> {{.Sort}}</td>
                   <td>
                     <a href="/article/edit?id={{.Id}}"><i class="fa fa-wrench"></i></a>
-                    <a href="http://www.miaopost.com/article/view?id={{.Id}}" target="_blank"><i class="fa fa-share"></i></a>
+                    <a href="http://www.miaopost.com/article/view?id={{.Id}}" target="_blank"><i class="fa fa-external-link"></i></a>
                     </td>
                 </tr>
                 {{end}}
