@@ -3,9 +3,9 @@
 .page-header .logo a {font-size: 30px; color: #ea6f5a;}
 .page-header  .slogan {font-size: 18px; padding-top: 15px; color: #777; }
 .page-header a.search_cats{font-size: 14px;}
-.content{padding-bottom: 15px;}
+.content{padding-bottom: 15px; min-height: 500px;}
 .modal-dialog{margin-top: 180px;}
-.footer { color: #969696;    height: 60px;    padding-top: 20px;}
+.footer { color: #969696;    height: 60px;    padding-top: 20px; margin-bottom: 10px; }
 .footer_top a {    color: #969696;    font-size: 13px;    margin: 0 10px;}
 .footer_top a:hover{color: #2f2f2f;}
 
@@ -92,4 +92,4 @@ img.img_tip{width: 18px; height: 18px;}
 
 
 /*** ========== article view.tpl **/
-.article-view {min-height: 500px; padding-top: 25px; padding-left: 15px;}
+.article-view {padding-top: 25px; padding-left: 15px;}
