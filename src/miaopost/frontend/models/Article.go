@@ -61,3 +61,11 @@ func GetArticleGroupMap() map[int]string {
 
 	return m
 }
+
+func GetArticleByGroupId(gid int) []Article {
+	var as []Article
+	_, err := orm.NewOrm().QueryTable("tbl_article").Filter("group_id", gid).Filter("status", 0).OrderBy("-sort").All(&as)
+	help.Error(err)
+
+	return as
+}

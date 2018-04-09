@@ -1,11 +1,9 @@
 package controllers
 
-import (
-	"yhl/help"
-)
+import ()
 
 type TipsController struct {
-	help.BaseController
+	BaseController
 }
 
 func (this *TipsController) Tips() {

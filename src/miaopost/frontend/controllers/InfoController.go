@@ -10,7 +10,7 @@ import (
 const pageSize int = 15
 
 type InfoController struct {
-	help.BaseController
+	BaseController
 }
 
 // 首页

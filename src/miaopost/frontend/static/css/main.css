@@ -5,6 +5,9 @@
 .page-header a.search_cats{font-size: 14px;}
 .content{padding-bottom: 15px;}
 .modal-dialog{margin-top: 180px;}
+.footer { color: #969696;    height: 60px;    padding-top: 20px;}
+.footer_top a {    color: #969696;    font-size: 13px;    margin: 0 10px;}
+.footer_top a:hover{color: #2f2f2f;}
 
 /**  ===  public ===**/
 .more{font-size: 12px; font-style: italic;}
@@ -81,8 +84,12 @@ img.img_tip{width: 18px; height: 18px;}
 }
 
 
-/**  =============== view.tpl =============== **/
+/**  =============== info view.tpl =============== **/
 .view .meta{font-size: 13px; color: #777; margin-bottom: 8px;}
 .view .meta span{margin-right: 25px;}
 .view .photos{margin-top: 15px;}
 .view .photos img{width: 100%; margin-bottom: 5px;}
+
+
+/*** ========== article view.tpl **/
+.article-view {min-height: 500px; padding-top: 25px; padding-left: 15px;}
