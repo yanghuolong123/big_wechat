@@ -26,6 +26,7 @@
                   <td>
                     <a href="/article/edit?id={{.Id}}"><i class="fa fa-wrench"></i></a>
                     <a href="http://www.miaopost.com/article/view?id={{.Id}}" target="_blank"><i class="fa fa-external-link"></i></a>
+                    <a href="/article/delete?id={{.Id}}" class="delete"><i class="fa fa-times"></i></a>
                     </td>
                 </tr>
                 {{end}}
@@ -43,6 +44,7 @@
 <script src="/static/plugin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
   $(function(){
+
     $('#article_list').DataTable({
         'paging'      : true,
         'lengthChange': false,
@@ -51,5 +53,14 @@
         'info'        : true,
         'autoWidth'   : false
       })
+
+    $("a.delete").click(function(){
+        var ln = $(this);
+       actionConfirm({msg:"确定要删除？",confirm:function(){
+          location.href = ln.attr("href");
+      }});
+      return false;
+    });
+
   });
 </script>

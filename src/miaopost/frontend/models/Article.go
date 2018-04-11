@@ -48,7 +48,8 @@ func GetArticleById(id int) (*Article, error) {
 }
 
 func DelArticleById(id int) bool {
-	i, err := orm.NewOrm().QueryTable("tbl_article").Filter("id", id).Update(orm.Params{"status": -1})
+	//i, err := orm.NewOrm().QueryTable("tbl_article").Filter("id", id).Update(orm.Params{"status": -1})
+	i, err := orm.NewOrm().QueryTable("tbl_article").Filter("id", id).Delete()
 	help.Error(err)
 
 	return int(i) > 0

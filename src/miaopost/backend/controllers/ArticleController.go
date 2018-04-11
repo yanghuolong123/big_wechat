@@ -106,5 +106,5 @@ func (this *ArticleController) Delete() {
 		this.Tips("删除失败")
 	}
 
-	this.Redirect("/list", 302)
+	this.Redirect("/article/list", 302)
 }
