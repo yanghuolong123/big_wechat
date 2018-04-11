@@ -5,7 +5,7 @@ import (
 	"miaopost/frontend/models"
 	"time"
 	"yhl/help"
-	m "yhl/model"
+	//	m "yhl/model"
 )
 
 type TestController struct {
@@ -14,20 +14,28 @@ type TestController struct {
 
 func (this *TestController) Get() {
 	t := time.Now()
+	begin := t.Add(-time.Minute * 1)
+	end := t
+	fmt.Println("========== begin:", begin)
+	fmt.Println("========== end:", end)
+	count := models.StatPv(begin, end)
+	fmt.Println("========== count:", count)
+	/*
 
-	q := m.Query{}
-	q.Table = "tbl_info"
-	q.Condition = map[string]interface{}{"status": 0}
-	q.OrderBy = []string{"-create_time", "status"}
-	var slice []models.Info
-	q.ReturnModelList = &slice
-	p := help.GetPageList(q, 6, 6)
-	fmt.Println(p.String())
-	fmt.Println("===================")
-	infos := p.DataList.(*[]models.Info)
-	//fmt.Println("=========== info", infos)
-	//fmt.Printf("=========== info type: %T\n", infos)
-	fmt.Println(models.ConvertInfosToVo(infos))
+		q := m.Query{}
+		q.Table = "tbl_info"
+		q.Condition = map[string]interface{}{"status": 0}
+		q.OrderBy = []string{"-create_time", "status"}
+		var slice []models.Info
+		q.ReturnModelList = &slice
+		p := help.GetPageList(q, 6, 6)
+		fmt.Println(p.String())
+		fmt.Println("===================")
+		infos := p.DataList.(*[]models.Info)
+		//fmt.Println("=========== info", infos)
+		//fmt.Printf("=========== info type: %T\n", infos)
+		fmt.Println(models.ConvertInfosToVo(infos))
+	*/
 
 	/*	t, _ := time.Parse(help.DatetimeFormat, "2018-04-03 00:10:00")
 		//local, _ := time.LoadLocation("Local")

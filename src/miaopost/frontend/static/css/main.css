@@ -5,8 +5,8 @@
 .page-header a.search_cats{font-size: 14px;}
 .content{padding-bottom: 15px; min-height: 500px;}
 .modal-dialog{margin-top: 180px;}
-.footer { color: #969696;    height: 60px;    padding-top: 20px; margin-bottom: 10px; }
-.footer_top a {    color: #969696;    font-size: 13px;    margin: 0 10px;}
+.footer { color: #969696;    height: 60px;    padding-top: 20px; margin-bottom: 10px; text-align: center; }
+.footer_top a {    color: #969696;    font-size: 14px;    margin: 0 10px;}
 .footer_top a:hover{color: #2f2f2f;}
 
 /**  ===  public ===**/
