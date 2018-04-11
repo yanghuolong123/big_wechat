@@ -167,6 +167,7 @@ $(function(){
 				$(".load-more").hide();
 			}
 		});
+		$(this).trigger("focusout");
 	});
 
 
