@@ -24,12 +24,11 @@
                   <td>{{.Id}}</td>
                   <td>{{map_get $.groupMap .Group_id}}</td>
                   <td>{{.Title}}</td>
-                  <td>{{str2html  (substr .Content 0  100)}}</td>
+                  <td><a href="http://www.miaopost.com/article/view?id={{.Id}}" target="_blank"><i class="fa fa-external-link"></i></a></td>
                   <td> {{.Sort}}</td>
                   <td>{{map_get $.statusMap .Status}}</td>
                   <td>
-                    <a href="/article/edit?id={{.Id}}"><i class="fa fa-wrench"></i></a>
-                    <a href="http://www.miaopost.com/article/view?id={{.Id}}" target="_blank"><i class="fa fa-external-link"></i></a>
+                    <a href="/article/edit?id={{.Id}}"><i class="fa fa-wrench"></i></a>                    
                     <a href="/article/delete?id={{.Id}}" class="delete"><i class="fa fa-times"></i></a>
                     </td>
                 </tr>
