@@ -9,9 +9,11 @@
                 <thead>
                 <tr>
                   <th>ID</th>
+                  <th>分组</th>
                   <th>标题</th>
                   <th>内容</th>
                   <th>排序</th>
+                  <th>状态</th>
                   <th>操作</th>
                 </tr>
                 </thead>
@@ -20,9 +22,11 @@
                 {{range .dataList}}
                 <tr>
                   <td>{{.Id}}</td>
+                  <td>{{map_get $.groupMap .Group_id}}</td>
                   <td>{{.Title}}</td>
                   <td>{{str2html  (substr .Content 0  100)}}</td>
                   <td> {{.Sort}}</td>
+                  <td>{{map_get $.statusMap .Status}}</td>
                   <td>
                     <a href="/article/edit?id={{.Id}}"><i class="fa fa-wrench"></i></a>
                     <a href="http://www.miaopost.com/article/view?id={{.Id}}" target="_blank"><i class="fa fa-external-link"></i></a>

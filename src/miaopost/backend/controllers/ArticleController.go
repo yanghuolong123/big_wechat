@@ -11,6 +11,13 @@ type ArticleController struct {
 	BaseController
 }
 
+func (this *ArticleController) Prepare() {
+	this.BaseController.Prepare()
+
+	this.Data["groupMap"] = models.GetArticleGroupMap()
+	this.Data["statusMap"] = models.GetArticleStatusMap()
+}
+
 func (this *ArticleController) List() {
 	page, _ := this.GetInt("page")
 	q := model.Query{}
@@ -37,12 +44,14 @@ func (this *ArticleController) Create() {
 		title := this.GetString("title")
 		content := this.GetString("content")
 		sort, _ := this.GetInt("sort")
+		status, _ := this.GetInt("status")
 
 		article := models.Article{
 			Group_id: int(group_id),
 			Title:    title,
 			Content:  content,
 			Sort:     int(sort),
+			Status:   int(status),
 		}
 
 		_, err := models.CreateArticle(&article)
@@ -52,8 +61,6 @@ func (this *ArticleController) Create() {
 
 		this.SendRes(0, "success", nil)
 	}
-
-	this.Data["groupMap"] = models.GetArticleGroupMap()
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "article/create.tpl"
@@ -70,6 +77,7 @@ func (this *ArticleController) Edit() {
 		title := strings.TrimSpace(this.GetString("title"))
 		content := strings.TrimSpace(this.GetString("content"))
 		sort, _ := this.GetInt("sort")
+		status, _ := this.GetInt("status")
 
 		if title != "" {
 			article.Title = title
@@ -80,10 +88,11 @@ func (this *ArticleController) Edit() {
 		if s := int(sort); s > 0 {
 			article.Sort = s
 		}
+		article.Status = int(status)
 
 		err := models.UpdateArticle(article)
 		if err != nil {
-			this.Redirect("/list", 302)
+			this.Redirect("/article/list", 302)
 		}
 
 		this.SendRes(0, "", nil)
@@ -94,7 +103,6 @@ func (this *ArticleController) Edit() {
 	}
 
 	this.Data["article"] = article
-	this.Data["groupMap"] = models.GetArticleGroupMap()
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "article/edit.tpl"

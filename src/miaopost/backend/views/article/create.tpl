@@ -27,6 +27,14 @@
                   <label for="sort">排序</label>
                   <input type="text" name="sort" id="sort" placeholder="排序" class="form-control">
                 </div>
+                <div class="form-group">
+                  <label for="status">状态</label>
+                  <select id="status" name="status" class="form-control">
+                  	{{range $k,$v := .statusMap}}
+                  	<option value="{{$k}}" {{if eq $k 0}}selected{{end}}>{{$v}}</option>
+                  	{{end}}
+                  </select>
+                </div>
                 
               </div>
               <!-- /.box-body -->

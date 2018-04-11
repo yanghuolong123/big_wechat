@@ -70,3 +70,10 @@ func GetArticleByGroupId(gid int) []Article {
 
 	return as
 }
+
+func GetArticleStatusMap() map[int]string {
+	return map[int]string{
+		0:  "启用",
+		-1: "禁用",
+	}
+}
