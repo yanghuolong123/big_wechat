@@ -97,7 +97,10 @@
 			return false;
 		});
 
-		CKEDITOR.replace('content')
+		CKEDITOR.replace('content',{
+			filebrowserImageUploadUrl:"/ckuploadfile",
+			image_previewText:" ",
+		})
 
 	});	
 </script>

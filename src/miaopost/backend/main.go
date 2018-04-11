@@ -18,6 +18,7 @@ func main() {
 	}
 
 	beego.InsertFilter("/*", beego.BeforeRouter, filterLogin)
+	beego.SetStaticPath("/uploads", "uploads")
 
 	beego.Run()
 }
