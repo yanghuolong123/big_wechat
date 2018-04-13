@@ -9,9 +9,8 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="info-content col-md-11">
-			{{str2html (showListInfo (substr .Info.Content 0 150))}} {{if (.Photos|len)}}<img class="img_tip" src="/static/img/image_s.png">{{end}}...
-			<a href="/info/view?id={{.Info.Id}}" class="more">more ››</a>
+		<div class="info-content col-md-11">			
+			<a href="/info/view?id={{.Info.Id}}" class="list_content">{{str2html (showListInfo (substr .Info.Content 0 150))}} {{if (.Photos|len)}}<img class="img_tip" src="/static/img/image_s.png">{{end}}...</a>
 			<div class="line"></div>
 		</div>
 	</div>
@@ -19,4 +18,3 @@
 {{else}}
 	<div class="alert alert-warning col-md-10" role="alert">亲，还没有数据哦！</div>
 {{end}}
-</div>
