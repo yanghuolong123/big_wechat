@@ -92,6 +92,14 @@ func GetArticleByType(tp int) []Article {
 	return as
 }
 
+func GetArticleByTypeAndGroup(tp, gp int) []Article {
+	var as []Article
+	_, err := orm.NewOrm().QueryTable("tbl_article").Filter("type", tp).Filter("group_id", gp).Filter("status", 0).OrderBy("-sort").All(&as)
+	help.Error(err)
+
+	return as
+}
+
 func GetArticleStatusMap() map[int]string {
 	return map[int]string{
 		0:  "启用",

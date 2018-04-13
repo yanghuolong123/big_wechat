@@ -13,7 +13,7 @@
                         {{end}}
 	</div>
 	<div class="row list-head">
-		<div class="col-md-8  col-xs-9 title">
+		<div class="col-md-10  col-xs-9 title">
 			<h4>最新发布</h3>
 		</div>
 		<div class="col-md-2  col-xs-2">
@@ -34,7 +34,7 @@
 	<div class="row">
 		<input type="hidden" id="hasMore"  value="{{.hasMore}}" />
 		<input type="hidden" id="page"  value="{{.page}}" />
-		<div class="col-md-10 info-list">
+		<div class="col-md-12 info-list">
 		{{template "info/listPage.tpl" .}}
 		<a href="javascript:;" class="load-more">加载更多<span class="loading"></span></a>
 		</div>

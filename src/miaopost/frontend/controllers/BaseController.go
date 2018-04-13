@@ -16,6 +16,9 @@ func (this *BaseController) Prepare() {
 	this.Data["footer_nav"] = footer_nav
 	this.Data["last_footer_nav_index"] = len(footer_nav) - 1
 
+	side_adv := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_Side)
+	this.Data["side_adv"] = side_adv
+
 	this.Data["version"] = help.Version
 
 }

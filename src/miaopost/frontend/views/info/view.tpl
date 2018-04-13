@@ -1,6 +1,6 @@
 <div class="view">
 	<div class="row meta">
-		<div class="col-md-offset-1 col-md-7 col-xs-9">
+		<div class="col-md-offset-1 col-md-9 col-xs-9">
 			<span class="badge">{{.cat.Name}}</span>
 			<span>阅读({{.info.Views}}) </span>
 			<span>{{showtime .info.Create_time}}</span>

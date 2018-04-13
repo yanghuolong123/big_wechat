@@ -13,8 +13,9 @@
                                         <span>中国学生极简信息发布平台</span>
                                 </div>
                         </div>
-                        <div class="content">
-                                {{.LayoutContent}}
+                        <div class="content row">
+                            <div class="col-md-9">{{.LayoutContent}}</div>
+                             <div class="col-md-3">{{template "layout/side.tpl" .}}</div>   
                         </div>
                 </div>
 
