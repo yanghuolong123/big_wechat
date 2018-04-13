@@ -32,7 +32,7 @@
                   <td>
                     <a href="/article/edit?id={{.Id}}&type={{$.type}}"><i class="fa fa-wrench"></i></a>                    
                     <a href="/article/delete?id={{.Id}}&type={{$.type}}" class="delete"><i class="fa fa-times"></i></a>
-                    <a href="http://www.miaopost.com/article/view?id={{.Id}}" target="_blank"><i class="fa fa-external-link"></i></a>
+                    <a href="{{if .Link}}{{.Link}}{{else}}http://www.miaopost.com/article/view?id={{.Id}}{{end}}" target="_blank"><i class="fa fa-external-link"></i></a>
                     </td>
                 </tr>
                 {{end}}
