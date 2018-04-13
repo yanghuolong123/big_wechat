@@ -7,7 +7,17 @@ import (
 )
 
 const (
-	Footer_Nav = iota + 1
+	Type_Nav = iota + 1
+	Type_Adv
+)
+
+const (
+	Nav_Footer = iota + 1
+)
+
+const (
+	Adv_Side = iota + 1
+	Adv_Footer
 )
 
 func init() {
@@ -16,8 +26,11 @@ func init() {
 
 type Article struct {
 	Id          int
+	Type        int
 	Group_id    int
 	Title       string
+	Logo        string
+	Link        string
 	Content     string
 	Sort        int
 	Status      int
@@ -55,10 +68,18 @@ func DelArticleById(id int) bool {
 	return int(i) > 0
 }
 
-func GetArticleGroupMap() map[int]string {
-	m := map[int]string{
-		Footer_Nav: "底部导航",
+func GetArticleGroupMap() map[int]map[int]string {
+	m := map[int]map[int]string{}
+	m1 := map[int]string{
+		Nav_Footer: "底部导航",
 	}
+	m2 := map[int]string{
+		Adv_Side:   "侧边栏广告位",
+		Adv_Footer: "底部广告位",
+	}
+
+	m[Type_Nav] = m1
+	m[Type_Adv] = m2
 
 	return m
 }

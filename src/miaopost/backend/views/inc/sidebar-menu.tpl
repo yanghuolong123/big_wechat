@@ -3,7 +3,8 @@
         <li class="header">菜单</li>
         <li><a href="http://www.miaopost.com" target="_blank"><i class="fa fa-share"></i> <span>站点首页</span></a></li>
         <li><a href="/"><i class="fa fa-link"></i> <span>首页</span></a></li>
-        <li><a href="/article/list"><i class="fa fa-book"></i> <span>文章管理</span></a></li>
+        <li><a href="/article/list?type=1"><i class="fa  fa-file-text"></i> <span>导航管理</span></a></li>
+        <li><a href="/article/list?type=2"><i class="fa   fa-align-left"></i> <span>广告管理</span></a></li>
         
         <li class="treeview">
           <a href="#"><i class="fa fa-folder"></i> <span>统计</span>
