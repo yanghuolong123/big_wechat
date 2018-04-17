@@ -10,6 +10,8 @@ func init() {
 	beego.Router("/test", &controllers.TestController{})
 	beego.Router("/delete", &controllers.TestController{}, "*:DelInfo")
 
+	// 微信接入
+	beego.Router("/wechat", &controllers.WechatController{}, "get,post:Index")
 	beego.Router("/uploadfile", &api.UploadController{}, "post:Uploadfile")
 
 	beego.Router("/tips", &api.TipsController{}, "get:Tips")

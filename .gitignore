@@ -16,6 +16,8 @@ src/miaopost/frontend/fast-disploy-china.sh
 #src/miaopost/frontend/conf/app.conf
 src/miaopost/frontend/log/
 !src/miaopost/frontend/log/web.log
+src/miaopost/frontend/conf/app.conf
+src/miaopost/frontend/conf/app.conf-online
 
 src/miaopost/backend/backend
 src/miaopost/backend/fast-disploy.sh
