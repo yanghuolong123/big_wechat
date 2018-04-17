@@ -6,6 +6,7 @@ import (
 	"time"
 	"yhl/help"
 	//	m "yhl/model"
+	"yhl/wechat"
 )
 
 type TestController struct {
@@ -14,12 +15,27 @@ type TestController struct {
 
 func (this *TestController) Get() {
 	t := time.Now()
-	begin := t.Add(-time.Minute * 1)
-	end := t
-	fmt.Println("========== begin:", begin)
-	fmt.Println("========== end:", end)
-	count := models.StatPv(begin, end)
-	fmt.Println("========== count:", count)
+
+	//urlstr := "http://www.miaopost.com"
+	signPackage := wechat.GetSignPackage()
+	fmt.Println("===== signPackage:", signPackage)
+	fmt.Println("==== ::", help.ClientRoute)
+
+	share := wechat.Share{}
+	share.Title = "Miaopost 分享测试"
+	share.Desc = "描述打算打算打算打算打算送打算的打算"
+	share.Link = "http://www.miaopost.com"
+	share.Img = "http://www.miaopost.com/static/img/logo.png"
+
+	this.Data["signPackage"] = signPackage
+	this.Data["wxshare"] = share
+	/*	begin := t.Add(-time.Minute * 1)
+		end := t
+		fmt.Println("========== begin:", begin)
+		fmt.Println("========== end:", end)
+		count := models.StatPv(begin, end)
+		fmt.Println("========== count:", count)
+	*/
 	/*
 
 		q := m.Query{}
