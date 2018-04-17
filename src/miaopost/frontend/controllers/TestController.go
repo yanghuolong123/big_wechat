@@ -19,7 +19,7 @@ func (this *TestController) Get() {
 	//urlstr := "http://www.miaopost.com"
 	signPackage := wechat.GetSignPackage()
 	fmt.Println("===== signPackage:", signPackage)
-	fmt.Println("==== ::", help.ClientRoute)
+	//	fmt.Println("==== ::", help.ClientRoute)
 
 	share := wechat.Share{}
 	share.Title = "Miaopost 分享测试"
