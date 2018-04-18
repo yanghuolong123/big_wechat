@@ -1,7 +1,7 @@
 <script src="/static/js/jweixin-1.0.0.js"></script>
 <script>
 wx.config({
-    debug: true,
+    debug: false,
     appId: '{{map_get .signPackage "appId"}}',
     timestamp: {{map_get .signPackage "timestamp"}},
     nonceStr: '{{map_get .signPackage "nonceStr"}}',
