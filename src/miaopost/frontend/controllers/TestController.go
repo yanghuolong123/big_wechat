@@ -17,6 +17,8 @@ type TestController struct {
 func (this *TestController) Get() {
 	t := time.Now()
 
+	fmt.Println("=========== isWx:", this.IsWeixin())
+
 	/*
 		//urlstr := "http://www.miaopost.com"
 		signPackage := wechat.GetSignPackage()

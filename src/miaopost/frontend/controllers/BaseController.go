@@ -29,7 +29,11 @@ func (this *BaseController) Prepare() {
 
 	this.Data["version"] = help.Version
 
-	signPackage := wechat.GetSignPackage()
-	this.Data["signPackage"] = signPackage
-	this.Data["wxshare"] = WxShare
+	isWx := this.IsWeixin()
+	if isWx {
+		signPackage := wechat.GetSignPackage()
+		this.Data["signPackage"] = signPackage
+		this.Data["wxshare"] = WxShare
+	}
+	this.Data["isWeixin"] = isWx
 }

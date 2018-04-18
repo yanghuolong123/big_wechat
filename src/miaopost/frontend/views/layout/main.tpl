@@ -22,6 +22,8 @@
                
                 {{template "layout/footer.tpl" .}}
                 {{template "layout/base-script.tpl" .}}
+                {{if .isWeixin}}
                 {{template "layout/wxshare.tpl" .}}
+                {{end}}
          </body>
 </html>
