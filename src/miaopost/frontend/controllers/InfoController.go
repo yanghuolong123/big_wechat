@@ -145,6 +145,7 @@ func (this *InfoController) View() {
 	if len(photos) > 0 {
 		share.Img = this.Ctx.Input.Site() + photos[0].Url
 	}
+	share.Title = cat.Name + " - 秒Po"
 	share.Link = help.ClientRoute
 	this.Data["wxshare"] = share
 
