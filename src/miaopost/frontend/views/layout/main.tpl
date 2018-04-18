@@ -22,5 +22,6 @@
                
                 {{template "layout/footer.tpl" .}}
                 {{template "layout/base-script.tpl" .}}
+                {{template "layout/wxshare.tpl" .}}
          </body>
 </html>

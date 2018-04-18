@@ -138,6 +138,15 @@ func (this *InfoController) View() {
 	photos := models.GetPhotoByInfoid(int(id))
 	this.Data["photos"] = photos
 
+	if info.Content != "" {
+		WxShare.Desc = info.Content
+	}
+	if len(photos) > 0 {
+		WxShare.Img = this.Ctx.Input.Site() + photos[0].Url
+	}
+	WxShare.Link = help.ClientRoute
+	this.Data["wxshare"] = WxShare
+
 	this.Layout = "layout/main1.tpl"
 	this.TplName = "info/view.tpl"
 }

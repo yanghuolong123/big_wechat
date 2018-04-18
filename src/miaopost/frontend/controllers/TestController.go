@@ -6,29 +6,30 @@ import (
 	"time"
 	"yhl/help"
 	//	m "yhl/model"
-	"yhl/wechat"
+	//	"yhl/wechat"
 )
 
 type TestController struct {
-	help.BaseController
+	//	help.BaseController
+	BaseController
 }
 
 func (this *TestController) Get() {
 	t := time.Now()
 
-	//urlstr := "http://www.miaopost.com"
-	signPackage := wechat.GetSignPackage()
-	fmt.Println("===== signPackage:", signPackage)
-	//	fmt.Println("==== ::", help.ClientRoute)
+	/*
+		//urlstr := "http://www.miaopost.com"
+		signPackage := wechat.GetSignPackage()
+		fmt.Println("===== signPackage:", signPackage)
+		//	fmt.Println("==== ::", help.ClientRoute)
 
-	share := wechat.Share{}
-	share.Title = "Miaopost 分享测试"
-	share.Desc = "描述打算打算打算打算打算送打算的打算"
-	share.Link = "http://www.miaopost.com"
-	share.Img = "http://www.miaopost.com/static/img/logo.png"
+		WxShare.Title = "Miaopost 分享测试"
+		WxShare.Desc = "描述打算打算打算打算打算送打算的打算"
 
-	this.Data["signPackage"] = signPackage
-	this.Data["wxshare"] = share
+		this.Data["signPackage"] = signPackage
+		this.Data["wxshare"] = WxShare
+	*/
+
 	/*	begin := t.Add(-time.Minute * 1)
 		end := t
 		fmt.Println("========== begin:", begin)
