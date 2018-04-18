@@ -90,6 +90,5 @@
   </footer>
   <div class="backdrop"></div>
 
-	{{template "layout/wxshare.tpl" .}}
-</body>
+	
 </html>
