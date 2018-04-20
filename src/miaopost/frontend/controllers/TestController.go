@@ -16,8 +16,10 @@ type TestController struct {
 
 func (this *TestController) Get() {
 	t := time.Now()
+	user := this.GetSession("user")
+	fmt.Println("============= session user:", user)
 
-	fmt.Println("=========== isWx:", this.IsWeixin())
+	//	fmt.Println("=========== isWx:", this.IsWeixin())
 
 	/*
 		//urlstr := "http://www.miaopost.com"

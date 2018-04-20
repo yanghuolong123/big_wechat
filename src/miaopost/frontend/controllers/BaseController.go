@@ -31,9 +31,45 @@ func (this *BaseController) Prepare() {
 
 	isWx := this.IsWeixin()
 	if isWx {
+		if !this.IsLogin() {
+			openid := wechat.GetOpenId(this.Ctx, help.ClientRoute)
+			if openid == "" {
+				goto loginEnd
+			}
+
+			user, err := models.GetUserByOpenid(openid)
+			if err == nil {
+				this.SetSession("user", user)
+				goto loginEnd
+			}
+
+			userinfo := wechat.GetWxUserinfo(openid, "")
+			if v, ok := userinfo["nickname"]; ok {
+				u := models.User{
+					Openid:   openid,
+					Nickname: v.(string),
+					Avatar:   userinfo["headimgurl"].(string),
+				}
+				if models.CreateUser(&u) > 0 {
+					this.SetSession("user", &u)
+				}
+			}
+		}
+
+	loginEnd:
+
 		signPackage := wechat.GetSignPackage()
 		this.Data["signPackage"] = signPackage
 		this.Data["wxshare"] = WxShare
 	}
 	this.Data["isWeixin"] = isWx
+}
+
+func (this *BaseController) IsLogin() bool {
+	user := this.GetSession("user")
+	if user != nil {
+		return true
+	}
+
+	return false
 }

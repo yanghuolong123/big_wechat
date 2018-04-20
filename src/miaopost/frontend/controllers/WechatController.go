@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"addwechat/models"
-	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
@@ -82,28 +80,6 @@ func subscribe(msgBody *wechat.MsgBody) {
 }
 
 func scanLogin(msgBody *wechat.MsgBody) (ekey string) {
-	ekey = msgBody.EventKey
-	cache := help.Cache
-	expire := 18000
-
-	user, err := models.GetUserByOpenid(msgBody.FromUserName)
-	if err == nil {
-		b, _ := json.Marshal(*user)
-		cache.Put(msgBody.EventKey, b, time.Duration(expire)*time.Second)
-		return
-	}
-
-	userinfo := wechat.GetWxUserinfo(msgBody.FromUserName, "")
-	if v, ok := userinfo["nickname"]; ok {
-		u := models.User{
-			Openid:   msgBody.FromUserName,
-			Nickname: v.(string),
-			Avatar:   userinfo["headimgurl"].(string),
-		}
-		models.CreateUser(&u)
-		b, _ := json.Marshal(u)
-		cache.Put(msgBody.EventKey, b, time.Duration(expire)*time.Second)
-	}
 
 	return
 }
