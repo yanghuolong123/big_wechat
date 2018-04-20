@@ -143,7 +143,7 @@ func (this *InfoController) View() {
 		share.Desc = info.Content
 	}
 	if len(photos) > 0 {
-		share.Img = this.Ctx.Input.Site() + photos[0].Url
+		share.Img = this.Ctx.Input.Site() + photos[0].Url + "!200!200"
 	}
 	share.Title = cat.Name + " - 秒Po"
 	share.Link = help.ClientRoute
