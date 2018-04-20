@@ -126,7 +126,7 @@ $(function(){
 
 				var upImg = rs.data;
 				if( rs.code == 0) {
-					$('.img-up-list').append('<div class="img-li img-li-new" data-url="' + upImg+ '"  data-big="' + upImg + '" style="background-image:url(' + upImg+ ')"><i></i></div>');
+					$('.img-up-list').append('<div class="img-li img-li-new" data-url="' + upImg+ '"  data-big="' + upImg + '" style="background-image:url(' + upImg+ '!200!200)"><i></i></div>');
 				}	
 				
 				// $('.img-li i').on('click', function() {
