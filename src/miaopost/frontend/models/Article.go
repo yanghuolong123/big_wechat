@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/astaxie/beego/orm"
+	"math/rand"
 	"time"
 	"yhl/help"
 )
@@ -17,7 +18,9 @@ const (
 
 const (
 	Adv_Side = iota + 1
-	Adv_Footer
+	Adv_Side_1
+	Adv_List_Bottom
+	Adv_View_Bottom
 )
 
 func init() {
@@ -74,8 +77,10 @@ func GetArticleGroupMap() map[int]map[int]string {
 		Nav_Footer: "底部导航",
 	}
 	m2 := map[int]string{
-		Adv_Side:   "侧边栏广告位",
-		Adv_Footer: "底部广告位",
+		Adv_Side:        "侧边栏广告位1",
+		Adv_Side_1:      "侧边栏广告位2",
+		Adv_List_Bottom: "列表底部广告位",
+		Adv_View_Bottom: "详情页底部广告位",
 	}
 
 	m[Type_Nav] = m1
@@ -105,4 +110,16 @@ func GetArticleStatusMap() map[int]string {
 		0:  "启用",
 		-1: "禁用",
 	}
+}
+
+func RandAdv(advs []Article, size int) (adv []Article) {
+	s := len(advs)
+	if s == 0 {
+		return
+	}
+	rand.Seed(time.Now().UnixNano())
+	r := rand.Intn(s)
+	adv = advs[r : r+size]
+
+	return
 }

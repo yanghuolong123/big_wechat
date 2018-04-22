@@ -21,4 +21,13 @@
 			{{end}}
 		</div>
 	</div>
+	<div class="adv row">
+		{{if .adv}}
+		<ul>
+		{{range .adv}}
+		<li><a href="{{if .Link}}{{.Link}}{{else}}/article/view?id={{.Id}}{{end}}"><img src="{{.Logo}}!800!800" /></a></li>
+		{{end}}
+		</ul>
+		{{end}}
+	</div>
 </div>

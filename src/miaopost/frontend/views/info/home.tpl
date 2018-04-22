@@ -37,6 +37,7 @@
 		<div class="col-md-12 info-list">
 		{{template "info/listPage.tpl" .}}
 		<a href="javascript:;" class="load-more">加载更多<span class="loading"></span></a>
+		{{template "info/listAdv.tpl" .}}
 		</div>
 	</div>
 </div>

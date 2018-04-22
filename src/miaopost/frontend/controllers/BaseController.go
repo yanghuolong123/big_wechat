@@ -24,12 +24,19 @@ func (this *BaseController) Prepare() {
 	this.Data["footer_nav"] = footer_nav
 	this.Data["last_footer_nav_index"] = len(footer_nav) - 1
 
-	side_adv := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_Side)
-	this.Data["side_adv"] = side_adv
+	isMobile := this.IsMobile()
+	this.Data["isMobile"] = isMobile
+	if !isMobile {
+		side_adv := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_Side)
+		this.Data["side_adv"] = models.RandAdv(side_adv, 1)
+		side_adv_1 := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_Side_1)
+		this.Data["side_adv_1"] = models.RandAdv(side_adv_1, 1)
+	}
 
 	this.Data["version"] = help.Version
 
 	isWx := this.IsWeixin()
+	this.Data["isWeixin"] = isWx
 	if isWx {
 		if !this.IsLogin() {
 			openid := wechat.GetOpenId(this.Ctx, help.ClientRoute)
@@ -62,7 +69,6 @@ func (this *BaseController) Prepare() {
 		this.Data["signPackage"] = signPackage
 		this.Data["wxshare"] = WxShare
 	}
-	this.Data["isWeixin"] = isWx
 }
 
 func (this *BaseController) IsLogin() bool {

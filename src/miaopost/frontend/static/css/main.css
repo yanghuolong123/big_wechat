@@ -27,6 +27,8 @@ a.list_content{color: #333;}
 a.list_content:hover{text-decoration: none;}
 .side img{width: 100%;}
 .side li{margin:15px 0; border-bottom: 1px solid #f0f0f0;}
+.list_adv{margin: 15px 0;}
+.list_adv img{width: 100%;}
 
 
 /** =============== home.tpl =============== **/
@@ -94,6 +96,7 @@ a.list_content:hover{text-decoration: none;}
 .view .meta span{margin-right: 25px;}
 .view .photos{margin-top: 15px;}
 .view .photos img{width: 100%; margin-bottom: 5px;}
+.view .adv img{width: 100%; margin: 20px 0;}
 
 
 /*** ========== article view.tpl **/
