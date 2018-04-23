@@ -82,7 +82,6 @@ func (this *InfoController) CreateGet() {
 	this.Data["cats"] = cats
 
 	if !this.IsWeixin() {
-		//this.Data["qr_url"] = "http://www.miaopost.com/info/create"
 		this.Data["qr_url"] = wechat.GetTmpStrQrImg("create")
 	}
 
