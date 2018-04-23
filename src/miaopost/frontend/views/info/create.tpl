@@ -54,14 +54,14 @@
                 </div>
               </div>
             </div>
-            {{if not .isWeixin}}
-             <div class="form-group">            
+            
+             <div class="form-group" style="{{if .isWeixin}}display: none;{{end}}">            
               <div class=" col-sm-offset-1 col-sm-4">
                 <label>我们会发送编辑链接至邮箱 <span class="text-danger label-tips">(建议填写)</span></label>
                 <input type="text" class="form-control" id="email" maxlength="55" placeholder="邮箱地址">
               </div>
             </div>     
-            {{end}}
+            
             <div class="form-group">
                   <div class="col-sm-offset-1 col-sm-5  error_tips text-danger"></div>
             </div>
