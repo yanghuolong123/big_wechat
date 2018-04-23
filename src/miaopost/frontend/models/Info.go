@@ -12,6 +12,7 @@ func init() {
 
 type Info struct {
 	Id          int
+	Uid         int
 	Cid         int
 	Content     string
 	Valid_day   int
@@ -20,6 +21,7 @@ type Info struct {
 	Views       int
 	Ip          string
 	Create_time time.Time
+	Update_time time.Time
 }
 
 type InfoVo struct {
@@ -31,6 +33,7 @@ type InfoVo struct {
 func CreateInfo(info *Info) int {
 	info.Ip = help.ClientIp
 	info.Create_time = time.Now()
+	info.Update_time = info.Create_time
 	i, err := orm.NewOrm().Insert(info)
 	if err != nil {
 		help.Log("error", err.Error())
@@ -65,6 +68,14 @@ func GetInfoByCid(cid int) []Info {
 	return infos
 }
 
+func GetInfoByUid(cid int) []Info {
+	var infos []Info
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("uid", cid).Filter("status", 0).OrderBy("-update_time").All(&infos)
+	help.Error(err)
+
+	return infos
+}
+
 func GetInfoByEmail(email string) []Info {
 	var infos []Info
 	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("email", email).OrderBy("-create_time").All(&infos)
@@ -80,7 +91,7 @@ func GetInfoPage(cid, offset, size int) (infos []Info) {
 	if cid > 0 {
 		qs = qs.Filter("cid", cid)
 	}
-	_, err := qs.OrderBy("-create_time").Limit(size, offset).All(&infos)
+	_, err := qs.OrderBy("-update_time").Limit(size, offset).All(&infos)
 	help.Error(err)
 
 	return
@@ -105,7 +116,7 @@ func IncInfoViews(id int) bool {
 }
 
 func SearchInfo(s string) (infos []Info) {
-	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0).Filter("content__icontains", s).OrderBy("-create_time").Limit(50).All(&infos)
+	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0).Filter("content__icontains", s).OrderBy("-update_time").Limit(50).All(&infos)
 	help.Error(err)
 
 	return

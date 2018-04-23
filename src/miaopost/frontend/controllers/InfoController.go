@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"miaopost/frontend/models"
 	"strings"
+	"time"
 	"yhl/help"
+	"yhl/model"
 )
 
 const pageSize int = 15
@@ -89,11 +91,16 @@ func (this *InfoController) CreatePost() {
 	email := this.GetString("email")
 	photo := this.GetString("photo")
 
+	u := this.GetSession("user")
+
 	info := new(models.Info)
 	info.Cid = int(cid)
 	info.Content = content
 	info.Valid_day = int(valid_day)
 	info.Email = email
+	if u != nil {
+		info.Uid = u.(*models.User).Id
+	}
 
 	id := models.CreateInfo(info)
 	if id > 0 {
@@ -243,22 +250,34 @@ func (this *InfoController) SuggestDel() {
 func (this *InfoController) ListPage() {
 	page, _ := this.GetInt("page")
 	cid, _ := this.GetInt("cid")
-	infos := models.GetInfoPage(int(cid), int(page)*pageSize, pageSize)
-	this.Data["infos"] = models.ConvertInfosToVo(&infos)
-	count := models.GetInfoCount(int(cid))
-	hasMore := 0
-	if (int(page)+1)*pageSize < count {
-		hasMore = 1
-	}
+	uid, _ := this.GetInt("uid")
 
-	this.Data["hasMore"] = hasMore
+	q := model.Query{}
+	q.Table = "tbl_info"
+	cm := map[string]interface{}{}
+	if int(cid) > 0 {
+		cm["cid"] = int(cid)
+	}
+	if int(uid) > 0 {
+		cm["uid"] = int(uid)
+		this.Data["isMy"] = true
+	}
+	cm["status"] = 0
+	q.Condition = cm
+	q.OrderBy = []string{"-update_time"}
+	var slice []models.Info
+	q.ReturnModelList = &slice
+	p := help.GetPageList(q, int(page), 15)
+
+	this.Data["infos"] = models.ConvertInfosToVo(p.DataList.(*[]models.Info))
 	this.TplName = "info/listPage.tpl"
 	s, _ := this.RenderString()
 
 	m := map[string]interface{}{}
 	m["listData"] = s
-	m["page"] = int(page)
-	m["hasMore"] = hasMore
+	m["page"] = p.CurrentPage
+	m["hasMore"] = p.HasMore
+
 	this.SendRes(0, "success", m)
 }
 
@@ -269,4 +288,49 @@ func (this *InfoController) Delete() {
 		this.SendRes(0, "success", nil)
 	}
 	this.SendRes(-1, "failed", nil)
+}
+
+// 置顶
+func (this *InfoController) Top() {
+	id, _ := this.GetInt("id")
+	info, err := models.GetInfoById(int(id))
+	if err != nil {
+		this.SendRes(-1, err.Error(), nil)
+	}
+
+	info.Update_time = time.Now()
+	err = models.UpdateInfo(info)
+	if err != nil {
+		this.SendRes(-1, err.Error(), nil)
+	}
+
+	this.SendRes(0, "success", nil)
+}
+
+// 我发布的信息
+func (this *InfoController) My() {
+	u := this.GetSession("user")
+	if u == nil {
+		this.Tips("还没有登陆")
+	}
+	user := u.(*models.User)
+	q := model.Query{}
+	q.Table = "tbl_info"
+	cm := map[string]interface{}{}
+	cm["uid"] = user.Id
+	cm["status"] = 0
+	q.Condition = cm
+	q.OrderBy = []string{"-update_time"}
+	var slice []models.Info
+	q.ReturnModelList = &slice
+	p := help.GetPageList(q, 0, 15)
+
+	this.Data["infos"] = models.ConvertInfosToVo(p.DataList.(*[]models.Info))
+	this.Data["page"] = p.CurrentPage
+	this.Data["hasMore"] = p.HasMore
+	this.Data["uid"] = user.Id
+	this.Data["isMy"] = true
+
+	this.Layout = "layout/main.tpl"
+	this.TplName = "info/my.tpl"
 }

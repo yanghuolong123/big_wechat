@@ -3,9 +3,14 @@
 	<div class="row">
 		<div class="col-md-8 col-xs-3 cat"><span class="label label-warning">{{.Cat.Name}}</span></div>
 		<div class="col-md-4 col-xs- 9 meta text-right">
-			<span>{{showtime .Info.Create_time}} </span>
+			<span>{{showtime .Info.Update_time}} </span>
+			{{if $.isMy}}
+			<span><a href="#" onclick="topInfo({{.Info.Id}});return false;">置顶</a></span>
+			<span><a href="#" onclick="delInfo({{.Info.Id}}, this);return false;">删除</a></span>
+			{{else}}
 			<span>阅读({{.Info.Views}})</span>
 			<span><a href="#" onclick="suggestDel({{.Info.Id}});return false;">建议删除</a></span>
+			{{end}}
 		</div>
 	</div>
 	<div class="row">

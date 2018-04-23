@@ -11,6 +11,35 @@ function suggestDel(infoId) {
 	})
 }
 
+// 删除信息
+var delInfo = function(id, obj){
+	$this = $(obj);
+	actionConfirm({msg:"你确认要删除?",confirm:function(){
+                        	$.post("/info/delete",{id:id}, function(e){
+			if(e.code<0) {
+	                                	prompt(e.msg);
+	                                	return false;
+	                        	}
+	                        	$this.parents(".info").remove();
+	                        	prompt({msg:"信息删除成功!",displayTime:3000});
+		});
+                }});	
+}
+
+// 删除信息
+var  topInfo = function(id){
+	$.post("/info/top",{id:id}, function(e){
+		if(e.code<0) {
+                                	prompt(e.msg);
+                                	return false;
+                        	}
+                        	prompt({msg:"信息置顶成功!",displayTime:3000});
+                        	setTimeout(function(){
+                        		window.location = location.href;
+                        	}, 2500);
+	});
+}
+
 $(function(){
 
 	// 搜索
@@ -142,7 +171,7 @@ $(function(){
 
 	// 查看更多
 	var hasMore = $("#hasMore").val();
-	if(hasMore == 0) {
+	if(hasMore == 0 || hasMore=="false") {
 		$(".load-more").hide();
 	}
 
@@ -150,7 +179,8 @@ $(function(){
 		$(".loading").append("<img src=\"/static/img/loading.gif\"/>");
 		var page = parseInt($("#page").val())+1;
 		var cid = $("#cid").val();
-		$.post("/info/listPage", {cid:cid, page:page}, function(e){
+		var uid = $("#uid").val();
+		$.post("/info/listPage", {cid:cid, page:page, uid:uid}, function(e){
 			isloading = false;
 			if( e.code<0) {
 				prompt(e.msg);
@@ -163,7 +193,7 @@ $(function(){
 						
 			$("#hasMore").val(e.data.hasMore);
 			hasMore = e.data.hasMore;
-			if(hasMore == 0) {
+			if(hasMore == 0 || hasMore==false) {
 				$(".load-more").hide();
 			}
 		});

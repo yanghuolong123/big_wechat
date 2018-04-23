@@ -16,8 +16,15 @@ type TestController struct {
 
 func (this *TestController) Get() {
 	t := time.Now()
-	user := this.GetSession("user")
-	fmt.Println("============= session user:", user)
+
+	user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
+	if err == nil {
+		this.SetSession("user", user)
+		fmt.Println("======================= 登陆成功")
+	}
+
+	//	user := this.GetSession("user")
+	//	fmt.Println("============= session user:", user)
 
 	//	fmt.Println("=========== isWx:", this.IsWeixin())
 

@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/astaxie/beego/orm"
 	"time"
+	"yhl/help"
 )
 
 func init() {
@@ -27,6 +28,7 @@ func GetUserByOpenid(openid string) (user *User, err error) {
 	o := orm.NewOrm()
 	user = &User{Openid: openid}
 	err = o.Read(user, "Openid")
+	help.Error(err)
 
 	return
 }
