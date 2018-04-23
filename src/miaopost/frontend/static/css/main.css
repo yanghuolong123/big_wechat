@@ -90,7 +90,8 @@ a.list_content:hover{text-decoration: none;}
     width: 12.11rem;
 }
 .create h4{color: #777;}
-.create .wx img{width: 150px; height: 150px;}
+.create .wx{padding-left: 15px;}
+.create .wx img{width: 150px; height: 150px; }
 
 /**  =============== info view.tpl =============== **/
 .view .meta{font-size: 13px; color: #777; margin-bottom: 8px;}
