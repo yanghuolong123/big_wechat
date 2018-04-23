@@ -48,40 +48,17 @@ func (this *WechatController) Index() {
 }
 
 func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
-	if msgBody.MsgType == "event" && msgBody.Event == "subscribe" {
-		if strings.Contains(msgBody.EventKey, "login_") {
-			msgBody.EventKey = strings.TrimLeft(msgBody.EventKey, "qrscene_")
-			key := scanLogin(msgBody)
-			//url := "http://www.addwechat.com/loginByKey?key=" + key
-			url := "http://addwechat.feichangjuzu.com/loginByKey?key=" + key
+	url := "http://www.miaopost.com/info/create"
+	if msgBody.MsgType == "event" && (msgBody.Event == "subscribe" || msgBody.Event == "SCAN") {
+		if strings.Contains(msgBody.EventKey, "create") {
 
-			return replyText(msgBody, "登陆成功! <a href=\""+url+"\">进入AddWechat</a>")
-		}
-
-		subscribe(msgBody)
-		return nil
-	}
-	if msgBody.MsgType == "event" && msgBody.Event == "SCAN" {
-		if strings.HasPrefix(msgBody.EventKey, "login_") {
-			key := scanLogin(msgBody)
-			//url := "http://www.addwechat.com/loginByKey?key=" + key
-			url := "http://addwechat.feichangjuzu.com/loginByKey?key=" + key
-
-			return replyText(msgBody, "登陆成功! <a href=\""+url+"\">进入AddWechat</a>")
+			return replyText(msgBody, "关联成功，发布信息完成后，您可以通过公众号的 “我的发布” 菜单进行便捷操作! <a href=\""+url+"\">发布我的信息</a>")
 		}
 
 		return nil
 	}
 
 	return nil
-}
-
-func subscribe(msgBody *wechat.MsgBody) {
-}
-
-func scanLogin(msgBody *wechat.MsgBody) (ekey string) {
-
-	return
 }
 
 func replyText(msgBody *wechat.MsgBody, text string) *wechat.MsgBody {

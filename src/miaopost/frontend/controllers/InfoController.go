@@ -7,6 +7,7 @@ import (
 	"time"
 	"yhl/help"
 	"yhl/model"
+	"yhl/wechat"
 )
 
 const pageSize int = 15
@@ -79,6 +80,11 @@ func (this *InfoController) CreateGet() {
 
 	cats := models.GetAllCategory()
 	this.Data["cats"] = cats
+
+	if !this.IsWeixin() {
+		//this.Data["qr_url"] = "http://www.miaopost.com/info/create"
+		this.Data["qr_url"] = wechat.GetTmpStrQrImg("create")
+	}
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "info/create.tpl"

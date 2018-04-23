@@ -16,12 +16,36 @@ type TestController struct {
 
 func (this *TestController) Get() {
 	t := time.Now()
+	/*
+		m := map[string]interface{}{}
+		m["button"] = []interface{}{
+			map[string]string{
+				"type": "view",
+				"name": "进入秒Po",
+				"url":  "http://www.miaopost.com",
+			},
+			map[string]string{
+				"type": "view",
+				"name": "我的发布",
+				"url":  "http://www.miaopost.com/info/my",
+			},
+			map[string]string{
+				"type": "view",
+				"name": "关于秒Po",
+				"url":  "http://www.miaopost.com/article/view?id=1",
+			},
+		}
+		data := wechat.CreateMenu(m)
+		fmt.Println(data)
+	*/
 
-	user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
-	if err == nil {
-		this.SetSession("user", user)
-		fmt.Println("======================= 登陆成功")
-	}
+	/*
+		user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
+		if err == nil {
+			this.SetSession("user", user)
+			fmt.Println("======================= 登陆成功")
+		}
+	*/
 
 	//	user := this.GetSession("user")
 	//	fmt.Println("============= session user:", user)

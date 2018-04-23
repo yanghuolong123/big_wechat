@@ -1,4 +1,18 @@
 <div class="create">
+       {{if not .isWeixin}}
+       <h4>微信发布</h4>
+       <div class="row">
+         <div class="col-sm-offset-1">
+          <p class="text-muted">(通过公众号进行发布，即可通过 “我的发布” 菜单享受便捷修改，删除，免费置顶服务)</p>           
+           {{if .qr_url}}
+            <div class="wx">
+            <img src="{{.qr_url}}">
+            </div>
+           {{end}}
+         </div>
+       </div>
+       <h4>普通发布</h4>
+       {{end}}
         <form class="form-horizontal">
             <div class="form-group">            
               <div class="col-sm-offset-1 col-sm-4">
@@ -40,12 +54,14 @@
                 </div>
               </div>
             </div>
+            {{if not .isWeixin}}
              <div class="form-group">            
               <div class=" col-sm-offset-1 col-sm-4">
                 <label>我们会发送编辑链接至邮箱 <span class="text-danger label-tips">(建议填写)</span></label>
                 <input type="text" class="form-control" id="email" maxlength="55" placeholder="邮箱地址">
               </div>
-            </div>                  
+            </div>     
+            {{end}}
             <div class="form-group">
                   <div class="col-sm-offset-1 col-sm-5  error_tips text-danger"></div>
             </div>
