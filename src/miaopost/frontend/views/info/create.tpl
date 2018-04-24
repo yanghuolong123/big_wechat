@@ -43,7 +43,7 @@
               </div>
             </div>
             <div class="form-group">            
-              <div class=" col-sm-offset-1 col-sm-2">
+              <div class=" col-sm-offset-1 col-sm-3">
                 <label>自动删除发布 <span class="text-danger label-tips">(建议填写)</span></label>
                 <div class="row">
                   <div  class="col-md-8 col-xs-8">
