@@ -18,9 +18,6 @@ type InfoController struct {
 
 // 首页
 func (this *InfoController) Get() {
-	cats := models.GetAllCategory()
-	this.Data["cats"] = cats
-
 	infos := models.GetInfoPage(0, 0, pageSize)
 	this.Data["infos"] = models.ConvertInfosToVo(&infos)
 	count := models.GetInfoCount(0)
@@ -41,9 +38,6 @@ func (this *InfoController) Get() {
 func (this *InfoController) List() {
 	cid, _ := this.GetInt("cid")
 	page, _ := this.GetInt("page")
-
-	cats := models.GetAllCategory()
-	this.Data["cats"] = cats
 
 	this.Data["hasMore"] = 0
 	this.Data["page"] = int(page)
@@ -77,9 +71,6 @@ func (this *InfoController) List() {
 func (this *InfoController) CreateGet() {
 	cid, _ := this.GetInt("cid")
 	this.Data["cid"] = int(cid)
-
-	cats := models.GetAllCategory()
-	this.Data["cats"] = cats
 
 	if !this.IsWeixin() {
 		this.Data["qr_url"] = wechat.GetTmpStrQrImg("create")
@@ -134,9 +125,6 @@ func (this *InfoController) CreatePost() {
 
 // 展示页
 func (this *InfoController) View() {
-	cats := models.GetAllCategory()
-	this.Data["cats"] = cats
-
 	id, _ := this.GetInt("id")
 	models.IncInfoViews(int(id))
 

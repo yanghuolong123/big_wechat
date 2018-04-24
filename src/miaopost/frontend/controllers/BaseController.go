@@ -20,6 +20,9 @@ type BaseController struct {
 func (this *BaseController) Prepare() {
 	this.BaseController.Prepare()
 
+	cats := models.GetAllCategory()
+	this.Data["cats"] = cats
+
 	footer_nav := models.GetArticleByType(models.Type_Nav)
 	this.Data["footer_nav"] = footer_nav
 	this.Data["last_footer_nav_index"] = len(footer_nav) - 1
