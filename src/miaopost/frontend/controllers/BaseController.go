@@ -18,8 +18,6 @@ type BaseController struct {
 }
 
 func (this *BaseController) Prepare() {
-	this.BaseController.Prepare()
-
 	cats := models.GetAllCategory()
 	this.Data["cats"] = cats
 
@@ -72,6 +70,8 @@ func (this *BaseController) Prepare() {
 		this.Data["signPackage"] = signPackage
 		this.Data["wxshare"] = WxShare
 	}
+
+	this.BaseController.Prepare()
 }
 
 func (this *BaseController) IsLogin() bool {
