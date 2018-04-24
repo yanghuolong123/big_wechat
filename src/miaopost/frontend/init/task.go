@@ -6,6 +6,7 @@ import (
 	"miaopost/frontend/models"
 	"time"
 	"yhl/help"
+	"yhl/wechat"
 )
 
 func init() {
@@ -18,6 +19,9 @@ func init() {
 
 	statEmail := toolbox.NewTask("statEmail", "0 10 0 * * *", statEmail)
 	toolbox.AddTask("statEmail", statEmail)
+
+	clearWxCache := toolbox.NewTask("clearWxCache", "0 0 */1 * * *", clearWxCache)
+	toolbox.AddTask("clearWxCache", clearWxCache)
 
 	toolbox.StartTask()
 }
@@ -53,6 +57,20 @@ func statEmail() error {
 		help.SendMail(email, "秒Po每日数据统计", msg, "html")
 
 	}()
+
+	return nil
+}
+
+func clearWxCache() error {
+	help.Log("task", "更新微信token.....")
+	cache := help.Cache
+	cache.Delete("access_token_" + wechat.Appid)
+	cache.Delete("jsapi_ticket_" + wechat.Appid)
+
+	accessToken := wechat.GetAccessToken()
+	jsapiTickey := wechat.GetJsApiTickey()
+	help.Log("task", "=============== new accessToken:"+accessToken)
+	help.Log("task", "=============== new jsapiTickey:"+jsapiTickey)
 
 	return nil
 }
