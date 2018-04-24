@@ -138,6 +138,18 @@ $(function(){
 	});
 
 	$('#imgs').on('change', function() {
+		$('.img-up-list').after('<div class="progress">'+
+		  '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 1%">'+
+		    '<span class="sr-only">100% Complete</span>'+
+		  '</div>'+
+		'</div>');
+		var n = 10;
+		var t = setInterval(function(){
+			$(".progress-bar").css("width", n+"%");
+			if (n<96) {
+				n += 1;
+			}			
+		}, 100);
 		var formData = new FormData();
 		formData.append('file', $('#imgs')[0].files[0]);				
 		$.ajax({
@@ -148,6 +160,9 @@ $(function(){
 			processData: false,
 			contentType: false,
 			success:function(rs,textStatus,jqXHR){
+				clearInterval(t);
+				$(".progress-bar").css("width", "100%");
+				$(".progress").remove();
 				if( rs.code <0) {
 					prompt(rs.msg);
 					return false;
