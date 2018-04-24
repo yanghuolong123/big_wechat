@@ -149,7 +149,7 @@ $(function(){
 			if (n<96) {
 				n += 1;
 			}			
-		}, 100);
+		}, 50);
 		var formData = new FormData();
 		formData.append('file', $('#imgs')[0].files[0]);				
 		$.ajax({
