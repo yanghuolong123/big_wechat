@@ -20,7 +20,7 @@ func init() {
 	statEmail := toolbox.NewTask("statEmail", "0 10 0 * * *", statEmail)
 	toolbox.AddTask("statEmail", statEmail)
 
-	clearWxCache := toolbox.NewTask("clearWxCache", "0 0 */1 * * *", clearWxCache)
+	clearWxCache := toolbox.NewTask("clearWxCache", "0 */30 * * * *", clearWxCache)
 	toolbox.AddTask("clearWxCache", clearWxCache)
 
 	toolbox.StartTask()
@@ -66,11 +66,14 @@ func clearWxCache() error {
 	cache := help.Cache
 	cache.Delete("access_token_" + wechat.Appid)
 	cache.Delete("jsapi_ticket_" + wechat.Appid)
+	cache.Delete("qr_img_create")
 
 	accessToken := wechat.GetAccessToken()
 	jsapiTickey := wechat.GetJsApiTickey()
+	createImg := wechat.GetTmpStrQrImg("create")
 	help.Log("task", "=============== new accessToken:"+accessToken)
 	help.Log("task", "=============== new jsapiTickey:"+jsapiTickey)
+	help.Log("task", "=============== new createImg:"+createImg)
 
 	return nil
 }
