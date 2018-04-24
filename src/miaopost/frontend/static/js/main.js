@@ -146,8 +146,8 @@ $(function(){
 		var n = 10;
 		var t = setInterval(function(){
 			$(".progress-bar").css("width", n+"%");
-			if (n<96) {
-				n += 1;
+			if (n<95) {
+				n += 5;
 			}			
 		}, 50);
 		var formData = new FormData();
@@ -161,8 +161,10 @@ $(function(){
 			contentType: false,
 			success:function(rs,textStatus,jqXHR){
 				clearInterval(t);
-				$(".progress-bar").css("width", "100%");
-				$(".progress").remove();
+				$(".progress-bar").css("width", "100%");				
+				setTimeout(function(){
+					$(".progress").remove();
+				},1000);
 				if( rs.code <0) {
 					prompt(rs.msg);
 					return false;
