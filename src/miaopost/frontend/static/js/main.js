@@ -21,19 +21,19 @@ var delInfo = function(id, obj){
 	                                	return false;
 	                        	}
 	                        	$this.parents(".info").remove();
-	                        	prompt({msg:"置顶成功，您的发布已成为最新发布，您可以多次使用置顶，提升显示效果。",displayTime:3000});
+	                        	prompt({msg:"信息删除成功!",displayTime:3000});
 		});
                 }});	
 }
 
-// 删除信息
+// 置顶信息
 var  topInfo = function(id){
 	$.post("/info/top",{id:id}, function(e){
 		if(e.code<0) {
                                 	prompt(e.msg);
                                 	return false;
                         	}
-                        	prompt({msg:"信息置顶成功!",displayTime:3000});
+                        	prompt({msg:"置顶成功，您的发布已成为最新发布，您可以多次使用置顶，提升显示效果。",displayTime:3000});
                         	setTimeout(function(){
                         		window.location = location.href;
                         	}, 2500);
