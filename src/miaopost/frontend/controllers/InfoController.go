@@ -165,12 +165,18 @@ func (this *InfoController) View() {
 // 编辑
 func (this *InfoController) EditGet() {
 	code := this.GetString("code")
-	code = help.DesDecrypt(code, help.DesKey)
+	infoId, _ := this.GetInt("id")
+	var id int
+	if code != "" {
+		code = help.DesDecrypt(code, help.DesKey)
 
-	s := strings.Split(code, ",")
-	id := help.StrToInt(s[0])
-	if id <= 0 {
-		this.Redirect("/tips?msg=code不正确", 302)
+		s := strings.Split(code, ",")
+		id = help.StrToInt(s[0])
+		if id <= 0 {
+			this.Redirect("/tips?msg=code不正确", 302)
+		}
+	} else {
+		id = int(infoId)
 	}
 
 	info, err := models.GetInfoById(id)

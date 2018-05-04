@@ -37,7 +37,7 @@
                 </div>
               </div>
             </div>
-             <div class="form-group">            
+             <div class="form-group" style="{{if .isWeixin}}display: none;{{end}}">            
               <div class=" col-sm-offset-1 col-sm-4">
                 <label>我们会发送编辑链接至邮箱</label>
                 <input type="text" class="form-control" id="email" value="{{.info.Email}}" maxlength="55" placeholder="邮箱地址">
@@ -49,7 +49,7 @@
             <div class="form-group">
               <div class="col-sm-offset-1 col-sm-10">
                 <input type="hidden" id="info_id"  value="{{.info.Id}}" name="id">
-                <button type="button" id="edit_info_btn" class="btn btn-success btn-lg">发布</button>
+                <button type="button" id="edit_info_btn" class="btn btn-success btn-lg">保存</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" id="del_info_btn" class="btn btn-danger btn-lg">删除</button>
               </div>

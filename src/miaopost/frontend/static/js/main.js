@@ -21,7 +21,7 @@ var delInfo = function(id, obj){
 	                                	return false;
 	                        	}
 	                        	$this.parents(".info").remove();
-	                        	prompt({msg:"信息删除成功!",displayTime:3000});
+	                        	prompt({msg:"置顶成功，您的发布已成为最新发布，您可以多次使用置顶，提升显示效果。",displayTime:3000});
 		});
                 }});	
 }

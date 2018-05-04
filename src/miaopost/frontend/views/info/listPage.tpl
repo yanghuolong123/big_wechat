@@ -6,6 +6,7 @@
 			<span>{{showtime .Info.Update_time}} </span>
 			{{if $.isMy}}
 			<span><a href="#" onclick="topInfo({{.Info.Id}});return false;">置顶</a></span>
+			<span><a href="/info/edit?id={{.Info.Id}}">编辑</a></span>
 			<span><a href="#" onclick="delInfo({{.Info.Id}}, this);return false;">删除</a></span>
 			{{else}}
 			<span>阅读({{.Info.Views}})</span>
