@@ -219,7 +219,7 @@ $(function(){
 
 
 	$("#loginBtn").click(function(){
-		$("#login_qrcode_img").html('<h4 style="color: red;">加载中.... <img src="/static/img/loading.gif" /></h4>');
+		$("#login_qrcode_img").html('<h4 style="color: red;">专属通道（二维码）生成中…<img src="/static/img/loading.gif" /></h4>');
 		$('#loginModal').modal({backdrop: 'static', keyboard: false});
 		$.get("/login", function(e){
 			$("#login_qrcode_img").html(e.data);

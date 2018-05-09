@@ -5,6 +5,7 @@
 .page-header a.search_cats{font-size: 14px;}
 .content{padding-bottom: 15px; min-height: 500px;}
 .modal-dialog{margin-top: 180px;}
+#loginModal .modal-dialog{margin-top: 50px;}
 .footer { color: #969696;    height: 60px;    padding-top: 20px; margin-bottom: 10px; text-align: center; }
 .footer_top a {    color: #333;    font-size: 14px;    margin: 0 10px;}
 .footer_top a:hover{color: #2f2f2f;}
@@ -103,3 +104,11 @@ a.list_content:hover{text-decoration: none;}
 
 /*** ========== article view.tpl **/
 .article-view {padding-top: 0px; padding-left: 15px;}
+
+/*======== user css */
+.user .table td {border-bottom: 1px solid #ddd; border-top: 0px; color: #777;}
+.user .table td a{text-align: right;}
+.user .title{margin-bottom: 40px;}
+.user .title h4{color: #777;}
+.user label{padding-top: 10px;}
+.user a.link{color: #777;}

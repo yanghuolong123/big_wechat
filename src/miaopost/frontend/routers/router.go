@@ -17,11 +17,18 @@ func init() {
 	beego.Router("/tips", &api.TipsController{}, "get:Tips")
 	beego.Router("/qrcode/png", &api.QrcodeController{}, "get:Png")
 
+	// 登陆
 	beego.Router("/login", &controllers.LoginController{}, "post:LoginPost")
 	beego.Router("/login", &controllers.LoginController{}, "get:LoginGet")
 	beego.Router("/loginByKey", &controllers.LoginController{}, "get:LoginByKey")
 	beego.Router("/logout", &controllers.LoginController{}, "get,post:Logout")
 
+	// 用户
+	beego.Router("/user", &controllers.UserController{}, "get:Index")
+	beego.Router("/user/edit", &controllers.UserController{}, "get:EditGet")
+	beego.Router("/user/edit", &controllers.UserController{}, "post:EditPost")
+
+	// 信息
 	beego.Router("/", &controllers.InfoController{})
 	beego.Router("/info/create", &controllers.InfoController{}, "get:CreateGet")
 	beego.Router("/info/create", &controllers.InfoController{}, "post:CreatePost")
@@ -35,5 +42,6 @@ func init() {
 	beego.Router("/info/my", &controllers.InfoController{}, "*:My")
 	beego.Router("/info/top", &controllers.InfoController{}, "*:Top")
 
+	// 文章
 	beego.Router("/article/view", &controllers.ArticleController{}, "*:View")
 }

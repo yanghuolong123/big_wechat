@@ -24,6 +24,14 @@ type User struct {
 	Createtime time.Time
 }
 
+func GetUserById(id int) (user *User, err error) {
+	o := orm.NewOrm()
+	user = &User{Id: id}
+	err = o.Read(user)
+
+	return
+}
+
 func GetUserByOpenid(openid string) (user *User, err error) {
 	o := orm.NewOrm()
 	user = &User{Openid: openid}

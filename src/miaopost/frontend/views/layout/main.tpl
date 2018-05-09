@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="col-md-2">
                                 {{if .user}}
-                                    <a  href="/info/my" class="btn btn-info">
+                                    <a  href="/user" class="btn btn-info">
                                                       <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  {{.user.Nickname}}
                                     </a>  
                                 {{else}}
