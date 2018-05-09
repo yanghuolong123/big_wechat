@@ -28,18 +28,18 @@
             <div class="form-group">             
               <div class="col-sm-offset-1 col-sm-6">
                 <label>图片和文字 <span class="text-danger label-tips">(至少一项)</span></label>
-                <textarea class="form-control"  id="info_content" rows="5" maxlength="2500" placeholder="添加描述">
-描述：
-价格：
-地址：
-联系方式：
-                </textarea>
                 <div class="img-up">
                     <div class="img-up-list clearfix">                        
                       
                     </div>
                     <label class="user-img" for="imgs"><input type="file" name="imgs" id="imgs"></label>
                 </div>
+                <textarea class="form-control"  id="info_content" rows="5" maxlength="2500" placeholder="添加描述">
+描述：
+价格：
+地址：
+联系方式：
+                </textarea>                
               </div>
             </div>
             <div class="form-group">            
@@ -56,7 +56,7 @@
               </div>
             </div>
             
-             <div class="form-group" style="{{if .isWeixin}}display: none;{{end}}">            
+             <div class="form-group" style="{{if .user}}display: none;{{end}}">            
               <div class=" col-sm-offset-1 col-sm-4">
                 <label>我们会发送编辑链接至邮箱 <span class="text-danger label-tips">(建议填写)</span></label>
                 <input type="text" class="form-control" id="email" maxlength="55" placeholder="邮箱地址">

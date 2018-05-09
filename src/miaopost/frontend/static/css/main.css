@@ -45,7 +45,7 @@ a.list_content:hover{text-decoration: none;}
 .create .valid_date{ padding-top: 5px; font-size: 16px;  color: #555; padding-left: 0px;}
 .create  form label{color: #777;}
 
-.img-up{margin-top: 15px;}
+.img-up{margin-top: 15px; margin-bottom: 8px;}
 
 .user-img {
     background: rgba(0, 0, 0, 0) url("../img/ico-add.png") no-repeat scroll center center / auto 2.33rem;

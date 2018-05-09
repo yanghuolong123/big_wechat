@@ -13,7 +13,6 @@
             <div class="form-group">             
               <div class="col-sm-offset-1 col-sm-6">
                 <label>图片和文字可以只填一项</label>
-                <textarea class="form-control"  id="info_content" rows="5" maxlength="2500" placeholder="添加描述">{{.info.Content}}</textarea>
                 <div class="img-up">
                     <div class="img-up-list clearfix">                        
                       {{range .photos}}
@@ -22,6 +21,7 @@
                     </div>
                     <label class="user-img" for="imgs"><input type="file" name="imgs" id="imgs"></label>
                 </div>
+                <textarea class="form-control"  id="info_content" rows="5" maxlength="2500" placeholder="添加描述">{{.info.Content}}</textarea>                
               </div>
             </div>
             <div class="form-group">            
@@ -37,7 +37,7 @@
                 </div>
               </div>
             </div>
-             <div class="form-group" style="{{if .isWeixin}}display: none;{{end}}">            
+             <div class="form-group" style="{{if .user}}display: none;{{end}}">            
               <div class=" col-sm-offset-1 col-sm-4">
                 <label>我们会发送编辑链接至邮箱</label>
                 <input type="text" class="form-control" id="email" value="{{.info.Email}}" maxlength="55" placeholder="邮箱地址">
