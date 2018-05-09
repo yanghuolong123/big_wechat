@@ -38,7 +38,7 @@
                     <div class="img-up-list clearfix">                        
                       
                     </div>
-                    <label class="user-img" for="imgs"><input type="file" name="imgs" id="imgs" capture="camera" accept="image/*"></label>
+                    <label class="user-img" for="imgs"><input type="file" name="imgs" id="imgs"></label>
                 </div>
               </div>
             </div>
