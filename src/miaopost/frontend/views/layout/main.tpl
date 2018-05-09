@@ -9,8 +9,19 @@
                                 <div class="logo col-md-2">
                                        <a href="/">秒Po-UTD</a>
                                 </div>
-                                <div class="slogan col-md-10">
+                                <div class="slogan col-md-8">
                                         <span>中国学生极简信息发布平台</span>
+                                </div>
+                                <div class="col-md-2">
+                                {{if .user}}
+                                    <a  href="/info/my" class="btn btn-info">
+                                                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  {{.user.Nickname}}
+                                    </a>  
+                                {{else}}
+                                    <button id="loginBtn" class="btn btn-info" type="button">
+                                              <span aria-hidden="true" class="glyphicon glyphicon-log-in"></span> 登录
+                                    </button>
+                                {{end}}
                                 </div>
                         </div>
                         <div class="content row">
@@ -19,7 +30,7 @@
                         </div>
                 </div>
 
-               
+                {{template "login/login.tpl" .}} 
                 {{template "layout/footer.tpl" .}}
                 {{template "layout/base-script.tpl" .}}
                 {{if .isWeixin}}

@@ -1,9 +1,11 @@
 package controllers
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
+	"miaopost/frontend/models"
 	"strings"
 	"time"
 	"yhl/help"
@@ -55,6 +57,15 @@ func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 			return replyText(msgBody, "关联成功，发布信息完成后，您可以通过公众号的 “我的发布” 菜单进行便捷操作! <a href=\""+url+"\">发布我的信息</a>")
 		}
 
+		if strings.Contains(msgBody.EventKey, "login_") {
+			msgBody.EventKey = strings.TrimLeft(msgBody.EventKey, "qrscene_")
+			key := scanLogin(msgBody)
+			_ = key
+			url := "http://www.miaopost.com"
+
+			return replyText(msgBody, "登陆成功! <a href=\""+url+"\">进入秒Po</a>")
+		}
+
 		return nil
 	}
 
@@ -70,4 +81,31 @@ func replyText(msgBody *wechat.MsgBody, text string) *wechat.MsgBody {
 	replyBody.Content = text
 
 	return replyBody
+}
+
+func scanLogin(msgBody *wechat.MsgBody) (ekey string) {
+	ekey = msgBody.EventKey
+	cache := help.Cache
+	expire := 1800
+
+	user, err := models.GetUserByOpenid(msgBody.FromUserName)
+	if err == nil {
+		b, _ := json.Marshal(user)
+		cache.Put(msgBody.EventKey, b, time.Duration(expire)*time.Second)
+		return
+	}
+
+	userinfo := wechat.GetWxUserinfo(msgBody.FromUserName, "")
+	if v, ok := userinfo["nickname"]; ok {
+		u := models.User{
+			Openid:   msgBody.FromUserName,
+			Nickname: v.(string),
+			Avatar:   userinfo["headimgurl"].(string),
+		}
+		models.CreateUser(&u)
+		b, _ := json.Marshal(u)
+		cache.Put(msgBody.EventKey, b, time.Duration(expire)*time.Second)
+	}
+
+	return
 }

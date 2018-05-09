@@ -218,6 +218,32 @@ $(function(){
 	});
 
 
+	$("#loginBtn").click(function(){
+		$("#login_qrcode_img").html('<h4 style="color: red;">加载中.... <img src="/static/img/loading.gif" /></h4>');
+		$('#loginModal').modal({backdrop: 'static', keyboard: false});
+		$.get("/login", function(e){
+			$("#login_qrcode_img").html(e.data);
+
+			var timer = setInterval(function(){
+			    $.post('/login', {"sceneId":$("#sceneId").val()}, function(e){
+			            if(e.code < 0) {
+			                return false;
+			            }
+			            
+			            clearInterval(timer);
+			            if(e.data>0) {
+			            	window.location = "/user";
+			            	return;
+			            }
+
+			            window.location = "/";
+			            
+			        });
+			}, 1000);
+		});
+	});
+
+
 	
 
 });
