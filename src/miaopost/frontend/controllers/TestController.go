@@ -21,18 +21,18 @@ func (this *TestController) Get() {
 		m["button"] = []interface{}{
 			map[string]string{
 				"type": "view",
-				"name": "进入秒Po",
+				"name": "发布信息",
+				"url":  "http://www.miaopost.com/info/create",
+			},
+			map[string]string{
+				"type": "view",
+				"name": "最新发布",
 				"url":  "http://www.miaopost.com",
 			},
 			map[string]string{
 				"type": "view",
 				"name": "我的发布",
 				"url":  "http://www.miaopost.com/info/my",
-			},
-			map[string]string{
-				"type": "view",
-				"name": "关于秒Po",
-				"url":  "http://www.miaopost.com/article/view?id=1",
 			},
 		}
 		data := wechat.CreateMenu(m)

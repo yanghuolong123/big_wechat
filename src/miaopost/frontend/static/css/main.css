@@ -1,7 +1,9 @@
 /**  =====  layout ====== **/
 .page-header {margin-top: 10px;}
-.page-header .logo a {font-size: 30px; color: #ea6f5a;}
+.page-header .logo a {font-size: 30px; color: #ff5a5f;}
 .page-header  .slogan {font-size: 18px; padding-top: 15px; color: #777; }
+.page-header .nav{font-size: 20px; padding-top: 8px;}
+.page-header .nav a{margin-left: 15px;}
 .page-header a.search_cats{font-size: 14px;}
 .content{padding-bottom: 15px; min-height: 500px;}
 .modal-dialog{margin-top: 180px;}
@@ -19,6 +21,7 @@ ul,li {list-style: none; margin: 0px; padding: 0px;}
 .info-list .meta span{margin-right:   10px;}
 .info-list .info-content{margin-top: 8px;}
 .info-list  .line{border-bottom: 1px solid #f0f0f0; margin-bottom: 20px; padding-bottom:  10px;}
+.info-list .label-warning{background-color: #ff5a5f;}
 img.img_tip{width: 18px; height: 18px;}
 .label-tips{font-size: 12px;}
 .dropdown button{ }

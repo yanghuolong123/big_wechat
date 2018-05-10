@@ -6,21 +6,22 @@
          <body>
                 <div class="container">
                         <div class="page-header row">
-                                <div class="logo col-md-2">
-                                       <a href="/">秒Po-UTD</a>
+                                <div class="logo col-md-1">
+                                       <a href="/">秒Po</a>
                                 </div>
                                 <div class="slogan col-md-8">
                                         <span>中国学生极简信息发布平台</span>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 nav">
+                                    <a class="region" href="javascript:;">UTD <span class="caret"></span></a>
                                 {{if .user}}
-                                    <a  href="/user" class="btn btn-info">
-                                                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  {{.user.Nickname}}
+                                    <a  href="/user" class="">
+                                                      {{.user.Nickname}}
                                     </a>  
                                 {{else}}
-                                    <button id="loginBtn" class="btn btn-info" type="button">
-                                              <span aria-hidden="true" class="glyphicon glyphicon-log-in"></span> 登录
-                                    </button>
+                                    <a id="loginBtn"  href="javascript:;">
+                                              <span aria-hidden="true" class="glyphicon glyphicon-user"></span>
+                                    </a>
                                 {{end}}
                                 </div>
                         </div>

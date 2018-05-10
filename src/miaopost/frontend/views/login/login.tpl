@@ -3,7 +3,7 @@
       <div class="modal-content">            
         <div class="modal-body row">
             <div class="col-sm-offset-1 col-sm-11">
-              <h4 class="text-muted">请使用微信扫码，关注公众号秒Po的同时即完成登陆</h4>
+              <h5 class="text-muted">扫码并关注秒Po即可对以往微信发布的信息进行编辑、删除和置顶操作</h5>
             </div>
             <div id="login_qrcode_img" class="col-sm-offset-1 col-sm-8">
                 <h4 style="color: red;">加载中.... <img src="/static/img/loading.gif" /></h4>
