@@ -140,6 +140,7 @@ func (this *InfoController) View() {
 
 	cat := models.GetCategoryById(info.Cid)
 	this.Data["cat"] = cat
+	this.Data["cid"] = cat.Id
 
 	photos := models.GetPhotoByInfoid(int(id))
 	this.Data["photos"] = photos

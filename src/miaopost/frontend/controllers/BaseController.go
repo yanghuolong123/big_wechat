@@ -18,6 +18,9 @@ type BaseController struct {
 }
 
 func (this *BaseController) Prepare() {
+	if help.ClientSite == "http://www.miaopost.com" {
+		this.Redirect("http://utd.miaopost.com"+help.ClientUri, 302)
+	}
 	cats := models.GetAllCategory()
 	this.Data["cats"] = cats
 
