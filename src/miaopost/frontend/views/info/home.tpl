@@ -8,6 +8,7 @@
 	                </div>
 	</div>
 	<div class="row cats">
+		<a href="/info/list?cid={{.Id}}" class="search_cats label label-primary">全部</a> 
 	        {{range .cats}}
                             <a href="/info/list?cid={{.Id}}" class="search_cats">{{.Name}}</a> 
                         {{end}}

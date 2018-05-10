@@ -19,9 +19,9 @@
                                               </span>
                                             </div>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 cats">
                                             {{range .cats}}
-                                                <a href="/info/list?cid={{.Id}}" class="search_cats">{{.Name}}</a> 
+                                                <a href="/info/list?cid={{.Id}}" class="search_cats {{if eq .Id $.cid}}label label-primary{{end}}">{{.Name}}</a> 
                                             {{end}}
                                         </div>
                                         <div class="col-md-2">
