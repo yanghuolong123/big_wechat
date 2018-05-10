@@ -16,6 +16,13 @@ type TestController struct {
 
 func (this *TestController) Get() {
 	t := time.Now()
+	//this.SetSession("test", "1111111111111111")
+	//user := new(models.User)
+	//user.Username = "aaaaaaaaaaaaa"
+	//this.SetSession("test", user)
+	u := this.GetSession("test")
+	fmt.Println("=============== session:", u)
+	fmt.Println("============= user:", this.GetSession("user"))
 	/*
 		m := map[string]interface{}{}
 		m["button"] = []interface{}{
