@@ -24,7 +24,7 @@
                 <textarea class="form-control"  id="info_content" rows="5" maxlength="2500" placeholder="添加描述">{{.info.Content}}</textarea>                
               </div>
             </div>
-            <div class="form-group">            
+            <div class="form-group" style="{{if .user}}display: none;{{end}}">            
               <div class=" col-sm-offset-1 col-sm-2">
                 <label>自动删除发布</label>
                 <div class="row">
