@@ -21,9 +21,6 @@ func (this *BaseController) Prepare() {
 	cats := models.GetAllCategory()
 	this.Data["cats"] = cats
 
-	user := this.GetSession("user")
-	this.Data["user"] = user
-
 	footer_nav := models.GetArticleByType(models.Type_Nav)
 	this.Data["footer_nav"] = footer_nav
 	this.Data["last_footer_nav_index"] = len(footer_nav) - 1
@@ -73,6 +70,9 @@ func (this *BaseController) Prepare() {
 		this.Data["signPackage"] = signPackage
 		this.Data["wxshare"] = WxShare
 	}
+
+	user := this.GetSession("user")
+	this.Data["user"] = user
 
 	this.BaseController.Prepare()
 }
