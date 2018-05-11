@@ -51,6 +51,12 @@ func (this *WechatController) Index() {
 
 func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 	if msgBody.MsgType == "event" && (msgBody.Event == "subscribe" || msgBody.Event == "SCAN") {
+		if msgBody.Event == "subscribe" {
+			content := `欢迎关注秒Po~ 使用秒Po发布时，我们会自动为您创建专属通道，无需注册即可在发布后进行便捷的编辑、删除和置顶操作。
+专属通道除了使用您的微信昵称用于标示外，不会获取任何其他信息。如介意使用微信昵称，可以在进入秒po后修改标示。`
+			wechat.SendTextMsg(msgBody.FromUserName, content)
+		}
+
 		if strings.Contains(msgBody.EventKey, "create") {
 
 			msg := "关注秒Po的同时我们即为您创建专属通道，发布后即可进行便捷的修改、删除和免费置顶操作"
