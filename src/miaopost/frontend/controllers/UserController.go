@@ -18,6 +18,7 @@ func (this *UserController) Prepare() {
 }
 
 func (this *UserController) Index() {
+	this.Redirect("/info/my", 302)
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "user/index.tpl"

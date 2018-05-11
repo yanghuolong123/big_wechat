@@ -17,7 +17,7 @@ ul,li {list-style: none; margin: 0px; padding: 0px;}
 
 /**  ===  public ===**/
 .more{font-size: 12px; font-style: italic;}
-.info-list{margin-top: 25px;}
+.info-list{}
 .info-list .cat{font-size: 18px;}
 .info-list .meta{font-size: 13px; color: #777; padding-top: 8px;}
 .info-list .meta span{margin-right:   10px;}
@@ -36,6 +36,8 @@ a.list_content:hover{text-decoration: none;}
 .list_adv{margin: 15px 0;}
 .list_adv img{width: 100%;}
 #login_qrcode_img #login_img{width: 100%;}
+.user_menu{ }
+.user_menu a{ margin-right: 15px; font-size: 18px; line-height: 38px; }
 
 
 /** =============== home.tpl =============== **/
@@ -106,6 +108,9 @@ a.list_content:hover{text-decoration: none;}
 .view .photos img{width: 100%; margin-bottom: 5px;}
 .view .adv img{width: 100%; margin: 20px 0;}
 
+/** ============== info my ============**/
+.my .info-list{margin-top: 15px;}
+
 
 /*** ========== article view.tpl **/
 .article-view {padding-top: 0px; padding-left: 15px;}
@@ -117,3 +122,6 @@ a.list_content:hover{text-decoration: none;}
 .user .title h4{color: #777;}
 .user label{padding-top: 10px;}
 .user a.link{color: #777;}
+
+/** user edit css ***/
+.edit_user form{margin-top: 30px;}
