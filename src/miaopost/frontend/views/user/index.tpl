@@ -6,8 +6,10 @@
 		<div class="col-md-2">
 			<h4><a href="/info/my">我的发布</a></h4>
 		</div>
-		<div class="col-md-offset-5 col-md-1">			
+		<div class="col-md-offset-5 col-md-1">	
+			{{if not .isWeixin}}		
 			<a href="/logout" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-log-out"></span> 退出</a>
+			{{end}}
 		</div>
 	</div>
 	<div class="row">
