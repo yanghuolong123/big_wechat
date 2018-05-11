@@ -1,10 +1,5 @@
 /**  =====  layout ====== **/
 .page-header {margin-top: 10px; padding-bottom: 0px; margin-bottom: 5px;}
-.page-header .logo a {font-size: 30px; color: #ff5a5f;}
-.page-header  .slogan {font-size: 18px; padding-top: 15px; color: #777; }
-.page-header .nav{font-size: 20px; padding-top: 8px;}
-.page-header .nav a{margin-left: 15px;}
-.page-header .cats{padding-top: 0px;}
 .content{padding-bottom: 15px; min-height: 500px;}
 .modal-dialog{margin-top: 180px;}
 #loginModal .modal-dialog{margin-top: 50px;}
