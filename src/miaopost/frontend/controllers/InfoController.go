@@ -63,8 +63,9 @@ func (this *InfoController) List() {
 	adv := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_List_Bottom)
 	this.Data["adv_list"] = models.RandAdv(adv, 1)
 
-	this.Layout = "layout/main1.tpl"
-	this.TplName = "info/list.tpl"
+	this.Layout = "layout/main.tpl"
+	//this.TplName = "info/list.tpl"
+	this.TplName = "info/home.tpl"
 }
 
 // 创建页面
@@ -140,7 +141,6 @@ func (this *InfoController) View() {
 
 	cat := models.GetCategoryById(info.Cid)
 	this.Data["cat"] = cat
-	this.Data["cid"] = cat.Id
 
 	photos := models.GetPhotoByInfoid(int(id))
 	this.Data["photos"] = photos
@@ -159,7 +159,7 @@ func (this *InfoController) View() {
 	adv := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_View_Bottom)
 	this.Data["adv"] = models.RandAdv(adv, 1)
 
-	this.Layout = "layout/main1.tpl"
+	this.Layout = "layout/main.tpl"
 	this.TplName = "info/view.tpl"
 }
 

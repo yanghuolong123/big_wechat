@@ -1,5 +1,5 @@
 /**  =====  layout ====== **/
-.page-header {margin-top: 10px;}
+.page-header {margin-top: 10px; padding-bottom: 0px; margin-bottom: 5px;}
 .page-header .logo a {font-size: 30px; color: #ff5a5f;}
 .page-header  .slogan {font-size: 18px; padding-top: 15px; color: #777; }
 .page-header .nav{font-size: 20px; padding-top: 8px;}
@@ -14,6 +14,11 @@
 ul,li {list-style: none; margin: 0px; padding: 0px;}
 .cats {padding-top: 10px;}
 .cats a{font-size: 18px; margin-right: 5px; line-height: 38px;}
+
+.region{padding-left: 25px; padding-right: 50px;}
+.logo{ margin-bottom: 15px; padding-left: 8px;}
+.logo a{font-size: 30px; color: #ff5a5f;}
+.logo span{color: #777;    font-size: 18px;    padding-top: 15px; padding-left: 15px;}
 
 /**  ===  public ===**/
 .more{font-size: 12px; font-style: italic;}

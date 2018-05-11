@@ -7,7 +7,7 @@
                 <div class="container">
                         <div class="page-header row">
                                 <div class="logo col-md-2">
-                                       <a href="/">秒Po</a>
+                                       <a href="/">秒Po</a> <span>极简校园信息发布平台</span>
                                 </div>
                                 <div class="slogan col-md-10">
                                     <div class="row">
