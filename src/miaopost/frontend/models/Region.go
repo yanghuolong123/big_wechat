@@ -23,3 +23,16 @@ func GetAllRegion() []Region {
 
 	return rlist
 }
+
+func GetCurrentRegion() (r Region) {
+	rlist := GetAllRegion()
+	for _, v := range rlist {
+		cDomain := v.Name + ".miaopost.com"
+		if cDomain == help.ClientDomain {
+			r = v
+			break
+		}
+	}
+
+	return
+}

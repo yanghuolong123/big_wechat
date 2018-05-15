@@ -40,6 +40,7 @@ func CreateInfo(info *Info) int {
 		subDomain := v.Name + ".miaopost.com"
 		if subDomain == help.ClientDomain {
 			info.Rid = v.Id
+			break
 		}
 	}
 	i, err := orm.NewOrm().Insert(info)
