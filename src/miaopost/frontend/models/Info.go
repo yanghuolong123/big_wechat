@@ -13,6 +13,7 @@ func init() {
 type Info struct {
 	Id          int
 	Uid         int
+	Rid         int
 	Cid         int
 	Content     string
 	Valid_day   int
@@ -34,6 +35,13 @@ func CreateInfo(info *Info) int {
 	info.Ip = help.ClientIp
 	info.Create_time = time.Now()
 	info.Update_time = info.Create_time
+	rList := GetAllRegion()
+	for _, v := range rList {
+		subDomain := v.Name + ".miaopost.com"
+		if subDomain == help.ClientDomain {
+			info.Rid = v.Id
+		}
+	}
 	i, err := orm.NewOrm().Insert(info)
 	if err != nil {
 		help.Log("error", err.Error())
