@@ -50,8 +50,10 @@
               <div class="col-sm-offset-1 col-sm-10">
                 <input type="hidden" id="info_id"  value="{{.info.Id}}" name="id">
                 <button type="button" id="edit_info_btn" class="btn btn-success btn-lg">保存</button>
+                {{if not .user}}
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button type="button" id="del_info_btn" class="btn btn-danger btn-lg">删除</button>
+                {{end}}
               </div>
             </div>
           </form>
