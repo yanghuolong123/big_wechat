@@ -1,9 +1,9 @@
 <div class="create">
        {{if not .isWeixin}}
-       <h4>微信登陆发布 <span class="text-danger ">(推荐)</span></h4>
+       <h4>微信登陆发布</h4>
        <div class="row">
          <div class="col-sm-offset-1 wx">
-          <p class="text-muted">(通过公众号进行发布，即可通过 “我的发布” 菜单享受便捷修改，删除，免费置顶服务)</p>           
+          <p class="text-danger">(推荐，发布后可以非常方便地通过服务号或电脑对发布进行编辑、删除和置顶操作)</p>           
            {{if .qr_url}}
             <div>
             <img src="{{.qr_url}}">

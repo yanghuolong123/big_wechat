@@ -1,3 +1,5 @@
+.red{color: red;}
+
 /**  =====  layout ====== **/
 .page-header {margin-top: 10px; padding-bottom: 0px; margin-bottom: 5px;}
 .content{padding-bottom: 15px; min-height: 500px;}
@@ -98,7 +100,7 @@ a.list_content:hover{text-decoration: none;}
     width: 12.11rem;
 }
 .create h4{color: #777; font-weight: bold;}
-.create .wx{padding-left: 15px;}
+.create .wx{padding-left: 15px; padding-right: 10px;}
 .create .wx img{width: 150px; height: 150px; }
 
 /**  =============== info view.tpl =============== **/
