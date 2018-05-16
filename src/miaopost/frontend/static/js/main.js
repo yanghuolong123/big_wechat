@@ -77,7 +77,7 @@ $(function(){
 		for(var i=0; i<cArr.length;i++) {
 			line = cArr[i];
 			c = line.split("：");
-			if(c[1]!=="") {
+			if($.trim(c[1])!=="") {
 				content += line;
 			}
 		}
