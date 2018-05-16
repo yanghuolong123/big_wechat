@@ -97,7 +97,7 @@ a.list_content:hover{text-decoration: none;}
     position: relative;
     width: 12.11rem;
 }
-.create h4{color: #777;}
+.create h4{color: #777; font-weight: bold;}
 .create .wx{padding-left: 15px;}
 .create .wx img{width: 150px; height: 150px; }
 

@@ -1,6 +1,6 @@
 <div class="create">
        {{if not .isWeixin}}
-       <h4>微信发布 <span class="text-danger ">(推荐)</span></h4>
+       <h4>微信登陆发布 <span class="text-danger ">(推荐)</span></h4>
        <div class="row">
          <div class="col-sm-offset-1 wx">
           <p class="text-muted">(通过公众号进行发布，即可通过 “我的发布” 菜单享受便捷修改，删除，免费置顶服务)</p>           
@@ -12,7 +12,7 @@
          </div>
        </div>
        <hr>
-       <h4>普通发布</h4>
+       <h4>免注册发布</h4>
        {{end}}
         <form class="form-horizontal">
             <div class="form-group">            
