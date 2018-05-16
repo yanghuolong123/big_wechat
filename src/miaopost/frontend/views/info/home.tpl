@@ -17,8 +17,8 @@
 		<div class="col-md-10  col-xs-9 title">
 			<h4>最新发布</h3>
 		</div>
-		<div class="col-md-2  col-xs-2">
-			<div class="dropdown">
+		<div class="col-md-2  col-xs-3">
+			<div class="dropdown pull-right">
 	                                              <button class="btn btn-primary dropdown-toggle" type="button" id="publish-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 	                                                发布    
 	                                                <span class="caret"></span>
