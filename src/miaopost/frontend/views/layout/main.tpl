@@ -12,7 +12,7 @@
                                         <p class="pull-right text-right">
                                             {{if .user}}
                                                 <a  href="/user" class="">
-                                                                  {{.user.Nickname}}
+                                                                  {{if .user.Nickname}}{{.user.Nickname}}{{else}}<span aria-hidden="true" class="glyphicon glyphicon-user"></span>{{end}}
                                                 </a>  
                                             {{else}}
                                                 <a id="loginBtn"  href="javascript:;">
