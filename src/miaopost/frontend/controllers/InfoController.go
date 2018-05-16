@@ -147,7 +147,7 @@ func (this *InfoController) View() {
 
 	share := WxShare
 	if info.Content != "" {
-		share.Desc = info.Content
+		share.Desc = strings.Replace(info.Content, "<br/>", " ", -1)
 	}
 	if len(photos) > 0 {
 		share.Img = this.Ctx.Input.Site() + photos[0].Url + "!200!200"

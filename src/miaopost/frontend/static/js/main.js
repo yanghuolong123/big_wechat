@@ -72,6 +72,16 @@ $(function(){
 			$(".error_tips").append("<p>请先选择分类</p>");
                         		flag = false;
 		}
+		var content="";
+		cArr = info_content.split("\n");
+		for(var i=0; i<cArr.length;i++) {
+			line = cArr[i];
+			c = line.split("：");
+			if(c[1]!=="") {
+				content += line;
+			}
+		}
+		info_content = $.trim(content);
 		if(info_content == ""  && photo=="") {
 			$(".error_tips").append("<p>请添加文字描述或图片</p>");
                         		flag = false;
