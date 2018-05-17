@@ -15,7 +15,7 @@
 	</div>
 	<div class="row list-head">
 		<div class="col-md-10  col-xs-9 title">
-			<h4>一周浏览({{.weekviews}})</h3>
+			<h4>一周浏览 <span class="badge">{{.weekviews}}</span></h3>
 		</div>
 		<div class="col-md-2  col-xs-3">
 			<div class="dropdown pull-right">
