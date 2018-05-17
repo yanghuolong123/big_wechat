@@ -30,6 +30,11 @@ func (this *InfoController) Get() {
 	adv := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_List_Bottom)
 	this.Data["adv_list"] = models.RandAdv(adv, 1)
 
+	end := time.Now()
+	begin := end.AddDate(0, 0, -7)
+	weekViews := models.StatInfoViews(begin, end)
+	this.Data["weekviews"] = weekViews
+
 	this.Layout = "layout/main.tpl"
 	this.TplName = "info/home.tpl"
 }
@@ -62,6 +67,11 @@ func (this *InfoController) List() {
 
 	adv := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_List_Bottom)
 	this.Data["adv_list"] = models.RandAdv(adv, 1)
+
+	end := time.Now()
+	begin := end.AddDate(0, 0, -7)
+	weekViews := models.StatInfoViews(begin, end)
+	this.Data["weekviews"] = weekViews
 
 	this.Layout = "layout/main.tpl"
 	//this.TplName = "info/list.tpl"

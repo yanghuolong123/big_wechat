@@ -16,6 +16,14 @@ func StatCountInfo(begin, end time.Time) int {
 	return int(i)
 }
 
+func StatInfoViews(begin, end time.Time) int {
+	var sum int
+	err := orm.NewOrm().Raw("select sum(views) from tbl_info where create_time between ? and ?", begin, end).QueryRow(&sum)
+	help.Error(err)
+
+	return sum
+}
+
 func StatPv(begin, end time.Time) int {
 	condition := bson.M{
 		"time": bson.M{"$gte": begin, "$lt": end},

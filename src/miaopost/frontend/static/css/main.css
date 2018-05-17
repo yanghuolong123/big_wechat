@@ -44,7 +44,7 @@ a.list_content:hover{text-decoration: none;}
 
 /** =============== home.tpl =============== **/
 .home{padding: 0 10px;}
-.home .list-head{margin-top: 25px;}
+.home .list-head{margin-top: 15px;}
 .home .list-head .title{padding-left: 0px;}
 .home .info-list{padding-left: 0px;}
 
