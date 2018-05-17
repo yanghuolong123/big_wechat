@@ -76,7 +76,11 @@ $(function(){
 		cArr = info_content.split("\n");
 		for(var i=0; i<cArr.length;i++) {
 			line = cArr[i];
-			c = line.split("：");
+			c = line.split("：");		
+			if(c[0]!="描述" && c[0]!="价格" && c[0]!="地址" && c[0]!="联系方式") {
+				content += line;
+				continue;
+			}
 			if($.trim(c[1])!=="") {
 				content += line;
 			}
