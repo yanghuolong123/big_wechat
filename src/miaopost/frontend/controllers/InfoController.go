@@ -153,7 +153,8 @@ func (this *InfoController) View() {
 	this.Data["cat"] = cat
 
 	photos := models.GetPhotoByInfoid(int(id))
-	this.Data["photos"] = photos
+	//this.Data["photos"] = photos
+	this.Data["photos"] = models.GetPhotoVoList(photos)
 
 	share := WxShare
 	if info.Content != "" {

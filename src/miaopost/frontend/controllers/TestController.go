@@ -16,13 +16,21 @@ type TestController struct {
 
 func (this *TestController) Get() {
 	t := time.Now()
+
+	//f := "/var/work/work_golang/work/zd/src/miaopost/frontend/uploads/2018/5/17/201805171524193954.jpg"
+	f := "./uploads/2018/5/17/201805171524193954.jpg"
+	//f := "/uploads/2018/5/9/201805091726545057.JPG"
+	h, w := help.GetImgHW(f)
+	fmt.Println("=================== h:", h, "   =========== w:", w)
+
 	//this.SetSession("test", "1111111111111111")
 	//user := new(models.User)
 	//user.Username = "aaaaaaaaaaaaa"
 	//this.SetSession("test", user)
-	u := this.GetSession("test")
-	fmt.Println("=============== session:", u)
-	fmt.Println("============= user:", this.GetSession("user"))
+	/*	u := this.GetSession("test")
+		fmt.Println("=============== session:", u)
+		fmt.Println("============= user:", this.GetSession("user"))
+	*/
 	/*
 		m := map[string]interface{}{}
 		m["button"] = []interface{}{

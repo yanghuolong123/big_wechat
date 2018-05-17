@@ -17,7 +17,7 @@
 		</div>
 		<div class="col-md-8 photos">
 			{{range .photos}}
-			<img src="{{.Url}}!640!640">
+			<img src="{{.P.Url}}{{cutImgSize .Width .Height}}">
 			{{end}}
 		</div>
 	</div>
