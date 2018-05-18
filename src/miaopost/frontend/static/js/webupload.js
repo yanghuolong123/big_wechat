@@ -14,11 +14,12 @@ $(function() {
         pick: '#picker',
         // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
         resize: false,
+        compress: false,
         chunked: true,
         chunkSize:100*1024,
         accept: {
-	    title: 'Imge',
-	    extensions: 'png,jpg,jpeg,gif',
+	    title: 'Images',
+	    extensions: 'gif,jpg,jpeg,bmp,png',
 	    mimeTypes: 'image/*,'
 	},
         fileNumLimit: 20,
