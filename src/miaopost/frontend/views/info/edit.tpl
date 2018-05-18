@@ -19,7 +19,8 @@
                         <div class="img-li img-li-new" data-url="{{.Url}}"  data-big="' + upImg + '" style="background-image:url({{.Url}})"><i></i></div>
                       {{end}}
                     </div>
-                    <label class="user-img" for="imgs"><input type="file" name="imgs" id="imgs"></label>
+                    <div id="thelist" class="uploader-list"></div>
+                    <div id="picker"><label class="user-img" for="imgs"></label></div>
                 </div>
                 <textarea class="form-control"  id="info_content" rows="5" maxlength="2500" placeholder="添加描述">{{.info.Content}}</textarea>                
               </div>

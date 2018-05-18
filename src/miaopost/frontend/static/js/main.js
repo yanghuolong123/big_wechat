@@ -151,53 +151,53 @@ $(function(){
 		return false;
 	});
 
-	$('#imgs').on('change', function() {
-		$('.img-up-list').after('<div class="progress">'+
-		  '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 1%">'+
-		    '<span class="sr-only">100% Complete</span>'+
-		  '</div>'+
-		'</div>');
-		var n = 10;
-		var t = setInterval(function(){
-			$(".progress-bar").css("width", n+"%");
-			if (n<95) {
-				n += 5;
-			}			
-		}, 50);
-		var formData = new FormData();
-		formData.append('file', $('#imgs')[0].files[0]);				
-		$.ajax({
-			url: '/uploadfile',
-			type: 'post',
-			cache: false,
-			data: formData,
-			processData: false,
-			contentType: false,
-			success:function(rs,textStatus,jqXHR){
-				clearInterval(t);
-				$(".progress-bar").css("width", "100%");				
-				setTimeout(function(){
-					$(".progress").remove();
-				},1000);
-				if( rs.code <0) {
-					prompt(rs.msg);
-					return false;
-				}
+	// $('#imgs').on('change', function() {
+	// 	$('.img-up-list').after('<div class="progress">'+
+	// 	  '<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 1%">'+
+	// 	    '<span class="sr-only">100% Complete</span>'+
+	// 	  '</div>'+
+	// 	'</div>');
+	// 	var n = 10;
+	// 	var t = setInterval(function(){
+	// 		$(".progress-bar").css("width", n+"%");
+	// 		if (n<95) {
+	// 			n += 5;
+	// 		}			
+	// 	}, 50);
+	// 	var formData = new FormData();
+	// 	formData.append('file', $('#imgs')[0].files[0]);				
+	// 	$.ajax({
+	// 		url: '/uploadfile',
+	// 		type: 'post',
+	// 		cache: false,
+	// 		data: formData,
+	// 		processData: false,
+	// 		contentType: false,
+	// 		success:function(rs,textStatus,jqXHR){
+	// 			clearInterval(t);
+	// 			$(".progress-bar").css("width", "100%");				
+	// 			setTimeout(function(){
+	// 				$(".progress").remove();
+	// 			},1000);
+	// 			if( rs.code <0) {
+	// 				prompt(rs.msg);
+	// 				return false;
+	// 			}
 
-				var upImg = rs.data;
-				if( rs.code == 0) {
-					$('.img-up-list').append('<div class="img-li img-li-new" data-url="' + upImg+ '"  data-big="' + upImg + '" style="background-image:url(' + upImg+ '!200!200)"><i></i></div>');
-				}	
+	// 			var upImg = rs.data;
+	// 			if( rs.code == 0) {
+	// 				$('.img-up-list').append('<div class="img-li img-li-new" data-url="' + upImg+ '"  data-big="' + upImg + '" style="background-image:url(' + upImg+ '!200!200)"><i></i></div>');
+	// 			}	
 				
-				// $('.img-li i').on('click', function() {
-				// 	$(this).parent('.img-li').remove();
-				// 	$('.user-img').show();
-				// 	return false;					
-				// });
+	// 			// $('.img-li i').on('click', function() {
+	// 			// 	$(this).parent('.img-li').remove();
+	// 			// 	$('.user-img').show();
+	// 			// 	return false;					
+	// 			// });
 							
-			}
-		});
-	});
+	// 		}
+	// 	});
+	// });
 
 
 	// 查看更多
