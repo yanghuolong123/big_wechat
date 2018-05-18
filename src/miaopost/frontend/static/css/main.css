@@ -47,7 +47,7 @@ a.list_content:hover{text-decoration: none;}
 .home .list-head{margin-top: 15px;}
 .home .list-head .title{padding-left: 0px;}
 .home .info-list{padding-left: 0px;}
-
+.home .list-head h4 span.week_pv{font-size: 14px;}
 
 
 /** ===== create.tpl ============ **/

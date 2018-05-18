@@ -32,7 +32,7 @@ func (this *InfoController) Get() {
 
 	end := time.Now()
 	begin := end.AddDate(0, 0, -7)
-	weekViews := models.StatInfoViews(begin, end)
+	weekViews := models.StatPv(begin, end)
 	this.Data["weekviews"] = weekViews
 
 	this.Layout = "layout/main.tpl"
@@ -70,7 +70,7 @@ func (this *InfoController) List() {
 
 	end := time.Now()
 	begin := end.AddDate(0, 0, -7)
-	weekViews := models.StatInfoViews(begin, end)
+	weekViews := models.StatPv(begin, end)
 	this.Data["weekviews"] = weekViews
 
 	this.Layout = "layout/main.tpl"
