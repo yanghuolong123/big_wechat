@@ -37,3 +37,10 @@ func GetCurrentRegion() (r Region) {
 
 	return
 }
+
+func GetAllRegionMap() (m orm.Params) {
+	_, err := orm.NewOrm().Raw("select id,shortname from tbl_region where status=0").RowsToMap(&m, "id", "shortname")
+	help.Error(err)
+
+	return
+}

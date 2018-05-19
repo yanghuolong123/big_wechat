@@ -7,8 +7,9 @@
             <div class="box-body">
               <table id="article_list" class="table table-bordered table-hover">
                 <thead>
-                <tr>
+                <tr>                  
                   <th>ID</th>
+                  <th>区域</th>
                   <th>分组</th>
                   <th>标题</th>
                   <th>Logo图标</th>
@@ -23,6 +24,7 @@
                 {{range .dataList}}
                 <tr>
                   <td>{{.Id}}</td>
+                  <td>{{map_get $.regions .Rid}}</td>
                   <td>{{map_get (map_get $.groupMap .Type) .Group_id}}</td>
                   <td>{{.Title}}</td>
                   <td>{{if .Logo}}<img src="{{.Logo}}" style="height: 150px; width: 250px;">{{end}}</td>

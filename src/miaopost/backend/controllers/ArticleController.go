@@ -41,6 +41,7 @@ func (this *ArticleController) List() {
 	}
 
 	this.Data["type"] = int(tp)
+	this.Data["regions"] = models.GetAllRegionMap()
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "article/" + tpl
@@ -50,6 +51,7 @@ func (this *ArticleController) Create() {
 	tp, _ := this.GetInt("type")
 	t := int(tp)
 	if this.Ctx.Input.IsAjax() {
+		rid, _ := this.GetInt("rid")
 		group_id, _ := this.GetInt("group_id")
 		title := this.GetString("title")
 		logo := this.GetString("logo")
@@ -59,6 +61,7 @@ func (this *ArticleController) Create() {
 		status, _ := this.GetInt("status")
 
 		article := models.Article{
+			Rid:      int(rid),
 			Type:     t,
 			Group_id: int(group_id),
 			Title:    title,
@@ -83,6 +86,7 @@ func (this *ArticleController) Create() {
 	}
 
 	this.Data["type"] = t
+	this.Data["regions"] = models.GetAllRegion()
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "article/" + tpl
@@ -98,6 +102,7 @@ func (this *ArticleController) Edit() {
 		if err != nil {
 			this.SendRes(-1, err.Error(), nil)
 		}
+		rid, _ := this.GetInt("rid")
 		group_id, _ := this.GetInt("group_id")
 		title := strings.TrimSpace(this.GetString("title"))
 		logo := this.GetString("logo")
@@ -106,6 +111,7 @@ func (this *ArticleController) Edit() {
 		sort, _ := this.GetInt("sort")
 		status, _ := this.GetInt("status")
 
+		article.Rid = int(rid)
 		article.Group_id = int(group_id)
 		article.Title = title
 		article.Logo = logo
@@ -133,6 +139,7 @@ func (this *ArticleController) Edit() {
 		tpl = "edit_type_" + help.ToStr(t) + ".tpl"
 	}
 	this.Data["type"] = t
+	this.Data["regions"] = models.GetAllRegion()
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "article/" + tpl

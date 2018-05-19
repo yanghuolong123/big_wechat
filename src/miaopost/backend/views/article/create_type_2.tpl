@@ -6,7 +6,16 @@
             <!-- form start -->
             <form method="post" role="form" id="create_form">
               <div class="box-body">
-              	<div class="form-group">
+                <div class="form-group">
+                  <label for="rid">区域</label>
+                  <select id="rid" name="rid" class="form-control">
+                  	<option value="">请选择</option>
+                  	{{range $k,$v := .regions }}  
+                  	<option value="{{$v.Id}}">{{$v.Shortname}}</option>
+                  	{{end}}   
+                  </select>
+                </div>
+                <div class="form-group">
                   <label for="group_id">分组</label>
                   <select id="group_id" name="group_id" class="form-control">
                   	<option value="">请选择</option>
@@ -68,6 +77,10 @@
 			var form = document.getElementById("create_form");
 			var fdata = new FormData(form);
 			fdata.append("content",CKEDITOR.instances.content.getData());
+			if(fdata.get("rid")=="") {
+				prompt("请选择区域");
+				return false;
+			}
 			if(fdata.get("group_id")=="") {
 				prompt("请选择分组");
 				return false;

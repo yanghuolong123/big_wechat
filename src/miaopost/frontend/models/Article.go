@@ -29,6 +29,7 @@ func init() {
 
 type Article struct {
 	Id          int
+	Rid         int
 	Type        int
 	Group_id    int
 	Title       string
@@ -97,9 +98,9 @@ func GetArticleByType(tp int) []Article {
 	return as
 }
 
-func GetArticleByTypeAndGroup(tp, gp int) []Article {
+func GetArticleByTypeAndGroup(rid, tp, gp int) []Article {
 	var as []Article
-	_, err := orm.NewOrm().QueryTable("tbl_article").Filter("type", tp).Filter("group_id", gp).Filter("status", 0).OrderBy("-sort").All(&as)
+	_, err := orm.NewOrm().QueryTable("tbl_article").Filter("rid", rid).Filter("type", tp).Filter("group_id", gp).Filter("status", 0).OrderBy("-sort").All(&as)
 	help.Error(err)
 
 	return as

@@ -20,15 +20,6 @@ type BaseController struct {
 
 func (this *BaseController) Prepare() {
 
-	isMobile := this.IsMobile()
-	this.Data["isMobile"] = isMobile
-	if !isMobile {
-		side_adv := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_Side)
-		this.Data["side_adv"] = models.RandAdv(side_adv, 1)
-		side_adv_1 := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_Side_1)
-		this.Data["side_adv_1"] = models.RandAdv(side_adv_1, 1)
-	}
-
 	isWx := this.IsWeixin()
 	this.Data["isWeixin"] = isWx
 	if isWx {
@@ -70,6 +61,15 @@ func (this *BaseController) Prepare() {
 
 	region := this.GetCurrentRegion()
 	this.Rid = region.Id
+
+	isMobile := this.IsMobile()
+	this.Data["isMobile"] = isMobile
+	if !isMobile {
+		side_adv := models.GetArticleByTypeAndGroup(this.Rid, models.Type_Adv, models.Adv_Side)
+		this.Data["side_adv"] = models.RandAdv(side_adv, 1)
+		side_adv_1 := models.GetArticleByTypeAndGroup(this.Rid, models.Type_Adv, models.Adv_Side_1)
+		this.Data["side_adv_1"] = models.RandAdv(side_adv_1, 1)
+	}
 
 	this.Data["version"] = help.Version
 

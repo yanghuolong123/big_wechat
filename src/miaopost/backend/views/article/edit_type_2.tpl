@@ -6,7 +6,16 @@
             <!-- form start -->
             <form method="post" role="form" id="edit_form">
               <div class="box-body">
-              	<div class="form-group">
+                 <div class="form-group">
+                  <label for="rid">区域</label>
+                  <select id="rid" name="rid" class="form-control">
+                  	<option value="">请选择</option>
+                  	{{range $k,$v := .regions }}  
+                  	<option value="{{$v.Id}}" {{if eq $.article.Rid $v.Id}}selected=""{{end}} >{{$v.Shortname}}</option>
+                  	{{end}}   
+                  </select>
+                </div>
+                 <div class="form-group">
                   <label for="group_id">分组</label>
                   <select id="group_id" name="group_id" class="form-control">
                   	<option value="">请选择</option>
