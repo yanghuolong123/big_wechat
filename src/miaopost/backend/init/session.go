@@ -8,4 +8,5 @@ import (
 
 func init() {
 	gob.Register(&models.Administrator{})
+	gob.Register(&models.User{})
 }

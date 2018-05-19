@@ -18,9 +18,9 @@ type InfoController struct {
 
 // 首页
 func (this *InfoController) Get() {
-	infos := models.GetInfoPage(0, 0, pageSize)
+	infos := models.GetInfoPage(0, this.Rid, 0, pageSize)
 	this.Data["infos"] = models.ConvertInfosToVo(&infos)
-	count := models.GetInfoCount(0)
+	count := models.GetInfoCount(0, this.Rid)
 	this.Data["hasMore"] = 0
 	this.Data["page"] = 0
 	if 1*pageSize < count {
@@ -49,8 +49,8 @@ func (this *InfoController) List() {
 
 	infos := []models.Info{}
 	if catId := int(cid); catId > 0 {
-		count := models.GetInfoCount(catId)
-		infos = models.GetInfoPage(catId, int(page), pageSize)
+		count := models.GetInfoCount(catId, this.Rid)
+		infos = models.GetInfoPage(catId, this.Rid, int(page), pageSize)
 		if 1*pageSize < count {
 			this.Data["hasMore"] = 1
 		}
@@ -273,6 +273,7 @@ func (this *InfoController) ListPage() {
 		cm["uid"] = int(uid)
 		this.Data["isMy"] = true
 	}
+	cm["rid"] = this.Rid
 	cm["status"] = 0
 	q.Condition = cm
 	q.OrderBy = []string{"-update_time"}

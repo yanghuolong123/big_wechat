@@ -10,10 +10,11 @@ func init() {
 }
 
 type Region struct {
-	Id       int
-	Name     string
-	Fullname string
-	Status   int
+	Id        int
+	Name      string
+	Shortname string
+	Fullname  string
+	Status    int
 }
 
 func GetAllRegion() []Region {

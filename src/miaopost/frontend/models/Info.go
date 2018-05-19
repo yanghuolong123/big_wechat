@@ -95,10 +95,13 @@ func GetInfoByEmail(email string) []Info {
 	return infos
 }
 
-func GetInfoPage(cid, offset, size int) (infos []Info) {
+func GetInfoPage(cid, rid, offset, size int) (infos []Info) {
 	qs := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0)
 	if cid > 0 {
 		qs = qs.Filter("cid", cid)
+	}
+	if rid > 0 {
+		qs = qs.Filter("rid", rid)
 	}
 	_, err := qs.OrderBy("-update_time").Limit(size, offset).All(&infos)
 	help.Error(err)
@@ -106,10 +109,13 @@ func GetInfoPage(cid, offset, size int) (infos []Info) {
 	return
 }
 
-func GetInfoCount(cid int) int {
+func GetInfoCount(cid, rid int) int {
 	qs := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0)
 	if cid > 0 {
 		qs = qs.Filter("cid", cid)
+	}
+	if rid > 0 {
+		qs = qs.Filter("rid", rid)
 	}
 	count, err := qs.Count()
 	help.Error(err)

@@ -8,5 +8,5 @@ import (
 
 func init() {
 	gob.Register(&models.User{})
-	//	gob.Register(&models.Administrator{})
+	gob.Register(&models.Administrator{})
 }

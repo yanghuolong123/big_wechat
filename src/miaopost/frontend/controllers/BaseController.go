@@ -15,15 +15,10 @@ var WxShare = wechat.Share{
 
 type BaseController struct {
 	help.BaseController
+	Rid int // region id
 }
 
 func (this *BaseController) Prepare() {
-	cats := models.GetAllCategory()
-	this.Data["cats"] = cats
-
-	footer_nav := models.GetArticleByType(models.Type_Nav)
-	this.Data["footer_nav"] = footer_nav
-	this.Data["last_footer_nav_index"] = len(footer_nav) - 1
 
 	isMobile := this.IsMobile()
 	this.Data["isMobile"] = isMobile
@@ -33,8 +28,6 @@ func (this *BaseController) Prepare() {
 		side_adv_1 := models.GetArticleByTypeAndGroup(models.Type_Adv, models.Adv_Side_1)
 		this.Data["side_adv_1"] = models.RandAdv(side_adv_1, 1)
 	}
-
-	this.Data["version"] = help.Version
 
 	isWx := this.IsWeixin()
 	this.Data["isWeixin"] = isWx
@@ -75,6 +68,18 @@ func (this *BaseController) Prepare() {
 		this.Redirect("http://utd.miaopost.com"+help.ClientUri, 302)
 	}
 
+	region := this.GetCurrentRegion()
+	this.Rid = region.Id
+
+	this.Data["version"] = help.Version
+
+	cats := models.GetAllCategory()
+	this.Data["cats"] = cats
+
+	footer_nav := models.GetArticleByType(models.Type_Nav)
+	this.Data["footer_nav"] = footer_nav
+	this.Data["last_footer_nav_index"] = len(footer_nav) - 1
+
 	user := this.GetSession("user")
 	this.Data["user"] = user
 
@@ -88,4 +93,16 @@ func (this *BaseController) IsLogin() bool {
 	}
 
 	return false
+}
+
+func (this *BaseController) GetCurrentRegion() (region models.Region) {
+	regions := models.GetAllRegion()
+	for _, r := range regions {
+		if this.Ctx.Input.Domain() == r.Name+".miaopost.com" {
+			region = r
+			break
+		}
+	}
+
+	return
 }
