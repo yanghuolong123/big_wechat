@@ -11,6 +11,7 @@ func init() {
 
 type Category struct {
 	Id     int
+	Rid    int
 	Name   string
 	Sort   int
 	Status int
@@ -39,6 +40,16 @@ func GetCategoryById(id int) Category {
 func GetAllCategory() []Category {
 	var clist []Category
 	_, err := orm.NewOrm().QueryTable("tbl_category").Filter("status", 0).OrderBy("-sort").All(&clist)
+	if err != nil {
+		help.Log("error", err.Error())
+	}
+
+	return clist
+}
+
+func GetCatsByRid(rid int) []Category {
+	var clist []Category
+	_, err := orm.NewOrm().QueryTable("tbl_category").Filter("status", 0).Filter("rid", rid).OrderBy("-sort").All(&clist)
 	if err != nil {
 		help.Log("error", err.Error())
 	}

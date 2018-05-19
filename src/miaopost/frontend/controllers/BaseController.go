@@ -73,7 +73,7 @@ func (this *BaseController) Prepare() {
 
 	this.Data["version"] = help.Version
 
-	cats := models.GetAllCategory()
+	cats := models.GetCatsByRid(this.Rid)
 	this.Data["cats"] = cats
 
 	footer_nav := models.GetArticleByType(models.Type_Nav)
