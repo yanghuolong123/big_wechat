@@ -77,6 +77,10 @@
 			var form = document.getElementById("edit_form");
 			var fdata = new FormData(form);
 			fdata.append("content",CKEDITOR.instances.content.getData());
+                  if(fdata.get("rid")=="") {
+                    prompt("请选择区域");
+                    return false;
+                  }
 			if(fdata.get("group_id")=="") {
 				prompt("请选择分组");
 				return false;
