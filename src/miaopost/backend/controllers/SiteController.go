@@ -1,27 +1,22 @@
 package controllers
 
 import (
-	"fmt"
 	"miaopost/backend/models"
-	"yhl/help"
+	//"yhl/help"
 )
 
 type SiteController struct {
-	help.BaseController
+	BaseController
 }
 
 func (this *SiteController) Get() {
-	user := this.GetSession("user")
-	fmt.Println("========= user:", user)
-
-	this.Data["user"] = user
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "site/index.tpl"
 }
 
 func (this *SiteController) LoginGet() {
-	user := this.GetSession("user")
+	user := this.GetSession("admin")
 	if user != nil {
 		this.Redirect("/", 302)
 	}
@@ -37,13 +32,13 @@ func (this *SiteController) LoginPost() {
 		this.SendRes(-1, err.Error(), nil)
 	}
 
-	this.SetSession("user", admin)
+	this.SetSession("admin", admin)
 	this.SendRes(0, "success", nil)
 
 }
 
 func (this *SiteController) Logout() {
-	this.DelSession("user")
+	this.DelSession("admin")
 
 	this.Redirect("/", 302)
 }

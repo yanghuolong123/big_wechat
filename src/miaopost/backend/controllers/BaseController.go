@@ -11,6 +11,6 @@ type BaseController struct {
 func (this *BaseController) Prepare() {
 	this.BaseController.Prepare()
 
-	user := this.GetSession("user")
+	user := this.GetSession("admin")
 	this.Data["user"] = user
 }

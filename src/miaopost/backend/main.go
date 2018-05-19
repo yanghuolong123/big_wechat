@@ -11,7 +11,7 @@ import (
 func main() {
 	filterRoute := []string{"/login", "/register", "/upload"}
 	var filterLogin = func(ctx *context.Context) {
-		user := ctx.Input.Session("user")
+		user := ctx.Input.Session("admin")
 		if user == nil && !beeUtils.InSlice(ctx.Request.RequestURI, filterRoute) {
 			ctx.Redirect(302, "/login")
 		}
