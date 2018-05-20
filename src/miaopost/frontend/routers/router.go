@@ -18,6 +18,10 @@ func init() {
 	beego.Router("/tips", &api.TipsController{}, "get:Tips")
 	beego.Router("/qrcode/png", &api.QrcodeController{}, "get:Png")
 
+	// Home
+	beego.Router("/home", &controllers.HomeController{})
+	beego.Router("/setRegion", &controllers.HomeController{}, "*:SetRegion")
+
 	// 登陆
 	beego.Router("/login", &controllers.LoginController{}, "post:LoginPost")
 	beego.Router("/login", &controllers.LoginController{}, "get:LoginGet")

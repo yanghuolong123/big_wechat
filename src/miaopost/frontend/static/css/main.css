@@ -46,7 +46,12 @@ a.list_content:hover{text-decoration: none;}
 .webuploader-pick{background: #fff; padding: 0px;}
 
 
-/** =============== home.tpl =============== **/
+/*==================== home index  ===============*/
+.entry .jumbotron{background-color: transparent;}
+.entry .jumbotron p{font-size: 16px;}
+
+
+/** =============== info home.tpl =============== **/
 .home{padding: 0 10px;}
 .home .list-head{margin-top: 15px;}
 .home .list-head .title{padding-left: 0px;}
@@ -54,7 +59,7 @@ a.list_content:hover{text-decoration: none;}
 .home .list-head h4 span.week_pv{font-size: 14px;}
 
 
-/** ===== create.tpl ============ **/
+/** ===== info create.tpl ============ **/
 .create .valid_date{ padding-top: 5px; font-size: 16px;  color: #555; padding-left: 0px;}
 .create  form label{color: #777;}
 

@@ -8,7 +8,7 @@
                         <div class="page-header row">
                                 <div class="row ">
                                     <div class="col-md-12 region"> 
-                                        <!--<a href="javascript:;">UTD <span class="caret"></span></a>-->
+                                        {{if .region}}
                                         <div class="btn-group">
                                           <a class="dropdown-toggle btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             {{.region.Shortname}} <span class="caret"></span>
@@ -19,6 +19,7 @@
                                           {{end}}
                                           </ul>
                                         </div>
+                                        {{end}}
                                         <p class="pull-right text-right">
                                             {{if .user}}
                                                 <a  href="/user" class="">

@@ -17,6 +17,14 @@ type Region struct {
 	Status    int
 }
 
+func GetRegionById(id int) (region *Region) {
+	region = &Region{Id: id}
+	err := orm.NewOrm().Read(region)
+	help.Error(err)
+
+	return
+}
+
 func GetAllRegion() []Region {
 	var rlist []Region
 	_, err := orm.NewOrm().QueryTable("tbl_region").Filter("status", 0).All(&rlist)
