@@ -97,12 +97,14 @@ func (this *BaseController) IsLogin() bool {
 
 func (this *BaseController) GetCurrentRegion() (region models.Region) {
 	regions := models.GetAllRegion()
+	this.Data["regions"] = regions
 	for _, r := range regions {
 		if this.Ctx.Input.Domain() == r.Name+".miaopost.com" {
 			region = r
 			break
 		}
 	}
+	this.Data["region"] = region
 
 	return
 }

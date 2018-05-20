@@ -13,6 +13,9 @@ ul,li {list-style: none; margin: 0px; padding: 0px;}
 .cats a{font-size: 16px; margin-right: 5px; line-height: 38px;}
 
 .region{padding-left: 25px; padding-right: 50px;}
+.region .btn-group a.btn{padding: 0px;}
+.region .btn-group a,.region .btn-group a:hover{color: #337ab7;}
+.region .dropdown-menu{min-width: 100px;}
 .logo{ margin-bottom: 15px; padding-left: 8px;}
 .logo a{font-size: 30px; color: #ff5a5f;}
 .logo span{color: #777;    font-size: 18px;    padding-top: 15px; padding-left: 15px;}

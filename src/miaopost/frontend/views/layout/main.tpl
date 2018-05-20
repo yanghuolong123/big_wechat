@@ -8,7 +8,17 @@
                         <div class="page-header row">
                                 <div class="row ">
                                     <div class="col-md-12 region"> 
-                                        <a href="javascript:;">UTD <span class="caret"></span></a>
+                                        <!--<a href="javascript:;">UTD <span class="caret"></span></a>-->
+                                        <div class="btn-group">
+                                          <a class="dropdown-toggle btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{.region.Shortname}} <span class="caret"></span>
+                                          </a>
+                                          <ul class="dropdown-menu">
+                                          {{range .regions}}
+                                            <li><a href="http://{{.Name}}.miaopost.com">{{.Shortname}}</a></li>
+                                          {{end}}
+                                          </ul>
+                                        </div>
                                         <p class="pull-right text-right">
                                             {{if .user}}
                                                 <a  href="/user" class="">
