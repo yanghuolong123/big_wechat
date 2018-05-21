@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"miaopost/frontend/models"
 	"yhl/help"
 	"yhl/wechat"
@@ -55,8 +56,32 @@ func (this *BaseController) Prepare() {
 		this.Data["wxshare"] = WxShare
 	}
 
-	if help.ClientSite == "http://www.miaopost.com" {
-		this.Redirect("http://utd.miaopost.com"+help.ClientUri, 302)
+	user := this.GetSession("user")
+	this.Data["user"] = user
+
+	if this.Ctx.Input.Site() == "http://www.miaopost.com" || this.Ctx.Input.Site() == "http://home.miaopost.com" {
+		subDomain := ""
+		setRegion := this.Ctx.GetCookie("setRegion")
+		fmt.Println("============ setRegion:", setRegion)
+
+		if setRegion != "" {
+			subDomain = setRegion
+		} else if user != nil {
+			region := models.GetRegionById(user.(*models.User).Rid)
+			if region.Name != "" {
+				this.Ctx.SetCookie("setRegion", region.Name, 30*24*3600, "/", "miaopost.com")
+				subDomain = region.Name
+			}
+		}
+
+		if subDomain != "" {
+			fmt.Println("============ subDomain:", subDomain)
+			uri := this.Ctx.Input.URI()
+			if uri == "/" || uri == "" {
+				uri = "/info"
+			}
+			this.Redirect("http://"+subDomain+".miaopost.com"+uri, 302)
+		}
 	}
 
 	region := this.GetCurrentRegion()
@@ -79,9 +104,6 @@ func (this *BaseController) Prepare() {
 	footer_nav := models.GetArticleByType(models.Type_Nav)
 	this.Data["footer_nav"] = footer_nav
 	this.Data["last_footer_nav_index"] = len(footer_nav) - 1
-
-	user := this.GetSession("user")
-	this.Data["user"] = user
 
 	this.BaseController.Prepare()
 }

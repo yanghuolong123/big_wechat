@@ -25,6 +25,14 @@ func GetRegionById(id int) (region *Region) {
 	return
 }
 
+func GetRegionByName(name string) (region *Region) {
+	region = &Region{Name: name}
+	err := orm.NewOrm().Read(region, "name")
+	help.Error(err)
+
+	return
+}
+
 func GetAllRegion() []Region {
 	var rlist []Region
 	_, err := orm.NewOrm().QueryTable("tbl_region").Filter("status", 0).All(&rlist)

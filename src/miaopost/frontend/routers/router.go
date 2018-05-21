@@ -19,7 +19,7 @@ func init() {
 	beego.Router("/qrcode/png", &api.QrcodeController{}, "get:Png")
 
 	// Home
-	beego.Router("/home", &controllers.HomeController{})
+	beego.Router("/", &controllers.HomeController{})
 	beego.Router("/setRegion", &controllers.HomeController{}, "*:SetRegion")
 
 	// 登陆
@@ -34,7 +34,7 @@ func init() {
 	beego.Router("/user/edit", &controllers.UserController{}, "post:EditPost")
 
 	// 信息
-	beego.Router("/", &controllers.InfoController{})
+	beego.Router("/info", &controllers.InfoController{})
 	beego.Router("/info/create", &controllers.InfoController{}, "get:CreateGet")
 	beego.Router("/info/create", &controllers.InfoController{}, "post:CreatePost")
 	beego.Router("/info/edit", &controllers.InfoController{}, "get:EditGet")

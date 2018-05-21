@@ -13,6 +13,7 @@ func init() {
 type User struct {
 	Id         int
 	Openid     string
+	Rid        int
 	Username   string
 	Email      string
 	Password   string
@@ -43,13 +44,15 @@ func GetUserByOpenid(openid string) (user *User, err error) {
 
 func CreateUser(user *User) int {
 	user.Createtime = time.Now()
-	i, _ := orm.NewOrm().Insert(user)
+	i, err := orm.NewOrm().Insert(user)
+	help.Error(err)
 
 	return int(i)
 }
 
 func UpdateUser(user *User) error {
 	_, err := orm.NewOrm().Update(user)
+	help.Error(err)
 
 	return err
 }

@@ -11,15 +11,11 @@ type HomeController struct {
 }
 
 func (this *HomeController) Get() {
-	//regions := models.GetAllRegion()
-
-	//this.Data["version"] = help.Version
-	//this.Data["regions"] = regions
 
 	setRegion := this.Ctx.GetCookie("setRegion")
 	fmt.Println("=================== :", setRegion)
 	if setRegion != "" {
-		this.Redirect("http://"+setRegion+".miaopost.com", 302)
+		this.Redirect("http://"+setRegion+".miaopost.com/info", 302)
 	}
 
 	this.Layout = "layout/main.tpl"
@@ -29,9 +25,19 @@ func (this *HomeController) Get() {
 func (this *HomeController) SetRegion() {
 	rid, _ := this.GetInt("rid")
 	region := models.GetRegionById(int(rid))
+	fmt.Println("============ regionName:", region.Name)
 
-	this.Ctx.SetCookie("setRegion", region.Name, 30*24*3600, "/")
+	this.Ctx.SetCookie("setRegion", region.Name, 30*24*3600, "/", "miaopost.com")
+	user := this.GetSession("user")
+	if user != nil {
+		u := user.(*models.User)
+		u.Rid = region.Id
+		this.SetSession("user", u)
+		go func(u *models.User) {
+			models.UpdateUser(u)
+		}(u)
+	}
 
-	this.Redirect("http://"+region.Name+".miaopost.com", 302)
+	this.Redirect("http://"+region.Name+".miaopost.com/info", 302)
 
 }

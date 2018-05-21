@@ -15,7 +15,7 @@
                                           </a>
                                           <ul class="dropdown-menu">
                                           {{range .regions}}
-                                            <li><a href="http://{{.Name}}.miaopost.com">{{.Shortname}}</a></li>
+                                            <li><a href="/setRegion?rid={{.Id}}">{{.Shortname}}</a></li>
                                           {{end}}
                                           </ul>
                                         </div>
