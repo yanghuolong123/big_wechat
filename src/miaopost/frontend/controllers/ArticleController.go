@@ -15,6 +15,10 @@ func (this *ArticleController) View() {
 		this.Tips(err.Error())
 	}
 
+	if article.Type == models.Type_Adv && article.Link != "" {
+		this.Redirect(article.Link, 302)
+	}
+
 	this.Data["article"] = article
 	this.Layout = "layout/main.tpl"
 	this.TplName = "article/view.tpl"

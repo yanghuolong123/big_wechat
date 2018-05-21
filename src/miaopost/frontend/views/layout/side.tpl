@@ -3,7 +3,7 @@
 	{{if .side_adv}}
 	<ul>
 	{{range .side_adv}}
-	<li><a href="{{if .Link}}{{.Link}}{{else}}/article/view?id={{.Id}}{{end}}"><img src="{{.Logo}}!300!300" /></a></li>
+	<li><a href="/article/view?id={{.Id}}"><img src="{{.Logo}}!300!300" /></a></li>
 	{{end}}
 	</ul>
 	{{end}}
@@ -13,7 +13,7 @@
 	{{if .side_adv_1}}
 	<ul>
 	{{range .side_adv_1}}
-	<li><a href="{{if .Link}}{{.Link}}{{else}}/article/view?id={{.Id}}{{end}}"><img src="{{.Logo}}!300!300" /></a></li>
+	<li><a href="/article/view?id={{.Id}}"><img src="{{.Logo}}!300!300" /></a></li>
 	{{end}}
 	</ul>
 	{{end}}
