@@ -164,7 +164,7 @@ func (this *InfoController) View() {
 		share.Img = this.Ctx.Input.Site() + photos[0].Url + "!200!200"
 	}
 	share.Title = cat.Name + " - 秒Po"
-	share.Link = "http://www.miaopost.com" + help.ClientUri
+	share.Link = this.Ctx.Input.Site() + this.Ctx.Input.URI()
 	this.Data["wxshare"] = share
 
 	adv := models.GetArticleByTypeAndGroup(this.Rid, models.Type_Adv, models.Adv_View_Bottom)
