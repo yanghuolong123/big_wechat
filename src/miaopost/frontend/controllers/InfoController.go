@@ -109,7 +109,7 @@ func (this *InfoController) CreatePost() {
 		info.Uid = u.(*models.User).Id
 	}
 
-	id := models.CreateInfo(info)
+	id := models.CreateInfo(info, this.Ctx)
 	if id > 0 {
 		if photo != "" {
 			plist := strings.Split(photo, ",")
@@ -245,7 +245,7 @@ func (this *InfoController) EditPost() {
 func (this *InfoController) SuggestDel() {
 	infoId, _ := this.GetInt("infoId")
 	iid := int(infoId)
-	id := models.CreateSuggest(iid)
+	id := models.CreateSuggest(iid, this.Ctx)
 	slist := models.GetSuggestByInfoidAndGroupByIp(iid)
 	if len(slist) > 3 {
 		models.DelInfoById(iid)

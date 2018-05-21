@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/orm"
 	"time"
 	"yhl/help"
@@ -31,14 +32,14 @@ type InfoVo struct {
 	Photos []Photo
 }
 
-func CreateInfo(info *Info) int {
-	info.Ip = help.ClientIp
+func CreateInfo(info *Info, ctx *context.Context) int {
+	info.Ip = ctx.Input.IP()
 	info.Create_time = time.Now()
 	info.Update_time = info.Create_time
 	rList := GetAllRegion()
 	for _, v := range rList {
 		subDomain := v.Name + ".miaopost.com"
-		if subDomain == help.ClientDomain {
+		if subDomain == ctx.Input.Domain() {
 			info.Rid = v.Id
 			break
 		}

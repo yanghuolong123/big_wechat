@@ -40,23 +40,3 @@ func GetAllRegion() []Region {
 
 	return rlist
 }
-
-func GetCurrentRegion() (r Region) {
-	rlist := GetAllRegion()
-	for _, v := range rlist {
-		cDomain := v.Name + ".miaopost.com"
-		if cDomain == help.ClientDomain {
-			r = v
-			break
-		}
-	}
-
-	return
-}
-
-func GetAllRegionMap() (m orm.Params) {
-	_, err := orm.NewOrm().Raw("select id,shortname from tbl_region where status=0").RowsToMap(&m, "id", "shortname")
-	help.Error(err)
-
-	return
-}

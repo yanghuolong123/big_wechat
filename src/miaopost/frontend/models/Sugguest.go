@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/orm"
 	"time"
 	"yhl/help"
@@ -18,11 +19,11 @@ type Suggest struct {
 	Create_time time.Time
 }
 
-func CreateSuggest(infoId int) int {
+func CreateSuggest(infoId int, ctx *context.Context) int {
 	var sug Suggest
 
 	sug.Info_id = infoId
-	sug.Ip = help.ClientIp
+	sug.Ip = ctx.Input.IP()
 	sug.Create_time = time.Now()
 
 	i, err := orm.NewOrm().Insert(&sug)

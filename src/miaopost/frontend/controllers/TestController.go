@@ -194,8 +194,8 @@ func (this *TestController) Get() {
 }
 
 func createSuggest() {
-	i := models.CreateSuggest(2)
-	fmt.Println(i)
+	//i := models.CreateSuggest(2)
+	//fmt.Println(i)
 }
 
 func getPhotoByInfoid() {
@@ -229,7 +229,7 @@ func createInfo() {
 	info.Content = "dsdssd搜索"
 	//info.Valid_day = 2
 	//info.Email = "yhl11@11.com"
-	models.CreateInfo(info)
+	//models.CreateInfo(info)
 }
 
 func getAllCategory() {
