@@ -25,7 +25,7 @@ func (this *BaseController) Prepare() {
 	this.Data["isWeixin"] = isWx
 	if isWx {
 		if !this.IsLogin() {
-			openid := wechat.GetOpenId(this.Ctx, help.ClientRoute)
+			openid := wechat.GetOpenId(this.Ctx)
 			if openid == "" {
 				goto loginEnd
 			}
@@ -51,7 +51,7 @@ func (this *BaseController) Prepare() {
 
 	loginEnd:
 
-		signPackage := wechat.GetSignPackage()
+		signPackage := wechat.GetSignPackage(this.Ctx)
 		this.Data["signPackage"] = signPackage
 		this.Data["wxshare"] = WxShare
 	}
