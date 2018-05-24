@@ -35,7 +35,7 @@
                                 </div>   
                         </div>
                          <div class="logo row">
-                                       <a href="/">秒Po</a> <span>极简校园信息发布平台</span>
+                                       <a href="/info">秒Po</a> <span>极简校园信息发布平台</span>
                         </div>
                         <div class="content row">
                             <div class="col-md-9">{{.LayoutContent}}</div>
