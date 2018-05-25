@@ -16,7 +16,7 @@
 	</div>
 	<div class="row">
 		<div class="info-content col-md-12">			
-			<a href="/info/view?id={{.Info.Id}}" class="list_content">{{str2html (showListInfo (substr .Info.Content 0 150))}} {{if (.Photos|len)}}<img class="img_tip" src="/static/img/image_s.png">{{end}}...</a>
+			<a href="/info/view?id={{.Info.Id}}" {{if not $.isMobile}}target="_blank"{{end}} class="list_content">{{str2html (showListInfo (substr .Info.Content 0 150))}} {{if (.Photos|len)}}<img class="img_tip" src="/static/img/image_s.png">{{end}}...</a>
 			<div class="line"></div>
 		</div>
 	</div>
