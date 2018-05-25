@@ -3,7 +3,7 @@
 		<div class="col-md-9 col-xs-9">
 			<span class="badge">{{.cat.Name}}</span>
 			<span>阅读({{.info.Views}}) </span>
-			<span>{{showtime .info.Create_time}}</span>
+			<span>{{showtime .info.Update_time}}</span>
 		</div>
 		<div class="col-md-2 col-xs-3">
 			<a href="#" onclick="suggestDel({{.info.Id}});return false;">建议删除</a>

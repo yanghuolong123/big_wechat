@@ -1,7 +1,7 @@
 <div class="edit_user">
 	<div class="user_menu">
 		<a href="/info/my">我的发布</a>
-		<a class="label label-primary" href="/user/edit">标示修改</a>
+		<a class="label label-primary" href="/user/edit">修改昵称</a>
 		{{if not .isWeixin}}		
 		<a href="/logout" class=""><span class="glyphicon glyphicon-log-out"></span> 退出</a>
 		{{end}}
