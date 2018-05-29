@@ -16,7 +16,7 @@ func init() {
 func ShowListInfo(content string) (s string) {
 	s = strings.Replace(content, "\n", "&nbsp;&nbsp;&nbsp;", -1)
 	s = strings.TrimPrefix(s, "描述：")
-	s = strings.TrimLeft(s, "&nbsp;")
+	s = strings.TrimSpace(s)
 	s = strings.TrimSpace(s)
 
 	return
