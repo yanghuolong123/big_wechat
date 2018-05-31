@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+	"labix.org/v2/mgo/bson"
 	"miaopost/frontend/models"
 	"strings"
 	"time"
@@ -310,13 +311,25 @@ func (this *InfoController) Top() {
 		this.SendRes(-1, err.Error(), nil)
 	}
 
+	condition := bson.M{
+		"infoId": info.Id,
+		"uid":    info.Uid,
+	}
+	count, err := help.MongoDb.C("top_record").Find(condition).Count()
+	help.Error(err)
+	if count >= 3 {
+		this.SendRes(-1, "亲，您的置顶机会已用完，最多可以免费置顶3次", nil)
+	}
+
 	info.Update_time = time.Now()
 	err = models.UpdateInfo(info)
 	if err != nil {
 		this.SendRes(-1, err.Error(), nil)
 	}
+	m := map[string]interface{}{"uid": info.Uid, "infoId": info.Id, "time": time.Now()}
+	help.MongoDb.C("top_record").Insert(m)
 
-	this.SendRes(0, "success", nil)
+	this.SendRes(0, "置顶成功，您还有"+help.ToStr(2-count)+"机会", nil)
 }
 
 // 我发布的信息

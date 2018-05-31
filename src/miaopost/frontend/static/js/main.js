@@ -33,7 +33,8 @@ var  topInfo = function(id){
                                 	prompt(e.msg);
                                 	return false;
                         	}
-                        	prompt({msg:"置顶成功，您的发布已成为最新发布，您可以多次使用置顶，提升显示效果。",displayTime:3000});
+                        	//prompt({msg:"置顶成功，您的发布已成为最新发布，您可以多次使用置顶，提升显示效果。",displayTime:3000});
+                        	prompt({msg:e.msg,displayTime:3000});
                         	setTimeout(function(){
                         		window.location = location.href;
                         	}, 2500);
