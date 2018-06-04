@@ -102,6 +102,7 @@ func (this *InfoController) CreatePost() {
 	u := this.GetSession("user")
 
 	info := new(models.Info)
+	info.Rid = this.Rid
 	info.Cid = int(cid)
 	info.Content = content
 	info.Valid_day = int(valid_day)

@@ -36,14 +36,16 @@ func CreateInfo(info *Info, ctx *context.Context) int {
 	info.Ip = ctx.Input.IP()
 	info.Create_time = time.Now()
 	info.Update_time = info.Create_time
+	/*
 	rList := GetAllRegion()
-	for _, v := range rList {
-		subDomain := v.Name + ".miaopost.com"
-		if subDomain == ctx.Input.Domain() {
-			info.Rid = v.Id
-			break
-		}
-	}
+			for _, v := range rList {
+				subDomain := v.Name + ".miaopost.com"
+				if subDomain == ctx.Input.Domain() {
+					info.Rid = v.Id
+					break
+				}
+			}
+	*/
 	i, err := orm.NewOrm().Insert(info)
 	if err != nil {
 		help.Log("error", err.Error())

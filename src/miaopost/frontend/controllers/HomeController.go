@@ -11,6 +11,7 @@ type HomeController struct {
 }
 
 func (this *HomeController) Get() {
+	this.Redirect("http://utd.miaopost.com", 302)
 
 	setRegion := this.Ctx.GetCookie("setRegion")
 	fmt.Println("=================== :", setRegion)

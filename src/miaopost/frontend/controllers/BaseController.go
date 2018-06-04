@@ -20,12 +20,13 @@ type BaseController struct {
 }
 
 func (this *BaseController) Prepare() {
+	site := this.Ctx.Input.Site()
 
 	isWx := this.IsWeixin()
 	this.Data["isWeixin"] = isWx
 	if isWx {
 		if !this.IsLogin() {
-			openid := wechat.GetOpenId(this.Ctx, "http://www.miaopost.com")
+			openid := wechat.GetOpenId(this.Ctx, site)
 			if openid == "" {
 				goto loginEnd
 			}
@@ -59,7 +60,7 @@ func (this *BaseController) Prepare() {
 	user := this.GetSession("user")
 	this.Data["user"] = user
 
-	if this.Ctx.Input.Site() == "http://www.miaopost.com" || this.Ctx.Input.Site() == "http://home.miaopost.com" {
+	if site == "http://www.miaopost.com" || site == "http://home.miaopost.com" {
 		subDomain := ""
 		setRegion := this.Ctx.GetCookie("setRegion")
 		fmt.Println("============ setRegion:", setRegion)
@@ -121,7 +122,8 @@ func (this *BaseController) GetCurrentRegion() (region models.Region) {
 	regions := models.GetAllRegion()
 	this.Data["regions"] = regions
 	for _, r := range regions {
-		if this.Ctx.Input.Domain() == r.Name+".miaopost.com" {
+		//if this.Ctx.Input.Domain() == r.Name+".miaopost.com" {
+		if this.Ctx.Input.SubDomains() == r.Name {
 			region = r
 			break
 		}

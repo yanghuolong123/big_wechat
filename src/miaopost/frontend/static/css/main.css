@@ -23,12 +23,12 @@ ul,li {list-style: none; margin: 0px; padding: 0px;}
 /**  ===  public ===**/
 .more{font-size: 12px; font-style: italic;}
 .info-list{}
-.info-list .cat{font-size: 18px;}
+.info-list .cat{font-size: 18px; margin-top: 3px;}
 .info-list .meta{font-size: 13px; color: #777; padding-top: 8px;}
 .info-list .meta span{margin-right:   0px; margin-left: 10px;}
 .info-list .info-content{margin-top: 8px;}
 .info-list  .line{border-bottom: 1px solid #f0f0f0; margin-bottom: 20px; padding-bottom:  10px;}
-.info-list .label-warning{background-color: #ff5a5f;}
+.info-list .label-warning{background-color: #ff5a5f; padding-top: 5px;}
 img.img_tip{width: 18px; height: 18px;}
 .label-tips{font-size: 12px;}
 .dropdown button{ }
