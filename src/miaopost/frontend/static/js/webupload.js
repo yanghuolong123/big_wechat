@@ -17,7 +17,7 @@ $(function() {
         compress: false,
         chunked: true,
         chunkSize:100*1024,
-        //sendAsBinary:true,
+        sendAsBinary:true,
         accept: {
 	    title: 'Images',
 	    extensions: 'gif,jpg,jpeg,bmp,png',
@@ -76,7 +76,7 @@ $(function() {
         $( '#'+file.id ).find('.progress').fadeOut();        	
     });
 
-    $("#picker").click(function(){alert(111);
+    $("#picker").click(function(){
         uploader.upload();
     });
     
