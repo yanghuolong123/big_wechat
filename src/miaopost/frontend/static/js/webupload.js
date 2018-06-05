@@ -76,7 +76,7 @@ $(function() {
         $( '#'+file.id ).find('.progress').fadeOut();        	
     });
 
-    $("#picker").click(function(){
+    $("#picker").click(function(){alert(111);
         uploader.upload();
     });
     
