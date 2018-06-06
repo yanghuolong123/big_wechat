@@ -44,7 +44,7 @@ a.list_content:hover{text-decoration: none;}
 .user_menu{ }
 .user_menu a{ margin-right: 15px; font-size: 18px; line-height: 38px; }
 .webuploader-pick{background: #fff; padding: 0px;}
-#picker div:nth-child(2){width:100%!important;height:100%!important;} 
+#picker {width:100%!important;height:100%!important;} 
 
 
 /*==================== home index  ===============*/
