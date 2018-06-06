@@ -76,8 +76,10 @@ $(function() {
         $( '#'+file.id ).find('.progress').fadeOut();        	
     });
 
-    // $("#picker").click(function(){
-    //     uploader.upload();
-    // });
+    $("#picker").click(function(){
+        uploader.upload();
+    });
+
+    $("#picker div:eq(1)").attr("style","position: absolute; top: 0px; left: 0px; width: 44px; height: 30px; overflow: hidden; bottom: auto; right: auto;"); 
     
 });
