@@ -21,7 +21,7 @@ $(function() {
         accept: {
 	    title: 'Images',
 	    extensions: 'gif,jpg,jpeg,bmp,png',
-	    mimeTypes: 'image/jpg,image/jpeg,image/png,image/gif'
+	    mimeTypes: 'image/jpg,image/jpeg,image/png,image/gif',
 	},
         fileNumLimit: 20,
         auto: true
@@ -76,10 +76,8 @@ $(function() {
         $( '#'+file.id ).find('.progress').fadeOut();        	
     });
 
-    $("#picker").click(function(){
-        uploader.upload();
-    });
-
-    $("#picker div:eq(1)").attr("style","position: absolute; top: 0px; left: 0px; width: 44px; height: 30px; overflow: hidden; bottom: auto; right: auto;"); 
+    // $("#picker").click(function(){
+    //     uploader.upload();
+    // });
     
 });
