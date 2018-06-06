@@ -76,8 +76,8 @@ $(function() {
         $( '#'+file.id ).find('.progress').fadeOut();        	
     });
 
-    $("#picker").click(function(){
-        uploader.upload();
-    });
+    // $("#picker").click(function(){
+    //     uploader.upload();
+    // });
     
 });
