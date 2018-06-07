@@ -27,6 +27,7 @@ func StatInfoViews(begin, end time.Time) int {
 func StatPv(begin, end time.Time) int {
 	condition := bson.M{
 		"time": bson.M{"$gte": begin, "$lt": end},
+		"uri":  bson.M{"$ne": "/login"},
 	}
 
 	i, err := help.MongoDb.C("trace_record").Find(condition).Count()
