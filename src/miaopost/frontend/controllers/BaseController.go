@@ -22,6 +22,9 @@ type BaseController struct {
 func (this *BaseController) Prepare() {
 	site := this.Ctx.Input.Site()
 
+	region := this.GetCurrentRegion()
+	this.Rid = region.Id
+
 	isWx := this.IsWeixin()
 	this.Data["isWeixin"] = isWx
 	if isWx {
@@ -42,8 +45,13 @@ func (this *BaseController) Prepare() {
 
 			userinfo := wechat.GetWxUserinfo(openid, "")
 			if v, ok := userinfo["nickname"]; ok {
+				rid := 1
+				if this.Rid > 0 {
+					rid = this.Rid
+				}
 				u := models.User{
 					Openid:   openid,
+					Rid:      rid,
 					Nickname: v.(string),
 					Avatar:   userinfo["headimgurl"].(string),
 				}
@@ -87,9 +95,6 @@ func (this *BaseController) Prepare() {
 			this.Redirect("http://"+subDomain+".miaopost.com"+uri, 302)
 		}
 	}
-
-	region := this.GetCurrentRegion()
-	this.Rid = region.Id
 
 	isMobile := this.IsMobile()
 	this.Data["isMobile"] = isMobile
