@@ -1,5 +1,5 @@
 <div class="create">
-       {{if not .isWeixin}}
+       {{if and (not .isWeixin) (not .user)}}
        <h4>微信登陆发布</h4>
        <div class="row">
          <div class="col-sm-offset-1 wx">
