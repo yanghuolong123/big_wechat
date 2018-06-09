@@ -66,14 +66,14 @@ func clearWxCache() error {
 	cache := help.Cache
 	cache.Delete("access_token_" + wechat.Appid)
 	cache.Delete("jsapi_ticket_" + wechat.Appid)
-	cache.Delete("qr_img_create")
+	//	cache.Delete("qr_img_create")
 
 	accessToken := wechat.GetAccessToken()
 	jsapiTickey := wechat.GetJsApiTickey()
-	createImg := wechat.GetTmpStrQrImg("create")
+	//	createImg := wechat.GetTmpStrQrImg("create")
 	help.Log("task", "=============== new accessToken:"+accessToken)
 	help.Log("task", "=============== new jsapiTickey:"+jsapiTickey)
-	help.Log("task", "=============== new createImg:"+createImg)
+	//	help.Log("task", "=============== new createImg:"+createImg)
 
 	return nil
 }
