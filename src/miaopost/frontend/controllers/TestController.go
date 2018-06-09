@@ -18,10 +18,10 @@ func (this *TestController) Get() {
 	t := time.Now()
 
 	//f := "/var/work/work_golang/work/zd/src/miaopost/frontend/uploads/2018/5/17/201805171524193954.jpg"
-	f := "./uploads/2018/5/17/201805171524193954.jpg"
+	//	f := "./uploads/2018/5/17/201805171524193954.jpg"
 	//f := "/uploads/2018/5/9/201805091726545057.JPG"
-	h, w := help.GetImgHW(f)
-	fmt.Println("=================== h:", h, "   =========== w:", w)
+	//	h, w := help.GetImgHW(f)
+	//	fmt.Println("=================== h:", h, "   =========== w:", w)
 
 	//this.SetSession("test", "1111111111111111")
 	//user := new(models.User)
@@ -54,13 +54,11 @@ func (this *TestController) Get() {
 		fmt.Println(data)
 	*/
 
-	/*
-		user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
-		if err == nil {
-			this.SetSession("user", user)
-			fmt.Println("======================= 登陆成功")
-		}
-	*/
+	user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
+	if err == nil {
+		this.SetSession("user", user)
+		fmt.Println("======================= 登陆成功")
+	}
 
 	//	user := this.GetSession("user")
 	//	fmt.Println("============= session user:", user)

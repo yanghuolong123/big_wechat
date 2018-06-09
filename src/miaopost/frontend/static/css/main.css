@@ -110,7 +110,7 @@ a.list_content:hover{text-decoration: none;}
 }
 .create h4{color: #777; font-weight: bold;}
 .create .wx{padding-left: 15px; padding-right: 10px;}
-.create .wx img{width: 150px; height: 150px; }
+.create .wx img#login_img{width: 150px; height: 150px; }
 
 /**  =============== info view.tpl =============== **/
 .view .meta{font-size: 13px; color: #777; margin-bottom: 8px;}

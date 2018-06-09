@@ -3,12 +3,12 @@
        <h4>微信登陆发布</h4>
        <div class="row">
          <div class="col-sm-offset-1 wx">
-          <p class="text-danger">(推荐，发布后可以非常方便地通过服务号或电脑对发布进行编辑、删除和置顶操作)</p>           
-           {{if .qr_url}}
-            <div>
-            <img src="{{.qr_url}}">
-            </div>
-           {{end}}
+          <p class="text-danger">(推荐，发布后可以非常方便地通过服务号或电脑对发布进行编辑、删除和置顶操作)</p>        
+          
+          <div class="create_login_qrcode">
+            <img src="/static/img/loading.gif">
+          </div>
+           
          </div>
        </div>
        <hr>

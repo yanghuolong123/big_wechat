@@ -8,7 +8,7 @@ import (
 	"time"
 	"yhl/help"
 	"yhl/model"
-	"yhl/wechat"
+	//	"yhl/wechat"
 )
 
 const pageSize int = 15
@@ -84,9 +84,9 @@ func (this *InfoController) CreateGet() {
 	cid, _ := this.GetInt("cid")
 	this.Data["cid"] = int(cid)
 
-	if !this.IsWeixin() {
-		this.Data["qr_url"] = wechat.GetTmpStrQrImg("create")
-	}
+	//if !this.IsWeixin() {
+	//	this.Data["qr_url"] = wechat.GetTmpStrQrImg("create")
+	//}
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "info/create.tpl"

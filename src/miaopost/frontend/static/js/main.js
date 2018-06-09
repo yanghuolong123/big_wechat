@@ -41,6 +41,7 @@ var  topInfo = function(id){
 	});
 }
 
+
 $(function(){
 
 	// 搜索
@@ -259,6 +260,29 @@ $(function(){
 	});
 
 
+	// 发布页扫码登陆
+	var clq = $(".create_login_qrcode");
+	if(clq.length>0) {
+		$.get("/login",function(e){
+			clq.html(e.data);
+			var timer = setInterval(function(){
+			    $.post('/login', {"sceneId":$("#sceneId").val()}, function(e){
+			            if(e.code < 0) {
+			                return false;
+			            }
+			            
+			            clearInterval(timer);
+			            if(e.data>0) {
+			            	window.location = "/user";
+			            	return;
+			            }
+
+			            window.location = "/";
+			            
+			        });
+			}, 1000);
+		});
+	}
 	
 
 });
@@ -289,3 +313,4 @@ $(function(){
 // 		});
 // 	}		
 // });
+
