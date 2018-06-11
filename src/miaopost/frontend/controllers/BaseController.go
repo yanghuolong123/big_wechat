@@ -29,8 +29,8 @@ func (this *BaseController) Prepare() {
 	this.Data["isWeixin"] = isWx
 	if isWx {
 		if !this.IsLogin() {
-			if site != "http://mp.feichangjuzu.com" {
-				site = "http://www.miaopost.com"
+			if site != "http://mp.womem.cn" {
+				site = "http://utd.feichangjuzu.com"
 			}
 			openid := wechat.GetOpenId(this.Ctx, site)
 			if openid == "" {

@@ -12,8 +12,8 @@ src/addwechat/log/
 src/miaopost/frontend/frontend
 src/miaopost/frontend/uploads/
 src/miaopost/frontend/fast-disploy.sh
-src/miaopost/frontend/fast-disploy-china.sh
-#src/miaopost/frontend/conf/app.conf
+src/miaopost/frontend/fast-disploy-test.sh
+src/miaopost/frontend/conf/app.conf-test
 src/miaopost/frontend/log/
 !src/miaopost/frontend/log/web.log
 src/miaopost/frontend/conf/app.conf

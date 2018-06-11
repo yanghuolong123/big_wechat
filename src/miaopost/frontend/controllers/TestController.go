@@ -37,28 +37,29 @@ func (this *TestController) Get() {
 			map[string]string{
 				"type": "view",
 				"name": "发布信息",
-				"url":  "http://www.miaopost.com/info/create",
+				"url":  "http://utd.feichangjuzu.com/info/create",
 			},
 			map[string]string{
 				"type": "view",
 				"name": "最新发布",
-				"url":  "http://www.miaopost.com",
+				"url":  "http://utd.feichangjuzu.com",
 			},
 			map[string]string{
 				"type": "view",
 				"name": "我的发布",
-				"url":  "http://www.miaopost.com/info/my",
+				"url":  "http://utd.feichangjuzu.com/info/my",
 			},
 		}
 		data := wechat.CreateMenu(m)
 		fmt.Println(data)
 	*/
 
-	user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
-	if err == nil {
-		this.SetSession("user", user)
-		fmt.Println("======================= 登陆成功")
-	}
+	/*	user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
+		if err == nil {
+			this.SetSession("user", user)
+			fmt.Println("======================= 登陆成功")
+		}
+	*/
 
 	//	user := this.GetSession("user")
 	//	fmt.Println("============= session user:", user)
