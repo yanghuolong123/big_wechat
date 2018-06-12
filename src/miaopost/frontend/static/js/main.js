@@ -280,7 +280,7 @@ $(function(){
 			            	prompt({msg:"已登录！此时通过电脑或公众号发布后都可以进行编辑、删除和免费置顶操作",displayTime:3000});
 		                        	setTimeout(function(){
 		                        		//window.location = "/user";
-		                        		window.location = "/";
+		                        		window.location = location.href;
 		                        	}, 2500);
 			            	
 			            	return;
