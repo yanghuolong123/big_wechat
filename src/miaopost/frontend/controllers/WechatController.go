@@ -57,18 +57,19 @@ func listen(msgBody *wechat.MsgBody) *wechat.MsgBody {
 			wechat.SendTextMsg(msgBody.FromUserName, content)
 		}
 
-		if strings.Contains(msgBody.EventKey, "create") {
-
-			msg := "关注秒Po的同时我们即为您创建专属通道，发布后即可进行便捷的修改、删除和免费置顶操作"
-			return replyText(msgBody, msg)
-		}
+		//		if strings.Contains(msgBody.EventKey, "create") {
+		//
+		//			msg := "关注秒Po的同时我们即为您创建专属通道，发布后即可进行便捷的修改、删除和免费置顶操作"
+		//			return replyText(msgBody, msg)
+		//		}
 
 		if strings.Contains(msgBody.EventKey, "login_") {
 			msgBody.EventKey = strings.TrimLeft(msgBody.EventKey, "qrscene_")
 			key := scanLogin(msgBody)
 			_ = key
-			url := "http://www.miaopost.com"
-			msg := "通道创建成功，通过电脑或公众号发布后都可以进行修改、删除和置顶。专属通道除了使用您的微信昵称用于标示外，不会获取任何其他信息。如介意使用微信昵称，可以 <a href=\"" + url + "/user/edit" + "\">修改标示</a>。"
+			//url := "http://www.miaopost.com"
+			//			msg := "通道创建成功，通过电脑或公众号发布后都可以进行修改、删除和置顶。专属通道除了使用您的微信昵称用于标示外，不会获取任何其他信息。如介意使用微信昵称，可以 <a href=\"" + url + "/user/edit" + "\">修改标示</a>。"
+			msg := "已登录！此时通过电脑或公众号发布后都可以进行编辑、删除和免费置顶操作。"
 
 			return replyText(msgBody, msg)
 		}
