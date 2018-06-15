@@ -292,6 +292,34 @@ $(function(){
 			}, 1000);
 		});
 	}
+
+	// 留言
+	$(".info-msg-btn").click(function(){
+		var info_id = $("#info_id").val();
+		var content = $.trim($("#info_msg").val());
+		if ( content=="") {
+			prompt("内容不能为空");
+			return false;
+		}
+
+		$.post("/info/msg", {info_id:info_id,content:content}, function(e){
+			if(e.code<0) {
+				prompt({msg:e.msg});
+				return false;
+			}
+
+			$("#info_msg").val("");
+
+			var comments = '';
+			comments += "<li>";
+			comments += " 	<h5>"+e.data.User.Nickname+"</h5>";
+			comments += "		<p>"+e.data.Im.Content+"</p>";
+			comments += "		<p>1秒前</p>";
+			comments += "</li>";
+
+			$("#commentlist").prepend(comments);
+		});
+	});
 	
 
 });

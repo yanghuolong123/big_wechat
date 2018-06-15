@@ -54,12 +54,11 @@ func (this *TestController) Get() {
 		fmt.Println(data)
 	*/
 
-	/*	user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
-		if err == nil {
-			this.SetSession("user", user)
-			fmt.Println("======================= 登陆成功")
-		}
-	*/
+	user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
+	if err == nil {
+		this.SetSession("user", user)
+		fmt.Println("======================= 登陆成功")
+	}
 
 	//	user := this.GetSession("user")
 	//	fmt.Println("============= session user:", user)

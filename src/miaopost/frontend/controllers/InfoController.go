@@ -172,6 +172,12 @@ func (this *InfoController) View() {
 	adv := models.GetArticleByTypeAndGroup(this.Rid, models.Type_Adv, models.Adv_View_Bottom)
 	this.Data["adv"] = models.RandAdv(adv, 1)
 
+	ims := models.GetInfoMessageByInfoId(info.Id)
+	if len(ims) > 0 {
+		imvos := models.ConvertInfoMsgToVos(ims)
+		this.Data["imvos"] = imvos
+	}
+
 	this.Layout = "layout/main.tpl"
 	this.TplName = "info/view.tpl"
 }
@@ -359,4 +365,28 @@ func (this *InfoController) My() {
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "info/my.tpl"
+}
+
+func (this *InfoController) CreateMsg() {
+	user := this.GetSession("user")
+	if user == nil {
+		this.SendRes(-1, "请先登录", nil)
+	}
+
+	content := this.GetString("content")
+	info_id, _ := this.GetInt("info_id")
+	pid, _ := this.GetInt("pid")
+	im := models.InfoMessage{
+		Uid:     user.(*models.User).Id,
+		Info_id: int(info_id),
+		Pid:     int(pid),
+		Content: content,
+	}
+	i := models.CreateInfoMessage(&im)
+	if i > 0 {
+		vo := models.ConvertInfoMsgToVo(&im)
+		this.SendRes(0, "success", vo)
+	}
+
+	this.SendRes(-1, "failed", nil)
 }

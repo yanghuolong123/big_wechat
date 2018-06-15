@@ -46,7 +46,14 @@ func init() {
 	beego.Router("/info/delete", &controllers.InfoController{}, "post:Delete")
 	beego.Router("/info/my", &controllers.InfoController{}, "*:My")
 	beego.Router("/info/top", &controllers.InfoController{}, "*:Top")
+	beego.Router("/info/msg", &controllers.InfoController{}, "post:CreateMsg")
 
 	// 文章
 	beego.Router("/article/view", &controllers.ArticleController{}, "*:View")
+
+	// 支付
+	beego.Router("/pay/confirm", &controllers.PayController{}, "get,post:Confirm")
+	beego.Router("/pay/wxscan", &controllers.PayController{}, "get,post:WxScan")
+	beego.Router("/pay/qrcode", &controllers.PayController{}, "get,post:Qrcode")
+	beego.Router("/pay/notify", &controllers.PayController{}, "*:Notify")
 }

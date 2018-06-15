@@ -21,6 +21,27 @@
 			{{end}}
 		</div>
 	</div>
+	<div class="comment ">
+		<h4 class="text-muted">留言</h4>
+		<div class="row">	
+			<div class="col-md-7">	
+				<input type="hidden" id="info_id" name="info_id" value="{{.info.Id}}">
+				<textarea id="info_msg" class="form-control"></textarea>
+			</div>
+		</div>		 
+		<div class="comment_btn col-sm-offset-6">
+			<button class="btn btn-success info-msg-btn">提交</button>
+		</div>
+		<ul id="commentlist">
+			{{range .imvos}}
+			<li>				
+				<h5>{{.User.Nickname}}</h5>
+				<p>{{.Im.Content}}</p>
+				<p>{{showtime .Im.Create_time}}</p>				
+			</li>
+			{{end}}
+		</ul>
+	</div>
 	<div class="adv row">
 		{{if .adv}}
 		<ul>

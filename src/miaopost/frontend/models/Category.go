@@ -5,6 +5,10 @@ import (
 	"yhl/help"
 )
 
+const (
+	Cat_type_1 = iota + 1
+)
+
 func init() {
 	orm.RegisterModelWithPrefix("tbl_", new(Category))
 }
@@ -55,4 +59,10 @@ func GetCatsByRid(rid int) []Category {
 	}
 
 	return clist
+}
+
+func GetCatTypeMap() map[int]string {
+	return map[int]string{
+		Cat_type_1: "问答/求助",
+	}
 }
