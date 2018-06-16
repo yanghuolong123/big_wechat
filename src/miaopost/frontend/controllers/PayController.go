@@ -109,6 +109,7 @@ func (this *PayController) WxScan() {
 	m := map[string]string{}
 	m["qrurl"] = "/pay/qrcode?" + v.Encode()
 	m["prepay_id"] = wxRes.Prepay_id
+	m["order_no"] = order.Orderno
 
 	this.SendRes(0, "success", m)
 }
@@ -166,4 +167,14 @@ func (this *PayController) Notify() {
 	help.Log("wxpay", "============== weixin pay success! ===============")
 
 	this.SendXml(wxpay.WXPayNotifyResp{Return_code: "SUCCESS", Return_msg: "OK!"})
+}
+
+func (this *PayController) Check() {
+	orderNo := this.GetString("order_no")
+	order := models.GetOrderByOrderno(orderNo)
+	if order.Status == 1 {
+		this.SendRes(0, "success", nil)
+	}
+
+	this.SendRes(-1, "no pay complete", nil)
 }

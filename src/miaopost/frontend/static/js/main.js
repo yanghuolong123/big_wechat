@@ -405,6 +405,7 @@ var admirePay = function(amount) {
 	$('#qrPayModal').modal({backdrop: 'static', keyboard: false});
 
 	var mid = $("#admire_msg_id").val();
+	var orderNo;
 	$.post("/pay/wxscan", {product_id:mid, amount:amount}, function(e){
 		if(e.code<0) {
 			prompt(e.msg);
@@ -412,22 +413,19 @@ var admirePay = function(amount) {
 		}
 
 		$("#pay_qr_img").attr("src", e.data.qrurl).addClass("qrimg");
+		orderNo = e.data.order_no;
 
-
-		// var timer = setInterval(function(){
-		//     $.post('/pg/checkPayUnlock', {"uid":uid,"gid":gid}, function(e){
-		//             if(e.code < 0) {
-		//                 return false;
-		//             }
+		var timer = setInterval(function(){
+		    $.post('/pay/check', {order_no:orderNo}, function(e){
+		            if(e.code < 0) {
+		                return false;
+		            }
 		            
-		//             clearInterval(timer);
-		//             $('#unlock_pay').modal("hide");
-		//             prompt("支付解锁成功！");
-		//             sleep(2000);
-  //           		window.location = "/pg/list?gid="+gid;
-		            
-		//         });
-		// }, 1000);
+		            clearInterval(timer);
+		            $('#qrPayModal').modal("hide");
+		            prompt("赞赏支付成功！感谢您的支持！");
+		        });
+		}, 1000);
 
 	});
 	
