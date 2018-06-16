@@ -293,36 +293,93 @@ $(function(){
 		});
 	}
 
-	// 留言
+	// 弹出留言框
+	$(".msg-btn").click(function(){
+		$('#msgModal').modal({backdrop: 'static', keyboard: false});
+	});
+
+	// 留言/回复
 	$(".info-msg-btn").click(function(){
 		var info_id = $("#info_id").val();
+		var pid = $("#msg_pid").val();
 		var content = $.trim($("#info_msg").val());
 		if ( content=="") {
-			prompt("内容不能为空");
+			//prompt("内容不能为空");
 			return false;
 		}
 
-		$.post("/info/msg", {info_id:info_id,content:content}, function(e){
+		$.post("/msg/create", {info_id:info_id,content:content,pid:pid}, function(e){
+			$("#msg_pid").val(0);
+			$('#msgModal').modal('hide');
 			if(e.code<0) {
 				prompt({msg:e.msg});
 				return false;
 			}
 
 			$("#info_msg").val("");
+			var p = "";
+			if (e.data.Im.Pid>0) {
+				p= "@"+e.data.Parent.User.Nickname;
+			}
 
-			var comments = '';
-			comments += "<li>";
-			comments += " 	<h5>"+e.data.User.Nickname+"</h5>";
-			comments += "		<p>"+e.data.Im.Content+"</p>";
-			comments += "		<p>1秒前</p>";
-			comments += "</li>";
+			var comments = '<div class="msg">';
+			comments += '<div class="row">';
+			comments += ' <div class="col-md-8 col-xs-3">';
+			comments += ' <span><a href="javascript:;">'+e.data.User.Nickname+'</a> '+p+'</span>';
+			comments += '</div> ';
+			comments += '<div class="col-md-4 col-xs- 9 text-right"> ';
+			comments += ' <span><a href="#" onclick="replyMsg('+e.data.Im.Id+');return false;">回复</a></span>';
+			comments += ' <span><a href="#" onclick="msgDelSuggest('+e.data.Im.Id+', this);return false;">建删</a></span>';
+			comments += ' <span><a href="javascript:;">赞赏</a></span>';
+			comments += '<span><a href="#" onclick="supportInfoMsg('+e.data.Im.Id+', this);return false;"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span><span class="support_num">'+e.data.Im.Support+'</span></a></span> ';
+			comments += ' </div>';
+			comments += ' </div>';
+			comments += '<div class="row"> ';
+			comments += '<div class="col-md-12">'+e.data.Im.Content+'</div> ';
+			comments += ' </div>';
+			comments += '</div>';
 
 			$("#commentlist").prepend(comments);
 		});
 	});
-	
+
 
 });
+
+// 回复留言
+var replyMsg = function(pid) {
+	$("#msg_pid").val(pid);
+	$('#msgModal').modal({backdrop: 'static', keyboard: false});
+
+}
+
+// 点赞支持 留言
+var supportInfoMsg= function(id, obj) {
+	$this = $(obj);
+	$.post("/msg/support",{id:id},function(e){
+		if(e.code<0) {
+			prompt({msg:e.msg});
+			return false;
+		}
+
+		var support = $this.find(".support_num");
+		support.text(parseInt(support.text())+1);
+
+		greeting({msg:"点赞成功，谢谢你的贡献。"})
+	});
+}
+
+// 建议删除 留言
+var msgDelSuggest = function(id) {
+	$.post("/msg/suggestDel",{id:id},function(e){
+		if(e.code<0) {
+			prompt({msg:e.msg});
+			return false;
+		}
+
+		greeting({msg:"提交成功，我们会在审核后删除影响平台秩序的留言。谢谢你的贡献。"})
+	});
+}
 
 // 分页列表
 // var isloading = false;
@@ -350,4 +407,3 @@ $(function(){
 // 		});
 // 	}		
 // });
-

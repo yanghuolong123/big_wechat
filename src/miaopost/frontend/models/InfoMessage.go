@@ -16,13 +16,15 @@ type InfoMessage struct {
 	Info_id     int
 	Pid         int
 	Content     string
+	Support     int
 	Status      int
 	Create_time time.Time
 }
 
 type InfoMsgVo struct {
-	Im   *InfoMessage
-	User *User
+	Im     *InfoMessage
+	User   *User
+	Parent *InfoMsgVo
 }
 
 func CreateInfoMessage(im *InfoMessage) int {
@@ -33,8 +35,16 @@ func CreateInfoMessage(im *InfoMessage) int {
 	return int(i)
 }
 
+func GetInfoMessageById(id int) (im *InfoMessage, err error) {
+	im = &InfoMessage{Id: id}
+	err = orm.NewOrm().Read(im)
+	help.Error(err)
+
+	return
+}
+
 func GetInfoMessageByInfoId(info_id int) (ims []*InfoMessage) {
-	_, err := orm.NewOrm().QueryTable("tbl_info_message").Filter("info_id", info_id).OrderBy("-create_time").All(&ims)
+	_, err := orm.NewOrm().QueryTable("tbl_info_message").Filter("info_id", info_id).Filter("status", 0).OrderBy("-create_time").All(&ims)
 	help.Error(err)
 
 	return
@@ -46,6 +56,13 @@ func ConvertInfoMsgToVo(im *InfoMessage) (vo InfoMsgVo) {
 
 	vo.Im = im
 	vo.User = u
+	if im.Pid > 0 {
+		p, err := GetInfoMessageById(im.Pid)
+		if err == nil {
+			pvo := ConvertInfoMsgToVo(p)
+			vo.Parent = &pvo
+		}
+	}
 
 	return
 }
@@ -57,4 +74,18 @@ func ConvertInfoMsgToVos(ims []*InfoMessage) (vos []InfoMsgVo) {
 	}
 
 	return
+}
+
+func DelInfoMsgById(id int) bool {
+	i, err := orm.NewOrm().QueryTable("tbl_info_message").Filter("id", id).Update(orm.Params{"status": -1})
+	help.Error(err)
+
+	return i > 0
+}
+
+func Support(id int) bool {
+	i, err := orm.NewOrm().QueryTable("tbl_info_message").Filter("id", id).Update(orm.Params{"support": orm.ColValue(orm.ColAdd, 1)})
+	help.Error(err)
+
+	return i > 0
 }

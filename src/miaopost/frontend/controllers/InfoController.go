@@ -253,11 +253,12 @@ func (this *InfoController) EditPost() {
 func (this *InfoController) SuggestDel() {
 	infoId, _ := this.GetInt("infoId")
 	iid := int(infoId)
-	id := models.CreateSuggest(iid, this.Ctx)
 	slist := models.GetSuggestByInfoidAndGroupByIp(iid)
 	if len(slist) > 3 {
 		models.DelInfoById(iid)
 	}
+
+	id := models.CreateSuggest(iid, this.Ctx)
 	if id > 0 {
 		this.SendRes(0, "success", nil)
 	}
@@ -365,28 +366,4 @@ func (this *InfoController) My() {
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "info/my.tpl"
-}
-
-func (this *InfoController) CreateMsg() {
-	user := this.GetSession("user")
-	if user == nil {
-		this.SendRes(-1, "请先登录", nil)
-	}
-
-	content := this.GetString("content")
-	info_id, _ := this.GetInt("info_id")
-	pid, _ := this.GetInt("pid")
-	im := models.InfoMessage{
-		Uid:     user.(*models.User).Id,
-		Info_id: int(info_id),
-		Pid:     int(pid),
-		Content: content,
-	}
-	i := models.CreateInfoMessage(&im)
-	if i > 0 {
-		vo := models.ConvertInfoMsgToVo(&im)
-		this.SendRes(0, "success", vo)
-	}
-
-	this.SendRes(-1, "failed", nil)
 }

@@ -18,6 +18,7 @@ type Category struct {
 	Rid    int
 	Name   string
 	Sort   int
+	Type   int
 	Status int
 }
 
