@@ -381,6 +381,59 @@ var msgDelSuggest = function(id) {
 	});
 }
 
+// 支付赞赏
+var admire = function(id) {
+	var uid = $("#login_uid").val();
+	if(uid==0) {
+		prompt("请先登陆！")
+		return false;
+	}
+
+	$("#admire_msg_id").val(id);
+	$('#admireModal').modal({backdrop: 'static', keyboard: false});
+
+	// $.post("/msg/admire",{mid:id}, function(e){
+
+	// });
+
+}
+
+var admirePay = function(amount) {
+	$('#admireModal').modal('hide');
+	$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/img/loading.gif");
+	$(".pay_amount").html("￥"+amount+"元");
+	$('#qrPayModal').modal({backdrop: 'static', keyboard: false});
+
+	var mid = $("#admire_msg_id").val();
+	return;
+	$.post("/pay/wxscan", {product_id:mid, amount:amount}, function(e){
+		if(e.code<0) {
+			prompt(e.msg);
+			return false;
+		}
+
+		$("#pay_qr_img").attr("src", e.data.qrurl).addClass("qrimg");
+
+
+		// var timer = setInterval(function(){
+		//     $.post('/pg/checkPayUnlock', {"uid":uid,"gid":gid}, function(e){
+		//             if(e.code < 0) {
+		//                 return false;
+		//             }
+		            
+		//             clearInterval(timer);
+		//             $('#unlock_pay').modal("hide");
+		//             prompt("支付解锁成功！");
+		//             sleep(2000);
+  //           		window.location = "/pg/list?gid="+gid;
+		            
+		//         });
+		// }, 1000);
+
+	});
+	
+}
+
 // 分页列表
 // var isloading = false;
 // var hasMore  = 0;

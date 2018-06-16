@@ -1,3 +1,8 @@
+{{if .user}}
+<input type="hidden" id="uid" value="{{.user.Id}}">
+{{else}}
+<input type="hidden" id="uid" value="0">
+{{end}}
 <div class="view">
 	<div class="row meta">
 		<div class="col-md-9 col-xs-9">

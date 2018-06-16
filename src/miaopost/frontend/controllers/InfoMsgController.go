@@ -78,6 +78,10 @@ func (this *InfoMsgController) SuggestDel() {
 
 // 赞赏
 func (this *InfoMsgController) Admire() {
+	mid, _ := this.GetInt("mid")
+	// 生成支付订单
+	_ = mid
+	this.SendRes(0, "success", nil)
 	// 支付后个人账号变更
 }
 

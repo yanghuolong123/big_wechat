@@ -122,6 +122,11 @@ a.list_content:hover{text-decoration: none;}
 #commentlist {padding-top: 10px;}
 #commentlist .msg{padding-bottom: 10px;}
 
+#qrPayModal .modal-header {    border-bottom: medium none;    padding-bottom: 0;    padding-right: 8px;    padding-top: 0;}
+#qrPayModal .center-block {    text-align: center;}
+#qrPayModal .modal-body {    padding-top: 5px;}
+#qrPayModal .pay_amount {    color: #f5a623;}
+img.qrimg {    height: 250px;    width: 250px;}
 
 
 /** ============== info my ============**/

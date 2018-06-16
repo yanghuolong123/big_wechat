@@ -22,10 +22,12 @@
                                         {{end}}
                                         <p class="pull-right text-right">
                                             {{if .user}}
+                                              <input type="hidden" id="login_uid" value="{{.user.Id}}">
                                                 <a  href="/user" class="">
                                                                   {{if .user.Nickname}}{{.user.Nickname}}{{else}}<span aria-hidden="true" class="glyphicon glyphicon-user"></span>{{end}}
                                                 </a>  
                                             {{else}}
+                                             <input type="hidden" id="login_uid" value="0">
                                                 <a id="loginBtn"  href="javascript:;">
                                                           <span aria-hidden="true" class="glyphicon glyphicon-user"></span>
                                                 </a>

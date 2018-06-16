@@ -14,7 +14,7 @@
 				<div class="col-md-4 col-xs- 9 text-right">
 					<span><a href="#" onclick="replyMsg({{.Im.Id}});return false;">回复</a></span>
 					<span><a href="#" onclick="msgDelSuggest({{.Im.Id}}, this);return false;">建删</a></span>
-					<span><a href="javascript:;">赞赏</a></span>
+					<span><a href="#" onclick="admire({{.Im.Id}}); return false;">赞赏</a></span>
 					<span><a href="#" onclick="supportInfoMsg({{.Im.Id}}, this);return false;"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span><span class="support_num">{{.Im.Support}}</span></a></span>
 				</div>
 			</div>
@@ -46,4 +46,45 @@
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="admireModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">   
+          <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">如果你觉得留言不错，请随意打赏。您的支持将鼓励我继续创作！</h4>
+         </div>         
+        <div class="modal-body row">     
+        	<input type="hidden" id="admire_msg_id" value="0">      
+          	<div class="col-md-8 admire_pay">
+	          	<a href="#" onclick="admirePay(0.1);return false;" class="btn btn-success">0.1元</a>
+	          	<a href="#" onclick="admirePay(0.5);return false;" class="btn btn-success">0.5元</a>
+	          	<a href="#" onclick="admirePay(1);return false;" class="btn btn-success">1元</a>
+	          	<a href="#" onclick="admirePay(2);return false;" class="btn btn-success">2元</a>
+	          	<a href="#" onclick="admirePay(5);return false;" class="btn btn-success">5元</a>
+          	</div>           
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div id="qrPayModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">      	
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+      	<div class="center-block">
+      		<h4>微信扫码支付</h4>
+	      	<p class="center-block">
+	      		<img id="pay_qr_img" src="/static/img/loading.gif" />
+	      	</p>
+	        	<p class="center-block">支付金额 : <span class="pay_amount">￥2.00</span></p>
+      	</div>
+      	
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
