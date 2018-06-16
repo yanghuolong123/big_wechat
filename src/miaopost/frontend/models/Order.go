@@ -1,6 +1,8 @@
 package models
 
 import (
+	"errors"
+	"fmt"
 	"github.com/astaxie/beego/orm"
 	"time"
 	"yhl/help"
@@ -22,6 +24,8 @@ type Order struct {
 	Transaction_id string
 	Create_time    time.Time
 	Pay_time       time.Time
+	Remark         string
+	Ip             string `orm:"-"`
 }
 
 func CreateOrder(o *Order) bool {
@@ -53,4 +57,20 @@ func GetOrderByOrderno(orderno string) (o *Order) {
 	}
 
 	return
+}
+
+func GenAdmireOrder(productId, uid int, amount float64) (*Order, error) {
+	order := &Order{}
+	order.Type = 1
+	order.Product_id = productId
+	order.Orderno = time.Now().Format(help.DatetimeNumFormat) + fmt.Sprintf("%d", help.RandNum(10000, 99999))
+	order.Amount = amount
+	order.Pay_type = 1
+	order.Uid = uid
+	order.Remark = "赞赏支付"
+	if CreateOrder(order) {
+		return order, nil
+	}
+
+	return order, errors.New("订单创建失败")
 }

@@ -405,7 +405,6 @@ var admirePay = function(amount) {
 	$('#qrPayModal').modal({backdrop: 'static', keyboard: false});
 
 	var mid = $("#admire_msg_id").val();
-	return;
 	$.post("/pay/wxscan", {product_id:mid, amount:amount}, function(e){
 		if(e.code<0) {
 			prompt(e.msg);

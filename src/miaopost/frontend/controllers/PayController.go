@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"encoding/xml"
-	"errors"
 	"fmt"
+	"github.com/astaxie/beego"
 	qrcode "github.com/skip2/go-qrcode"
 	"miaopost/frontend/models"
 	"net/url"
@@ -16,34 +16,23 @@ type PayController struct {
 	help.BaseController
 }
 
-func prePayOrder(productId int, trade_type, openid string) (resp wxpay.UnifyOrderResp, err error) {
-	bodyName := "body namebody nambody nambody nameee "
-
-	order := &models.Order{}
-	order.Type = 1
-	order.Product_id = productId
-	order.Orderno = time.Now().Format(help.DatetimeNumFormat) + fmt.Sprintf("%d", help.RandNum(10000, 99999))
-	order.Amount = 0.01
-	order.Pay_type = 1
-	order.Uid = 2
-	if !models.CreateOrder(order) {
-		return resp, errors.New("创建订单失败")
-	}
+func prePayOrder(order *models.Order, trade_type, openid string) (resp wxpay.UnifyOrderResp, err error) {
+	notify_domain := beego.AppConfig.String("wx.pay.notify.domain")
 
 	orderReq := new(wxpay.UnifyOrderReq)
-	orderReq.Body = bodyName
+	orderReq.Body = order.Remark
 	orderReq.Out_trade_no = order.Orderno
 	orderReq.Total_fee = int(order.Amount * 100)
-	orderReq.Notify_url = "addwechat.feichangjuzu.com/pay/notify"
+	orderReq.Notify_url = notify_domain + "/pay/notify"
 	//orderReq.Trade_type = "NATIVE"
 	orderReq.Trade_type = trade_type
 	if orderReq.Trade_type == "JSAPI" {
 		orderReq.Openid = openid
 	}
-	orderReq.Product_id = productId
+	orderReq.Product_id = order.Product_id
 	orderReq.Time_start = time.Now().Format(help.DatetimeNumFormat)
 	orderReq.Time_expire = time.Now().Add(time.Duration(600 * time.Second)).Format(help.DatetimeNumFormat)
-	orderReq.Spbill_create_ip = help.ClientIp
+	orderReq.Spbill_create_ip = order.Ip
 
 	wxRes := wxpay.UnifiedOrder(orderReq)
 	help.Log("wxpay", wxRes)
@@ -52,16 +41,29 @@ func prePayOrder(productId int, trade_type, openid string) (resp wxpay.UnifyOrde
 }
 
 func (this *PayController) Confirm() {
+	uid := 0
+	user := this.GetSession("user")
+	if user != nil {
+		uid = user.(*models.User).Id
+	}
 	productId, _ := this.GetInt("product_id")
-	url := this.Ctx.Input.Site() + this.Ctx.Input.URI()
+	amount, _ := this.GetFloat("amount")
 
-	openid := wxpay.GetOpenId(this.Ctx, url)
+	order, err := models.GenAdmireOrder(productId, uid, amount)
+	order.Ip = this.Ctx.Input.IP()
+	if err != nil {
+		this.Redirect(err.Error(), 302)
+	}
+
+	//url := this.Ctx.Input.Site() + this.Ctx.Input.URI()
+	//openid := wxpay.GetOpenId(this.Ctx, url)
+	openid := user.(*models.User).Openid
 	if openid == "" {
 		this.Redirect("/tips?msg=openid获取失败", 302)
 		return
 	}
 
-	wxRes, err := prePayOrder(productId, "JSAPI", openid)
+	wxRes, err := prePayOrder(order, "JSAPI", openid)
 	if err != nil {
 		this.Redirect("/tips?msg=预订单生成失败", 302)
 	}
@@ -70,18 +72,29 @@ func (this *PayController) Confirm() {
 	help.Log("wxpay", sdk)
 	this.Data["sdk"] = sdk
 
-	user := this.GetSession("user")
 	this.Data["user"] = user
-	this.Data["gid"] = productId
+	this.Data["product_id"] = productId
 
-	this.Layout = "layout/addwechat.tpl"
+	this.Layout = "layout/main.tpl"
 	this.TplName = "pay/confirm.tpl"
 }
 
 func (this *PayController) WxScan() {
+	uid := 0
+	user := this.GetSession("user")
+	if user != nil {
+		uid = user.(*models.User).Id
+	}
 	productId, _ := this.GetInt("product_id")
+	amount, _ := this.GetFloat("amount")
 
-	wxRes, err := prePayOrder(productId, "NATIVE", "")
+	order, err := models.GenAdmireOrder(productId, uid, amount)
+	order.Ip = this.Ctx.Input.IP()
+	if err != nil {
+		this.SendRes(-1, err.Error(), nil)
+	}
+
+	wxRes, err := prePayOrder(order, "NATIVE", "")
 	if err != nil {
 		this.SendRes(-1, err.Error(), nil)
 	}
@@ -147,7 +160,8 @@ func (this *PayController) Notify() {
 		order.Status = 1
 		order.Transaction_id = notifyReq.Transaction_id
 		models.UpdateOrder(order)
-		//models.CreateUnlockGroup(order.Uid, order.Product_id)
+		// 个人账号金额增加
+		// todo .....
 	}
 	help.Log("wxpay", "============== weixin pay success! ===============")
 
