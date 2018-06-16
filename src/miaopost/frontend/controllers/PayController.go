@@ -48,6 +48,7 @@ func (this *PayController) Confirm() {
 	}
 	productId, _ := this.GetInt("product_id")
 	amount, _ := this.GetFloat("amount")
+	info_id, _ := this.GetInt("info_id")
 
 	order, err := models.GenAdmireOrder(productId, uid, amount)
 	order.Ip = this.Ctx.Input.IP()
@@ -73,7 +74,8 @@ func (this *PayController) Confirm() {
 	this.Data["sdk"] = sdk
 
 	this.Data["user"] = user
-	this.Data["product_id"] = productId
+	this.Data["info_id"] = info_id
+	this.Data["amount"] = amount
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "pay/confirm.tpl"
