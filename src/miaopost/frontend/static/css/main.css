@@ -41,8 +41,6 @@ a.list_content:hover{text-decoration: none;}
 .list_adv{margin: 15px 0;}
 .list_adv img{width: 100%;}
 #login_qrcode_img #login_img{width: 100%;}
-.user_menu{ }
-.user_menu a{ margin-right: 15px; font-size: 18px; line-height: 38px; }
 .webuploader-pick{background: #fff; padding: 0px;}
 
 
@@ -128,11 +126,6 @@ a.list_content:hover{text-decoration: none;}
 #qrPayModal .pay_amount {    color: #f5a623;}
 img.qrimg {    height: 250px;    width: 250px;}
 
-
-/** ============== info my ============**/
-.my .info-list{margin-top: 15px;}
-
-
 /*** ========== article view.tpl **/
 .article-view {padding-top: 0px; padding-left: 15px;}
 
@@ -144,5 +137,16 @@ img.qrimg {    height: 250px;    width: 250px;}
 .user label{padding-top: 10px;}
 .user a.link{color: #777;}
 
+.user_menu{ }
+.user_menu a{ margin-right: 15px; font-size: 16px; line-height: 25px; }
+
+/** ============== user my ============**/
+.my .info-list{margin-top: 15px;}
+
 /** user edit css ***/
 .edit_user form{margin-top: 30px;}
+
+/** user account  ***/
+.account{margin-top: 20px; background-color: #dff0d8;    border-color: #d6e9c6;    color: #3c763d; padding-top: 15px; padding-bottom: 15px;}
+.account h4 span{color: #ff5a5f;}
+.account_detail {margin-top: 20px;}

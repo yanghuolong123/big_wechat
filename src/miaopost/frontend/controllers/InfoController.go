@@ -339,31 +339,3 @@ func (this *InfoController) Top() {
 
 	this.SendRes(0, "置顶成功，您还有"+help.ToStr(2-count)+"机会", nil)
 }
-
-// 我发布的信息
-func (this *InfoController) My() {
-	u := this.GetSession("user")
-	if u == nil {
-		this.Tips("还没有登陆")
-	}
-	user := u.(*models.User)
-	q := model.Query{}
-	q.Table = "tbl_info"
-	cm := map[string]interface{}{}
-	cm["uid"] = user.Id
-	cm["status"] = 0
-	q.Condition = cm
-	q.OrderBy = []string{"-update_time"}
-	var slice []models.Info
-	q.ReturnModelList = &slice
-	p := help.GetPageList(q, 0, 15)
-
-	this.Data["infos"] = models.ConvertInfosToVo(p.DataList.(*[]models.Info))
-	this.Data["page"] = p.CurrentPage
-	this.Data["hasMore"] = p.HasMore
-	this.Data["uid"] = user.Id
-	this.Data["isMy"] = true
-
-	this.Layout = "layout/main.tpl"
-	this.TplName = "info/my.tpl"
-}

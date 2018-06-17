@@ -32,6 +32,8 @@ func init() {
 	beego.Router("/user", &controllers.UserController{}, "get:Index")
 	beego.Router("/user/edit", &controllers.UserController{}, "get:EditGet")
 	beego.Router("/user/edit", &controllers.UserController{}, "post:EditPost")
+	beego.Router("/user/my", &controllers.UserController{}, "*:My")
+	beego.Router("/user/account", &controllers.UserController{}, "*:Account")
 
 	// 信息
 	beego.Router("/info", &controllers.InfoController{})
@@ -44,7 +46,6 @@ func init() {
 	beego.Router("/info/suggestDel", &controllers.InfoController{}, "post:SuggestDel")
 	beego.Router("/info/listPage", &controllers.InfoController{}, "post:ListPage")
 	beego.Router("/info/delete", &controllers.InfoController{}, "post:Delete")
-	beego.Router("/info/my", &controllers.InfoController{}, "*:My")
 	beego.Router("/info/top", &controllers.InfoController{}, "*:Top")
 
 	// 留言
