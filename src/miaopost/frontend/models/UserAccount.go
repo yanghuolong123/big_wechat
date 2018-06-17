@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	orm.RegisterModelWithPrefix("tbl", new(UserAccount))
+	orm.RegisterModelWithPrefix("tbl_", new(UserAccount))
 }
 
 type UserAccount struct {
@@ -23,10 +23,25 @@ func CreateUserAccount(ua *UserAccount) int {
 }
 
 func GetUserAccountByUid(uid int) (ua *UserAccount, err error) {
-	//	ua = &UserAccount{Uid: uid}
-	ua.Uid = uid
-	err = orm.NewOrm().Read(ua)
+	ua = &UserAccount{Uid: uid}
+	err = orm.NewOrm().Read(ua, "Uid")
 	help.Error(err)
 
 	return
+}
+
+func IncUserAccount(uid int, amount float64) bool {
+	ua, err := GetUserAccountByUid(uid)
+	if err != nil {
+		ua.Uid = uid
+		ua.Amount = amount
+		CreateUserAccount(ua)
+		return true
+	}
+
+	ua.Amount += amount
+	i, err := orm.NewOrm().Update(ua)
+	help.Error(err)
+
+	return i > 0
 }

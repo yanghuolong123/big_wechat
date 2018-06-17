@@ -17,6 +17,16 @@ type TestController struct {
 func (this *TestController) Get() {
 	t := time.Now()
 
+	/*
+		user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
+		if err == nil {
+			this.SetSession("user", user)
+			fmt.Println("======================= 登陆成功")
+		}
+	*/
+
+	//	models.IncUserAccount(6, 0.1)
+
 	//f := "/var/work/work_golang/work/zd/src/miaopost/frontend/uploads/2018/5/17/201805171524193954.jpg"
 	//	f := "./uploads/2018/5/17/201805171524193954.jpg"
 	//f := "/uploads/2018/5/9/201805091726545057.JPG"
@@ -53,12 +63,6 @@ func (this *TestController) Get() {
 		data := wechat.CreateMenu(m)
 		fmt.Println(data)
 	*/
-
-	user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
-	if err == nil {
-		this.SetSession("user", user)
-		fmt.Println("======================= 登陆成功")
-	}
 
 	//	user := this.GetSession("user")
 	//	fmt.Println("============= session user:", user)
