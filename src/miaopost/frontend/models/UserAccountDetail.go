@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	orm.RegisterModelWithPrefix("tbl", new(UserAccountDetail))
+	orm.RegisterModelWithPrefix("tbl_", new(UserAccountDetail))
 }
 
 type UserAccountDetail struct {
