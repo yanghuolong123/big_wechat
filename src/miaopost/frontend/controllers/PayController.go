@@ -147,41 +147,48 @@ func (this *PayController) Notify() {
 	var notifyReq wxpay.WXPayNotifyReq
 	err := xml.Unmarshal(body, &notifyReq)
 	if err != nil {
-		help.Log("error", err.Error())
+		help.Log("wxpay", err.Error())
 		this.SendXml(wxpay.WXPayNotifyResp{Return_code: "FAIL", Return_msg: "failed to unmarshal xml"})
 	}
 
-	notifySign := notifyReq.Sign
-	notifyReq.Sign = ""
+	if notifyReq.Return_code == "SUCCESS" && notifyReq.Result_code == "SUCCESS" {
+		order := models.GetOrderByOrderno(notifyReq.Out_trade_no)
+		if order.Status < 1 {
+			order.Pay_time = time.Now()
+			order.Status = 1
+			order.Transaction_id = notifyReq.Transaction_id
+			models.UpdateOrder(order)
 
-	m := help.StructToMap(notifyReq)
-	signStr := wxpay.Sign(m)
+			// 个人账号金额增加
+			uad := new(models.UserAccountDetail)
+			uad.Uid = order.Uid
+			uad.Amount = order.Amount
+			uad.Type = order.Type
+			uad.Remark = order.Remark
+			models.CreateUserAccountDetail(uad)
 
-	if notifySign != signStr {
-		help.Log("error", "verify sign failed || signStr:"+signStr+" reqSign:"+notifySign)
-		this.SendXml(wxpay.WXPayNotifyResp{Return_code: "FAIL", Return_msg: "failed to verify sign, please retry"})
+			models.IncUserAccount(order.Uid, order.Amount)
+		}
+
+		help.Log("wxpay", "============== weixin pay success! ===============")
+		this.SendXml(wxpay.WXPayNotifyResp{Return_code: "SUCCESS", Return_msg: "OK!"})
 	}
 
-	order := models.GetOrderByOrderno(notifyReq.Out_trade_no)
-	if order.Status < 1 {
-		order.Pay_time = time.Now()
-		order.Status = 1
-		order.Transaction_id = notifyReq.Transaction_id
-		models.UpdateOrder(order)
+	/*
+		notifySign := notifyReq.Sign
+		notifyReq.Sign = ""
 
-		// 个人账号金额增加
-		uad := new(models.UserAccountDetail)
-		uad.Uid = order.Uid
-		uad.Amount = order.Amount
-		uad.Type = order.Type
-		uad.Remark = order.Remark
-		models.CreateUserAccountDetail(uad)
+		m := help.StructToMap(notifyReq)
+		signStr := wxpay.Sign(m)
 
-		models.IncUserAccount(order.Uid, order.Amount)
-	}
-	help.Log("wxpay", "============== weixin pay success! ===============")
+		if notifySign != signStr {
+			help.Log("wxpay", "verify sign failed || signStr:"+signStr+" reqSign:"+notifySign)
+			this.SendXml(wxpay.WXPayNotifyResp{Return_code: "FAIL", Return_msg: "failed to verify sign, please retry"})
+		}
+	*/
 
-	this.SendXml(wxpay.WXPayNotifyResp{Return_code: "SUCCESS", Return_msg: "OK!"})
+	help.Log("wxpay", "未知错误")
+	this.SendXml(wxpay.WXPayNotifyResp{Return_code: "FAIL", Return_msg: "unknow error"})
 }
 
 // pc扫码支付后监听支付结果
@@ -207,10 +214,11 @@ func (this *PayController) Withdraw() {
 
 	partnerTradeNo := help.GenOrderNo()
 	certPath := help.GetAPPRootPath() + "/conf"
-	remark := "用户提现"
+	remark := "user_withdraw"
 	help.Log("wxpay", "certPath:"+certPath)
 
 	res := wxpay.PayToUser(amount, user.Openid, partnerTradeNo, remark, this.Ctx.Input.IP(), certPath)
+	help.Log("wxpay", res)
 
 	if res.ReturnCode == "SUCCESS" && res.ResultCode == "SUCCESS" {
 		help.Log("wxpay", user.Nickname+" 提现"+fmt.Sprintf("%v", amount)+"元成功!")
