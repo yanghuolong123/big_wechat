@@ -391,11 +391,6 @@ var admire = function(id) {
 
 	$("#admire_msg_id").val(id);
 	$('#admireModal').modal({backdrop: 'static', keyboard: false});
-
-	// $.post("/msg/admire",{mid:id}, function(e){
-
-	// });
-
 }
 
 var admirePay = function(amount) {
@@ -444,6 +439,8 @@ var withDraw=function() {
 
 $(function(){
 	$(".with-draw-btn").click(function(e){
+		$('#withDrawModal').modal('hide');
+
 		var amount = $("#withdraw_amount").val();
 
 		$.post("/pay/withdraw",{amount:amount},function(e){
