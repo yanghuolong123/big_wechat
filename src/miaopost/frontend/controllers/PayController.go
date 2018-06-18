@@ -214,7 +214,7 @@ func (this *PayController) Withdraw() {
 
 	partnerTradeNo := help.GenOrderNo()
 	certPath := help.GetAPPRootPath() + "/conf"
-	remark := "user_withdraw"
+	remark := "用户提现"
 	help.Log("wxpay", "certPath:"+certPath)
 
 	res := wxpay.PayToUser(amount, user.Openid, partnerTradeNo, remark, this.Ctx.Input.IP(), certPath)
