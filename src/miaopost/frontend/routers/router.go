@@ -63,4 +63,5 @@ func init() {
 	beego.Router("/pay/qrcode", &controllers.PayController{}, "get,post:Qrcode")
 	beego.Router("/pay/notify", &controllers.PayController{}, "*:Notify")
 	beego.Router("/pay/check", &controllers.PayController{}, "post:Check")
+	beego.Router("/pay/withdraw", &controllers.PayController{}, "post:Withdraw")
 }

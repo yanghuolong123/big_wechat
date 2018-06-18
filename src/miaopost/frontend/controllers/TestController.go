@@ -3,6 +3,9 @@ package controllers
 import (
 	"fmt"
 	"miaopost/frontend/models"
+	"os"
+	"os/exec"
+	"path/filepath"
 	"time"
 	"yhl/help"
 	//	m "yhl/model"
@@ -22,6 +25,8 @@ func (this *TestController) Get() {
 		this.SetSession("user", user)
 		fmt.Println("======================= 登陆成功")
 	}
+
+	//	fmt.Println("=========== root path:", GetAPPRootPath())
 
 	//	models.IncUserAccount(6, 0.1)
 
@@ -253,4 +258,16 @@ func (this *TestController) DelInfo() {
 	} else {
 		this.Tips("删除操作失败!")
 	}
+}
+
+func GetAPPRootPath() string {
+	file, err := exec.LookPath(os.Args[0])
+	if err != nil {
+		return ""
+	}
+	p, err := filepath.Abs(file)
+	if err != nil {
+		return ""
+	}
+	return filepath.Dir(p)
 }

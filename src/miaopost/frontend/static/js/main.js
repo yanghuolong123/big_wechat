@@ -437,6 +437,25 @@ var admirePay = function(amount) {
 	
 }
 
+// 用户提现
+var withDraw=function() {
+	$('#withDrawModal').modal({backdrop: 'static', keyboard: false});
+}
+
+$(function(){
+	$(".with-draw-btn").click(function(e){
+		var amount = $("#withdraw_amount").val();
+
+		$.post("/pay/withdraw",{amount:amount},function(e){
+			if(e.code<0) {
+				prompt(e.msg);
+				return false;
+			}
+			
+		});
+	});
+});
+
 // 分页列表
 // var isloading = false;
 // var hasMore  = 0;

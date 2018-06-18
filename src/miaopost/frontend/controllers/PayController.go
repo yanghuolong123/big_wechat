@@ -16,6 +16,7 @@ type PayController struct {
 	help.BaseController
 }
 
+// 预订单生成
 func prePayOrder(order *models.Order, trade_type, openid string) (resp wxpay.UnifyOrderResp, err error) {
 	notify_domain := beego.AppConfig.String("wx.pay.notify.domain")
 
@@ -40,6 +41,7 @@ func prePayOrder(order *models.Order, trade_type, openid string) (resp wxpay.Uni
 	return wxRes, nil
 }
 
+// 公众号微信支付
 func (this *PayController) Confirm() {
 	uid := 0
 	user := this.GetSession("user")
@@ -81,6 +83,7 @@ func (this *PayController) Confirm() {
 	this.TplName = "pay/confirm.tpl"
 }
 
+// pc微信扫码支付
 func (this *PayController) WxScan() {
 	uid := 0
 	user := this.GetSession("user")
@@ -116,6 +119,7 @@ func (this *PayController) WxScan() {
 	this.SendRes(0, "success", m)
 }
 
+// 生成二维码
 func (this *PayController) Qrcode() {
 	url := this.GetString("url")
 	qr, err := qrcode.New(url, qrcode.High)
@@ -135,6 +139,7 @@ func (this *PayController) Qrcode() {
 	this.Ctx.WriteString(png)
 }
 
+// 支付后监听微信后台返回
 func (this *PayController) Notify() {
 	body := this.Ctx.Input.RequestBody
 	help.Log("wxpay", "========= requestBody:"+string(body))
@@ -179,6 +184,7 @@ func (this *PayController) Notify() {
 	this.SendXml(wxpay.WXPayNotifyResp{Return_code: "SUCCESS", Return_msg: "OK!"})
 }
 
+// pc扫码支付后监听支付结果
 func (this *PayController) Check() {
 	orderNo := this.GetString("order_no")
 	order := models.GetOrderByOrderno(orderNo)
@@ -187,4 +193,38 @@ func (this *PayController) Check() {
 	}
 
 	this.SendRes(-1, "no pay complete", nil)
+}
+
+// 用户申请提现
+func (this *PayController) Withdraw() {
+	amount, _ := this.GetFloat("amount")
+	if amount < 0 {
+		this.SendRes(-1, "错误金额", nil)
+	}
+
+	u := this.GetSession("user")
+	user := u.(*models.User)
+
+	partnerTradeNo := help.GenOrderNo()
+	certPath := help.GetAPPRootPath() + "/conf"
+	remark := "用户提现"
+
+	res := wxpay.PayToUser(amount, user.Openid, partnerTradeNo, remark, this.Ctx.Input.IP(), certPath)
+
+	if res.ReturnCode == "SUCCESS" && res.ResultCode == "SUCCESS" {
+		help.Log("wxpay", user.Nickname+" 提现"+fmt.Sprintf("%v", amount)+"元成功!")
+
+		uad := new(models.UserAccountDetail)
+		uad.Uid = user.Id
+		uad.Amount = -amount
+		uad.Type = 3
+		uad.Remark = remark
+		models.CreateUserAccountDetail(uad)
+
+		models.IncUserAccount(user.Id, -amount)
+		this.SendRes(0, "success", nil)
+	}
+
+	help.Log("wxpay", "code:"+res.ErrCodeDes+" msg:"+res.ReturnMsg)
+	this.SendRes(-1, "code:"+res.ErrCodeDes+" msg:"+res.ReturnMsg, nil)
 }
