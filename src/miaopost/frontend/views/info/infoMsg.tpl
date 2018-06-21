@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">{{.Im.Content}}</div>
+				<div class="col-md-12">{{str2html .Im.Content}}</div>
 			</div>
 		</div>
 		{{end}}
@@ -34,10 +34,13 @@
 	        <h4 class="modal-title">我要留言</h4>
          </div>         
         <div class="modal-body row">
-            <div class="col-md-7">	
+            <div class="col-md-12">	
 		<input type="hidden" id="info_id" name="info_id" value="{{.info.Id}}">
 		<input type="hidden" id="msg_pid" name="pid" value="0">
-		<textarea id="info_msg" class="form-control"></textarea>
+		<!--<textarea id="info_msg" class="form-control"></textarea>-->
+		<form>
+			<textarea id="info_msg" name="content" style="width:100%;height:200px;visibility:hidden;"></textarea>
+		</form>
 	</div>
         </div>
         <div class="modal-footer">
@@ -89,3 +92,22 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<link rel="stylesheet" href="/static/plugin/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="/static/plugin/kindeditor/kindeditor-all-min.js"></script>
+<script charset="utf-8" src="/static/plugin/kindeditor/lang/zh-CN.js"></script>
+<script type="text/javascript">
+	var editor;
+	KindEditor.ready(function(K) {
+		editor = K.create('textarea[name="content"]', {
+			resizeType : 1,
+			allowPreviewEmoticons : false,
+			allowImageUpload : false,
+			afterBlur: function () { this.sync(); },
+			//afterFocus: function(){ this.html("");},
+			items : [
+				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+		});		
+	});
+</script>

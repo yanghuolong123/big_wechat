@@ -41,7 +41,7 @@ func (this *ArticleController) List() {
 	}
 
 	this.Data["type"] = int(tp)
-	this.Data["regions"] = models.GetAllRegionMap()
+	this.Data["regions"] = models.GetAllRegion()
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "article/" + tpl
