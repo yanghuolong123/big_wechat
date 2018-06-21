@@ -212,25 +212,33 @@ func (this *PayController) Withdraw() {
 	u := this.GetSession("user")
 	user := u.(*models.User)
 
-	partnerTradeNo := help.GenOrderNo()
+	order, _ := models.GenWithdrawOrder(user.Id, amount)
+	//partnerTradeNo := help.GenOrderNo()
 	certPath := help.GetAPPRootPath() + "/conf"
-	remark := "用户提现"
+	//remark := "用户提现"
 	help.Log("wxpay", "certPath:"+certPath)
 
-	res := wxpay.PayToUser(amount, user.Openid, partnerTradeNo, remark, this.Ctx.Input.IP(), certPath)
+	res := wxpay.PayToUser(amount, user.Openid, order.Orderno, order.Remark, this.Ctx.Input.IP(), certPath)
 	help.Log("wxpay", res)
 
 	if res.ReturnCode == "SUCCESS" && res.ResultCode == "SUCCESS" {
 		help.Log("wxpay", user.Nickname+" 提现"+fmt.Sprintf("%v", amount)+"元成功!")
+		order = models.GetOrderByOrderno(res.PartnerTradeNo)
+		if order.Status < 1 {
+			order.Pay_time = time.Now()
+			order.Status = 1
+			order.Transaction_id = res.PaymentNo
+			models.UpdateOrder(order)
 
-		uad := new(models.UserAccountDetail)
-		uad.Uid = user.Id
-		uad.Amount = -amount
-		uad.Type = 3
-		uad.Remark = remark
-		models.CreateUserAccountDetail(uad)
+			uad := new(models.UserAccountDetail)
+			uad.Uid = user.Id
+			uad.Amount = -amount
+			uad.Type = order.Type
+			uad.Remark = order.Remark
+			models.CreateUserAccountDetail(uad)
 
-		models.IncUserAccount(user.Id, -amount)
+			models.IncUserAccount(user.Id, -amount)
+		}
 		this.SendRes(0, "success", nil)
 	}
 

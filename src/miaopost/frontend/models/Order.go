@@ -74,3 +74,18 @@ func GenAdmireOrder(productId, uid int, amount float64) (*Order, error) {
 
 	return order, errors.New("订单创建失败")
 }
+
+func GenWithdrawOrder(uid int, amount float64) (*Order, error) {
+	order := &Order{}
+	order.Type = 3
+	order.Orderno = help.GenOrderNo()
+	order.Amount = amount
+	order.Pay_type = 1
+	order.Uid = uid
+	order.Remark = "用户提现"
+	if CreateOrder(order) {
+		return order, nil
+	}
+
+	return order, errors.New("订单创建失败")
+}
