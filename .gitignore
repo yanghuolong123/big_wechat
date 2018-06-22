@@ -18,7 +18,8 @@ src/miaopost/frontend/log/
 !src/miaopost/frontend/log/web.log
 src/miaopost/frontend/conf/app.conf
 src/miaopost/frontend/conf/app.conf-online
-src/miaopost/frontend/conf/apiclient_*
+src/miaopost/frontend/conf/feichangjuzu
+src/miaopost/frontend/conf/miaopost
 
 src/miaopost/backend/backend
 src/miaopost/backend/fast-disploy.sh
