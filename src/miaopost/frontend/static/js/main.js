@@ -242,8 +242,10 @@ $(function(){
 
 			var timer = setInterval(function(){
 			    $.post('/login', {"sceneId":$("#sceneId").val()}, function(e){
+			    	$('#loginModal').modal("hide");
 			            if(e.code < 0) {
-			                return false;
+			            	prompt({msg:e.msg});
+			                	return false;
 			            }
 			            
 			            clearInterval(timer);
@@ -272,7 +274,8 @@ $(function(){
 			var timer = setInterval(function(){
 			    $.post('/login', {"sceneId":$("#sceneId").val()}, function(e){
 			            if(e.code < 0) {
-			                return false;
+			            	prompt({msg:e.msg});
+			               	return false;
 			            }
 			            
 			            clearInterval(timer);
