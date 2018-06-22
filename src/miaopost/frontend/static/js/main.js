@@ -241,15 +241,14 @@ $(function(){
 			$("#login_qrcode_img").html(e.data);
 
 			var timer = setInterval(function(){
-			    $.post('/login', {"sceneId":$("#sceneId").val()}, function(e){
-			    	$('#loginModal').modal("hide");
+			    $.post('/login', {"sceneId":$("#sceneId").val()}, function(e){			    	
 			            if(e.code < 0) {
-			            	prompt({msg:e.msg});
 			                	return false;
 			            }
 			            
 			            clearInterval(timer);
 			            if(e.code==0) {
+			            	$('#loginModal').modal("hide");
 			            	prompt({msg:"已登录！您可以通过用户中心进行编辑、删除和免费置顶操作",displayTime:3000});
 		                        	setTimeout(function(){
 		                        		window.location = location.href;
@@ -274,7 +273,6 @@ $(function(){
 			var timer = setInterval(function(){
 			    $.post('/login', {"sceneId":$("#sceneId").val()}, function(e){
 			            if(e.code < 0) {
-			            	prompt({msg:e.msg});
 			               	return false;
 			            }
 			            
