@@ -164,6 +164,7 @@ func (this *PayController) Notify() {
 			uad.Uid = order.Uid
 			uad.Amount = order.Amount
 			uad.Type = order.Type
+			uad.Order_id = order.Id
 			uad.Remark = order.Remark
 			models.CreateUserAccountDetail(uad)
 
@@ -235,6 +236,7 @@ func (this *PayController) Withdraw() {
 			uad.Uid = user.Id
 			uad.Amount = -amount
 			uad.Type = order.Type
+			uad.Order_id = order.Id
 			uad.Remark = order.Remark
 			models.CreateUserAccountDetail(uad)
 
