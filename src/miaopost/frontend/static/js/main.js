@@ -331,8 +331,8 @@ $(function(){
 			comments += '<div class="col-md-4 col-xs- 9 text-right"> ';
 			comments += ' <span><a href="#" onclick="replyMsg('+e.data.Im.Id+');return false;">回复</a></span>';
 			comments += ' <span><a href="#" onclick="msgDelSuggest('+e.data.Im.Id+', this);return false;">建删</a></span>';
-			comments += ' <span><a href="javascript:;">赞赏</a></span>';
-			comments += '<span><a href="#" onclick="supportInfoMsg('+e.data.Im.Id+', this);return false;"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span><span class="support_num">'+e.data.Im.Support+'</span></a></span> ';
+			comments += ' <span><a href="#" onclick="admire('+e.data.Im.Id+'); return false;">赞赏</a></span>';
+			comments += ' <span><a href="#" onclick="supportInfoMsg('+e.data.Im.Id+', this);return false;"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span><span class="support_num">'+e.data.Im.Support+'</span></a></span>';			
 			comments += ' </div>';
 			comments += ' </div>';
 			comments += '<div class="row"> ';
@@ -366,7 +366,7 @@ var supportInfoMsg= function(id, obj) {
 		var support = $this.find(".support_num");
 		support.text(parseInt(support.text())+1);
 
-		greeting({msg:"点赞成功，谢谢你的贡献。"})
+		//greeting({msg:"点赞成功，谢谢你的贡献。"})
 	});
 }
 
