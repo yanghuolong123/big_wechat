@@ -296,6 +296,12 @@ $(function(){
 
 	// 弹出留言框
 	$(".msg-btn").click(function(){
+		var uid = $("#login_uid").val();
+		if(uid==0) {
+			prompt("请先登陆！")
+			return false;
+		}
+
 		$('#msgModal').modal({backdrop: 'static', keyboard: false});
 	});
 
@@ -350,6 +356,12 @@ $(function(){
 
 // 回复留言
 var replyMsg = function(pid) {
+	var uid = $("#login_uid").val();
+	if(uid==0) {
+		prompt("请先登陆！")
+		return false;
+	}
+	
 	$("#msg_pid").val(pid);
 	$('#msgModal').modal({backdrop: 'static', keyboard: false});
 

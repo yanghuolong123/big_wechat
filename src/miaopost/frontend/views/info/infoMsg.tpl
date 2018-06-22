@@ -105,9 +105,11 @@
 			afterBlur: function () { this.sync(); },
 			//afterFocus: function(){ this.html("");},
 			items : [
-				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-				'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+				//'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				//'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				//'insertunorderedlist', '|', 'emoticons', 'image', 'link'
+				'insertorderedlist','bold',  '|', 'emoticons', 'image', 'link'
+				]
 		});		
 	});
 </script>
