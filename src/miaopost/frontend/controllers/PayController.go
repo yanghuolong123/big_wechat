@@ -214,7 +214,8 @@ func (this *PayController) Withdraw() {
 
 	order, _ := models.GenWithdrawOrder(user.Id, amount)
 	//partnerTradeNo := help.GenOrderNo()
-	certPath := help.GetAPPRootPath() + "/conf"
+	certDir := beego.AppConfig.String("wx.pay.cert.dir")
+	certPath := help.GetAPPRootPath() + certDir
 	//remark := "用户提现"
 	help.Log("wxpay", "certPath:"+certPath)
 
