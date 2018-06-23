@@ -68,11 +68,9 @@ $(function(){
 		}
 		photo=photo.substring(0,photo.length-1);
 
-		var flag = true;
-		$(".error_tips").html("");
 		if(cid == "") {
-			$(".error_tips").append("<p>请先选择分类</p>");
-                        		flag = false;
+			prompt("请先选择分类");
+                        	return false;
 		}
 		var content="";
 		cArr = info_content.split("\n");
@@ -89,25 +87,48 @@ $(function(){
 		}
 		info_content = $.trim(content);
 		if(info_content == ""  && photo=="") {
-			$(".error_tips").append("<p>请添加文字描述或图片</p>");
-                        		flag = false;
+			prompt("请添加文字描述或图片");
+                        	return false;
 		}
 		if(valid_day!="") {
 			if(!/^[0-9]+$/.test(valid_day)){
-			        $(".error_tips").append("<p>自动删除发布请填写数字</p>");
-                        		        flag = false;
+			        	prompt("自动删除发布请填写数字");
+                        		return false;
 			}
 		}
 		if(email!="") {
 			if(!/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(email)){
-			        $(".error_tips").append("<p>邮箱格式不正确</p>");
-                        		        flag = false;
+			       	 prompt("邮箱格式不正确");
+                        		return false;
 			}
 		}
 
-		 if (!flag) {
-	                        return false;
-	                }
+
+		var reward_type,reward_amount,reward_num;		
+		reward_type = $('input[name="reward_type"]:checked').val();
+		reward_amount = $('input[name="reward_amount"]:checked').val();
+		reward_num = $('input[name="reward_num"]:checked').val();
+		if(reward_type>0 || reward_amount>0 || reward_num>0) {	
+			if (typeof(reward_type) == "undefined") { 
+			    prompt("请选择红包类型");
+			    return false;
+			} 
+
+			if (typeof(reward_amount) == "undefined") { 
+			    prompt("请选择红包平均金额");
+			    return false;
+			} 			
+			
+			if (typeof(reward_num) == "undefined") { 
+			    prompt("请选择红包个数");
+			    return false;
+			} 
+
+			if(!$('#reward_confirm').is(':checked')) {
+			    prompt("请先确认");
+			    return false;
+			}
+		}
 
 	                $this.attr("disabled","disabled");
 	                var url = "/info/create";
@@ -115,7 +136,7 @@ $(function(){
 	                	url = "/info/edit";
 	                }
 
-	                $.post(url, {id:id,cid:cid, content:info_content, valid_day:valid_day, email:email,photo:photo}, function(e){
+	                $.post(url, {id:id,cid:cid, content:info_content, valid_day:valid_day, email:email,photo:photo,reward_type:reward_type,reward_amount:reward_amount,reward_num:reward_num}, function(e){
 	                	$this.removeAttr("disabled");
 	                        	if(e.code<0) {
 	                                	$(".error_tips").append(e.msg);
@@ -125,6 +146,46 @@ $(function(){
 	                        	window.location = "/info/view?id="+e.data.Id;
 	                });
 
+	});
+
+	// 红包处理
+	$('#reward_confirm').click(function(){
+		var reward_type,reward_amount,reward_num;		
+		reward_type = $('input[name="reward_type"]:checked').val();
+		reward_amount = $('input[name="reward_amount"]:checked').val();
+		reward_num = $('input[name="reward_num"]:checked').val();
+		 
+		if($(this).is(":checked")) {
+			if (typeof(reward_type) == "undefined") { 
+			    prompt("请选择红包类型");
+			    return false;
+			} 
+		 
+			reward_amount = $('input[name="reward_amount"]:checked').val();
+			if (typeof(reward_amount) == "undefined") { 
+			    prompt("请选择红包平均金额");
+			    return false;
+			} 
+			
+			reward_num = $('input[name="reward_num"]:checked').val();
+			if (typeof(reward_num) == "undefined") { 
+			    prompt("请选择红包个数");
+			    return false;
+			} 
+
+			$(".total_reward_amount").html(reward_amount*reward_num+"元");
+		} else {
+			$("#collapseReward input:radio").removeAttr('checked'); 
+		}
+	});
+
+	$("#collapseReward input:radio").click(function(){
+		$('#reward_confirm').removeAttr('checked'); 
+	});
+
+	//  分类刷新
+	$(".create #cid").change(function(){
+		location.href = "/info/create?cid="+$(this).val();
 	});
 
 	// 删除信息

@@ -12,18 +12,21 @@ func init() {
 }
 
 type Info struct {
-	Id          int
-	Uid         int
-	Rid         int
-	Cid         int
-	Content     string
-	Valid_day   int
-	Email       string
-	Status      int
-	Views       int
-	Ip          string
-	Create_time time.Time
-	Update_time time.Time
+	Id            int
+	Uid           int
+	Rid           int
+	Cid           int
+	Content       string
+	Valid_day     int
+	Email         string
+	Status        int
+	Views         int
+	Ip            string
+	Reward_type   int
+	Reward_num    int
+	Reward_amount float64
+	Create_time   time.Time
+	Update_time   time.Time
 }
 
 type InfoVo struct {
@@ -37,14 +40,14 @@ func CreateInfo(info *Info, ctx *context.Context) int {
 	info.Create_time = time.Now()
 	info.Update_time = info.Create_time
 	/*
-	rList := GetAllRegion()
-			for _, v := range rList {
-				subDomain := v.Name + ".miaopost.com"
-				if subDomain == ctx.Input.Domain() {
-					info.Rid = v.Id
-					break
+		rList := GetAllRegion()
+				for _, v := range rList {
+					subDomain := v.Name + ".miaopost.com"
+					if subDomain == ctx.Input.Domain() {
+						info.Rid = v.Id
+						break
+					}
 				}
-			}
 	*/
 	i, err := orm.NewOrm().Insert(info)
 	if err != nil {

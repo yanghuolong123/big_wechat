@@ -82,7 +82,11 @@ func (this *InfoController) List() {
 // 创建页面
 func (this *InfoController) CreateGet() {
 	cid, _ := this.GetInt("cid")
-	this.Data["cid"] = int(cid)
+	cat := models.Category{}
+	if catId := int(cid); catId > 0 {
+		cat = models.GetCategoryById(catId)
+	}
+	this.Data["cat"] = cat
 
 	//if !this.IsWeixin() {
 	//	this.Data["qr_url"] = wechat.GetTmpStrQrImg("create")
@@ -98,6 +102,11 @@ func (this *InfoController) CreatePost() {
 	valid_day, _ := this.GetInt("valid_day")
 	email := this.GetString("email")
 	photo := this.GetString("photo")
+	reward_type, _ := this.GetInt("reward_type")
+	reward_num, _ := this.GetInt("reward_num")
+	reward_amount, _ := this.GetFloat("reward_amount")
+	rtype := int(reward_type)
+	rnum := int(reward_num)
 
 	u := this.GetSession("user")
 
@@ -107,6 +116,9 @@ func (this *InfoController) CreatePost() {
 	info.Content = content
 	info.Valid_day = int(valid_day)
 	info.Email = email
+	info.Reward_type = rtype
+	info.Reward_num = rnum
+	info.Reward_amount = reward_amount
 	if u != nil {
 		info.Uid = u.(*models.User).Id
 	}

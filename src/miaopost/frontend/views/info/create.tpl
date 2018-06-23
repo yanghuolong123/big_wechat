@@ -20,7 +20,7 @@
                 <select id="cid" class="form-control">
                   <option value="">请选择分类</option>
                   {{range .cats}}
-                    <option value="{{.Id}}" {{if  eq .Id $.cid}}selected="selected"{{end}}>{{.Name}}</option>
+                    <option value="{{.Id}}" {{if  eq .Id $.cat.Id}}selected="selected"{{end}}>{{.Name}}</option>
                   {{end}}
                 </select>
               </div>
@@ -43,6 +43,72 @@
                 </textarea>                
               </div>
             </div>
+
+            {{if  eq .cat.Type 1}}
+            <div class="form-group" >            
+              <div class=" col-sm-offset-1 col-sm-6">
+                <p>
+                <a class="btn btn-success" role="button" data-toggle="collapse" href="#collapseReward" aria-expanded="false" aria-controls="collapseExample">
+                  添加红包
+                </a>
+                </p>
+                <div class="collapse" id="collapseReward">
+                  <div class="well">
+                    <ul>
+                      <li>
+                        <label class="radio-inline">红包类型：</label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_type" value="1"> 阅读红包
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_type"  value="2"> 留言红包
+                        </label>
+                      </li>
+                      <li>
+                        <label class="radio-inline">平均金额：</label>
+                         <label class="radio-inline">
+                          <input type="radio" name="reward_amount" value="0.1"> 0.1元
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_amount" value="0.2"> 0.2元
+                        </label>
+                        <label class="radio-inline">
+                         <input type="radio" name="reward_amount" value="0.5"> 0.5元
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_amount" value="1"> 1元
+                        </label>
+                      </li>
+                      <li>
+                        <label class="radio-inline">红包个数：</label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_num"  value="10"> 10
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_num"  value="20"> 20
+                        </label>
+                        <label class="radio-inline">
+                         <input type="radio" name="reward_num"  value="30"> 30
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_num"  value="50"> 50
+                        </label>
+                      </li>
+                      <li>
+                        <label class="radio-inline">总金额：<span class="total_reward_amount"></span></label>
+                      </li>
+                      <li>
+                        <label class="checkbox-inline">
+                          <input type="checkbox" name="reward_confirm" id="reward_confirm" value="1"> 确认/取消
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{end}}
+
             <div class="form-group" style="{{if .user}}display: none;{{end}}">            
               <div class=" col-sm-offset-1 col-sm-3">
                 <label>自动删除发布 <span class="text-danger label-tips">(建议填写)</span></label>
@@ -62,11 +128,8 @@
                 <label>我们会发送编辑链接至邮箱 <span class="text-danger label-tips">(建议填写)</span></label>
                 <input type="text" class="form-control" id="email" maxlength="55" placeholder="邮箱地址">
               </div>
-            </div>     
-            
-            <div class="form-group">
-                  <div class="col-sm-offset-1 col-sm-5  error_tips text-danger"></div>
-            </div>
+            </div> 
+
             <div class="form-group">
               <div class="col-sm-offset-1 col-sm-10">
                 <button type="button" id="create_info_btn" class="btn btn-primary btn-lg">发布</button>
