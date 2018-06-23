@@ -51,8 +51,19 @@ func (this *PayController) Confirm() {
 	productId, _ := this.GetInt("product_id")
 	amount, _ := this.GetFloat("amount")
 	info_id, _ := this.GetInt("info_id")
+	otype, _ := this.GetInt("type")
 
-	order, err := models.GenAdmireOrder(productId, uid, amount)
+	order_type := int(otype)
+	order := new(models.Order)
+	var err error
+	if order_type == 1 {
+		// 赞赏支付订单
+		order, err = models.GenAdmireOrder(productId, uid, amount)
+	} else if order_type == 2 {
+		// 红包信息支付发布
+		order, err = models.GenRewardOrder(productId, uid, amount)
+	}
+
 	order.Ip = this.Ctx.Input.IP()
 	if err != nil {
 		this.Redirect(err.Error(), 302)
@@ -92,8 +103,19 @@ func (this *PayController) WxScan() {
 	}
 	productId, _ := this.GetInt("product_id")
 	amount, _ := this.GetFloat("amount")
+	otype, _ := this.GetInt("type")
 
-	order, err := models.GenAdmireOrder(productId, uid, amount)
+	order_type := int(otype)
+	order := new(models.Order)
+	var err error
+	if order_type == 1 {
+		// 赞赏支付订单
+		order, err = models.GenAdmireOrder(productId, uid, amount)
+	} else if order_type == 2 {
+		// 红包信息支付发布
+		order, err = models.GenRewardOrder(productId, uid, amount)
+	}
+
 	order.Ip = this.Ctx.Input.IP()
 	if err != nil {
 		this.SendRes(-1, err.Error(), nil)
