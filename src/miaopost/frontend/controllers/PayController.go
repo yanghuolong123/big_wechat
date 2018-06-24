@@ -184,15 +184,17 @@ func (this *PayController) Notify() {
 			models.UpdateOrder(order)
 
 			// 个人账号金额增加
-			uad := new(models.UserAccountDetail)
-			uad.Uid = order.Uid
-			uad.Amount = order.Amount
-			uad.Type = order.Type
-			uad.Order_id = order.Id
-			uad.Remark = order.Remark
-			models.CreateUserAccountDetail(uad)
+			if order.Type == 1 {
+				uad := new(models.UserAccountDetail)
+				uad.Uid = order.Uid
+				uad.Amount = order.Amount
+				uad.Type = order.Type
+				uad.Order_id = order.Id
+				uad.Remark = order.Remark
+				models.CreateUserAccountDetail(uad)
 
-			models.IncUserAccount(order.Uid, order.Amount)
+				models.IncUserAccount(order.Uid, order.Amount)
+			}
 		}
 
 		help.Log("wxpay", "============== weixin pay success! ===============")
