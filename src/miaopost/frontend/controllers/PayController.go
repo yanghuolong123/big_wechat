@@ -194,6 +194,8 @@ func (this *PayController) Notify() {
 				models.CreateUserAccountDetail(uad)
 
 				models.IncUserAccount(order.Uid, order.Amount)
+			} else if order.Type == 2 {
+
 			}
 		}
 
