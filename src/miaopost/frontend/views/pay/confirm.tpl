@@ -1,5 +1,5 @@
 <div class="alert alert-info" role="alert">
-	<p class="text-warning">亲, 感谢您对此留言信息赞赏，需要支付</p>
+	<p class="text-warning">{{.msg}}</p>
 	<p class="center-block">支付金额 : <span class="pay_amount text-danger">￥{{.amount}}元</span></p>
 	<br>
 	<button class="btn btn-success" type="button" onclick="pay();">立即支付</button>

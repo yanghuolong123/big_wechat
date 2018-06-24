@@ -52,6 +52,7 @@ func (this *PayController) Confirm() {
 	amount, _ := this.GetFloat("amount")
 	info_id, _ := this.GetInt("info_id")
 	otype, _ := this.GetInt("type")
+	msg := this.GetString("msg")
 
 	order_type := int(otype)
 	order := new(models.Order)
@@ -89,6 +90,7 @@ func (this *PayController) Confirm() {
 	this.Data["user"] = user
 	this.Data["info_id"] = info_id
 	this.Data["amount"] = amount
+	this.Data["msg"] = msg
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "pay/confirm.tpl"

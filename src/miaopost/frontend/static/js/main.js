@@ -136,11 +136,48 @@ $(function(){
 	                	url = "/info/edit";
 	                }
 
-	                $.post(url, {id:id,cid:cid, content:info_content, valid_day:valid_day, email:email,photo:photo,reward_type:reward_type,reward_amount:reward_amount,reward_num:reward_num}, function(e){
-	                	$this.removeAttr("disabled");
+	                $.post(url, {id:id,cid:cid, content:info_content, valid_day:valid_day, email:email,photo:photo,reward_type:reward_type,reward_amount:reward_amount,reward_num:reward_num}, function(e){	                	
 	                        	if(e.code<0) {
-	                                	$(".error_tips").append(e.msg);
-	                                	return false;
+	                                		prompt(e.msg);
+	                                		$this.removeAttr("disabled");
+	                                		return false;
+	                        	}
+
+	                        	if(e.data.Reward_type>0) {
+	                        		amount = e.data.Reward_amount*e.data.Reward_num;
+	                        		if(isWeiXin()){
+						window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&info_id="+e.data.Id+"&type=2&msg=亲, 信息发布成功，红包需要支付";
+					} else {
+						prompt("亲, 信息发布成功，红包需要支付");
+
+						$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/img/loading.gif");
+						$(".pay_amount").html("￥"+amount+"元");
+						$('#qrPayModal').modal({backdrop: 'static', keyboard: false});
+
+						$.post("/pay/wxscan", {product_id:e.data.Id, amount:amount, type:2}, function(e){
+							if(e.code<0) {
+								prompt(e.msg);
+								return false;
+							}
+
+							$("#pay_qr_img").attr("src", e.data.qrurl).addClass("qrimg");
+							orderNo = e.data.order_no;
+
+							var timer = setInterval(function(){
+							    $.post('/pay/check', {order_no:orderNo}, function(e){
+							            if(e.code < 0) {
+							                return false;
+							            }
+							            
+							            clearInterval(timer);
+							            $('#qrPayModal').modal("hide");
+							            prompt("赞赏支付成功！感谢您的支持！");
+							        });
+							}, 1000);
+
+						});
+					}
+
 	                        	}
 
 	                        	window.location = "/info/view?id="+e.data.Id;
@@ -475,13 +512,13 @@ var admirePay = function(amount) {
 	var orderNo;
 
 	if(isWeiXin()){
-		window.location.href = "/pay/confirm?product_id="+mid+"&amount="+amount+"&info_id="+$("#info_id").val();
+		window.location.href = "/pay/confirm?product_id="+mid+"&amount="+amount+"&info_id="+$("#info_id").val()+"&type=1&msg=亲, 感谢您对此留言信息赞赏，需要支付";
 	} else {
 		$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/img/loading.gif");
 		$(".pay_amount").html("￥"+amount+"元");
 		$('#qrPayModal').modal({backdrop: 'static', keyboard: false});
 
-		$.post("/pay/wxscan", {product_id:mid, amount:amount}, function(e){
+		$.post("/pay/wxscan", {product_id:mid, amount:amount, type:1}, function(e){
 			if(e.code<0) {
 				prompt(e.msg);
 				return false;

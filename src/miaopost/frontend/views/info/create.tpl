@@ -137,3 +137,7 @@
             </div>
           </form>
 </div>
+
+{{if  eq .cat.Type 1}}
+{{template "pay/qrcode.tpl" .}} 
+{{end}}
