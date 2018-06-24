@@ -98,7 +98,7 @@ func GenRewardOrder(productId, uid int, amount float64) (*Order, error) {
 	order.Amount = amount
 	order.Pay_type = 1
 	order.Uid = uid
-	order.Remark = "赞赏支付"
+	order.Remark = "红包发布信息支付"
 	if CreateOrder(order) {
 		return order, nil
 	}

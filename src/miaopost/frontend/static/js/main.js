@@ -171,7 +171,8 @@ $(function(){
 							            
 							            clearInterval(timer);
 							            $('#qrPayModal').modal("hide");
-							            prompt("赞赏支付成功！感谢您的支持！");
+							            prompt({msg:"红包支付成功！感谢您的支持！",displayTime:3000});
+							            window.location = "/info/view?id="+e.data.Id;
 							        });
 							}, 1000);
 
@@ -180,7 +181,7 @@ $(function(){
 
 	                        	}
 
-	                        	window.location = "/info/view?id="+e.data.Id;
+	                        	// window.location = "/info/view?id="+e.data.Id;
 	                });
 
 	});
