@@ -221,7 +221,7 @@ func (this *PayController) Check() {
 	orderNo := this.GetString("order_no")
 	order := models.GetOrderByOrderno(orderNo)
 	if order.Status == 1 {
-		this.SendRes(0, "success", nil)
+		this.SendRes(0, "success", order)
 	}
 
 	this.SendRes(-1, "no pay complete", nil)

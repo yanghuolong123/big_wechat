@@ -148,7 +148,7 @@ $(function(){
 	                        		if(isWeiXin()){
 						window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&info_id="+e.data.Id+"&type=2&msg=亲, 信息发布成功，红包需要支付";
 					} else {
-						prompt("亲, 信息发布成功，红包需要支付");
+						//prompt("亲, 信息发布成功，红包需要支付");
 
 						$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/img/loading.gif");
 						$(".pay_amount").html("￥"+amount+"元");
