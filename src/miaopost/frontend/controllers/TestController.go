@@ -20,11 +20,13 @@ type TestController struct {
 func (this *TestController) Get() {
 	t := time.Now()
 
-	user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
-	if err == nil {
-		this.SetSession("user", user)
-		fmt.Println("======================= 登陆成功")
-	}
+	/*
+		user, err := models.GetUserByOpenid("oltIswun-dbeOE8TPl5BWTacNyUo")
+		if err == nil {
+			this.SetSession("user", user)
+			fmt.Println("======================= 登陆成功")
+		}
+	*/
 
 	//fmt.Println("============== rpop:", help.Redis.Rpop("list1"))
 	//help.Redis.Lpush("list1", "111111111")

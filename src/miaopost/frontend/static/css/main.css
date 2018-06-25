@@ -70,9 +70,8 @@ a.list_content:hover{text-decoration: none;}
 .create .wx{padding-left: 15px; padding-right: 10px;}
 .create .wx img#login_img{width: 150px; height: 150px; }
 
-/*.create .collapse .well{padding: 8px ; padding-left: 2px;}*/
-.create ul li label.checkbox-inline{margin-left:  20px;}
-/*.create .checkbox-inline, .create .radio-inline {padding-left: 10px;}*/
+.create .collapse .radio-inline {    margin-left: 3px; }
+.reward_title {font-weight: bold;}
 
 /**  =============== info view.tpl =============== **/
 .view .meta{font-size: 13px; color: #777; margin-bottom: 8px;}

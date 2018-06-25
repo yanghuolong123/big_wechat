@@ -54,19 +54,23 @@
                 </p>
                 <div class="collapse" id="collapseReward">
                   <div class="well">
-                    <ul>
-                      <li>
-                        <label class="radio-inline">红包类型：</label>
+
+                    <div class="row">
+                      <div class="col-sm-4"><label class="radio-inline reward_title">红包类型：</label></div>
+                      <div class="col-sm-8">
                         <label class="radio-inline">
                           <input type="radio" name="reward_type" value="1"> 阅读红包
                         </label>
                         <label class="radio-inline">
                           <input type="radio" name="reward_type"  value="2"> 留言红包
                         </label>
-                      </li>
-                      <li>
-                        <label class="radio-inline">平均金额：</label>
-                         <label class="radio-inline">
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-4"><label class="radio-inline reward_title">平均金额：</label></div>
+                      <div class="col-sm-8">
+                        <label class="radio-inline">
                           <input type="radio" name="reward_amount" value="0.1"> 0.1元
                         </label>
                         <label class="radio-inline">
@@ -78,9 +82,12 @@
                         <label class="radio-inline">
                           <input type="radio" name="reward_amount" value="1"> 1元
                         </label>
-                      </li>
-                      <li>
-                        <label class="radio-inline">红包个数：</label>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-4"><label class="radio-inline reward_title">红包个数：</label></div>
+                      <div class="col-sm-8">
                         <label class="radio-inline">
                           <input type="radio" name="reward_num"  value="10"> 10
                         </label>
@@ -93,16 +100,21 @@
                         <label class="radio-inline">
                           <input type="radio" name="reward_num"  value="50"> 50
                         </label>
-                      </li>
-                      <li>
-                        <label class="radio-inline">总金额：<span class="total_reward_amount"></span></label>
-                      </li>
-                      <li>
-                        <label class="checkbox-inline">
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12"><label class="radio-inline reward_title">总金额：<span class="total_reward_amount"></span></label></div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-offset-1 col-sm-11">
+                        <label class="checkbox-inline reward_title">
                           <input type="checkbox" name="reward_confirm" id="reward_confirm" value="1"> 确认/取消
                         </label>
-                      </li>
-                    </ul>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
