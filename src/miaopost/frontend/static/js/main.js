@@ -450,6 +450,10 @@ $(function(){
 			comments += '</div>';
 
 			$("#commentlist").prepend(comments);
+
+			if(e.data.Ireward != null) {
+				greeting({title:"提示",msg:"恭喜您! 您获得了 "+e.data.Ireward.Amount+"元 留言红包。"})	
+			}
 		});
 	});
 

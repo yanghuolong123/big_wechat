@@ -195,7 +195,7 @@ func (this *PayController) Notify() {
 
 				models.IncUserAccount(order.Uid, order.Amount)
 			} else if order.Type == 2 {
-
+				go models.GenBathInfoRewardByInfoId(order.Product_id)
 			}
 		}
 

@@ -335,7 +335,8 @@ func (this *InfoController) Top() {
 		"infoId": info.Id,
 		"uid":    info.Uid,
 	}
-	count, err := help.MongoDb.C("top_record").Find(condition).Count()
+	c := help.MongoDb.C("top_record")
+	count, err := c.Find(condition).Count()
 	help.Error(err)
 	if count >= 3 {
 		this.SendRes(-1, "亲，您的置顶机会已用完，最多可以免费置顶3次", nil)
@@ -347,7 +348,7 @@ func (this *InfoController) Top() {
 		this.SendRes(-1, err.Error(), nil)
 	}
 	m := map[string]interface{}{"uid": info.Uid, "infoId": info.Id, "time": time.Now()}
-	help.MongoDb.C("top_record").Insert(m)
+	c.Insert(m)
 
 	this.SendRes(0, "置顶成功，您还有"+help.ToStr(2-count)+"机会", nil)
 }

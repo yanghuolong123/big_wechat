@@ -14,16 +14,17 @@ type InfoMsgController struct {
 
 // 留言/回复
 func (this *InfoMsgController) CreateMsg() {
-	user := this.GetSession("user")
-	if user == nil {
+	u := this.GetSession("user")
+	if u == nil {
 		this.SendRes(-1, "请先登录", nil)
 	}
+	user := u.(*models.User)
 
 	content := this.GetString("content")
 	info_id, _ := this.GetInt("info_id")
 	pid, _ := this.GetInt("pid")
 	im := models.InfoMessage{
-		Uid:     user.(*models.User).Id,
+		Uid:     user.Id,
 		Info_id: int(info_id),
 		Pid:     int(pid),
 		Content: content,
@@ -31,6 +32,16 @@ func (this *InfoMsgController) CreateMsg() {
 	i := models.CreateInfoMessage(&im)
 	if i > 0 {
 		vo := models.ConvertInfoMsgToVo(&im)
+		c := help.MongoDb.C("pre_msg_reward")
+		var ir *models.InfoReward
+		err := c.Find(bson.M{"info_id": int(info_id), "uid": user.Id}).One(&ir)
+		if err == nil {
+			ir := models.GainReward(ir.Id, user.Id)
+			vo.Ireward = ir
+
+			c.Remove(bson.M{"id": ir.Id})
+		}
+
 		this.SendRes(0, "success", vo)
 	}
 

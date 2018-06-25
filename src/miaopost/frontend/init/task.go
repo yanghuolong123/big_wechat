@@ -3,6 +3,7 @@ package init
 import (
 	"fmt"
 	"github.com/astaxie/beego/toolbox"
+	"labix.org/v2/mgo/bson"
 	"miaopost/frontend/models"
 	"time"
 	"yhl/help"
@@ -22,6 +23,9 @@ func init() {
 
 	clearWxCache := toolbox.NewTask("clearWxCache", "0 */30 * * * *", clearWxCache)
 	toolbox.AddTask("clearWxCache", clearWxCache)
+
+	recoverRewardList := toolbox.NewTask("recoverRewardList", "0 */2 * * * *", recoverRewardList)
+	toolbox.AddTask("recoverRewardList", recoverRewardList)
 
 	toolbox.StartTask()
 }
@@ -74,6 +78,23 @@ func clearWxCache() error {
 	help.Log("task", "=============== new accessToken:"+accessToken)
 	help.Log("task", "=============== new jsapiTickey:"+jsapiTickey)
 	//	help.Log("task", "=============== new createImg:"+createImg)
+
+	return nil
+}
+
+func recoverRewardList() error {
+	help.Log("task", "恢复红包队列...")
+
+	c := help.MongoDb.C("pre_msg_reward")
+	var irs []*models.InfoReward
+	c.Find(nil).All(&irs)
+	for _, ir := range irs {
+		if !time.Now().Before(ir.Gain_time.Add(time.Minute * 45)) {
+			c.Remove(bson.M{"id": ir.Id})
+			help.Redis.Lpush("list_reward_info_"+help.ToStr(ir.Info_id), help.ToStr(ir.Id))
+			help.Log("task", ir)
+		}
+	}
 
 	return nil
 }

@@ -2,6 +2,7 @@
 <html>
         <head>
             {{template "layout/base-style.tpl" .}}
+            <script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
          </head>
          <body>
                 <div class="container">

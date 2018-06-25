@@ -26,6 +26,15 @@ func (this *TestController) Get() {
 		fmt.Println("======================= 登陆成功")
 	}
 
+	//fmt.Println("============== rpop:", help.Redis.Rpop("list1"))
+	//help.Redis.Lpush("list1", "111111111")
+	//help.Redis.Lpush("list1", "222222222")
+	//help.Redis.Lpush("list1", "33333")
+	//help.Redis.Set("test1", "test1111111111111111111111111")
+	//fmt.Println("================== :", help.Redis.Get("test1"))
+	//models.GenBathInfoRewardByInfoId(676)
+	//models.GainReward(1, 1)
+
 	//	fmt.Println("=========== root path:", GetAPPRootPath())
 
 	//	models.IncUserAccount(6, 0.1)

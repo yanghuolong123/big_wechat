@@ -22,9 +22,10 @@ type InfoMessage struct {
 }
 
 type InfoMsgVo struct {
-	Im     *InfoMessage
-	User   *User
-	Parent *InfoMsgVo
+	Im      *InfoMessage
+	User    *User
+	Parent  *InfoMsgVo
+	Ireward *InfoReward
 }
 
 func CreateInfoMessage(im *InfoMessage) int {
