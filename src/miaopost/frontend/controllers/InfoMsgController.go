@@ -54,7 +54,6 @@ func (this *InfoMsgController) CreateMsg() {
 				}
 
 				user, _ := models.GetUserById(p.Uid)
-				help.Log("wxmsg", user)
 				viewUrl := this.Ctx.Input.Site() + "/info/view?id=" + help.ToStr(info_id)
 				msg := user.Nickname + "回复了你的留言， 查看: " + viewUrl
 				wechat.SendTextMsg(user.Openid, msg)
