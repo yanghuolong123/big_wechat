@@ -6,6 +6,7 @@ import (
 	"miaopost/frontend/models"
 	"time"
 	"yhl/help"
+	"yhl/wechat"
 )
 
 type InfoMsgController struct {
@@ -32,6 +33,8 @@ func (this *InfoMsgController) CreateMsg() {
 	i := models.CreateInfoMessage(&im)
 	if i > 0 {
 		vo := models.ConvertInfoMsgToVo(&im)
+
+		// 留言红包处理
 		c := help.MongoDb.C("pre_msg_reward")
 		var ir *models.InfoReward
 		err := c.Find(bson.M{"info_id": int(info_id), "uid": user.Id}).One(&ir)
@@ -40,6 +43,22 @@ func (this *InfoMsgController) CreateMsg() {
 			vo.Ireward = ir
 
 			c.Remove(bson.M{"id": ir.Id})
+		}
+
+		// 微信提醒回复人
+		if int(pid) > 0 {
+			go func(pid int) {
+				p, err := models.GetInfoMessageById(pid)
+				if err != nil {
+					return
+				}
+
+				user, _ := models.GetUserById(p.Uid)
+				help.Log("wxmsg", user)
+				viewUrl := this.Ctx.Input.Site() + "/info/view?id=" + help.ToStr(info_id)
+				msg := user.Nickname + "回复了你的留言， 查看: " + viewUrl
+				wechat.SendTextMsg(user.Openid, msg)
+			}(int(pid))
 		}
 
 		this.SendRes(0, "success", vo)
