@@ -182,6 +182,8 @@ $(function(){
 						});
 					}
 
+	                        	} else {
+	                        		window.location = "/info/view?id="+e.data.Id;
 	                        	}
 
 	                        	// window.location = "/info/view?id="+e.data.Id;
@@ -400,7 +402,8 @@ $(function(){
 	$(".msg-btn").click(function(){
 		var uid = $("#login_uid").val();
 		if(uid==0) {
-			prompt("请先登陆！")
+			//prompt("请先登陆！")
+			$("#loginBtn").trigger("click");
 			return false;
 		}
 
@@ -464,7 +467,8 @@ $(function(){
 var replyMsg = function(pid) {
 	var uid = $("#login_uid").val();
 	if(uid==0) {
-		prompt("请先登陆！")
+		//prompt("请先登陆！")
+		$("#loginBtn").trigger("click");
 		return false;
 	}
 	

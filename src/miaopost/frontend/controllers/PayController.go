@@ -194,6 +194,8 @@ func (this *PayController) Notify() {
 				models.CreateUserAccountDetail(uad)
 
 				models.IncUserAccount(order.Uid, order.Amount)
+
+				go models.AdmireWxTip(order.Product_id, order.Amount, this.Ctx)
 			} else if order.Type == 2 {
 				go models.GenBathInfoRewardByInfoId(order.Product_id)
 			}

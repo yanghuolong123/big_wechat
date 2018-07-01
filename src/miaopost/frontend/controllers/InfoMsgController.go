@@ -6,7 +6,6 @@ import (
 	"miaopost/frontend/models"
 	"time"
 	"yhl/help"
-	"yhl/wechat"
 )
 
 type InfoMsgController struct {
@@ -45,19 +44,12 @@ func (this *InfoMsgController) CreateMsg() {
 			c.Remove(bson.M{"id": ir.Id})
 		}
 
-		// 微信提醒回复人
 		if int(pid) > 0 {
-			go func(pid int) {
-				p, err := models.GetInfoMessageById(pid)
-				if err != nil {
-					return
-				}
-
-				user, _ := models.GetUserById(p.Uid)
-				viewUrl := this.Ctx.Input.Site() + "/info/view?id=" + help.ToStr(info_id)
-				msg := user.Nickname + "回复了你的留言， 查看: " + viewUrl
-				wechat.SendTextMsg(user.Openid, msg)
-			}(int(pid))
+			// 微信提醒回复人
+			go models.ReplyWxTip(int(pid), this.Ctx)
+		} else {
+			// 微信提醒信息发布人
+			go models.MessageWxTip(im.Id, this.Ctx)
 		}
 
 		this.SendRes(0, "success", vo)
