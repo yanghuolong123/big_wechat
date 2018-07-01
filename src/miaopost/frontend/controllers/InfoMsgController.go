@@ -46,7 +46,7 @@ func (this *InfoMsgController) CreateMsg() {
 
 		if int(pid) > 0 {
 			// 微信提醒回复人
-			go models.ReplyWxTip(int(pid), this.Ctx)
+			go models.ReplyWxTip(im.Id, this.Ctx)
 		} else {
 			// 微信提醒信息发布人
 			go models.MessageWxTip(im.Id, this.Ctx)
