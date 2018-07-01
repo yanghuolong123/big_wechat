@@ -1,5 +1,5 @@
 <style>
-  #picker div:nth-child(2){width:100%!important;height:100%!important;}
+  #picker div:nth-child(2) input{width:100%!important;height:100%!important;}
 </style>
 <div class="create">
        {{if and (not .isWeixin) (not .user)}}
