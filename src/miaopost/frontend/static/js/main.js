@@ -123,11 +123,6 @@ $(function(){
 			    prompt("请选择红包个数");
 			    return false;
 			} 
-
-			if(!$('#reward_confirm').is(':checked')) {
-			    prompt("请先确认");
-			    return false;
-			}
 		}
 
 	                $this.attr("disabled","disabled");
@@ -189,41 +184,6 @@ $(function(){
 	                        	// window.location = "/info/view?id="+e.data.Id;
 	                });
 
-	});
-
-	// 红包处理
-	$('#reward_confirm').click(function(){
-		var reward_type,reward_amount,reward_num;		
-		reward_type = $('input[name="reward_type"]:checked').val();
-		reward_amount = $('input[name="reward_amount"]:checked').val();
-		reward_num = $('input[name="reward_num"]:checked').val();
-		 
-		if($(this).is(":checked")) {
-			if (typeof(reward_type) == "undefined") { 
-			    prompt("请选择红包类型");
-			    return false;
-			} 
-		 
-			reward_amount = $('input[name="reward_amount"]:checked').val();
-			if (typeof(reward_amount) == "undefined") { 
-			    prompt("请选择红包平均金额");
-			    return false;
-			} 
-			
-			reward_num = $('input[name="reward_num"]:checked').val();
-			if (typeof(reward_num) == "undefined") { 
-			    prompt("请选择红包个数");
-			    return false;
-			} 
-
-			$(".total_reward_amount").html(reward_amount*reward_num+"元");
-		} else {
-			$("#collapseReward input:radio").removeAttr('checked'); 
-		}
-	});
-
-	$("#collapseReward input:radio").click(function(){
-		$('#reward_confirm').removeAttr('checked'); 
 	});
 
 	//  分类刷新

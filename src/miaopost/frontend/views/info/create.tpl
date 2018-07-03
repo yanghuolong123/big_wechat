@@ -50,78 +50,9 @@
             {{if  eq .cat.Type 1}}
             <div class="form-group" >            
               <div class=" col-sm-offset-1 col-sm-6">
-                <p>
-                <a class="btn btn-success" role="button" data-toggle="collapse" href="#collapseReward" aria-expanded="false" aria-controls="collapseExample">
-                  添加红包
-                </a>
-                </p>
-                <div class="collapse" id="collapseReward">
-                  <div class="well">
-
-                    <div class="row">
-                      <div class="col-sm-4"><label class="radio-inline reward_title">红包类型：</label></div>
-                      <div class="col-sm-8">
-                        <label class="radio-inline">
-                          <input type="radio" name="reward_type" value="1"> 阅读红包
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="reward_type"  value="2"> 留言红包
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-sm-4"><label class="radio-inline reward_title">平均金额：</label></div>
-                      <div class="col-sm-8">
-                        <label class="radio-inline">
-                          <input type="radio" name="reward_amount" value="0.1"> 0.1元
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="reward_amount" value="0.2"> 0.2元
-                        </label>
-                        <label class="radio-inline">
-                         <input type="radio" name="reward_amount" value="0.5"> 0.5元
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="reward_amount" value="1"> 1元
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-sm-4"><label class="radio-inline reward_title">红包个数：</label></div>
-                      <div class="col-sm-8">
-                        <label class="radio-inline">
-                          <input type="radio" name="reward_num"  value="10"> 10
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="reward_num"  value="20"> 20
-                        </label>
-                        <label class="radio-inline">
-                         <input type="radio" name="reward_num"  value="30"> 30
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="reward_num"  value="50"> 50
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-sm-12"><label class="radio-inline reward_title">总金额：<span class="total_reward_amount"></span></label></div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-sm-offset-1 col-sm-11">
-                        <label class="checkbox-inline reward_title">
-                          <input type="checkbox" name="reward_confirm" id="reward_confirm" value="1"> 确认/取消
-                        </label>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#withdrawModal"> 添加红包 </button>
               </div>
-            </div>
+             </div>
             {{end}}
 
             <div class="form-group" style="{{if .user}}display: none;{{end}}">            
@@ -154,5 +85,154 @@
 </div>
 
 {{if  eq .cat.Type 1}}
+
 {{template "pay/qrcode.tpl" .}} 
+
+<!-- Modal -->
+<div class="modal fade" id="withdrawModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">添加红包</h4>
+      </div>
+      <div class="modal-body">
+        
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-3 control-label">红包类型：</label>
+            <div class="col-sm-9">
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_type" value="1"> 阅读红包
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_type"  value="2"> 留言红包
+                        </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-3 control-label">平均金额：</label>
+            <div class="col-sm-9">
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_amount" value="0.1"> 0.1元
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_amount" value="0.2"> 0.2元
+                        </label>
+                        <label class="radio-inline">
+                         <input type="radio" name="reward_amount" value="0.5"> 0.5元
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_amount" value="1"> 1元
+                        </label>
+            </div>
+          </div>  
+           <div class="form-group">
+            <label for="inputPassword3" class="col-sm-3 control-label">红包个数：</label>
+            <div class="col-sm-9">
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_num"  value="10"> 10
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_num"  value="20"> 20
+                        </label>
+                        <label class="radio-inline">
+                         <input type="radio" name="reward_num"  value="30"> 30
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="reward_num"  value="50"> 50
+                        </label>
+            </div>
+          </div>   
+          <div class="form-group">
+             <label for="inputPassword3" class="col-sm-3 control-label">总金额：</label> 
+             <div class="col-sm-9">
+               <span class="total_reward_amount"></span>
+             </div>           
+          </div>     
+          
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success width-draw-confirm">确定</button>
+        <button type="button" class="btn btn-primary width-draw-cancel">取消添加红包</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    // 红包处理
+    $('input[name="reward_num"]').change(function(e){
+         var reward_type,reward_amount,reward_num;   
+          reward_type = $('input[name="reward_type"]:checked').val();
+          reward_amount = $('input[name="reward_amount"]:checked').val();
+          reward_num = $('input[name="reward_num"]:checked').val();
+
+          if (typeof(reward_num) != "undefined" && typeof(reward_amount)!="undefined") {
+              $(".total_reward_amount").html(reward_amount*reward_num+"元");
+           }
+
+          if (typeof(reward_type) == "undefined") { 
+              prompt("请选择红包类型");
+              return false;
+          } 
+         
+          if (typeof(reward_amount) == "undefined") { 
+              prompt("请选择红包平均金额");
+              return false;
+          }           
+          
+    });
+
+    $('input[name="reward_amount"]').change(function(e){
+        var reward_type,reward_amount,reward_num;   
+          reward_type = $('input[name="reward_type"]:checked').val();
+          reward_amount = $('input[name="reward_amount"]:checked').val();
+          reward_num = $('input[name="reward_num"]:checked').val();
+
+          if (typeof(reward_type) == "undefined") { 
+              prompt("请选择红包类型");
+          } 
+
+           if (typeof(reward_num) != "undefined") { 
+             $(".total_reward_amount").html(reward_amount*reward_num+"元");
+          } 
+
+    });
+
+    $(".width-draw-confirm").click(function(){
+        var reward_type,reward_amount,reward_num;   
+        reward_type = $('input[name="reward_type"]:checked').val();
+        reward_amount = $('input[name="reward_amount"]:checked').val();
+        reward_num = $('input[name="reward_num"]:checked').val();
+
+        if (typeof(reward_type) == "undefined") { 
+            prompt("请选择红包类型");
+            return false;
+        } 
+
+        if (typeof(reward_amount) == "undefined") { 
+            prompt("请选择红包平均金额");
+            return false;
+        }       
+        
+        if (typeof(reward_num) == "undefined") { 
+            prompt("请选择红包个数");
+            return false;
+        } 
+
+        $("#withdrawModal").modal('hide');
+    });
+
+    $(".width-draw-cancel").click(function(){
+        $('#withdrawModal input').removeAttr('checked'); 
+        $(".total_reward_amount").html("");
+
+        $("#withdrawModal").modal('hide');
+    });
+
+</script>
+
 {{end}}
