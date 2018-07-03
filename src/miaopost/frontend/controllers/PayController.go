@@ -183,8 +183,8 @@ func (this *PayController) Notify() {
 			order.Transaction_id = notifyReq.Transaction_id
 			models.UpdateOrder(order)
 
-			// 个人账号金额增加
 			if order.Type == 1 {
+				// 赞赏支付,个人账号金额增加
 				uad := new(models.UserAccountDetail)
 				uad.Uid = order.Uid
 				uad.Amount = order.Amount
@@ -197,6 +197,7 @@ func (this *PayController) Notify() {
 
 				go models.AdmireWxTip(order.Product_id, order.Amount, this.Ctx)
 			} else if order.Type == 2 {
+				// 红包发布信息
 				go models.GenBathInfoRewardByInfoId(order.Product_id)
 			}
 		}

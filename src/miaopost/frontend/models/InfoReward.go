@@ -59,6 +59,9 @@ func GenBathInfoRewardByInfoId(info_id int) bool {
 		return false
 	}
 
+	info.Reward_pay = 1
+	UpdateInfo(info)
+
 	for i := info.Reward_num; i > 0; i-- {
 		ir := new(InfoReward)
 		ir.Info_id = info.Id

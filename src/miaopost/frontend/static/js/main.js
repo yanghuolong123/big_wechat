@@ -172,7 +172,7 @@ $(function(){
 								            $('#qrPayModal').modal("hide");
 								            prompt({msg:"红包支付成功！感谢您的支持！",displayTime:3000});
 								            setTimeout(function(){
-						                        		window.location = "/info/view?id="+e.data.Product_id;
+						                        		window.location = "/info/view?id="+e.data.Product_id+"&chance=no";
 						                        	}, 2500);
 								            
 								        });

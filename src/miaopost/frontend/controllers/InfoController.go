@@ -190,6 +190,9 @@ func (this *InfoController) View() {
 		this.Data["imvos"] = imvos
 	}
 
+	chance := this.GetString("chance")
+	this.Data["chance"] = chance
+
 	this.Layout = "layout/main.tpl"
 	this.TplName = "info/view.tpl"
 }

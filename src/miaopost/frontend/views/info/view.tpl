@@ -1,4 +1,5 @@
 <input type="hidden" id="info_id" value="{{.info.Id}}">
+<input type="hidden" id="chance" value="{{.chance}}">
 <div class="view">
 	<div class="row meta">
 		<div class="col-md-9 col-xs-9">
@@ -36,9 +37,14 @@
 	</div>
 </div>
 
-{{if  eq .cat.Type 1}}
+{{if  eq .info.Reward_pay 1}}
 <script type="text/javascript">
-$(function(){
+
+var getWithDraw = function() {
+	var chance = $("#chance").val();
+	if (chance=="no") {
+		return false;
+	}
 	$.post("/reward/chance",{info_id:$("#info_id").val()}, function(e){
 		if(e.code<=0) {
 			return false;
@@ -50,6 +56,10 @@ $(function(){
 			greeting({title:"提示",msg:"恭喜您! 您获得了 "+e.data.Amount+"元 留言红包机会，在45分钟内进行留言将会获得此红包。"})	
 		}
 	})
+};
+
+$(function(){
+	getWithDraw();
 });
 </script>
 {{end}}

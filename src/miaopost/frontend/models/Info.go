@@ -25,6 +25,7 @@ type Info struct {
 	Reward_type   int
 	Reward_num    int
 	Reward_amount float64
+	Reward_pay    int
 	Create_time   time.Time
 	Update_time   time.Time
 }

@@ -24,7 +24,7 @@ function onBridgeReady(){
            	//alert("支付成功");
             prompt("支付成功！");
             setTimeout(function(){
-              window.location = "/info/view?id="+$("#info_id").val();
+              window.location = "/info/view?id="+$("#info_id").val()+"&chance=no";
             }, 2000);            
            }  else if (res.err_msg == "get_brand_wcpay_request:cancel")  {
                      alert("支付过程中用户取消");
