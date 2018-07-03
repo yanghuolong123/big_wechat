@@ -139,42 +139,78 @@ $(function(){
 	                        	}
 
 	                        	if(e.data.Reward_type>0) {
+	                        		prompt({msg:"发布成功！支付后即可成功添加红包!",displayTime:2500});
 	                        		amount = e.data.Reward_amount*e.data.Reward_num;
 	                        		if(isWeiXin()){
-						window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&info_id="+e.data.Id+"&type=2&msg=亲, 信息发布成功，红包需要支付";
+						//window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&info_id="+e.data.Id+"&type=2&msg=亲, 信息发布成功，红包需要支付";						
+		                        		setTimeout(function(){
+			                        		window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&info_id="+e.data.Id+"&type=2&msg=亲, 信息发布成功，红包需要支付";
+			                        	}, 2500);
 					} else {
 						//prompt("亲, 信息发布成功，红包需要支付");
+						setTimeout(function(){
+							$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/img/loading.gif");
+							$(".pay_amount").html("￥"+amount+"元");
+							$('#qrPayModal').modal({backdrop: 'static', keyboard: false});
 
-						$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/img/loading.gif");
-						$(".pay_amount").html("￥"+amount+"元");
-						$('#qrPayModal').modal({backdrop: 'static', keyboard: false});
+							$.post("/pay/wxscan", {product_id:e.data.Id, amount:amount, type:2}, function(e){
+								if(e.code<0) {
+									prompt(e.msg);
+									return false;
+								}
 
-						$.post("/pay/wxscan", {product_id:e.data.Id, amount:amount, type:2}, function(e){
-							if(e.code<0) {
-								prompt(e.msg);
-								return false;
-							}
+								$("#pay_qr_img").attr("src", e.data.qrurl).addClass("qrimg");
+								orderNo = e.data.order_no;
 
-							$("#pay_qr_img").attr("src", e.data.qrurl).addClass("qrimg");
-							orderNo = e.data.order_no;
+								var timer = setInterval(function(){
+								    $.post('/pay/check', {order_no:orderNo}, function(e){
+								            if(e.code < 0) {
+								                return false;
+								            }
+								            
+								            clearInterval(timer);
+								            $('#qrPayModal').modal("hide");
+								            prompt({msg:"红包支付成功！感谢您的支持！",displayTime:3000});
+								            setTimeout(function(){
+						                        		window.location = "/info/view?id="+e.data.Product_id;
+						                        	}, 2500);
+								            
+								        });
+								}, 1000);
 
-							var timer = setInterval(function(){
-							    $.post('/pay/check', {order_no:orderNo}, function(e){
-							            if(e.code < 0) {
-							                return false;
-							            }
+							});
+						}, 2500);
+
+						// $("#pay_qr_img").removeClass("qrimg").attr("src", "/static/img/loading.gif");
+						// $(".pay_amount").html("￥"+amount+"元");
+						// $('#qrPayModal').modal({backdrop: 'static', keyboard: false});
+
+						// $.post("/pay/wxscan", {product_id:e.data.Id, amount:amount, type:2}, function(e){
+						// 	if(e.code<0) {
+						// 		prompt(e.msg);
+						// 		return false;
+						// 	}
+
+						// 	$("#pay_qr_img").attr("src", e.data.qrurl).addClass("qrimg");
+						// 	orderNo = e.data.order_no;
+
+						// 	var timer = setInterval(function(){
+						// 	    $.post('/pay/check', {order_no:orderNo}, function(e){
+						// 	            if(e.code < 0) {
+						// 	                return false;
+						// 	            }
 							            
-							            clearInterval(timer);
-							            $('#qrPayModal').modal("hide");
-							            prompt({msg:"红包支付成功！感谢您的支持！",displayTime:3000});
-							            setTimeout(function(){
-					                        		window.location = "/info/view?id="+e.data.Product_id;
-					                        	}, 2500);
+						// 	            clearInterval(timer);
+						// 	            $('#qrPayModal').modal("hide");
+						// 	            prompt({msg:"红包支付成功！感谢您的支持！",displayTime:3000});
+						// 	            setTimeout(function(){
+					 //                        		window.location = "/info/view?id="+e.data.Product_id;
+					 //                        	}, 2500);
 							            
-							        });
-							}, 1000);
+						// 	        });
+						// 	}, 1000);
 
-						});
+						// });
 					}
 
 	                        	} else {
