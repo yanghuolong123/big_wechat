@@ -85,6 +85,28 @@ func GainReward(id, uid int) *InfoReward {
 		ir.Uid = uid
 		ir.Gain_time = time.Now()
 		o.Update(ir)
+
+		// 个人账户变更
+		go func() {
+			info, err := GetInfoById(ir.Info_id)
+			if err != nil {
+				help.Error(err)
+				return
+			}
+			uad := new(UserAccountDetail)
+			uad.Uid = uid
+			uad.Amount = ir.Amount
+			uad.Type = 2
+			if info.Reward_type == 1 {
+				uad.Remark = "获得阅读红包"
+			} else if info.Reward_type == 2 {
+				uad.Remark = "获得留言红包"
+			}
+			CreateUserAccountDetail(uad)
+
+			IncUserAccount(uid, ir.Amount)
+		}()
+
 		return ir
 	}
 
