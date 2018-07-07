@@ -107,6 +107,7 @@ func scanLogin(msgBody *wechat.MsgBody) (ekey string) {
 	if v, ok := userinfo["nickname"]; ok {
 		u := models.User{
 			Openid:   msgBody.FromUserName,
+			Rid:      1,
 			Nickname: v.(string),
 			Avatar:   userinfo["headimgurl"].(string),
 		}
