@@ -70,7 +70,7 @@ func (this *BaseController) Prepare() {
 	this.Data["user"] = user
 
 	if site == "http://www.miaopost.com" || site == "http://home.miaopost.com" {
-		subDomain := ""
+		subDomain := "utd"
 		setRegion := this.Ctx.GetCookie("setRegion")
 		fmt.Println("============ setRegion:", setRegion)
 
