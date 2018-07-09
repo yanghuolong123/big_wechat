@@ -75,7 +75,7 @@
 
 {{template "pay/qrcode.tpl" .}} 
 
-{{if not .isMobile}}
+{{if false}}
 
 <link rel="stylesheet" href="/static/plugin/bootstrap-wysihtml5/dist/bootstrap3-wysihtml5.min.css">
 <style type="text/css">
