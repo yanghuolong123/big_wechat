@@ -17,8 +17,9 @@ func ReplyWxTip(id int, ctx *context.Context) {
 	}
 
 	user, _ := GetUserById(p.Uid)
+	u, _ := GetUserById(m.Uid)
 	viewUrl := ctx.Input.Site() + "/info/view?id=" + help.ToStr(p.Info_id)
-	msg := user.Nickname + " 回复了您的留言:  " + help.HtmlToStr(m.Content) + "\n" + viewUrl
+	msg := u.Nickname + " 回复了您的留言:  " + help.HtmlToStr(m.Content) + "\n" + viewUrl
 	wechat.SendTextMsg(user.Openid, msg)
 }
 
@@ -31,8 +32,9 @@ func MessageWxTip(id int, ctx *context.Context) {
 	info, _ := GetInfoById(m.Info_id)
 
 	user, _ := GetUserById(info.Uid)
+	u, _ := GetUserById(m.Uid)
 	viewUrl := ctx.Input.Site() + "/info/view?id=" + help.ToStr(m.Info_id)
-	msg := user.Nickname + " 给您留言:  " + help.HtmlToStr(m.Content) + "\n" + viewUrl
+	msg := u.Nickname + " 给您留言:  " + help.HtmlToStr(m.Content) + "\n" + viewUrl
 	wechat.SendTextMsg(user.Openid, msg)
 }
 
