@@ -75,6 +75,33 @@
 
 {{template "pay/qrcode.tpl" .}} 
 
+{{if not .isMobile}}
+
+<link rel="stylesheet" href="/static/plugin/bootstrap-wysihtml5/dist/bootstrap3-wysihtml5.min.css">
+<style type="text/css">
+	#info_msg{overflow:scroll; max-height:300px}
+</style>
+<script src="/static/plugin/bootstrap-wysihtml5/dist/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="/static/plugin/bootstrap-wysihtml5/dist/locales/bootstrap-wysihtml5.zh-CN.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#info_msg").wysihtml5({	  
+		    "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
+		    "emphasis": true, //Italics, bold, etc. Default true
+		    "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+		    "html": false, //Button which allows you to edit the generated HTML. Default false
+		    "link": false, //Button to insert a link. Default true
+		    "image": false, //Button to insert an image. Default true,
+		    "color": false, //Button to change color of font  
+		    "blockquote": false, //Blockquote  
+		   "size": "xs", //default: none, other options are xs, sm, lg	
+		   "locale":"zh-CN",	 
+		});
+	});
+</script>
+
+{{else}}
+
 <link rel="stylesheet" href="/static/plugin/kindeditor/themes/default/default.css" />
 <script charset="utf-8" src="/static/plugin/kindeditor/kindeditor-all-min.js"></script>
 <script charset="utf-8" src="/static/plugin/kindeditor/lang/zh-CN.js"></script>
@@ -96,3 +123,5 @@
 		});		
 	});
 </script>
+{{end}}
+

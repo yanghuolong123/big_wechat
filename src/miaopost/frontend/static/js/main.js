@@ -424,8 +424,8 @@ $(function(){
 				return false;
 			}
 
-			//$("#info_msg").val("");
-			editor.html("");
+			$("#info_msg").val("");
+			//editor.html("");
 			var p = "";
 			if (e.data.Im.Pid>0) {
 				p= "@"+e.data.Parent.User.Nickname;
