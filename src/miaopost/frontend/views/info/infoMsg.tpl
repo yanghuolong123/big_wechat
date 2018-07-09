@@ -103,7 +103,7 @@
 {{else}}
 
 <link rel="stylesheet" href="/static/plugin/kindeditor/themes/default/default.css" />
-<script charset="utf-8" src="/static/plugin/kindeditor/kindeditor-all-min.js"></script>
+<script charset="utf-8" src="/static/plugin/kindeditor/kindeditor-all.modify.js"></script>
 <script charset="utf-8" src="/static/plugin/kindeditor/lang/zh-CN.js"></script>
 <script type="text/javascript">
 	var editor;
