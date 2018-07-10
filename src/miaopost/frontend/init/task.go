@@ -91,7 +91,7 @@ func recoverRewardList() error {
 	for _, ir := range irs {
 		if !time.Now().Before(ir.Gain_time.Add(time.Minute * 45)) {
 			c.Remove(bson.M{"id": ir.Id})
-			help.Redis.Lpush("list_reward_info_"+help.ToStr(ir.Info_id), help.ToStr(ir.Id))
+			help.Redis.Lpush("list_reward_info_"+help.ToStr(ir.Info_id), help.ToStr(ir.Id), 0)
 			help.Log("task", ir)
 		}
 	}

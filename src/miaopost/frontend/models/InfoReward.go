@@ -67,7 +67,7 @@ func GenBathInfoRewardByInfoId(info_id int) bool {
 		ir.Info_id = info.Id
 		ir.Amount = info.Reward_amount
 		CreateInfoReward(ir)
-		help.Redis.Lpush("list_reward_info_"+help.ToStr(info.Id), help.ToStr(ir.Id))
+		help.Redis.Lpush("list_reward_info_"+help.ToStr(info.Id), help.ToStr(ir.Id), 0)
 	}
 
 	return true
