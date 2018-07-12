@@ -27,6 +27,7 @@ func (this *TestController) Get() {
 	}
 
 	//help.Redis.Sadd("set1", 600, "11", "22")
+	//fmt.Println("============= sysmember:", help.Redis.Sismember("set1", "1111"))
 	//fmt.Println("============= scard:", help.Redis.Scard("set1"))
 	//fmt.Println("============= smembers:", help.Redis.Smembers("set1"))
 
