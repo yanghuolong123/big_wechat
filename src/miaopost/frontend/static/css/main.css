@@ -91,6 +91,8 @@ a.list_content:hover{text-decoration: none;}
 #qrPayModal .pay_amount {    color: #f5a623;}
 img.qrimg {    height: 250px;    width: 250px;}
 
+.view ol li {list-style-type:decimal }
+
 /*** ========== article view.tpl **/
 .article-view {padding-top: 0px; padding-left: 15px;}
 
