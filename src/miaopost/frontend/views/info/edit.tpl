@@ -16,7 +16,7 @@
                 <div class="img-up">
                     <div class="img-up-list clearfix">                        
                       {{range .photos}}
-                        <div class="img-li img-li-new" data-url="{{.Url}}"  data-big="' + upImg + '" style="background-image:url({{.Url}})"><i></i></div>
+                        <div class="img-li img-li-new" data-url="{{.Url}}"  data-big="' + upImg + '" style="background-image:url({{.Url}}!200!200)"><i></i></div>
                       {{end}}
                     </div>
                     <div id="thelist" class="uploader-list"></div>
