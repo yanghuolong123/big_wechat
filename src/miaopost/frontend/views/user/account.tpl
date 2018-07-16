@@ -6,7 +6,7 @@
 		<div class="jumbotron account">
 		  
 		  <p><h4>账户总余额：<span>￥{{.ua.Amount}}</span></h4></p>
-		  <p><a class="btn btn-success" href="#" onclick="withDraw();return false;" role="button">提现</a></p>
+		  <p><a class="btn btn-success" href="#" onclick="withDraw();return false;" role="button">提现</a> <span class="withdraw_tip">(注：最低提现额度为1元)</span></p>
 		</div>
 
 		<div class="panel panel-success account_detail">
@@ -46,12 +46,12 @@
       </div>
       <div class="modal-body">
       	<div class="center-block">   
-      		<p class="center-block">最多可以提现金额 : <span class="pay_amount">￥{{.ua.Amount}}</span></p>   		
+      		<p class="center-block">{{if lt .ua.Amount 1.0}}最低提现额度为1元{{else}}最多可以提现金额 : <span class="pay_amount">￥{{.ua.Amount}}</span>{{end}}</p>   		
 	      	<p class="center-block">
 	      		￥<input type="text" id="withdraw_amount">
 	      	</p>
 	      	<p class="center-block">
-	      	<button type="button" class="btn btn-danger with-draw-btn">确认转出</button>
+	      	<button type="button" class="btn btn-danger with-draw-btn" {{if lt .ua.Amount 1.0}}disabled="disabled"{{end}}>确认转出</button>
 	      	</p>
 	        	
       	</div>
