@@ -73,6 +73,7 @@ a.list_content:hover{text-decoration: none;}
 
 .create .collapse .radio-inline {    margin-left: 3px; }
 .reward_title {font-weight: bold;}
+.withdraw_icon .img_tip1{width: 30px; height: 25px;}
 
 /**  =============== info view.tpl =============== **/
 .view .meta{font-size: 13px; color: #777; margin-bottom: 8px;}

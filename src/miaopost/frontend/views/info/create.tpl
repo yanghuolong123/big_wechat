@@ -51,6 +51,7 @@
             <div class="form-group" >            
               <div class=" col-sm-offset-1 col-sm-6">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#withdrawModal"> 添加红包 </button>
+                <span class="withdraw_icon"></span>
               </div>
              </div>
             {{end}}
@@ -93,7 +94,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
         <h4 class="modal-title" id="myModalLabel">添加红包</h4>
       </div>
       <div class="modal-body">
@@ -223,6 +224,8 @@
             return false;
         } 
 
+        $(".withdraw_icon").html('<img class="img_tip1" src="/static/img/reward_type'+reward_type+'.png"/>');
+
         $("#withdrawModal").modal('hide');
     });
 
@@ -230,6 +233,7 @@
         $('#withdrawModal input').removeAttr('checked'); 
         $(".total_reward_amount").html("");
 
+        $(".withdraw_icon").html('');
         $("#withdrawModal").modal('hide');
     });
 
