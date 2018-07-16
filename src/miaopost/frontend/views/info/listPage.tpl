@@ -16,7 +16,7 @@
 	</div>
 	<div class="row">
 		<div class="info-content col-md-12">			
-			<a href="/info/view?id={{.Info.Id}}" {{if not $.isMobile}}target="_blank"{{end}} class="list_content">{{str2html (showListInfo (substr .Info.Content 0 150))}} {{if (.Photos|len)}}<img class="img_tip" src="/static/img/image_s.png"/>{{end}}{{if ne .Info.Reward_type 0}}<img class="img_tip" src="/static/img/reward_type{{.Info.Reward_type}}.png"/>{{end}} ...</a>
+			<a href="/info/view?id={{.Info.Id}}" {{if not $.isMobile}}target="_blank"{{end}} class="list_content">{{str2html (showListInfo (substr .Info.Content 0 150))}} {{if (.Photos|len)}}<img class="img_tip" src="/static/img/image_s.png"/>{{end}}{{if ne .Info.Reward_type 0}}<img class="img_tip1" src="/static/img/reward_type{{.Info.Reward_type}}.png"/>{{end}} ...</a>
 			<div class="line"></div>
 		</div>
 	</div>

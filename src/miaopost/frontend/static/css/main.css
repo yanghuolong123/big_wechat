@@ -30,6 +30,7 @@ ul,li {list-style: none; margin: 0px; padding: 0px;}
 .info-list  .line{border-bottom: 1px solid #f0f0f0; margin-bottom: 20px; padding-bottom:  10px;}
 .info-list .label-warning{background-color: #ff5a5f; padding-top: 5px;}
 img.img_tip{width: 18px; height: 18px;}
+img.img_tip1{width: 20px; height: 15px;}
 .label-tips{font-size: 12px;}
 .dropdown button{ }
 a.load-more {  color: #333; display: block; font-size: 16px; margin-right: 50px; padding: 10px 15px; text-align: center; width: 95%;}
