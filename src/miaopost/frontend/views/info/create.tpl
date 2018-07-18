@@ -50,7 +50,7 @@
             {{if  eq .cat.Type 1}}
             <div class="form-group" >            
               <div class=" col-sm-offset-1 col-sm-6">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#withdrawModal"> 添加红包 </button>
+                <button type="button" class="btn btn-success" id="withdraw"> 添加红包 </button>
                 <span class="withdraw_icon"></span>
               </div>
              </div>
@@ -94,7 +94,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+        <button type="button" id="withdrawModalClose" class="close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">添加红包</h4>
       </div>
       <div class="modal-body">
@@ -157,13 +157,40 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success width-draw-confirm">确定</button>
-        <button type="button" class="btn btn-primary width-draw-cancel">取消添加红包</button>
+        <!--<button type="button" class="btn btn-primary width-draw-cancel">取消添加红包</button>-->
       </div>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
+
+$(function(){
+    // 添加红包
+    $("#withdraw").click(function(){
+          var reward_type;   
+          reward_type = $('input[name="reward_type"]:checked').val();
+
+          if (typeof(reward_type) == "undefined" ) {
+              $("#withdrawModal").modal();              
+           } else {
+               $(this).text("添加红包");
+               $('#withdrawModal input').removeAttr('checked'); 
+                $(".total_reward_amount").html("");
+
+                $(".withdraw_icon").html('');
+                $("#withdrawModal").modal('hide');
+           }
+        
+    });
+
+    // 取消模态框
+    $('#withdrawModalClose').click(function(){
+                $('#withdrawModal input').removeAttr('checked'); 
+                $(".total_reward_amount").html("");
+                $("#withdrawModal").modal('hide');
+    });
+
     // 红包处理
     $('input[name="reward_num"]').change(function(e){
          var reward_type,reward_amount,reward_num;   
@@ -224,18 +251,22 @@
             return false;
         } 
 
+        $("#withdraw").text("取消红包");
         $(".withdraw_icon").html('<img class="img_tip1" src="/static/img/reward_type'+reward_type+'.png"/>');
 
         $("#withdrawModal").modal('hide');
     });
 
-    $(".width-draw-cancel").click(function(){
-        $('#withdrawModal input').removeAttr('checked'); 
-        $(".total_reward_amount").html("");
+    // $(".width-draw-cancel").click(function(){
+    //     $('#withdrawModal input').removeAttr('checked'); 
+    //     $(".total_reward_amount").html("");
 
-        $(".withdraw_icon").html('');
-        $("#withdrawModal").modal('hide');
-    });
+    //     $(".withdraw_icon").html('');
+    //     $("#withdrawModal").modal('hide');
+    // });
+});
+
+    
 
 </script>
 
