@@ -84,7 +84,8 @@
 		editor = K.create('textarea[name="content"]', {
 			resizeType : 1,
 			allowPreviewEmoticons : false,
-			allowImageUpload : false,
+			allowImageUpload : true,
+			uploadJson:"/kuploadfile",
 			afterBlur: function () { this.sync(); },
 			//afterFocus: function(){ this.html("");},
 			items : [

@@ -12,7 +12,10 @@ func init() {
 
 	// 微信接入
 	beego.Router("/wechat", &controllers.WechatController{}, "get,post:Index")
+
+	// 文件上传
 	beego.Router("/uploadfile", &api.UploadController{}, "post:Uploadfile")
+	beego.Router("/kuploadfile", &api.UploadController{}, "post:KUploadfile")
 	beego.Router("/webupload", &api.UploadController{}, "post:WebUpload")
 
 	beego.Router("/tips", &api.TipsController{}, "get:Tips")
