@@ -118,3 +118,7 @@ img.qrimg {    height: 250px;    width: 250px;}
 .account h4 span{color: #ff5a5f;}
 .account_detail {margin-top: 20px;}
 .withdraw_tip {font-size: 13px;}
+
+/** ======= msg/view -======= **/
+.msg_view ol li {list-style-type:decimal }
+a.info_msg_content,a.info_msg_conten:hover{color: #333;}

@@ -56,6 +56,7 @@ func init() {
 	beego.Router("/msg/support", &controllers.InfoMsgController{}, "post:Support")
 	beego.Router("/msg/suggestDel", &controllers.InfoMsgController{}, "post:SuggestDel")
 	beego.Router("/msg/admire", &controllers.InfoMsgController{}, "post:Admire")
+	beego.Router("/msg/view", &controllers.InfoMsgController{}, "*:View")
 
 	// 红包
 	beego.Router("/reward/chance", &controllers.InfoRewardController{}, "post:Chance")

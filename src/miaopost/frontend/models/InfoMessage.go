@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/astaxie/beego/orm"
+	"regexp"
 	"time"
 	"yhl/help"
 )
@@ -26,6 +27,7 @@ type InfoMsgVo struct {
 	User    *User
 	Parent  *InfoMsgVo
 	Ireward *InfoReward
+	IsImg   bool
 }
 
 func CreateInfoMessage(im *InfoMessage) int {
@@ -63,6 +65,12 @@ func ConvertInfoMsgToVo(im *InfoMessage) (vo InfoMsgVo) {
 			pvo := ConvertInfoMsgToVo(p)
 			vo.Parent = &pvo
 		}
+	}
+	re, _ := regexp.Compile(`<img.*?(?:>|\/>)`)
+	if re.MatchString(im.Content) {
+		vo.IsImg = true
+	} else {
+		vo.IsImg = false
 	}
 
 	return

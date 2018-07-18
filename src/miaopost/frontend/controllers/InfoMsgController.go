@@ -113,3 +113,16 @@ func (this *InfoMsgController) Support() {
 
 	this.SendRes(0, "success", nil)
 }
+
+func (this *InfoMsgController) View() {
+	id, _ := this.GetInt("id")
+	infoMsg, err := models.GetInfoMessageById(int(id))
+	if err != nil {
+		this.Tips(err.Error())
+	}
+	infoMsgVo := models.ConvertInfoMsgToVo(infoMsg)
+
+	this.Data["infoMsgVo"] = infoMsgVo
+	this.Layout = "layout/main.tpl"
+	this.TplName = "msg/view.tpl"
+}
