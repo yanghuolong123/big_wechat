@@ -122,3 +122,4 @@ img.qrimg {    height: 250px;    width: 250px;}
 /** ======= msg/view -======= **/
 .msg_view ol li {list-style-type:decimal }
 a.info_msg_content,a.info_msg_conten:hover{color: #333;}
+.msg_view .content img{width: 100%;}

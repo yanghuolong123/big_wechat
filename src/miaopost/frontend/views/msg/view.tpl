@@ -4,7 +4,7 @@
 			<p><span>{{showtime .infoMsgVo.Im.Create_time}}</span></p>
 		</div>		
 	</div>
-	<div class="row">
+	<div class="row content">
 		<div class="col-md-8">{{str2html .infoMsgVo.Im.Content}}</div>
 	</div>
 	
