@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12"><a class="info_msg_content" href="/msg/view?id={{.Im.Id}}">{{html2str .Im.Content}}{{if .IsImg}} <img class="img_tip" src="/static/img/image_s.png"/> ...{{end}}</a></div>
+				<div class="col-md-12"><a class="info_msg_content" href="/msg/view?id={{.Im.Id}}">{{substr (html2str .Im.Content) 0 150}}{{if .IsImg}} <img class="img_tip" src="/static/img/image_s.png"/>{{end}} ...</a></div>
 			</div>
 		</div>
 		{{end}}
