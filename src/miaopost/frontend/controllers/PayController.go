@@ -81,6 +81,7 @@ func (this *PayController) Confirm() {
 	wxRes, err := prePayOrder(order, "JSAPI", openid)
 	if err != nil {
 		this.Redirect("/tips?msg=预订单生成失败", 302)
+		return
 	}
 
 	sdk := wxpay.JsPaySdk(wxRes.Prepay_id)

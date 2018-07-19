@@ -14,6 +14,7 @@ func (this *UserController) Prepare() {
 	user := this.GetSession("user")
 	if user == nil {
 		this.Redirect("/", 302)
+		return
 	}
 
 	this.BaseController.Prepare()
@@ -44,6 +45,7 @@ func (this *UserController) EditPost() {
 	err := models.UpdateUser(u)
 	if err != nil {
 		this.Redirect("/tips?msg="+err.Error(), 302)
+		return
 	}
 
 	this.SetSession("user", u)

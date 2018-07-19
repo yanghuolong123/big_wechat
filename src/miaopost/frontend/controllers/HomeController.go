@@ -18,6 +18,7 @@ func (this *HomeController) Get() {
 	fmt.Println("=================== :", setRegion)
 	if setRegion != "" {
 		this.Redirect("http://"+setRegion+".miaopost.com/info", 302)
+		return
 	}
 
 	this.Layout = "layout/main.tpl"

@@ -55,6 +55,7 @@ func (this *LoginController) LoginByKey() {
 		this.SetSession("user", u)
 
 		this.Redirect("/", 302)
+		return
 	}
 
 	this.Redirect("/tips?msg=链接已失效", 302)

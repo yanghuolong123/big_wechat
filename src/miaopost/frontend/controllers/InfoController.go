@@ -156,9 +156,11 @@ func (this *InfoController) View() {
 	info, err := models.GetInfoById(int(id))
 	if err != nil {
 		this.Redirect("/tips?msg="+err.Error(), 302)
+		return
 	}
 	if info.Status < 0 {
 		this.Tips("此信息已经删除!")
+		return
 	}
 	info.Content = strings.Replace(info.Content, "\n", "<br/>", -1)
 	this.Data["info"] = info
@@ -209,6 +211,7 @@ func (this *InfoController) EditGet() {
 		id = help.StrToInt(s[0])
 		if id <= 0 {
 			this.Redirect("/tips?msg=code不正确", 302)
+			return
 		}
 	} else {
 		id = int(infoId)
@@ -217,9 +220,11 @@ func (this *InfoController) EditGet() {
 	info, err := models.GetInfoById(id)
 	if err != nil {
 		this.Redirect("/tips?msg="+err.Error(), 302)
+		return
 	}
 	if info.Status < 0 {
 		this.Tips("此信息已被删除")
+		return
 	}
 	this.Data["info"] = info
 

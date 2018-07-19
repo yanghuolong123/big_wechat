@@ -13,10 +13,12 @@ func (this *ArticleController) View() {
 	article, err := models.GetArticleById(int(id))
 	if err != nil {
 		this.Tips(err.Error())
+		return
 	}
 
 	if article.Type == models.Type_Adv && article.Link != "" {
 		this.Redirect(article.Link, 302)
+		return
 	}
 
 	this.Data["article"] = article
