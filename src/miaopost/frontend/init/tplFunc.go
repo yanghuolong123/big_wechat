@@ -2,7 +2,7 @@ package init
 
 import (
 	"github.com/astaxie/beego"
-	"math"
+	//	"math"
 	"strings"
 	"yhl/help"
 )
@@ -23,12 +23,16 @@ func ShowListInfo(content string) (s string) {
 }
 
 func CutImgSize(w, h int) string {
-	size := int(math.Max(float64(w), float64(h)))
-	if size >= 640 {
-		size = int(size / 3)
+	//	size := int(math.Max(float64(w), float64(h)))
+	//if size >= 640 {
+	//	size = int(size / 3)
+	//	return strings.Repeat("!"+help.ToStr(size), 2)
+	//}
+	size := w
+	if w > 480 {
+		size = 480
 		return strings.Repeat("!"+help.ToStr(size), 2)
 	}
 
 	return ""
-
 }
