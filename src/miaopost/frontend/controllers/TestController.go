@@ -20,13 +20,11 @@ type TestController struct {
 func (this *TestController) Get() {
 	t := time.Now()
 
-	/*
-		user, err := models.GetUserByOpenid("oTbmFxG5r1WRrHdb32O5y2aSAIkc")
-		if err == nil {
-			this.SetSession("user", user)
-			fmt.Println("======================= 登陆成功")
-		}
-	*/
+	user, err := models.GetUserByOpenid("oTbmFxG5r1WRrHdb32O5y2aSAIkc")
+	if err == nil {
+		this.SetSession("user", user)
+		fmt.Println("======================= 登陆成功")
+	}
 
 	//help.Redis.Sadd("set1", 600, "11", "22")
 	//fmt.Println("============= sysmember:", help.Redis.Sismember("set1", "1111"))
