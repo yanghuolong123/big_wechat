@@ -20,11 +20,13 @@ type TestController struct {
 func (this *TestController) Get() {
 	t := time.Now()
 
-	user, err := models.GetUserByOpenid("oTbmFxG5r1WRrHdb32O5y2aSAIkc")
-	if err == nil {
-		this.SetSession("user", user)
-		fmt.Println("======================= 登陆成功")
-	}
+	/*
+		user, err := models.GetUserByOpenid("oTbmFxG5r1WRrHdb32O5y2aSAIkc")
+		if err == nil {
+			this.SetSession("user", user)
+			fmt.Println("======================= 登陆成功")
+		}
+	*/
 
 	//help.Redis.Sadd("set1", 600, "11", "22")
 	//fmt.Println("============= sysmember:", help.Redis.Sismember("set1", "1111"))
@@ -37,7 +39,7 @@ func (this *TestController) Get() {
 	//help.Redis.Lpush("list1", "33333")
 	//	help.Redis.Set("test1", "test1111111111111111111111111", 60)
 	//fmt.Println("================== :", help.Redis.Get("test1"))
-	//models.GenBathInfoRewardByInfoId(676)
+	//	models.GenBathInfoRewardByInfoId(711)
 	//models.GainReward(1, 1)
 
 	//	fmt.Println("=========== root path:", GetAPPRootPath())

@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/astaxie/beego/orm"
+	"sort"
 	"time"
 	"yhl/help"
 )
@@ -65,7 +66,8 @@ func GenBathInfoRewardByInfoId(info_id int) bool {
 	for i := info.Reward_num; i > 0; i-- {
 		ir := new(InfoReward)
 		ir.Info_id = info.Id
-		ir.Amount = info.Reward_amount
+		rewardlist := RandomReward(info.Reward_amount*float64(info.Reward_num), info.Reward_num) //info.Reward_amount
+		ir.Amount = rewardlist[i-1]
 		CreateInfoReward(ir)
 		help.Redis.Lpush("list_reward_info_"+help.ToStr(info.Id), help.ToStr(ir.Id), 0)
 	}
@@ -111,4 +113,26 @@ func GainReward(id, uid int) *InfoReward {
 	}
 
 	return ir
+}
+
+func RandomReward(amount float64, num int) (rewardlist []float64) {
+	var list []int
+	total := int(amount * 100)
+	avg := total / num
+	for i := 0; i < num; i++ {
+		list = append(list, avg)
+	}
+
+	for i := 0; i < num; i = i + 2 {
+		r := help.RandNum(1, avg)
+		list[i] = list[i] + r
+		list[i+1] = list[i+1] - r
+	}
+
+	sort.Ints(list)
+	for _, v := range list {
+		rewardlist = append(rewardlist, float64(v)/100)
+	}
+
+	return rewardlist
 }
