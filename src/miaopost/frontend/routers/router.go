@@ -71,4 +71,5 @@ func init() {
 	beego.Router("/pay/notify", &controllers.PayController{}, "*:Notify")
 	beego.Router("/pay/check", &controllers.PayController{}, "post:Check")
 	beego.Router("/pay/withdraw", &controllers.PayController{}, "post:Withdraw")
+	beego.Router("/pay/obtainUserBalance", &controllers.PayController{}, "post:ObtainUserBalance")
 }

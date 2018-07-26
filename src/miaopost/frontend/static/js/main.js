@@ -519,6 +519,38 @@ var admirePay = function(amount) {
 	var mid = $("#admire_msg_id").val();
 	var orderNo;
 
+	var balance=0;
+	$.ajax({
+                url:"/pay/obtainUserBalance",
+                async:false,
+                type: "POST",
+                data: {amount:amount, type:1},
+                success: function(e){
+                        if(e.code<0) {
+			prompt(e.msg);
+			balance = -1;
+			return false;		
+		}
+
+		if(e.code==0) {
+			prompt("赞赏支付成功！感谢您的支持！");		
+			return false;
+		}
+
+		balance = e.data.Amount;
+                }
+       	});
+
+	if (balance<=0) {
+		return false;
+	}
+
+	if (balance>amount) {
+		//alert(balance);
+		amount = balance - amount;
+	}
+	return;
+
 	if(isWeiXin()){
 		window.location.href = "/pay/confirm?product_id="+mid+"&amount="+amount+"&info_id="+$("#info_id").val()+"&type=1&msg=亲, 感谢您对此留言信息赞赏，需要支付";
 	} else {

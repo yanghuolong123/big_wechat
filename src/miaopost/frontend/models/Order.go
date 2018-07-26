@@ -67,7 +67,7 @@ func GenAdmireOrder(productId, uid int, amount float64) (*Order, error) {
 	order.Amount = amount
 	order.Pay_type = 1
 	order.Uid = uid
-	order.Remark = "赞赏支付"
+	order.Remark = "支付赞赏"
 	if CreateOrder(order) {
 		return order, nil
 	}
@@ -98,7 +98,7 @@ func GenRewardOrder(productId, uid int, amount float64) (*Order, error) {
 	order.Amount = amount
 	order.Pay_type = 1
 	order.Uid = uid
-	order.Remark = "红包发布信息支付"
+	order.Remark = "支付发布信息红包"
 	if CreateOrder(order) {
 		return order, nil
 	}
