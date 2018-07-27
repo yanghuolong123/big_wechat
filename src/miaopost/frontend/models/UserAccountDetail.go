@@ -14,7 +14,7 @@ type UserAccountDetail struct {
 	Id          int
 	Uid         int
 	Type        int
-	Order_id    int
+	Product_id  int
 	Amount      float64
 	Remark      string
 	Create_time time.Time

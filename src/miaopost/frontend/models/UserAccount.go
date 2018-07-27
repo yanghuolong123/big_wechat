@@ -51,7 +51,7 @@ func AccountChange(amount float64, uid, adtype, order_id int, remark string) boo
 	uad.Uid = uid
 	uad.Amount = amount
 	uad.Type = adtype
-	uad.Order_id = order_id
+	uad.Product_id = order_id
 	uad.Remark = remark
 	i := CreateUserAccountDetail(uad)
 	if i > 0 {

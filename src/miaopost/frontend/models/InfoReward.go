@@ -95,18 +95,15 @@ func GainReward(id, uid int) *InfoReward {
 				help.Error(err)
 				return
 			}
-			uad := new(UserAccountDetail)
-			uad.Uid = uid
-			uad.Amount = ir.Amount
-			uad.Type = 2
-			if info.Reward_type == 1 {
-				uad.Remark = "获得阅读红包"
-			} else if info.Reward_type == 2 {
-				uad.Remark = "获得留言红包"
-			}
-			CreateUserAccountDetail(uad)
 
-			IncUserAccount(uid, ir.Amount)
+			remark := ""
+			if info.Reward_type == 1 {
+				remark = "获得阅读红包"
+			} else if info.Reward_type == 2 {
+				remark = "获得留言红包"
+			}
+
+			AccountChange(ir.Amount, uid, info.Reward_type, info.Id, remark)
 		}()
 
 		return ir

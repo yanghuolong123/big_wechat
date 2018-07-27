@@ -186,13 +186,13 @@ func (this *PayController) Notify() {
 
 			if order.Type == 1 {
 				// 赞赏支付,赞赏对象个人的账号金额增加, 自己的账号余额清0
-				models.AccountChange(-order.Amount, order.Uid, order.Type, order.Id, "支付赞赏-微信")
-				msg, _ := models.GetInfoMessageById(order.Product_id)
-				models.AccountChange(order.Amount, msg.Uid, order.Type, order.Id, "获得赞赏-微信")
 
 				ua, _ := models.GetUserAccountByUid(order.Uid)
-				models.AccountChange(-ua.Amount, order.Uid, order.Type, order.Id, "支付赞赏-")
-				models.AccountChange(ua.Amount, msg.Uid, order.Type, order.Id, "获得赞赏-微信")
+				msg, _ := models.GetInfoMessageById(order.Product_id)
+				amount := int(order.Amount*100) + int(ua.Amount*100)
+				models.AccountChange(float64(amount)/100, msg.Uid, order.Type, order.Product_id, "获得赞赏")
+
+				models.AccountChange(-ua.Amount, order.Uid, order.Type, order.Product_id, "支付赞赏")
 
 				go models.AdmireWxTip(order.Product_id, order.Amount, this.Ctx)
 			} else if order.Type == 2 {
@@ -262,15 +262,7 @@ func (this *PayController) Withdraw() {
 			order.Transaction_id = res.PaymentNo
 			models.UpdateOrder(order)
 
-			uad := new(models.UserAccountDetail)
-			uad.Uid = user.Id
-			uad.Amount = -amount
-			uad.Type = order.Type
-			uad.Order_id = order.Id
-			uad.Remark = order.Remark
-			models.CreateUserAccountDetail(uad)
-
-			models.IncUserAccount(user.Id, -amount)
+			models.AccountChange(-amount, user.Id, order.Type, 0, order.Remark)
 		}
 		this.SendRes(0, "success", nil)
 	}
@@ -303,15 +295,12 @@ func (this *PayController) Balance() {
 		} else if adtype == 2 {
 			remark = "支付发布信息红包"
 		}
-		remark += "-余额"
 		if models.AccountChange(-amount, user.Id, adtype, 0, remark) {
 			if adtype == 1 {
 				remark = "获得赞赏"
+				models.AccountChange(amount, payToUid, adtype, 0, remark)
 			} else if adtype == 2 {
-				remark = "获得发布信息红包"
 			}
-			remark += "-余额"
-			models.AccountChange(amount, payToUid, adtype, 0, remark)
 
 		}
 

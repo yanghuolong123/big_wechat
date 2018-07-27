@@ -139,8 +139,38 @@ $(function(){
 	                        	}
 
 	                        	if(e.data.Reward_type>0) {
-	                        		prompt({msg:"发布成功！支付后即可成功添加红包!",displayTime:2500});
 	                        		amount = e.data.Reward_amount*e.data.Reward_num;
+
+	                        		var balance=0;
+					$.ajax({
+				                url:"/pay/balance",
+				                async:false,
+				                type: "POST",
+				                data: {amount:amount, type:2},
+				                success: function(e){
+				                        if(e.code<0) {
+							prompt(e.msg);
+							balance = -1;
+							return false;		
+						}
+
+						if(e.code==0) {
+							prompt("发布红包信息成功！");		
+							return false;
+						}
+
+						balance = e.data.Amount;
+				                }
+				       	});
+
+					if(balance<=0) {
+						return false;
+					}
+					alert(balance);
+					return;
+
+					amount -= balance;
+	                        		prompt({msg:"发布成功！支付完成后即可成功添加红包!",displayTime:2500});	                        		
 	                        		if(isWeiXin()){
 						//window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&info_id="+e.data.Id+"&type=2&msg=亲, 信息发布成功，红包需要支付";						
 		                        		setTimeout(function(){
@@ -181,36 +211,7 @@ $(function(){
 							});
 						}, 2500);
 
-						// $("#pay_qr_img").removeClass("qrimg").attr("src", "/static/img/loading.gif");
-						// $(".pay_amount").html("￥"+amount+"元");
-						// $('#qrPayModal').modal({backdrop: 'static', keyboard: false});
-
-						// $.post("/pay/wxscan", {product_id:e.data.Id, amount:amount, type:2}, function(e){
-						// 	if(e.code<0) {
-						// 		prompt(e.msg);
-						// 		return false;
-						// 	}
-
-						// 	$("#pay_qr_img").attr("src", e.data.qrurl).addClass("qrimg");
-						// 	orderNo = e.data.order_no;
-
-						// 	var timer = setInterval(function(){
-						// 	    $.post('/pay/check', {order_no:orderNo}, function(e){
-						// 	            if(e.code < 0) {
-						// 	                return false;
-						// 	            }
-							            
-						// 	            clearInterval(timer);
-						// 	            $('#qrPayModal').modal("hide");
-						// 	            prompt({msg:"红包支付成功！感谢您的支持！",displayTime:3000});
-						// 	            setTimeout(function(){
-					 //                        		window.location = "/info/view?id="+e.data.Product_id;
-					 //                        	}, 2500);
-							            
-						// 	        });
-						// 	}, 1000);
-
-						// });
+						
 					}
 
 	                        	} else {
@@ -550,7 +551,6 @@ var admirePay = function(amount) {
 	}
 
 	if (amount>balance) {
-		//alert(balance);
 		amount -= balance ;
 	}
 	alert(amount);
