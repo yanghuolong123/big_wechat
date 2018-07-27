@@ -185,17 +185,14 @@ func (this *PayController) Notify() {
 			models.UpdateOrder(order)
 
 			if order.Type == 1 {
-				// 赞赏支付,赞赏对象个人的账号金额增加
+				// 赞赏支付,赞赏对象个人的账号金额增加, 自己的账号余额清0
+				models.AccountChange(-order.Amount, order.Uid, order.Type, order.Id, "支付赞赏-微信")
 				msg, _ := models.GetInfoMessageById(order.Product_id)
-				uad := new(models.UserAccountDetail)
-				uad.Uid = msg.Uid
-				uad.Amount = order.Amount
-				uad.Type = order.Type
-				uad.Order_id = order.Id
-				uad.Remark = "获得赞赏"
-				models.CreateUserAccountDetail(uad)
+				models.AccountChange(order.Amount, msg.Uid, order.Type, order.Id, "获得赞赏-微信")
 
-				models.IncUserAccount(order.Uid, order.Amount)
+				ua, _ := models.GetUserAccountByUid(order.Uid)
+				models.AccountChange(-ua.Amount, order.Uid, order.Type, order.Id, "支付赞赏-")
+				models.AccountChange(ua.Amount, msg.Uid, order.Type, order.Id, "获得赞赏-微信")
 
 				go models.AdmireWxTip(order.Product_id, order.Amount, this.Ctx)
 			} else if order.Type == 2 {
@@ -283,9 +280,12 @@ func (this *PayController) Withdraw() {
 }
 
 // 获取用户余额
-func (this *PayController) ObtainUserBalance() {
+func (this *PayController) Balance() {
 	pay_way, _ := this.GetInt("type")
 	amount, _ := this.GetFloat("amount")
+	toUid, _ := this.GetInt("toUid")
+
+	payToUid := int(toUid)
 
 	u := this.GetSession("user")
 	user := u.(*models.User)
@@ -296,22 +296,24 @@ func (this *PayController) ObtainUserBalance() {
 	}
 
 	if amount <= ua.Amount {
-		models.IncUserAccount(user.Id, -amount)
-
-		way := int(pay_way)
-		uad := new(models.UserAccountDetail)
-		uad.Uid = user.Id
-		uad.Amount = -amount
-		uad.Type = way
-		//uad.Order_id = order.Id
+		adtype := int(pay_way)
 		remark := ""
-		if way == 1 {
+		if adtype == 1 {
 			remark = "支付赞赏"
-		} else if way == 2 {
+		} else if adtype == 2 {
 			remark = "支付发布信息红包"
 		}
-		uad.Remark = remark
-		models.CreateUserAccountDetail(uad)
+		remark += "-余额"
+		if models.AccountChange(-amount, user.Id, adtype, 0, remark) {
+			if adtype == 1 {
+				remark = "获得赞赏"
+			} else if adtype == 2 {
+				remark = "获得发布信息红包"
+			}
+			remark += "-余额"
+			models.AccountChange(amount, payToUid, adtype, 0, remark)
+
+		}
 
 		this.SendRes(0, "success", 0)
 	}

@@ -15,7 +15,7 @@
 					<span><a href="#" onclick="replyMsg({{.Im.Id}});return false;">回复</a></span>
 					<span><a href="#" onclick="msgDelSuggest({{.Im.Id}}, this);return false;">建删</a></span>
 					{{if  eq $.cat.Type 1}}
-					<span><a href="#" onclick="admire({{.Im.Id}}); return false;">赞赏</a></span>
+					<span><a href="#" onclick="admire({{.Im.Id}}, {{.Im.Uid}}); return false;">赞赏</a></span>
 					<span><a href="#" onclick="supportInfoMsg({{.Im.Id}}, this);return false;"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span><span class="support_num">{{.Im.Support}}</span></a></span>
 					{{end}}
 				</div>
@@ -62,6 +62,7 @@
          </div>         
         <div class="modal-body row">     
         	<input type="hidden" id="admire_msg_id" value="0">      
+        	<input type="hidden" id="toUid" value="0">
           	<div class="col-md-12 admire_pay text-center">
 	          	<a href="#" onclick="admirePay(0.1);return false;" class="btn btn-success">0.1元</a>
 	          	<a href="#" onclick="admirePay(0.5);return false;" class="btn btn-success">0.5元</a>

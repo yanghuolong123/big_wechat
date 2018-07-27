@@ -504,7 +504,7 @@ var msgDelSuggest = function(id) {
 }
 
 // 支付赞赏
-var admire = function(id) {
+var admire = function(id,toUid) {
 	var uid = $("#login_uid").val();
 	if(uid==0) {
 		prompt("请先登陆！")
@@ -512,6 +512,7 @@ var admire = function(id) {
 	}
 
 	$("#admire_msg_id").val(id);
+	$("#toUid").val(toUid);
 	$('#admireModal').modal({backdrop: 'static', keyboard: false});
 }
 
@@ -519,14 +520,15 @@ var admirePay = function(amount) {
 	$('#admireModal').modal('hide');	
 
 	var mid = $("#admire_msg_id").val();
+	var toUid = $("#toUid").val();
 	var orderNo;
 
 	var balance=0;
 	$.ajax({
-                url:"/pay/obtainUserBalance",
+                url:"/pay/balance",
                 async:false,
                 type: "POST",
-                data: {amount:amount, type:1},
+                data: {amount:amount, type:1, toUid:toUid},
                 success: function(e){
                         if(e.code<0) {
 			prompt(e.msg);
@@ -547,10 +549,11 @@ var admirePay = function(amount) {
 		return false;
 	}
 
-	if (balance>amount) {
+	if (amount>balance) {
 		//alert(balance);
-		amount = balance - amount;
+		amount -= balance ;
 	}
+	alert(amount);
 	return;
 
 	if(isWeiXin()){

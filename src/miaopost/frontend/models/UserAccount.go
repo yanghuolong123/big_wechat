@@ -45,3 +45,18 @@ func IncUserAccount(uid int, amount float64) bool {
 
 	return i > 0
 }
+
+func AccountChange(amount float64, uid, adtype, order_id int, remark string) bool {
+	uad := new(UserAccountDetail)
+	uad.Uid = uid
+	uad.Amount = amount
+	uad.Type = adtype
+	uad.Order_id = order_id
+	uad.Remark = remark
+	i := CreateUserAccountDetail(uad)
+	if i > 0 {
+		return IncUserAccount(uid, amount)
+	}
+
+	return false
+}
