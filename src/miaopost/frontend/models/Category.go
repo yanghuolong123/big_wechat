@@ -34,9 +34,9 @@ func CreateCategory(name string) bool {
 	return i > 0
 }
 
-func GetCategoryById(id int) Category {
-	cat := Category{Id: id}
-	err := orm.NewOrm().Read(&cat)
+func GetCategoryById(id int) *Category {
+	cat := &Category{Id: id}
+	err := orm.NewOrm().Read(cat)
 	help.Error(err)
 
 	return cat

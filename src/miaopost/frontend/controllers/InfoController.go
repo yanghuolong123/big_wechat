@@ -82,7 +82,7 @@ func (this *InfoController) List() {
 // 创建页面
 func (this *InfoController) CreateGet() {
 	cid, _ := this.GetInt("cid")
-	cat := models.Category{}
+	cat := &models.Category{}
 	if catId := int(cid); catId > 0 {
 		cat = models.GetCategoryById(catId)
 	}

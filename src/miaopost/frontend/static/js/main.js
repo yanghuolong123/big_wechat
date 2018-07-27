@@ -439,8 +439,10 @@ $(function(){
 			comments += '<div class="col-md-4 col-xs- 9 text-right"> ';
 			comments += ' <span><a href="#" onclick="replyMsg('+e.data.Im.Id+');return false;">回复</a></span>';
 			comments += ' <span><a href="#" onclick="msgDelSuggest('+e.data.Im.Id+', this);return false;">建删</a></span>';
+			if (e.data.Cat.Type==1) {
 			comments += ' <span><a href="#" onclick="admire('+e.data.Im.Id+'); return false;">赞赏</a></span>';
 			comments += ' <span><a href="#" onclick="supportInfoMsg('+e.data.Im.Id+', this);return false;"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span><span class="support_num">'+e.data.Im.Support+'</span></a></span>';			
+			}
 			comments += ' </div>';
 			comments += ' </div>';
 			comments += '<div class="row"> ';

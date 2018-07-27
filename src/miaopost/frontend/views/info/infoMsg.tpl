@@ -14,8 +14,10 @@
 				<div class="col-md-4 col-xs- 9 text-right">
 					<span><a href="#" onclick="replyMsg({{.Im.Id}});return false;">回复</a></span>
 					<span><a href="#" onclick="msgDelSuggest({{.Im.Id}}, this);return false;">建删</a></span>
+					{{if  eq $.cat.Type 1}}
 					<span><a href="#" onclick="admire({{.Im.Id}}); return false;">赞赏</a></span>
 					<span><a href="#" onclick="supportInfoMsg({{.Im.Id}}, this);return false;"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span><span class="support_num">{{.Im.Support}}</span></a></span>
+					{{end}}
 				</div>
 			</div>
 			<div class="row">
@@ -93,7 +95,11 @@
 				//'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
 				//'insertunorderedlist', '|', 'emoticons', 'image', 'link'
 				//'insertorderedlist','bold',  '|', 'emoticons', 'image', 'link'
+				{{if  eq .cat.Type 1}}
 				'insertorderedlist','bold',  '|', 'emoticons'
+				{{else}}
+				'emoticons'
+				{{end}}
 				]
 		});		
 	});

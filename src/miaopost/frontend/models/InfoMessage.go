@@ -28,6 +28,8 @@ type InfoMsgVo struct {
 	Parent  *InfoMsgVo
 	Ireward *InfoReward
 	IsImg   bool
+	Info    *Info
+	Cat     *Category
 }
 
 func CreateInfoMessage(im *InfoMessage) int {
@@ -59,6 +61,8 @@ func ConvertInfoMsgToVo(im *InfoMessage) (vo InfoMsgVo) {
 
 	vo.Im = im
 	vo.User = u
+	vo.Info, _ = GetInfoById(im.Info_id)
+	vo.Cat = GetCategoryById(vo.Info.Cid)
 	if im.Pid > 0 {
 		p, err := GetInfoMessageById(im.Pid)
 		if err == nil {

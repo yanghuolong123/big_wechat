@@ -23,9 +23,9 @@
 			{{end}}
 		</div>
 	</div>
-	{{if  eq .cat.Type 1}}
-		{{template "info/infoMsg.tpl" .}}
-	{{end}}
+	
+	{{template "info/infoMsg.tpl" .}}
+	
 	<div class="adv row">
 		{{if .adv}}
 		<ul>
