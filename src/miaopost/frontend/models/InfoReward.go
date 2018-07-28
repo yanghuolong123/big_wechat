@@ -54,14 +54,7 @@ func GetInfoRewardByInfoId(info_id int) []InfoReward {
 }
 
 func GenBathInfoRewardByInfoId(info_id int) bool {
-	info, err := GetInfoById(info_id)
-	if err != nil {
-		help.Error(err)
-		return false
-	}
-
-	info.Reward_pay = 1
-	UpdateInfo(info)
+	info, _ := RewardPaySuccess(info_id)
 
 	for i := info.Reward_num; i > 0; i-- {
 		ir := new(InfoReward)

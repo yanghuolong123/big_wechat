@@ -65,11 +65,13 @@ func (this *UserController) My() {
 	cm["status"] = 0
 	q.Condition = cm
 	q.OrderBy = []string{"-update_time"}
-	var slice []models.Info
+	var slice []*models.Info
 	q.ReturnModelList = &slice
 	p := help.GetPageList(q, 0, 15)
+	data := p.DataList
 
-	this.Data["infos"] = models.ConvertInfosToVo(p.DataList.(*[]models.Info))
+	infos := data.(*[]*models.Info)
+	this.Data["infos"] = models.ConvertInfosToVo2(infos)
 	this.Data["page"] = p.CurrentPage
 	this.Data["hasMore"] = p.HasMore
 	this.Data["uid"] = user.Id

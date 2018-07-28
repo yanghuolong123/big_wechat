@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/orm"
 	"time"
@@ -102,7 +103,7 @@ func GetInfoByEmail(email string) []Info {
 	return infos
 }
 
-func GetInfoPage(cid, rid, offset, size int) (infos []Info) {
+func GetInfoPage(cid, rid, offset, size int) (infos []*Info) {
 	qs := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0)
 	if cid > 0 {
 		qs = qs.Filter("cid", cid)
@@ -137,7 +138,7 @@ func IncInfoViews(id int) bool {
 	return num > 0
 }
 
-func SearchInfo(s string) (infos []Info) {
+func SearchInfo(s string) (infos []*Info) {
 	_, err := orm.NewOrm().QueryTable("tbl_info").Filter("status", 0).Filter("content__icontains", s).OrderBy("-update_time").Limit(50).All(&infos)
 	help.Error(err)
 
@@ -149,15 +150,27 @@ func ConvertInfoToVo(info *Info) InfoVo {
 	vo.Info = info
 	vo.Cat = GetCategoryById(info.Cid)
 	vo.Photos = GetPhotoByInfoid(info.Id)
+	fmt.Println(vo)
 
 	return vo
 }
 
-func ConvertInfosToVo(infos *[]Info) []InfoVo {
+func ConvertInfosToVo(infos []*Info) []InfoVo {
+	vos := []InfoVo{}
+	for _, info := range infos {
+		vo := ConvertInfoToVo(info)
+		vos = append(vos, vo)
+		_ = info
+	}
+
+	return vos
+}
+func ConvertInfosToVo2(infos *[]*Info) []InfoVo {
 	vos := []InfoVo{}
 	for _, info := range *infos {
-		vo := ConvertInfoToVo(&info)
+		vo := ConvertInfoToVo(info)
 		vos = append(vos, vo)
+		_ = info
 	}
 
 	return vos
@@ -179,4 +192,20 @@ func DelExpireInfo() bool {
 	}
 
 	return true
+}
+
+func RewardPaySuccess(id int) (*Info, error) {
+	info, err := GetInfoById(id)
+	if err != nil {
+		help.Error(err)
+		return nil, err
+	}
+
+	info.Reward_pay = 1
+	err = UpdateInfo(info)
+	if err != nil {
+		return nil, err
+	}
+
+	return info, nil
 }

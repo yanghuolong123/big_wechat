@@ -276,8 +276,10 @@ func (this *PayController) Balance() {
 	pay_way, _ := this.GetInt("type")
 	amount, _ := this.GetFloat("amount")
 	toUid, _ := this.GetInt("toUid")
+	product_id, _ := this.GetInt("product_id")
 
 	payToUid := int(toUid)
+	productId := int(product_id)
 
 	u := this.GetSession("user")
 	user := u.(*models.User)
@@ -295,11 +297,12 @@ func (this *PayController) Balance() {
 		} else if adtype == 2 {
 			remark = "支付发布信息红包"
 		}
-		if models.AccountChange(-amount, user.Id, adtype, 0, remark) {
+		if models.AccountChange(-amount, user.Id, adtype, productId, remark) {
 			if adtype == 1 {
 				remark = "获得赞赏"
-				models.AccountChange(amount, payToUid, adtype, 0, remark)
+				models.AccountChange(amount, payToUid, adtype, productId, remark)
 			} else if adtype == 2 {
+				go models.GenBathInfoRewardByInfoId(productId)
 			}
 
 		}

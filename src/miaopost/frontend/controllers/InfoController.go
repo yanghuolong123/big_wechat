@@ -20,7 +20,7 @@ type InfoController struct {
 // 首页
 func (this *InfoController) Get() {
 	infos := models.GetInfoPage(0, this.Rid, 0, pageSize)
-	this.Data["infos"] = models.ConvertInfosToVo(&infos)
+	this.Data["infos"] = models.ConvertInfosToVo2(&infos)
 	count := models.GetInfoCount(0, this.Rid)
 	this.Data["hasMore"] = 0
 	this.Data["page"] = 0
@@ -48,7 +48,7 @@ func (this *InfoController) List() {
 	this.Data["hasMore"] = 0
 	this.Data["page"] = int(page)
 
-	infos := []models.Info{}
+	infos := []*models.Info{}
 	if catId := int(cid); catId > 0 {
 		count := models.GetInfoCount(catId, this.Rid)
 		infos = models.GetInfoPage(catId, this.Rid, int(page), pageSize)
@@ -64,7 +64,7 @@ func (this *InfoController) List() {
 	}
 
 	this.Data["cid"] = int(cid)
-	this.Data["infos"] = models.ConvertInfosToVo(&infos)
+	this.Data["infos"] = models.ConvertInfosToVo(infos)
 
 	adv := models.GetArticleByTypeAndGroup(this.Rid, models.Type_Adv, models.Adv_List_Bottom)
 	this.Data["adv_list"] = models.RandAdv(adv, 1)
@@ -306,11 +306,13 @@ func (this *InfoController) ListPage() {
 	cm["status"] = 0
 	q.Condition = cm
 	q.OrderBy = []string{"-update_time"}
-	var slice []models.Info
+	var slice []*models.Info
 	q.ReturnModelList = &slice
 	p := help.GetPageList(q, int(page), 15)
+	data := p.DataList
+	infos := data.(*[]*models.Info)
 
-	this.Data["infos"] = models.ConvertInfosToVo(p.DataList.(*[]models.Info))
+	this.Data["infos"] = models.ConvertInfosToVo2(infos)
 	this.TplName = "info/listPage.tpl"
 	s, _ := this.RenderString()
 

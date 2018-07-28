@@ -146,7 +146,7 @@ $(function(){
 				                url:"/pay/balance",
 				                async:false,
 				                type: "POST",
-				                data: {amount:amount, type:2},
+				                data: {amount:amount, type:2,product_id:e.data.Id},
 				                success: function(e){
 				                        if(e.code<0) {
 							prompt(e.msg);
@@ -164,10 +164,9 @@ $(function(){
 				       	});
 
 					if(balance<=0) {
+						window.location = "/info/view?id="+e.data.Id+"&chance=no";
 						return false;
 					}
-					alert(balance);
-					return;
 
 					amount -= balance;
 	                        		prompt({msg:"发布成功！支付完成后即可成功添加红包!",displayTime:2500});	                        		
@@ -441,7 +440,7 @@ $(function(){
 			comments += ' <span><a href="#" onclick="replyMsg('+e.data.Im.Id+');return false;">回复</a></span>';
 			comments += ' <span><a href="#" onclick="msgDelSuggest('+e.data.Im.Id+', this);return false;">建删</a></span>';
 			if (e.data.Cat.Type==1) {
-			comments += ' <span><a href="#" onclick="admire('+e.data.Im.Id+'); return false;">赞赏</a></span>';
+			comments += ' <span><a href="#" onclick="admire('+e.data.Im.Id+','+e.data.Im.Uid+'); return false;">赞赏</a></span>';
 			comments += ' <span><a href="#" onclick="supportInfoMsg('+e.data.Im.Id+', this);return false;"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span><span class="support_num">'+e.data.Im.Support+'</span></a></span>';			
 			}
 			comments += ' </div>';
@@ -529,7 +528,7 @@ var admirePay = function(amount) {
                 url:"/pay/balance",
                 async:false,
                 type: "POST",
-                data: {amount:amount, type:1, toUid:toUid},
+                data: {amount:amount, type:1, toUid:toUid,product_id:mid},
                 success: function(e){
                         if(e.code<0) {
 			prompt(e.msg);
@@ -553,8 +552,6 @@ var admirePay = function(amount) {
 	if (amount>balance) {
 		amount -= balance ;
 	}
-	alert(amount);
-	return;
 
 	if(isWeiXin()){
 		window.location.href = "/pay/confirm?product_id="+mid+"&amount="+amount+"&info_id="+$("#info_id").val()+"&type=1&msg=亲, 感谢您对此留言信息赞赏，需要支付";
