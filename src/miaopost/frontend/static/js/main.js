@@ -169,6 +169,7 @@ $(function(){
 					}
 
 					amount -= balance;
+					amount = amount.toFixed(2);
 	                        		prompt({msg:"发布成功！支付完成后即可成功添加红包!",displayTime:2500});	                        		
 	                        		if(isWeiXin()){
 						//window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&info_id="+e.data.Id+"&type=2&msg=亲, 信息发布成功，红包需要支付";						
@@ -550,7 +551,8 @@ var admirePay = function(amount) {
 	}
 
 	if (amount>balance) {
-		amount -= balance ;
+		amount -=  balance ;
+		amount = amount.toFixed(2);
 	}
 
 	if(isWeiXin()){
