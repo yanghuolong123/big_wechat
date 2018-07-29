@@ -62,6 +62,7 @@ func (this *InfoMsgController) CreateMsg() {
 func (this *InfoMsgController) SuggestDel() {
 	id, _ := this.GetInt("id")
 
+	c := help.MongoDb.C("info_msg_del_sug")
 	condition := bson.M{
 		"msg_id": int(id),
 	}
@@ -74,7 +75,7 @@ func (this *InfoMsgController) SuggestDel() {
 		Count int    "value"
 	}
 	var result []record
-	_, err := help.MongoDb.C("info_msg_del_sug").Find(condition).MapReduce(job, &result)
+	_, err := c.Find(condition).MapReduce(job, &result)
 	if err != nil {
 		this.SendRes(-1, err.Error(), nil)
 	}
@@ -92,7 +93,7 @@ func (this *InfoMsgController) SuggestDel() {
 	if user != nil {
 		m["uid"] = user.(*models.User).Id
 	}
-	help.MongoDb.C("info_msg_del_sug").Insert(m)
+	c.Insert(m)
 
 	this.SendRes(0, "success", nil)
 }
