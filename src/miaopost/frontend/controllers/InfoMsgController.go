@@ -62,10 +62,10 @@ func (this *InfoMsgController) CreateMsg() {
 func (this *InfoMsgController) SuggestDel() {
 	id, _ := this.GetInt("id")
 
-	c := help.MongoDb.C("info_msg_del_sug")
 	condition := bson.M{
 		"msg_id": int(id),
 	}
+	c := help.MongoDb.C("info_msg_del_sug")
 	job := &mgo.MapReduce{
 		Map:    "function(){ emit(this.ip, 1) }",
 		Reduce: "function(key, values) { return Array.sum(values) }",
