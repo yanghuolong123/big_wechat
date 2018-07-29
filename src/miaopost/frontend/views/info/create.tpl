@@ -47,13 +47,14 @@
               </div>
             </div>
 
-            
+            {{if .user}}
             <div class="form-group" >            
               <div class=" col-sm-offset-1 col-sm-6">
                 <button type="button" class="btn btn-success" id="withdraw"> 添加红包 </button>
                 <span class="withdraw_icon"></span>
               </div>
              </div>
+             {{end}}
             
 
             <div class="form-group" style="{{if .user}}display: none;{{end}}">            
