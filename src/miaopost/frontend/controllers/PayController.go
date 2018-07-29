@@ -184,7 +184,10 @@ func (this *PayController) Notify() {
 			order.Transaction_id = notifyReq.Transaction_id
 			models.UpdateOrder(order)
 
-			ua, _ := models.GetUserAccountByUid(order.Uid)
+			ua, err := models.GetUserAccountByUid(order.Uid)
+			if err != nil {
+				ua = new(models.UserAccount)
+			}
 			if order.Type == 1 {
 				// 赞赏支付,赞赏对象个人的账号金额增加, 自己的账号余额清0
 
@@ -192,11 +195,15 @@ func (this *PayController) Notify() {
 				amount := int(order.Amount*100) + int(ua.Amount*100)
 				models.AccountChange(float64(amount)/100, msg.Uid, order.Type, order.Product_id, "获得赞赏")
 
-				models.AccountChange(-ua.Amount, order.Uid, order.Type, order.Product_id, "支付赞赏")
+				if ua.Amount > 0 {
+					models.AccountChange(-ua.Amount, order.Uid, order.Type, order.Product_id, "支付赞赏")
+				}
 
 				go models.AdmireWxTip(order.Product_id, order.Amount, this.Ctx)
 			} else if order.Type == 2 {
-				models.AccountChange(-ua.Amount, order.Uid, order.Type, order.Product_id, "支付发布红包信息")
+				if ua.Amount > 0 {
+					models.AccountChange(-ua.Amount, order.Uid, order.Type, order.Product_id, "支付发布红包信息")
+				}
 				// 红包发布信息
 				go models.GenBathInfoRewardByInfoId(order.Product_id)
 			}
