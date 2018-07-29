@@ -149,12 +149,11 @@ $(function(){
 				                data: {amount:amount, type:2,product_id:e.data.Id},
 				                success: function(e){
 				                        if(e.code<0) {
-							prompt(e.msg);
-							balance = -1;
 							return false;		
 						}
 
 						if(e.code==0) {
+							balance = -1;
 							prompt("发布红包信息成功！");		
 							return false;
 						}
@@ -163,7 +162,7 @@ $(function(){
 				                }
 				       	});
 
-					if(balance<=0) {
+					if(balance<0) {
 						window.location = "/info/view?id="+e.data.Id+"&chance=no";
 						return false;
 					}
@@ -531,13 +530,12 @@ var admirePay = function(amount) {
                 type: "POST",
                 data: {amount:amount, type:1, toUid:toUid,product_id:mid},
                 success: function(e){
-                        if(e.code<0) {
-			prompt(e.msg);
-			balance = -1;
+                        if(e.code==-1) {
 			return false;		
 		}
 
 		if(e.code==0) {
+			balance = -1;
 			prompt("赞赏支付成功！感谢您的支持！");		
 			return false;
 		}
@@ -546,7 +544,7 @@ var admirePay = function(amount) {
                 }
        	});
 
-	if (balance<=0) {
+	if (balance<0) {
 		return false;
 	}
 
