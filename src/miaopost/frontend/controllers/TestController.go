@@ -74,7 +74,7 @@ func (this *TestController) Get() {
 			map[string]string{
 				"type": "view",
 				"name": "我的发布",
-				"url":  "http://www.miaopost.com/info/my",
+				"url":  "http://www.miaopost.com/user/my",
 			},
 		}
 		data := wechat.CreateMenu(m)
