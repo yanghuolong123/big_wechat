@@ -43,6 +43,12 @@ func prePayOrder(order *models.Order, trade_type, openid string) (resp wxpay.Uni
 
 // 公众号微信支付
 func (this *PayController) Confirm() {
+	cDomain := this.Ctx.Input.Domain()
+	notify_domain := beego.AppConfig.String("wx.pay.notify.domain")
+	if cDomain != notify_domain {
+		this.Redirect("http://"+notify_domain+this.Ctx.Input.URI(), 302)
+	}
+
 	uid := 0
 	user := this.GetSession("user")
 	if user != nil {
