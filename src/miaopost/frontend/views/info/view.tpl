@@ -24,7 +24,9 @@
 		</div>
 	</div>
 	
+	{{if .user}}
 	{{template "info/infoMsg.tpl" .}}
+	{{end}}
 	
 	<div class="adv row">
 		{{if .adv}}
