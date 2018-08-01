@@ -24,7 +24,7 @@
 		</div>
 	</div>
 	
-	{{if .user}}
+	{{if .info.Uid}}
 	{{template "info/infoMsg.tpl" .}}
 	{{end}}
 	
