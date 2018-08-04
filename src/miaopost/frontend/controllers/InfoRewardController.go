@@ -28,14 +28,14 @@ func (this *InfoRewardController) Chance() {
 	info, _ := models.GetInfoById(int(info_id))
 
 	if info.Reward_type == 1 {
-		val := help.Redis.Rpop("list_reward_info_" + help.ToStr(info_id))
-		if val == "" {
-			this.SendRes(0, "no change", nil)
-		}
-
 		num := help.RandNum(1, 10)
 		if num%2 == 0 {
 			this.SendRes(3, "success", nil)
+		}
+
+		val := help.Redis.Rpop("list_reward_info_" + help.ToStr(info_id))
+		if val == "" {
+			this.SendRes(0, "no change", nil)
 		}
 
 		reward_id := help.StrToInt(val)
@@ -52,14 +52,14 @@ func (this *InfoRewardController) Chance() {
 			this.SendRes(0, "has pre change", ir1)
 		}
 
-		val := help.Redis.Rpop("list_reward_info_" + help.ToStr(info_id))
-		if val == "" {
-			this.SendRes(0, "no change", nil)
-		}
-
 		num := help.RandNum(1, 10)
 		if num%2 == 0 {
 			this.SendRes(3, "success", nil)
+		}
+
+		val := help.Redis.Rpop("list_reward_info_" + help.ToStr(info_id))
+		if val == "" {
+			this.SendRes(0, "no change", nil)
 		}
 
 		reward_id := help.StrToInt(val)
