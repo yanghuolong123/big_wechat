@@ -335,6 +335,12 @@ $(function(){
 
 
 	$("#loginBtn").click(function(){
+		var curl = location.pathname;
+		if (curl=="/info/create") {
+			prompt("请直接扫描页面上的二维码");
+			return false;
+		}
+		
 		$("#login_qrcode_img").html('<h4 style="color: red;">专属通道（二维码）生成中…<img src="/static/img/loading.gif" /></h4>');
 		$('#loginModal').modal({backdrop: 'static', keyboard: false});
 		$.get("/login", function(e){
