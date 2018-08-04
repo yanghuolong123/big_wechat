@@ -1,7 +1,7 @@
 <div class="comment ">
 	<div class="row">
-		<div class="col-md-8 col-xs-4"><h4 class="text-muted">留言区</h4></div>
-		<div class="col-md-4 col-xs-8 text-right"><a href="javascript:;" class="msg-btn btn btn-success">我要留言</a></div>
+		<div class="col-md-8 col-xs-8"><h4 class="text-muted">留言区  <span class="text-warning">(服务号会即时将留言内容推送给发布者或被回复者)</span></h4></div>
+		<div class="col-md-4 col-xs-4 text-right"><a href="javascript:;" class="msg-btn btn btn-success">我要留言</a></div>
 	</div>
 	
 	<div id="commentlist">
@@ -13,7 +13,7 @@
 					{{if .Im.Pid}}<span> @{{.Parent.User.Nickname}}</span>{{end}}
 
 				</div>
-				<div class="col-md-4 col-xs- 6 text-right">
+				<div class="col-md-4 col-xs-6 text-right">
 					<span><a href="#" onclick="replyMsg({{.Im.Id}});return false;">回复</a></span>
 					<span><a href="#" onclick="msgDelSuggest({{.Im.Id}}, this);return false;">建删</a></span>
 					{{if  eq $.cat.Type 1}}

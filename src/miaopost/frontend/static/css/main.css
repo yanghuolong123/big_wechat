@@ -75,6 +75,8 @@ a.list_content:hover{text-decoration: none;}
 .reward_title {font-weight: bold;}
 .withdraw_icon .img_tip1{width: 30px; height: 25px;}
 
+.create h4 span {font-size: 13px;}
+
 /**  =============== info view.tpl =============== **/
 .view .meta{font-size: 13px; color: #777; margin-bottom: 8px;}
 .view .meta span{margin-right: 25px;}
@@ -92,6 +94,7 @@ a.list_content:hover{text-decoration: none;}
 img.qrimg {    height: 250px;    width: 250px;}
 
 .view ol li {list-style-type:decimal }
+.comment h4 span{font-size: 13px;}
 
 /*** ========== article view.tpl **/
 .article-view {padding-top: 0px; padding-left: 15px;}

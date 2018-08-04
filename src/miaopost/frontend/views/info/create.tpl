@@ -3,10 +3,9 @@
 </style>
 <div class="create">
        {{if and (not .isWeixin) (not .user)}}
-       <h4>微信登录发布</h4>
+       <h4>微信登录发布 <span class="text-danger">(推荐，可享受服务号一键编辑、一键删除、免费置顶及留言推送服务)</span> </h4>
        <div class="row">
-         <div class="col-sm-offset-1 wx">
-          <p class="text-danger">(1. 推荐，可享受服务号一键编辑、一键删除、免费置顶及留言推送服务)</p>        
+         <div class="col-sm-offset-1 wx">              
           
           <div class="create_login_qrcode">
             <img src="/static/img/loading.gif">
@@ -15,7 +14,8 @@
          </div>
        </div>
        <hr>
-       <h4>免注册发布(无法接受留言及服务号留言推送)</h4>
+       <h4>免注册发布 <span class="text-danger">(无法接受留言及服务号留言推送)</span></h4>
+       <p class="text-danger"></p>
        {{end}}
         <form class="form-horizontal">
             <div class="form-group">            
