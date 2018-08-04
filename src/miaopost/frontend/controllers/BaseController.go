@@ -70,13 +70,18 @@ func (this *BaseController) Prepare() {
 	this.Data["user"] = user
 
 	if site == "http://www.miaopost.com" || site == "http://home.miaopost.com" {
-		subDomain := "utd"
+		//subDomain := "utd"
+		subDomain := ""
 		setRegion := this.Ctx.GetCookie("setRegion")
 		fmt.Println("============ setRegion:", setRegion)
 
 		if setRegion != "" {
 			subDomain = setRegion
 		} else if user != nil {
+			if user.(*models.User).Rid == 0 {
+				this.Redirect("/", 302)
+			}
+
 			region := models.GetRegionById(user.(*models.User).Rid)
 			if region.Name != "" {
 				this.Ctx.SetCookie("setRegion", region.Name, 30*24*3600, "/", "miaopost.com")

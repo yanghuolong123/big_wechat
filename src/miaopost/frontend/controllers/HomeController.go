@@ -3,16 +3,17 @@ package controllers
 import (
 	"fmt"
 	"miaopost/frontend/models"
-	//	"yhl/help"
+	"yhl/help"
 )
 
 type HomeController struct {
-	BaseController
+	help.BaseController
+	//BaseController
 }
 
 func (this *HomeController) Get() {
 	//this.Redirect("http://utd.miaopost.com/info", 302)
-	this.Redirect("/info", 302)
+	//	this.Redirect("/info", 302)
 
 	setRegion := this.Ctx.GetCookie("setRegion")
 	fmt.Println("=================== :", setRegion)
@@ -20,6 +21,9 @@ func (this *HomeController) Get() {
 		this.Redirect("http://"+setRegion+".miaopost.com/info", 302)
 		return
 	}
+
+	regions := models.GetAllRegion()
+	this.Data["regions"] = regions
 
 	this.Layout = "layout/main.tpl"
 	this.TplName = "home/index.tpl"
