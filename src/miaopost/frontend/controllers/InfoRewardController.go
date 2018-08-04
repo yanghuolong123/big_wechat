@@ -33,6 +33,11 @@ func (this *InfoRewardController) Chance() {
 			this.SendRes(0, "no change", nil)
 		}
 
+		num := help.RandNum(1, 10)
+		if num%2 == 0 {
+			this.SendRes(3, "success", nil)
+		}
+
 		reward_id := help.StrToInt(val)
 		ir := models.GainReward(reward_id, user.Id)
 		this.SendRes(1, "success", ir)
@@ -51,6 +56,12 @@ func (this *InfoRewardController) Chance() {
 		if val == "" {
 			this.SendRes(0, "no change", nil)
 		}
+
+		num := help.RandNum(1, 10)
+		if num%2 == 0 {
+			this.SendRes(3, "success", nil)
+		}
+
 		reward_id := help.StrToInt(val)
 
 		ir, err := models.GetInfoRewardById(reward_id)

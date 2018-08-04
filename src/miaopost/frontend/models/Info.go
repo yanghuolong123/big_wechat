@@ -1,7 +1,7 @@
 package models
 
 import (
-	"fmt"
+	//	"fmt"
 	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/orm"
 	"time"
@@ -32,9 +32,10 @@ type Info struct {
 }
 
 type InfoVo struct {
-	Info   *Info
-	Cat    *Category
-	Photos []Photo
+	Info        *Info
+	Cat         *Category
+	Photos      []Photo
+	Reward_type int
 }
 
 func CreateInfo(info *Info, ctx *context.Context) int {
@@ -150,7 +151,12 @@ func ConvertInfoToVo(info *Info) InfoVo {
 	vo.Info = info
 	vo.Cat = GetCategoryById(info.Cid)
 	vo.Photos = GetPhotoByInfoid(info.Id)
-	fmt.Println(vo)
+	vo.Reward_type = 0
+	len := help.Redis.Llen("list_reward_info_" + help.ToStr(info.Id))
+	if len > 0 {
+		vo.Reward_type = info.Reward_type
+	}
+	//fmt.Println(vo)
 
 	return vo
 }

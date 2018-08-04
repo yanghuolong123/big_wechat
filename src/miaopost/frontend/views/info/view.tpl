@@ -53,9 +53,11 @@ var getWithDraw = function() {
 		}
 
 		if(e.code==1) {
-			greeting({title:"提示",msg:"恭喜您! 您获得了 "+e.data.Amount+"元 阅读红包。"})	
+			greeting({title:"提示",msg:"恭喜您，您拆开的随机红包中有 "+e.data.Amount+" 元。（50%的红包中是有随机现金的） "})	
 		} else if(e.code==2) {
-			greeting({title:"提示",msg:"恭喜您获得了一个 "+e.data.Amount+"元 的留言红包!，请在45分钟内完成留言。如45分钟后未完成留言，红包将释放给其他用户"})
+			greeting({title:"提示",msg:"恭喜您，获得了一个 "+e.data.Amount+"元 的留言红包!，请在45分钟内完成留言。如45分钟后未完成留言，红包将释放给其他用户"})
+		} else if(e.code==3) {
+			greeting({title:"提示",msg:"很遗憾，您拆开的随机红包是空的。（50%的红包中是有随机现金的） "})	
 		}
 	})
 };
