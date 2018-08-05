@@ -30,6 +30,11 @@ func CutImgSize(w, h int) string {
 	//}
 	size := w
 	if w > 480 {
+		if h > w {
+			rate := float64(w) / 480
+			bh := float64(h) / rate
+			return strings.Repeat("!"+help.ToStr(int(bh)), 2)
+		}
 		size = 480
 		return strings.Repeat("!"+help.ToStr(size), 2)
 	}
