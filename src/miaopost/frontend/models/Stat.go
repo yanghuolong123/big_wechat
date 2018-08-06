@@ -36,6 +36,19 @@ func StatPv(begin, end time.Time) int {
 	return i
 }
 
+func StatPvByDomain(begin, end time.Time, domain string) int {
+	condition := bson.M{
+		"time":   bson.M{"$gte": begin, "$lt": end},
+		"uri":    bson.M{"$ne": "/login"},
+		"domain": domain,
+	}
+
+	i, err := help.MongoDb.C("trace_record").Find(condition).Count()
+	help.Error(err)
+
+	return i
+}
+
 func StatUv(begin, end time.Time) int {
 	condition := bson.M{
 		"time": bson.M{"$gte": begin, "$lt": end},
