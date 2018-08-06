@@ -16,7 +16,7 @@ func (this *InfoRewardController) Chance() {
 
 	u := this.GetSession("user")
 	if u == nil {
-		this.SendRes(-1, "need login", nil)
+		this.SendRes(-2, "need login", nil)
 	}
 	user := u.(*models.User)
 	_, err := models.GetInfoRewardByInfoIdAndUid(int(info_id), user.Id)

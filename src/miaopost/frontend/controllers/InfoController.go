@@ -192,6 +192,12 @@ func (this *InfoController) View() {
 		this.Data["imvos"] = imvos
 	}
 
+	reward_type := 0
+	len := help.Redis.Llen("list_reward_info_" + help.ToStr(info.Id))
+	if len > 0 {
+		reward_type = info.Reward_type
+	}
+	this.Data["reward_type"] = reward_type
 	chance := this.GetString("chance")
 	this.Data["chance"] = chance
 

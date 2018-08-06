@@ -39,7 +39,7 @@
 	</div>
 </div>
 
-{{if  eq .info.Reward_pay 1}}
+{{if  .reward_type}}
 <script type="text/javascript">
 
 var getWithDraw = function() {
@@ -48,9 +48,9 @@ var getWithDraw = function() {
 		return false;
 	}
 	$.post("/reward/chance",{info_id:$("#info_id").val()}, function(e){
-		if(e.code<=0) {
-			return false;
-		}
+		// if(e.code<=0) {
+		// 	return false;
+		// }
 
 		if(e.code==1) {
 			greeting({title:"提示",msg:"恭喜您，您拆开的随机红包中有 "+e.data.Amount+" 元。（50%的红包中是有随机现金的） "})	
@@ -58,7 +58,12 @@ var getWithDraw = function() {
 			greeting({title:"提示",msg:"恭喜您，获得了一个 "+e.data.Amount+"元 的留言红包!，请在45分钟内完成留言。如45分钟后未完成留言，红包将释放给其他用户"})
 		} else if(e.code==3) {
 			greeting({title:"提示",msg:"很遗憾，您拆开的随机红包是空的。（50%的红包中是有随机现金的） "})	
-		}
+		} else if(e.code==-2) {
+			greeting({title:"提示",msg:"登录后才可以拆开此条发布中的红包"})
+		} 
+			
+		return false;
+		
 	})
 };
 
