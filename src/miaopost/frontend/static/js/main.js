@@ -169,14 +169,15 @@ $(function(){
 
 					amount -= balance;
 					amount = amount.toFixed(2);
-	                        		prompt({msg:"发布成功！支付完成后即可成功添加红包!",displayTime:2500});	                        		
+					var msg = "亲，信息发布成功！支付后即可成功添加红包。钱包余额 "+balance+"元，还需支付："+amount+"元";
+	                        		                        		
 	                        		if(isWeiXin()){
 						//window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&info_id="+e.data.Id+"&type=2&msg=亲, 信息发布成功，红包需要支付";						
 		                        		setTimeout(function(){
-			                        		window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&info_id="+e.data.Id+"&type=2&msg=亲, 信息发布成功，红包需要支付";
+			                        		window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&info_id="+e.data.Id+"&type=2&msg="+msg;
 			                        	}, 2500);
 					} else {
-						//prompt("亲, 信息发布成功，红包需要支付");
+						prompt({msg:msg,displayTime:2500});
 						setTimeout(function(){
 							$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/img/loading.gif");
 							$(".pay_amount").html("￥"+amount+"元");
