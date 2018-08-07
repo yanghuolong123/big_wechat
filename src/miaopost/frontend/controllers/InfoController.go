@@ -51,7 +51,7 @@ func (this *InfoController) List() {
 	infos := []*models.Info{}
 	if catId := int(cid); catId > 0 {
 		count := models.GetInfoCount(catId, this.Rid)
-		infos = models.GetInfoPage(catId, this.Rid, int(page), 30)
+		infos = models.GetInfoPage(catId, this.Rid, int(page), pageSize)
 		if 1*pageSize < count {
 			this.Data["hasMore"] = 1
 		}
@@ -314,7 +314,7 @@ func (this *InfoController) ListPage() {
 	q.OrderBy = []string{"-update_time"}
 	var slice []*models.Info
 	q.ReturnModelList = &slice
-	p := help.GetPageList(q, int(page), 15)
+	p := help.GetPageList(q, int(page), 30)
 	data := p.DataList
 	infos := data.(*[]*models.Info)
 
