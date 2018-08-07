@@ -81,10 +81,6 @@ func (this *InfoController) List() {
 
 // 创建页面
 func (this *InfoController) CreateGet() {
-	site := this.Ctx.Input.Site()
-	if site == "http://wwww.miaopost.com" || site == "http://home.miaopost.com" {
-		this.Redirect("/", 302)
-	}
 	cid, _ := this.GetInt("cid")
 	cat := &models.Category{}
 	if catId := int(cid); catId > 0 {

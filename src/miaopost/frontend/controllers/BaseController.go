@@ -90,12 +90,13 @@ func (this *BaseController) Prepare() {
 		}
 
 		if subDomain != "" {
-			fmt.Println("============ subDomain:", subDomain)
 			uri := this.Ctx.Input.URI()
 			if uri == "/" || uri == "" {
 				uri = "/info"
 			}
 			this.Redirect("http://"+subDomain+".miaopost.com"+uri, 302)
+		} else {
+			this.Redirect("/", 302)
 		}
 	}
 
