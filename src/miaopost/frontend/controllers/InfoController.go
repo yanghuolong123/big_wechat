@@ -11,7 +11,7 @@ import (
 	//	"yhl/wechat"
 )
 
-const pageSize int = 15
+const pageSize int = 40
 
 type InfoController struct {
 	BaseController
@@ -51,7 +51,7 @@ func (this *InfoController) List() {
 	infos := []*models.Info{}
 	if catId := int(cid); catId > 0 {
 		count := models.GetInfoCount(catId, this.Rid)
-		infos = models.GetInfoPage(catId, this.Rid, int(page), pageSize)
+		infos = models.GetInfoPage(catId, this.Rid, int(page), 30)
 		if 1*pageSize < count {
 			this.Data["hasMore"] = 1
 		}
