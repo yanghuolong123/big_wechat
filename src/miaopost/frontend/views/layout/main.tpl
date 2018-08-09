@@ -3,6 +3,7 @@
         <head>
             {{template "layout/base-style.tpl" .}}
             <script src="/static/plugin/jquery/jquery-2.2.4.js"></script>
+            <script src="/static/plugin/jquery/jquery.cookie.min.js"></script>
          </head>
          <body>
                 <div class="container">
