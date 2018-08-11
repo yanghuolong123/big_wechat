@@ -24,3 +24,5 @@ src/miaopost/frontend/conf/miaopost
 src/miaopost/backend/backend
 src/miaopost/backend/fast-disploy.sh
 src/miaopost/backend/uploads
+src/miaopost/backend/log/
+!src/miaopost/backend/log/web.log
