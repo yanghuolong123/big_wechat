@@ -72,4 +72,8 @@ func init() {
 	beego.Router("/pay/check", &controllers.PayController{}, "post:Check")
 	beego.Router("/pay/withdraw", &controllers.PayController{}, "post:Withdraw")
 	beego.Router("/pay/balance", &controllers.PayController{}, "post:Balance")
+
+	// 广告
+	beego.Router("/adv/create", &controllers.AdvController{}, "get:CreateGet")
+	beego.Router("/adv/create", &controllers.AdvController{}, "post:CreatePost")
 }

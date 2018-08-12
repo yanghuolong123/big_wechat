@@ -16,7 +16,8 @@ var WxShare = wechat.Share{
 
 type BaseController struct {
 	help.BaseController
-	Rid int // region id
+	Rid  int // region id
+	User *models.User
 }
 
 func (this *BaseController) Prepare() {
@@ -67,6 +68,9 @@ func (this *BaseController) Prepare() {
 	}
 
 	user := this.GetSession("user")
+	if user != nil {
+		this.User = user.(*models.User)
+	}
 	this.Data["user"] = user
 
 	if site == "http://www.miaopost.com" || site == "http://home.miaopost.com" {
