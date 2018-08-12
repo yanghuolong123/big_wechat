@@ -17,6 +17,12 @@ type AdvRegion struct {
 	Status    int
 }
 
+type AdvRegionVo struct {
+	AdvRe  *AdvRegion
+	Region *Region
+	Pos    *AdvPos
+}
+
 func CreateAdvRegion(ar *AdvRegion) error {
 	_, err := orm.NewOrm().Insert(ar)
 	help.Error(err)
@@ -58,4 +64,23 @@ func UpdateAdvRegionPriceById(id int, price float64) bool {
 	help.Error(err)
 
 	return i > 0
+}
+
+func ConvertAdvRegionToVo(advRe *AdvRegion) AdvRegionVo {
+	vo := AdvRegionVo{}
+	vo.AdvRe = advRe
+	vo.Region = GetRegionById(advRe.Region_id)
+	vo.Pos = GetAdvPosById(advRe.Pos_id)
+
+	return vo
+}
+
+func ConvertAdvRegionToVos(advRes []AdvRegion) []AdvRegionVo {
+	vos := []AdvRegionVo{}
+	for _, ar := range advRes {
+		vo := ConvertAdvRegionToVo(&ar)
+		vos = append(vos, vo)
+	}
+
+	return vos
 }

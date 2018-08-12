@@ -22,6 +22,9 @@ func (this *AdvController) CreateGet() {
 	}
 	this.Data["tid"] = tid
 
+	posList := models.GetAdvRegionByRegionId(this.Rid)
+	this.Data["posList"] = models.ConvertAdvRegionToVos(posList)
+
 	this.Layout = "layout/main.tpl"
 	this.TplName = "adv/create.tpl"
 }
