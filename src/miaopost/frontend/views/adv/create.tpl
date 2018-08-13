@@ -57,16 +57,19 @@
 	    		</div>
 	    		<div class="col-sm-4">
 	    			<label>投放位置：</label>
-	    			<select name="Pos" class="form-control">
+	    			<select name="Pos" class="form-control" id="adv_pos">
 	    				<option value="">请选择</option>
 		      		{{range .posList}}
 		      			<option value="{{.Pos.Id}}">{{.Pos.Name}} (￥{{.AdvRe.Price}}/千次)</option>
 		      		{{end}}
 				</select>
+				{{range .posList}}
+					<input type="hidden" id="pos_price_{{.Pos.Id}}" value="{{.AdvRe.Price}}">
+		      		{{end}}
 	    		</div>
 	    		<div class="col-sm-3">
 	    			<label>展示次数(千次)：</label>
-	       			<select name="Display_times" class="form-control">
+	       			<select name="Display_times" class="form-control" id="adv_show">
 		       			<option value="1">1</option>
 		       			<option value="10">10</option>
 		       			<option value="20">20</option>
@@ -94,7 +97,7 @@
 	  <div class="form-group">
 	    <label for="" class="col-sm-2 control-label">广告费用</label>
 	    <div class="col-sm-10">
-	      ss
+	      <span class="text-danger" id="total_fee"></span>
 	    </div>
 	  </div>
 	  <div class="form-group">
@@ -148,6 +151,16 @@
 </script>
 <script type="text/javascript">
 $(function(){
+	$("#adv_pos,#adv_show").change(function(){
+		var times = $("#adv_show").val();
+		var pos = $("#adv_pos").val();
+		if(parseInt(pos)>0) {
+			var price = $("#pos_price_"+pos).val();
+			$("#total_fee").text(price*times);
+		} else {
+			$("#total_fee").text("");
+		}
+	});
 
 	$(".btn-adv").click(function(){
 
@@ -196,5 +209,6 @@ $(function(){
 
 		});
 	});
+
 });
 </script>
