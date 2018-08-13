@@ -48,14 +48,53 @@
 	  <div class="form-group">
 	    <label for="" class="col-sm-2 control-label">投放目标及强度</label>
 	    <div class="col-sm-10">
-	      <input type="hidden" name="Region_id" value="{{.region.Id}}">
-	      {{.region.Shortname}}
+	    	<div class="rows">
+	    		<div class="col-sm-2">
+	    			<label>投放校区：</label>
+	    			<select name="Region_id" class="form-control">
+	    				<option value="{{.region.Id}}">{{.region.Shortname}}</option>
+	    			</select>
+	    		</div>
+	    		<div class="col-sm-4">
+	    			<label>投放位置：</label>
+	    			<select name="Pos" class="form-control">
+	    				<option value="">请选择</option>
+		      		{{range .posList}}
+		      			<option value="{{.Pos.Id}}">{{.Pos.Name}} (￥{{.AdvRe.Price}}/千次)</option>
+		      		{{end}}
+				</select>
+	    		</div>
+	    		<div class="col-sm-3">
+	    			<label>展示次数(千次)：</label>
+	       			<select name="Display_times" class="form-control">
+		       			<option value="1">1</option>
+		       			<option value="10">10</option>
+		       			<option value="20">20</option>
+		       			<option value="30">30</option>
+		       			<option value="40">40</option>
+		       			<option value="50">50</option>
+		       		</select>
+	    		</div>
+	    		<div class="col-sm-3">
+	    			<label>每日上限(千次)：</label>
+		       		<select name="Day_limit" class="form-control">
+		       			<option value="1">1</option>
+		       			<option value="2">2</option>
+		       			<option value="3">3</option>
+		       			<option value="4">4</option>
+		       			<option value="5">5</option>
+		       		</select>
+	    		</div>
+	    	</div>
+	      
+	      <br/>
+	     
 	    </div>
 	  </div>
 	  <div class="form-group">
 	    <label for="" class="col-sm-2 control-label">广告费用</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" name="Amount" placeholder="">
+	      ss
 	    </div>
 	  </div>
 	  <div class="form-group">
@@ -145,8 +184,8 @@ $(function(){
 			prompt("目标网址url格式不正确");
 			return;
 		}
-		if($.trim(obj.Amount)=="") {
-			prompt("金额不正确");
+		if($.trim(obj.Pos)=="") {
+			prompt("请选择投放位置");
 			return;
 		}
 

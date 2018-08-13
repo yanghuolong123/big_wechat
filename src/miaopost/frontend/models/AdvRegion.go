@@ -45,6 +45,16 @@ func GetAdvRegionById(id int) (ar *AdvRegion, err error) {
 	return
 }
 
+func GetAdvRegionByRegionidAndPosid(rid, pid int) (*AdvRegion, error) {
+	ar := &AdvRegion{}
+	ar.Region_id = rid
+	ar.Pos_id = pid
+	err := orm.NewOrm().Read(ar, "region_id", "pos_id")
+	help.Error(err)
+
+	return ar, err
+}
+
 func GetAdvRegionByRegionId(rid int) (ars []AdvRegion) {
 	_, err := orm.NewOrm().QueryTable("tbl_adv_region").Filter("region_id", rid).Filter("status", 0).All(&ars)
 	help.Error(err)
@@ -66,9 +76,9 @@ func UpdateAdvRegionPriceById(id int, price float64) bool {
 	return i > 0
 }
 
-func ConvertAdvRegionToVo(advRe *AdvRegion) AdvRegionVo {
+func ConvertAdvRegionToVo(advRe AdvRegion) AdvRegionVo {
 	vo := AdvRegionVo{}
-	vo.AdvRe = advRe
+	vo.AdvRe = &advRe
 	vo.Region = GetRegionById(advRe.Region_id)
 	vo.Pos = GetAdvPosById(advRe.Pos_id)
 
@@ -78,7 +88,7 @@ func ConvertAdvRegionToVo(advRe *AdvRegion) AdvRegionVo {
 func ConvertAdvRegionToVos(advRes []AdvRegion) []AdvRegionVo {
 	vos := []AdvRegionVo{}
 	for _, ar := range advRes {
-		vo := ConvertAdvRegionToVo(&ar)
+		vo := ConvertAdvRegionToVo(ar)
 		vos = append(vos, vo)
 	}
 

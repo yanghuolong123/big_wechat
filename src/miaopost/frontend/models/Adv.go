@@ -26,6 +26,7 @@ type Adv struct {
 	Display_times int
 	Day_limit     int
 	Amount        float64
+	Total_amount  float64
 	Recom_code    string
 	Status        int
 	Display_count int

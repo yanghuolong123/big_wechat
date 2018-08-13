@@ -36,12 +36,16 @@ func (this *AdvController) CreatePost() {
 
 	adv := new(models.Adv)
 	if err := this.ParseForm(adv); err != nil {
-		this.SendRes(-1, "param error", nil)
+		this.SendRes(-1, err.Error(), nil)
 	}
 	adv.Uid = this.User.Id
 	fmt.Println(adv)
 
-	if adv.Merch_name == "" || adv.Contact == "" || adv.Amount <= 0.0 {
+	advRe, _ := models.GetAdvRegionByRegionidAndPosid(adv.Region_id, adv.Pos)
+	adv.Amount = advRe.Price
+	adv.Total_amount = adv.Amount * float64(adv.Display_times)
+
+	if adv.Merch_name == "" || adv.Contact == "" {
 		this.SendRes(-1, "参数不正确", nil)
 	}
 
