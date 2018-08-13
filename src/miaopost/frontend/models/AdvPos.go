@@ -24,6 +24,7 @@ func GetAdvPosList() (plist []AdvPos) {
 }
 
 func GetAdvPosById(id int) (ap *AdvPos) {
+	ap = new(AdvPos)
 	err := orm.NewOrm().Read(ap)
 	help.Error(err)
 

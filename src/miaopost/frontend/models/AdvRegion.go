@@ -46,7 +46,7 @@ func GetAdvRegionById(id int) (ar *AdvRegion, err error) {
 }
 
 func GetAdvRegionByRegionId(rid int) (ars []AdvRegion) {
-	_, err := orm.NewOrm().QueryTable("tbl_adv_region").Filter("region_id", rid).Filter("status", 0).All(ars)
+	_, err := orm.NewOrm().QueryTable("tbl_adv_region").Filter("region_id", rid).Filter("status", 0).All(&ars)
 	help.Error(err)
 
 	return
