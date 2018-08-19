@@ -10,6 +10,7 @@ import (
 const (
 	Type_Nav = iota + 1
 	Type_Adv
+	Type_Adv_Entry
 )
 
 const (
