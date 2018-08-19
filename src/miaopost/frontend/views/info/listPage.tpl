@@ -37,7 +37,7 @@ $(function(){
 		$.each(advs, function(i,item){
 			var tag = item.Tag;
 			if(tag == '') {
-				tag = '广告';
+				tag = '推广';
 			}
 
 			var link = '/adv/view?id='+item.Id;
