@@ -55,15 +55,27 @@ func (this *AdvController) CreatePost() {
 	this.SendRes(0, "success", adv)
 }
 
-func (this *AdvController) Show() {
+func (this *AdvController) ShowList() {
 	if this.User == nil {
 		this.SendRes(-1, "请先登陆", nil)
 	}
 
-	adv_type, _ := this.GetInt("type")
-	at := int(adv_type)
-
-	advs := models.GetAdvByTypeAndRegion(at, this.Rid)
+	advs := models.ShowListAdvByTypeAndRegion(this.Rid)
 
 	this.SendRes(0, "success", advs)
+}
+
+func (this *AdvController) View() {
+	id, _ := this.GetInt("id")
+	aid := int(id)
+
+	adv, err := models.GetAdvById(aid)
+	if err != nil {
+		this.Tips(err.Error())
+	}
+
+	this.Data["adv"] = models.ConvertAdvToVo(adv)
+
+	this.Layout = "layout/main.tpl"
+	this.TplName = "adv/view.tpl"
 }

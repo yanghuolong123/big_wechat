@@ -2,6 +2,8 @@ package models
 
 import (
 	"github.com/astaxie/beego/orm"
+	"math/rand"
+	"strings"
 	"time"
 	"yhl/help"
 )
@@ -31,6 +33,11 @@ type Adv struct {
 	Status        int
 	Display_count int
 	Create_time   time.Time
+}
+
+type AdvVo struct {
+	A      *Adv
+	Photos []string
 }
 
 func CreateAdv(av *Adv) error {
@@ -78,10 +85,41 @@ func GetAdvByUid(uid int) []*Adv {
 	return advs
 }
 
-func GetAdvByTypeAndRegion(t, r int) []*Adv {
+func GetAdvByTypeAndRegionAndPos(t, r, p int) []*Adv {
 	var advs []*Adv
-	_, err := orm.NewOrm().QueryTable("tbl_adv").Filter("type", t).Filter("region_id", r).Filter("status", 1).All(&advs)
+	_, err := orm.NewOrm().QueryTable("tbl_adv").Filter("type", t).Filter("region_id", r).Filter("pos", p).Filter("status", 1).All(&advs)
 	help.Error(err)
 
 	return advs
+}
+
+func ShowListAdvByTypeAndRegion(r int) []*Adv {
+	var advs []*Adv
+	aps := GetAdvPosList()
+	for _, p := range aps {
+		plist := GetAdvByTypeAndRegionAndPos(1, r, p.Id)
+		l := len(plist)
+		if l > 0 {
+			randnum := rand.Intn(l)
+			advs = append(advs, plist[randnum])
+		}
+	}
+
+	go func(advs []*Adv) {
+		for _, adv := range advs {
+			orm.NewOrm().QueryTable("tbl_adv").Filter("id", adv.Id).Update(orm.Params{"display_count": orm.ColValue(orm.ColAdd, 1)})
+		}
+	}(advs)
+
+	return advs
+}
+
+func ConvertAdvToVo(adv *Adv) *AdvVo {
+	vo := &AdvVo{}
+	vo.A = adv
+	var photos []string
+	photos = strings.Split(strings.Trim(adv.Photos, ","), ",")
+	vo.Photos = photos
+
+	return vo
 }

@@ -27,7 +27,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$.post('/adv/show', {type:1}, function(e){
+	$.post('/adv/showList', {type:1}, function(e){
 		if(e<=0) {
 			return false;
 		}
@@ -40,6 +40,16 @@ $(function(){
 				tag = '广告';
 			}
 
+			var link = '/adv/view?id='+item.Id;
+			if(item.Target!="") {
+				link = item.Target;
+			}
+
+			var icon = "";
+			if(item.Potos!="") {
+				icon = '<img class="img_tip" src="/static/img/image_s.png"/>';
+			}
+
 			$c = '';
 			$c += '<div class="info">';
 			$c += '	<div class="row">';
@@ -50,7 +60,7 @@ $(function(){
 			$c += '	</div>';
 			$c += '	<div class="row">';
 			$c += ' 		<div class="info-content col-md-12">	' ;
-			$c += '			<a href="" class="list_content">'+item.Content+'</a>';
+			$c += '			<a href="'+link+'" class="list_content">'+item.Content+icon+'</a>';
 			$c += '			<div class="line"></div>';
 			$c += '		</div>';
 			$c += '	</div>';

@@ -76,5 +76,6 @@ func init() {
 	// 广告
 	beego.Router("/adv/create", &controllers.AdvController{}, "get:CreateGet")
 	beego.Router("/adv/create", &controllers.AdvController{}, "post:CreatePost")
-	beego.Router("/adv/show", &controllers.AdvController{}, "post:Show")
+	beego.Router("/adv/showList", &controllers.AdvController{}, "post:ShowList")
+	beego.Router("/adv/view", &controllers.AdvController{}, "get,post:View")
 }
