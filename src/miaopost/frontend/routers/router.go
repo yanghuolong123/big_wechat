@@ -77,5 +77,6 @@ func init() {
 	beego.Router("/adv/create", &controllers.AdvController{}, "get:CreateGet")
 	beego.Router("/adv/create", &controllers.AdvController{}, "post:CreatePost")
 	beego.Router("/adv/showList", &controllers.AdvController{}, "post:ShowList")
+	beego.Router("/adv/showView", &controllers.AdvController{}, "post:ShowView")
 	beego.Router("/adv/view", &controllers.AdvController{}, "get,post:View")
 }

@@ -38,6 +38,7 @@ type Adv struct {
 type AdvVo struct {
 	A      *Adv
 	Photos []string
+	Logo   string
 }
 
 func CreateAdv(av *Adv) error {
@@ -93,7 +94,7 @@ func GetAdvByTypeAndRegionAndPos(t, r, p int) []*Adv {
 	return advs
 }
 
-func ShowListAdvByTypeAndRegion(r int) []*Adv {
+func ShowListAdvByRegion(r int) []*Adv {
 	var advs []*Adv
 	aps := GetAdvPosList()
 	for _, p := range aps {
@@ -114,12 +115,35 @@ func ShowListAdvByTypeAndRegion(r int) []*Adv {
 	return advs
 }
 
+func ShowViewAdvByRegion(r int) *Adv {
+	adv := &Adv{}
+	plist := GetAdvByTypeAndRegionAndPos(2, r, 5)
+	l := len(plist)
+	if l > 0 {
+		randnum := rand.Intn(l)
+		adv = plist[randnum]
+	}
+
+	go func(adv *Adv) {
+		orm.NewOrm().QueryTable("tbl_adv").Filter("id", adv.Id).Update(orm.Params{"display_count": orm.ColValue(orm.ColAdd, 1)})
+
+	}(adv)
+
+	return adv
+}
+
 func ConvertAdvToVo(adv *Adv) *AdvVo {
 	vo := &AdvVo{}
 	vo.A = adv
 	var photos []string
 	photos = strings.Split(strings.Trim(adv.Photos, ","), ",")
 	vo.Photos = photos
+	logos := strings.Split(strings.Trim(adv.Logo, ","), ",")
+	logo_size := len(logos)
+	if logo_size > 0 {
+		randnum := rand.Intn(logo_size)
+		vo.Logo = logos[randnum]
+	}
 
 	return vo
 }

@@ -27,7 +27,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$.post('/adv/showList', {type:1}, function(e){
+	$.post('/adv/showList', function(e){
 		if(e<=0) {
 			return false;
 		}

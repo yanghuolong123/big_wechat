@@ -60,9 +60,24 @@ func (this *AdvController) ShowList() {
 		this.SendRes(-1, "请先登陆", nil)
 	}
 
-	advs := models.ShowListAdvByTypeAndRegion(this.Rid)
+	advs := models.ShowListAdvByRegion(this.Rid)
 
 	this.SendRes(0, "success", advs)
+}
+
+func (this *AdvController) ShowView() {
+	if this.User == nil {
+		this.SendRes(-1, "请先登陆", nil)
+	}
+
+	adv := models.ShowViewAdvByRegion(this.Rid)
+	if adv.Id <= 0 {
+		this.SendRes(-1, "failed", nil)
+	}
+
+	vo := models.ConvertAdvToVo(adv)
+
+	this.SendRes(0, "success", vo)
 }
 
 func (this *AdvController) View() {
