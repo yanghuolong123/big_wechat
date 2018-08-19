@@ -54,3 +54,16 @@ func (this *AdvController) CreatePost() {
 
 	this.SendRes(0, "success", adv)
 }
+
+func (this *AdvController) Show() {
+	if this.User == nil {
+		this.SendRes(-1, "请先登陆", nil)
+	}
+
+	adv_type, _ := this.GetInt("type")
+	at := int(adv_type)
+
+	advs := models.GetAdvByTypeAndRegion(at, this.Rid)
+
+	this.SendRes(0, "success", advs)
+}

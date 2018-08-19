@@ -24,3 +24,55 @@
 {{else}}
 	<div class="alert alert-warning col-md-10" role="alert">亲，还没有数据哦！</div>
 {{end}}
+
+<script type="text/javascript">
+$(function(){
+	$.post('/adv/show', {type:1}, function(e){
+		if(e<=0) {
+			return false;
+		}
+
+		advs = e.data;
+		var i = 0;
+		$.each(advs, function(i,item){
+			var tag = item.Tag;
+			if(tag == '') {
+				tag = '广告';
+			}
+
+			$c = '';
+			$c += '<div class="info">';
+			$c += '	<div class="row">';
+			$c += '		<div class="col-md-8 col-xs-3 cat"><span class="label label-warning">'+tag+'</span></div>';
+			$c += '		<div class="col-md-4 col-xs- 9 meta text-right">';
+			//$c += '			<span>展示数('+item.Display_count+')</span>';
+			$c += '		</div>';
+			$c += '	</div>';
+			$c += '	<div class="row">';
+			$c += ' 		<div class="info-content col-md-12">	' ;
+			$c += '			<a href="" class="list_content">'+item.Content+'</a>';
+			$c += '			<div class="line"></div>';
+			$c += '		</div>';
+			$c += '	</div>';
+			$c += '</div>';
+
+			var pos  = item.Pos;
+			if(pos==1) {
+				$(".info-list .info").eq(4+i).after($c);
+				i++;
+			} else if(pos == 2) {
+				$(".info-list .info").eq(14+i).after($c);
+				i++;
+			} else if(pos == 3) {
+				$(".info-list .info").eq(24+i).after($c);
+				i++;
+			} else if(pos ==4) {
+				$(".info-list .info").eq(34+i).after($c);
+				i++;
+			}
+			
+
+		});
+	});
+});
+</script>

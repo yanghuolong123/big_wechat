@@ -256,7 +256,7 @@ $(function(){
 		                url:"/pay/balance",
 		                async:false,
 		                type: "POST",
-		                data: {amount:amount, type:3,product_id:e.data.Id},
+		                data: {amount:amount, type:4,product_id:e.data.Id},
 		                success: function(e){
 		                        if(e.code<0) {
 					return false;		
@@ -264,7 +264,7 @@ $(function(){
 
 				if(e.code==0) {
 					balance = -1;
-					prompt("广告信息成功！");		
+					prompt("广告信息发布成功！");		
 					return false;
 				}
 

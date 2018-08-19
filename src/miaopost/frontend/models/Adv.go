@@ -77,3 +77,11 @@ func GetAdvByUid(uid int) []*Adv {
 
 	return advs
 }
+
+func GetAdvByTypeAndRegion(t, r int) []*Adv {
+	var advs []*Adv
+	_, err := orm.NewOrm().QueryTable("tbl_adv").Filter("type", t).Filter("region_id", r).Filter("status", 1).All(&advs)
+	help.Error(err)
+
+	return advs
+}
