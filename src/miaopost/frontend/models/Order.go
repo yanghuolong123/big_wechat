@@ -105,3 +105,19 @@ func GenRewardOrder(productId, uid int, amount float64) (*Order, error) {
 
 	return order, errors.New("订单创建失败")
 }
+
+func GenAdvOrder(productId, uid int, amount float64) (*Order, error) {
+	order := &Order{}
+	order.Type = 4
+	order.Product_id = productId
+	order.Orderno = help.GenOrderNo()
+	order.Amount = amount
+	order.Pay_type = 1
+	order.Uid = uid
+	order.Remark = "支付发布广告"
+	if CreateOrder(order) {
+		return order, nil
+	}
+
+	return order, errors.New("订单创建失败")
+}

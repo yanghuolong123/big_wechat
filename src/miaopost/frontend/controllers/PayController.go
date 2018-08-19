@@ -69,6 +69,9 @@ func (this *PayController) Confirm() {
 	} else if order_type == 2 {
 		// 红包信息支付发布
 		order, err = models.GenRewardOrder(productId, uid, amount)
+	} else if order_type == 4 {
+		// 发布广告支付
+		order, err = models.GenAdvOrder(productId, uid, amount)
 	}
 
 	order.Ip = this.Ctx.Input.IP()
@@ -123,6 +126,9 @@ func (this *PayController) WxScan() {
 	} else if order_type == 2 {
 		// 红包信息支付发布
 		order, err = models.GenRewardOrder(productId, uid, amount)
+	} else if order_type == 4 {
+		// 发布广告支付
+		order, err = models.GenAdvOrder(productId, uid, amount)
 	}
 
 	order.Ip = this.Ctx.Input.IP()
@@ -212,6 +218,12 @@ func (this *PayController) Notify() {
 				}
 				// 红包发布信息
 				go models.GenBathInfoRewardByInfoId(order.Product_id)
+			} else if order.Type == 4 {
+				// 广告发布支付
+				if ua.Amount > 0 {
+					models.AccountChange(-ua.Amount, order.Uid, order.Type, order.Product_id, "支付发布广告")
+				}
+				models.EnableAdvById(order.Product_id)
 			}
 		}
 
@@ -310,6 +322,8 @@ func (this *PayController) Balance() {
 			remark = "支付赞赏"
 		} else if adtype == 2 {
 			remark = "支付发布信息红包"
+		} else if adtype == 4 {
+			remark = "支付广告发布"
 		}
 		if models.AccountChange(-amount, user.Id, adtype, productId, remark) {
 			if adtype == 1 {
@@ -317,6 +331,8 @@ func (this *PayController) Balance() {
 				models.AccountChange(amount, payToUid, adtype, productId, remark)
 			} else if adtype == 2 {
 				go models.GenBathInfoRewardByInfoId(productId)
+			} else if adtype == 4 {
+				models.EnableAdvById(productId)
 			}
 
 		}

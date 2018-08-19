@@ -13,12 +13,28 @@
 	      <input type="text" class="form-control" name="Contact" placeholder="电话/qq/微信">
 	    </div>
 	  </div>
+	  {{if eq .tid 1}}
 	  <div class="form-group">
 	    <label for="tag" class="col-sm-2 control-label">广告标签</label>
 	    <div class="col-sm-6">
 	      <input type="text" class="form-control" name="Tag" placeholder="最多4个汉字，如美食、手机、留学等，不填则默认显示“推广”">
 	    </div>
 	  </div>
+	  {{else }}
+	   <div class="form-group">
+	    <label for="photos" class="col-sm-2 control-label">广告图片</label>	    
+	    <div class="col-sm-10">	
+	      <div class="img-up">
+                    <div class="img-up-list-1 clearfix">                        
+                      
+                    </div>
+                    <div id="thelist-1" class="uploader-list"></div>
+                    <div id="picker-1"><label class="user-img" for="imgs"></label></div>
+                  </div>    
+	      <input type="hidden" class="form-control" name="Logo" placeholder="">
+	    </div>
+	  </div>
+	  {{end}}
 	  <div class="form-group">
 	    <label for="content" class="col-sm-2 control-label">广告内容</label>
 	    <div class="col-sm-10">
@@ -36,7 +52,7 @@
                     <div id="thelist" class="uploader-list"></div>
                     <div id="picker"><label class="user-img" for="imgs"></label></div>
                   </div>    
-	      <input type="hidden" class="form-control" name="Photos" placeholder="最多4个汉字，如美食、手机、留学等，不填则默认显示“推广”">
+	      <input type="hidden" class="form-control" name="Photos" placeholder="">
 	    </div>
 	  </div>
 	  <div class="form-group">
@@ -118,6 +134,17 @@
 
 <style type="text/css">
 	form label{color: #777;}
+	.img-up-list-1 .img-li {
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    background-size: cover;
+	    border: 0.02rem solid #efefef;
+	    float: left;
+	    height: 8.45rem;
+	    margin: 0 0 0.2rem 0.2rem;
+	    position: relative;
+	    width: 12.11rem;
+	}
 </style>
 
 <link rel="stylesheet" href="/static/plugin/kindeditor/themes/default/default.css" />
@@ -182,14 +209,26 @@ $(function(){
 			return;
 		}
 
+		var logo = "";
+		for( var s=0; s<$('.img-up-list-1 .img-li-new').length; s++) {
+			logo += $('.img-up-list-1 .img-li-new').eq(s).attr('data-url') + ',';
+		}
+		logo=logo.substring(0,logo.length-1);
+		if(logo!="") {
+			obj.Logo = logo;
+		}
+
+		if(obj.Type==2 && obj.Logo=="") {
+			prompt("请先上传广告图片");
+			return;
+		}
+
 		var photo="";
-		for( var s=0; s<$('.img-li-new').length; s++) {
-			photo += $('.img-li-new').eq(s).attr('data-url') + ',';
+		for( var s=0; s<$('.img-up-list .img-li-new').length; s++) {
+			photo += $('.img-up-list .img-li-new').eq(s).attr('data-url') + ',';
 		}
 		photo=photo.substring(0,photo.length-1);
 		if(photo!="") {
-			// prompt("请先上传");
-			// return;
 			obj.Photos = photo;
 		}
 		
@@ -206,9 +245,170 @@ $(function(){
 		//var data = $("#adv-form").serialize();
 		//alert(data);
 		$.post("/adv/create",obj,function(e){
+			if(e.code<0) {
+                                		prompt(e.msg);
+                                		return false;
+                        	}
+
+                        	amount = e.data.Total_amount;
+                        	var balance=0;
+			$.ajax({
+		                url:"/pay/balance",
+		                async:false,
+		                type: "POST",
+		                data: {amount:amount, type:3,product_id:e.data.Id},
+		                success: function(e){
+		                        if(e.code<0) {
+					return false;		
+				}
+
+				if(e.code==0) {
+					balance = -1;
+					prompt("广告信息成功！");		
+					return false;
+				}
+
+				balance = e.data.Amount;
+		                }
+		       	});
+
+			if(balance<0) {
+				window.location = "/info";
+				return false;
+			}
+
+			amount -= balance;
+			amount = amount.toFixed(2);
+			var msg = "亲，您的广告发布成功！支付后即可成功展示。钱包余额 "+balance+"元，还需支付："+amount+"元";
+
+			if(isWeiXin()){					
+                        		setTimeout(function(){
+	                        		window.location.href = "/pay/confirm?product_id="+e.data.Id+"&amount="+amount+"&type=4&msg="+msg;
+	                        	}, 2500);
+			} else {
+				prompt({msg:msg,displayTime:2500});
+				setTimeout(function(){
+					$("#pay_qr_img").removeClass("qrimg").attr("src", "/static/img/loading.gif");
+					$(".pay_amount").html("￥"+amount+"元");
+					$('#qrPayModal').modal({backdrop: 'static', keyboard: false});
+
+					$.post("/pay/wxscan", {product_id:e.data.Id, amount:amount, type:4}, function(e){
+						if(e.code<0) {
+							prompt(e.msg);
+							return false;
+						}
+
+						$("#pay_qr_img").attr("src", e.data.qrurl).addClass("qrimg");
+						orderNo = e.data.order_no;
+
+						var timer = setInterval(function(){
+						    $.post('/pay/check', {order_no:orderNo}, function(e){
+						            if(e.code < 0) {
+						                return false;
+						            }
+						            
+						            clearInterval(timer);
+						            $('#qrPayModal').modal("hide");
+						            prompt({msg:"广告支付成功！感谢您的支持！",displayTime:3000});
+						            setTimeout(function(){
+				                        		window.location = "/info";
+				                        	}, 2500);
+						            
+						        });
+						}, 1000);
+
+					});
+				}, 2500);				
+			}
+
+
 
 		});
 	});
 
+});
+</script>
+<script type="text/javascript">
+$(function() {
+    
+    $list1 = $('#thelist-1'),
+    state = 'pending';
+   // uploader;
+     
+    uploader = WebUploader.create({
+        // swf文件路径
+        swf: '/static/plugin/webuploader/Uploader.swf',
+        // 文件接收服务端。
+        server: '/webupload',
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#picker-1',
+        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+        resize: false,
+        compress: false,
+        chunked: true,
+        chunkSize:100*1024,
+        //sendAsBinary:true,
+        accept: {
+	    title: 'Images',
+	    extensions: 'gif,jpg,jpeg,bmp,png',
+	    mimeTypes: 'image/jpg,image/jpeg,image/png,image/gif',
+	},
+        fileNumLimit: 1,
+        auto: true
+    });
+    
+    // 当有文件被添加进队列的时候
+    uploader.on( 'fileQueued', function( file ) {
+    $list1.append( '<div id="' + file.id + '" class="item">' +
+     // '<span class="info">' + file.name + ' </span>' +
+    //  '<span class="state"> 等待上传...</span>' +
+      //'<span class="text">0%</span>' +
+    '</div>' );
+    });
+    
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on( 'uploadProgress', function( file, percentage ) {
+        var $li = $( '#'+file.id ),
+          $percent = $li.find('.progress .progress-bar');
+
+        // 避免重复创建
+        if ( !$percent.length ) {
+          $percent = $('<div class="progress progress-striped active">' +
+           '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+           '</div>' +
+          '</div>').appendTo( $li ).find('.progress-bar');
+        }
+
+        //$li.find('span.state').text('上传中，请等候... ');
+        
+        $percent.css( 'width', percentage * 100 + '%' );
+        // if(percentage==1) {
+        //     percentage = 0.99;
+        // }
+        //$li.find('span.text').text( Math.round( percentage * 100 ) + '%' );
+    });
+    
+    uploader.on( 'uploadSuccess', function( file, obj ) {
+        //$( '#'+file.id ).find('span.state').text('上传成功 ');
+        //$( '#'+file.id ).find('span.text').text('100% ');        
+        	var upImg = obj.data;
+	if( obj.code == 0 && upImg!="") {
+		$('.img-up-list-1').append('<div class="img-li img-li-new" data-url="' + upImg+ '"  data-big="' + upImg + '" style="background-image:url(' + upImg+ '!200!200)"><i></i></div>');
+	}
+    });
+
+    uploader.on( 'uploadError', function( file ) {
+        $( '#'+file.id ).find('span.state').text('上传出错 ');
+    });
+
+    uploader.on( 'uploadComplete', function( file ) {
+        $( '#'+file.id ).find('.progress').fadeOut();        	
+    });
+
+    // $("#picker").click(function(){
+    //     uploader.upload();
+    // });
+    
 });
 </script>

@@ -63,6 +63,13 @@ func BanAdvById(id int) bool {
 	return int(i) > 0
 }
 
+func EnableAdvById(id int) bool {
+	i, err := orm.NewOrm().QueryTable("tbl_adv").Filter("id", id).Update(orm.Params{"status": 1})
+	help.Error(err)
+
+	return int(i) > 0
+}
+
 func GetAdvByUid(uid int) []*Adv {
 	var advs []*Adv
 	_, err := orm.NewOrm().QueryTable("tbl_adv").Filter("uid", uid).All(&advs)
