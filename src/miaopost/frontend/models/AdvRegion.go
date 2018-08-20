@@ -37,6 +37,13 @@ func UpdateAdvRegion(ar *AdvRegion) error {
 	return err
 }
 
+func GetAllAdvRegion() (ars []AdvRegion) {
+	_, err := orm.NewOrm().QueryTable("tbl_adv_region").Filter("status", 0).All(&ars)
+	help.Error(err)
+
+	return
+}
+
 func GetAdvRegionById(id int) (ar *AdvRegion, err error) {
 	ar.Id = id
 	err = orm.NewOrm().Read(ar)

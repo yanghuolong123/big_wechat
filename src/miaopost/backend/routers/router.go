@@ -21,4 +21,6 @@ func init() {
 	beego.Router("/article/edit", &controllers.ArticleController{}, "*:Edit")
 	beego.Router("/article/delete", &controllers.ArticleController{}, "*:Delete")
 
+	beego.Router("/adv/regionPos", &controllers.AdvController{}, "*:RegionPos")
+
 }
