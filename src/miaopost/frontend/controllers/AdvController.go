@@ -44,6 +44,13 @@ func (this *AdvController) CreatePost() {
 	advRe, _ := models.GetAdvRegionByRegionidAndPosid(adv.Region_id, adv.Pos)
 	adv.Amount = advRe.Price
 	adv.Total_amount = adv.Amount * float64(adv.Display_times)
+	if adv.Recom_code != "" {
+		adv.Operator_income = adv.Total_amount * 0.85
+		adv.Head_income = adv.Total_amount - adv.Operator_income
+	} else {
+		adv.Operator_income = adv.Total_amount * 0.15
+		adv.Head_income = adv.Total_amount - adv.Operator_income
+	}
 
 	if adv.Merch_name == "" || adv.Contact == "" {
 		this.SendRes(-1, "参数不正确", nil)

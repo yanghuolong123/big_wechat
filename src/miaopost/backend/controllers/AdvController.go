@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"miaopost/backend/models"
-	//"miaopost/backend/models"
+	"time"
 	"yhl/help"
 	"yhl/model"
 )
@@ -60,12 +60,17 @@ func (this *AdvController) UpdatePosPrice() {
 }
 
 func (this *AdvController) AdvList() {
+	advtype := this.Int("type")
 	page := this.Int("page")
 
 	q := model.Query{}
 	q.Table = "tbl_adv"
-	q.Condition = map[string]interface{}{"status__gte": 0}
-	q.OrderBy = []string{"status", "-create_time"}
+	if advtype == 1 {
+		q.Condition = map[string]interface{}{"status__gt": 0}
+	} else if advtype == 2 {
+		q.Condition = map[string]interface{}{"status": 0}
+	}
+	q.OrderBy = []string{"-create_time"}
 	var slice []*models.Adv
 	q.ReturnModelList = &slice
 	p := help.GetPageList(q, int(page), 1000)
@@ -77,6 +82,33 @@ func (this *AdvController) AdvList() {
 	list := p.DataList.(*[]*models.Adv)
 	this.Data["dataList"] = models.ConvertAdvToVos2(list)
 
+	this.Data["advtype"] = advtype
 	this.Layout = "layout/main.tpl"
 	this.TplName = "adv/advList.tpl"
+}
+
+func (this *AdvController) UpdateStatus() {
+	id := this.Int("id")
+	status := this.Int("status")
+
+	adv, err := models.GetAdvById(id)
+	if err != nil {
+		help.Error(err)
+		this.SendRes(-1, err.Error(), nil)
+	}
+
+	adv.Status = status
+	if adv.Status == 0 && status == 1 {
+		adv.Valid_time = time.Now()
+	} else if status == 1 {
+		adv.Total_amount = 0
+		adv.Head_income = 0
+		adv.Operator_income = 0
+	}
+	err = models.UpdateAdv(adv)
+	if err != nil {
+		this.SendRes(-1, err.Error(), nil)
+	}
+
+	this.SendRes(0, "success", nil)
 }

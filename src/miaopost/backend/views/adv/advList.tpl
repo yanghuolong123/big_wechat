@@ -1,6 +1,6 @@
 <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">广告列表 </h3>
+              <h3 class="box-title">{{if eq .advtype 1}}已投放{{else if eq .advtype 2}}待支付{{end}}广告列表 </h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -18,6 +18,8 @@
                   <th>支付金</th>
                   <th>投放商家</th>
                   <th>联系方式</th>
+                  <th>总部收入</th>
+                  <th>运营者收入</th>
                   <th>状态</th>
                   <th>投放日期</th>
                   <th>操作</th>
@@ -28,22 +30,31 @@
                 {{range .dataList}}
                 <tr>
                   <td>{{.A.Id}}</td>
+                  <td>{{.ARvo.Region.Shortname}}</td>
+                  <td>{{.ARvo.Pos.Name}}</td>
+                  <td>{{.A.Display_times}}</td>
+                  <td>{{.A.Display_count}}</td>
                   <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{.A.Amount}}</td>
+                  <td>{{.A.Recom_code}}</td>
+                  <td>{{.A.Total_amount}}</td>
+                  <td>{{.A.Merch_name}}</td>
+                  <td>{{.A.Contact}}</td>
+                  <td>{{.A.Head_income}}</td>
+                  <td>{{.A.Operator_income}}</td>
+                  <td>{{.StatusLabel}}</td>
+                  <td>{{date .A.Create_time "Y-m-d"}}</td>
                   <td>
-                    <a href="/"><i class="fa fa-wrench"></i></a>                    
-                    <a href="/" class="delete"><i class="fa fa-times"></i></a>
-                    <a href="" target="_blank"><i class="fa fa-external-link"></i></a>
+                    {{if eq $.advtype 1}}
+                      {{if eq .A.Status 2}}
+                      <a href="javascript:;" onclick="updateStatus({{.A.Id}},1)" class="btn btn-success">恢复投放</a>
+                      {{else}}
+                     <a href="javascript:;" onclick="updateStatus({{.A.Id}},2)" class="btn btn-success">暂停投放</a>
+                      {{end}}                      
+                    {{ else if eq $.advtype 2}}
+                     <a href="javascript:;" onclick="updateStatus({{.A.Id}},1)" class="btn btn-danger">免费投放</a> 
+                    {{end}}                                      
+                    <a href="javascript:;" onclick="updateStatus({{.A.Id}},-1)" class="btn btn-warning">删除</a>                   
                     </td>
                 </tr>
                 {{end}}
@@ -71,13 +82,19 @@
         'autoWidth'   : false
       })
 
-    $("a.delete").click(function(){
-        var ln = $(this);
-       actionConfirm({msg:"确定要删除？",confirm:function(){
-          location.href = ln.attr("href");
-      }});
-      return false;
-    });
-
   });
+
+   var updateStatus = function(id, status) {
+      $.post("/adv/updateStatus",{id:id,status:status},function(e){
+          if(e.code<0) {
+            prompt(e.msg);
+            return false;
+          }
+
+          greeting({msg:"广告位状态修改成功！",confirm:function(){
+                location.href  = location.href ;
+          }});
+
+      });
+    }
 </script>

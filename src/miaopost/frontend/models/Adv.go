@@ -13,33 +13,39 @@ func init() {
 }
 
 type Adv struct {
-	Id            int
-	Type          int
-	Uid           int
-	Merch_name    string
-	Contact       string
-	Tag           string
-	Logo          string
-	Content       string
-	Target        string
-	Photos        string
-	Region_id     int
-	Pos           int
-	Display_times int
-	Day_limit     int
-	Amount        float64
-	Total_amount  float64
-	Recom_code    string
-	Status        int
-	Display_count int
-	Create_time   time.Time
+	Id              int
+	Type            int
+	Uid             int
+	Merch_name      string
+	Contact         string
+	Tag             string
+	Logo            string
+	Content         string
+	Target          string
+	Photos          string
+	Region_id       int
+	Pos             int
+	Display_times   int
+	Day_limit       int
+	Amount          float64
+	Total_amount    float64
+	Recom_code      string
+	Head_income     float64
+	Operator_income float64
+	Status          int
+	Display_count   int
+	Valid_time      time.Time
+	Create_time     time.Time
 }
 
 type AdvVo struct {
-	A      *Adv
-	Photos []string
-	Logo   string
-	ARvo   *AdvRegionVo
+	A               *Adv
+	Photos          []string
+	Logo            string
+	ARvo            *AdvRegionVo
+	StatusLabel     string
+	Head_income     float64
+	Operator_income float64
 }
 
 func CreateAdv(av *Adv) error {
@@ -73,7 +79,7 @@ func BanAdvById(id int) bool {
 }
 
 func EnableAdvById(id int) bool {
-	i, err := orm.NewOrm().QueryTable("tbl_adv").Filter("id", id).Update(orm.Params{"status": 1})
+	i, err := orm.NewOrm().QueryTable("tbl_adv").Filter("id", id).Update(orm.Params{"status": 1, "valid_time": time.Now()})
 	help.Error(err)
 
 	return int(i) > 0
@@ -153,6 +159,7 @@ func ConvertAdvToVo(adv *Adv) *AdvVo {
 		randnum := rand.Intn(logo_size)
 		vo.Logo = logos[randnum]
 	}
+	vo.StatusLabel = AdvStatusArr()[adv.Status]
 
 	ar, _ := GetAdvRegionByRegionidAndPosid(adv.Region_id, adv.Pos)
 	vo.ARvo = ConvertAdvRegionToVo(ar)
@@ -178,4 +185,12 @@ func ConvertAdvToVos2(advs *[]*Adv) []*AdvVo {
 	}
 
 	return vos
+}
+
+func AdvStatusArr() map[int]string {
+	return map[int]string{
+		0: "待支付",
+		1: "已支付",
+		2: "暂停投放",
+	}
 }
