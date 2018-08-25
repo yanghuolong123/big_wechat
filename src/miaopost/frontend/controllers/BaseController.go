@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"miaopost/frontend/models"
+	"strings"
 	"yhl/help"
 	"yhl/wechat"
 )
@@ -29,6 +30,9 @@ func (this *BaseController) Prepare() {
 	this.Data["isWeixin"] = isWx
 	if isWx {
 		if !this.IsLogin() {
+			if strings.HasSuffix(site, "miaopost.com") {
+				site = "http://www.miaopost.com"
+			}
 
 			openid := wechat.GetOpenId(this.Ctx, site)
 			if openid == "" {
