@@ -10,6 +10,7 @@
                   <th>区域</th>
                   <th>位置</th>
                   <th>价格</th>
+                  <th>推荐码</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -19,6 +20,7 @@
                   <td>{{.Region.Shortname}} ({{.Region.Fullname}})</td> 
                   <td>{{.Pos.Name}}</td>
                   <td><input type="hidden" name="adv_re_id" value="{{.AdvRe.Id}}" /><input type="text" class="price" value="{{.AdvRe.Price}}"> </td>
+                  <td>{{.Region.Recom_code}}</td>
                 </tr>
                 {{end}}
                 

@@ -64,6 +64,7 @@ func init() {
 
 	// 文章
 	beego.Router("/article/view", &controllers.ArticleController{}, "*:View")
+	beego.Router("/article/advEntry", &controllers.ArticleController{}, "*:AdvEntry")
 
 	// 支付
 	beego.Router("/pay/confirm", &controllers.PayController{}, "get,post:Confirm")

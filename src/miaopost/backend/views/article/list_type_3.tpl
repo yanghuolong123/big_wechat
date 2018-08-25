@@ -1,6 +1,9 @@
 <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">广告发表入口页面配置 </h3>
+              {{if eq (.dataList|len) 0}}
+              <a href="/article/create?type={{.type}}" class="btn btn-info  pull-right">创建广告</a>
+              {{end}}
             </div>
             <!-- /.box-header -->
             <div class="box-body">

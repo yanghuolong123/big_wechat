@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"miaopost/frontend/models"
-	//	"yhl/help"
-	"fmt"
+	"strings"
+	"yhl/help"
 )
 
 type AdvController struct {
@@ -39,7 +39,11 @@ func (this *AdvController) CreatePost() {
 		this.SendRes(-1, err.Error(), nil)
 	}
 	adv.Uid = this.User.Id
-	fmt.Println(adv)
+	region := models.GetRegionById(adv.Region_id)
+	adv.Recom_code = strings.TrimSpace(adv.Recom_code)
+	if adv.Recom_code != "" && region.Recom_code != adv.Recom_code {
+		this.SendRes(-1, "推荐码不正确", nil)
+	}
 
 	advRe, _ := models.GetAdvRegionByRegionidAndPosid(adv.Region_id, adv.Pos)
 	adv.Amount = advRe.Price
@@ -57,7 +61,10 @@ func (this *AdvController) CreatePost() {
 	}
 
 	err := models.CreateAdv(adv)
-	fmt.Println(err)
+	if err != nil {
+		help.Error(err)
+		this.SendRes(-1, err.Error(), adv)
+	}
 
 	this.SendRes(0, "success", adv)
 }
