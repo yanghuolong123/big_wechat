@@ -220,3 +220,13 @@ $.fn.serializeObject = function()
     });
     return o;
 };
+
+var isMoney = function(money) {
+    var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+        if (reg.test(money)) {
+             return true;
+        }
+
+        return false;
+}
+

@@ -10,14 +10,7 @@
                   <label for="content">内容</label>
                   <textarea  id="content"  placeholder="Enter ..." rows="3" class="form-control">{{.article.Content}}</textarea>
                 </div> 
-                <div class="form-group">
-                  <label for="status">状态</label>
-                  <select id="status" name="status" class="form-control">
-                  	{{range $k,$v := .statusMap}}
-                  	<option value="{{$k}}" {{if eq $k $.article.Status}}selected{{end}}>{{$v}}</option>
-                  	{{end}}
-                  </select>
-                </div>
+               
                 
               </div>
               <!-- /.box-body -->

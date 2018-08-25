@@ -1,7 +1,6 @@
 <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">文章列表 </h3>
-              <a href="/article/create?type=3" class="btn btn-info  pull-right">创建文章</a>
+              <h3 class="box-title">广告发表入口页面配置 </h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -9,7 +8,6 @@
                 <thead>
                 <tr>
                   <th>内容</th>
-                  <th>状态</th>
                   <th>操作</th>
                 </tr>
                 </thead>
@@ -18,7 +16,6 @@
                 {{range .dataList}}
                 <tr>
                   <td>{{str2html .Content}}</td> 
-                  <td>{{map_get $.statusMap .Status}}</td>
                   <td>
                     <a href="/article/edit?id={{.Id}}&type={{$.type}}"><i class="fa fa-wrench"></i></a> 
                     </td>

@@ -16,9 +16,9 @@
 
                 {{range .vos}}
                 <tr>
-                  <td>{{.Region.Shortname}}</td> 
+                  <td>{{.Region.Shortname}} ({{.Region.Fullname}})</td> 
                   <td>{{.Pos.Name}}</td>
-                  <td><input type="text" class="price"  id="{{.AdvRe.Id}}" value="{{.AdvRe.Price}}"> </td>
+                  <td><input type="hidden" name="adv_re_id" value="{{.AdvRe.Id}}" /><input type="text" class="price" value="{{.AdvRe.Price}}"> </td>
                 </tr>
                 {{end}}
                 
@@ -54,8 +54,25 @@
     });
 
     $(".price").change(function(){
-      
-      alert(111);
+        var price = $(this).val();
+        var id = $(this).prev().val();
+        if(!isMoney(price) || price<=0) {
+            prompt("请填写正确金额");
+            return;
+        }
+
+        $.post("/adv/updatePosPrice",{id:id,price:price}, function(e){
+              if(e.code<0) {
+                prompt(e.msg);
+                return;
+              }
+
+              greeting({msg:"广告位价格修改成功！",confirm:function(){
+                location.href  = location.href ;
+              }});
+              
+        });
+
     });
 
   });

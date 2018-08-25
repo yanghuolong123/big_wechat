@@ -45,6 +45,7 @@ func GetAllAdvRegion() (ars []AdvRegion) {
 }
 
 func GetAdvRegionById(id int) (ar *AdvRegion, err error) {
+	ar = &AdvRegion{}
 	ar.Id = id
 	err = orm.NewOrm().Read(ar)
 	help.Error(err)
