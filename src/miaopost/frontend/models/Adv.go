@@ -87,6 +87,14 @@ func GetAdvByUid(uid int) []*Adv {
 	return advs
 }
 
+func GetAdvAll() []*Adv {
+	var advs []*Adv
+	_, err := orm.NewOrm().QueryTable("tbl_adv").Filter("status__gte", 0).OrderBy("-id").All(&advs)
+	help.Error(err)
+
+	return advs
+}
+
 func GetAdvByTypeAndRegionAndPos(t, r, p int) []*Adv {
 	var advs []*Adv
 	_, err := orm.NewOrm().QueryTable("tbl_adv").Filter("type", t).Filter("region_id", r).Filter("pos", p).Filter("status", 1).All(&advs)
@@ -155,6 +163,16 @@ func ConvertAdvToVo(adv *Adv) *AdvVo {
 func ConvertAdvToVos(advs []*Adv) []*AdvVo {
 	vos := []*AdvVo{}
 	for _, a := range advs {
+		vo := ConvertAdvToVo(a)
+		vos = append(vos, vo)
+	}
+
+	return vos
+}
+
+func ConvertAdvToVos2(advs *[]*Adv) []*AdvVo {
+	vos := []*AdvVo{}
+	for _, a := range *advs {
 		vo := ConvertAdvToVo(a)
 		vos = append(vos, vo)
 	}

@@ -15,7 +15,7 @@
           <ul class="treeview-menu">
             <li><a href="/article/list?type=3">广告入口页</a></li>
             <li><a href="/adv/regionPos">广告价格配置</a></li>
-            <li><a href="/">广告列表</a></li>
+            <li><a href="/adv/advList">广告列表</a></li>
           </ul>
         </li>
         

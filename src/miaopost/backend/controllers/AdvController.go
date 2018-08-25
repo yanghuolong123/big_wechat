@@ -4,6 +4,7 @@ import (
 	"miaopost/backend/models"
 	//"miaopost/backend/models"
 	"yhl/help"
+	"yhl/model"
 )
 
 type AdvController struct {
@@ -56,4 +57,26 @@ func (this *AdvController) UpdatePosPrice() {
 	}
 
 	this.SendRes(0, "success", nil)
+}
+
+func (this *AdvController) AdvList() {
+	page := this.Int("page")
+
+	q := model.Query{}
+	q.Table = "tbl_adv"
+	q.Condition = map[string]interface{}{"status__gte": 0}
+	q.OrderBy = []string{"status", "-create_time"}
+	var slice []*models.Adv
+	q.ReturnModelList = &slice
+	p := help.GetPageList(q, int(page), 1000)
+
+	this.Data["totalCount"] = p.TotalCount
+	this.Data["totalPage"] = p.TotalPage
+	this.Data["currentPage"] = p.CurrentPage
+	this.Data["hasMore"] = p.HasMore
+	list := p.DataList.(*[]*models.Adv)
+	this.Data["dataList"] = models.ConvertAdvToVos2(list)
+
+	this.Layout = "layout/main.tpl"
+	this.TplName = "adv/advList.tpl"
 }
