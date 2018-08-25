@@ -37,6 +37,7 @@ func init() {
 	beego.Router("/user/edit", &controllers.UserController{}, "post:EditPost")
 	beego.Router("/user/my", &controllers.UserController{}, "*:My")
 	beego.Router("/user/account", &controllers.UserController{}, "*:Account")
+	beego.Router("/user/adv", &controllers.UserController{}, "*:Adv")
 
 	// 信息
 	beego.Router("/info", &controllers.InfoController{})

@@ -39,6 +39,7 @@ type AdvVo struct {
 	A      *Adv
 	Photos []string
 	Logo   string
+	ARvo   *AdvRegionVo
 }
 
 func CreateAdv(av *Adv) error {
@@ -80,7 +81,7 @@ func EnableAdvById(id int) bool {
 
 func GetAdvByUid(uid int) []*Adv {
 	var advs []*Adv
-	_, err := orm.NewOrm().QueryTable("tbl_adv").Filter("uid", uid).All(&advs)
+	_, err := orm.NewOrm().QueryTable("tbl_adv").Filter("uid", uid).OrderBy("-id").All(&advs)
 	help.Error(err)
 
 	return advs
@@ -145,5 +146,18 @@ func ConvertAdvToVo(adv *Adv) *AdvVo {
 		vo.Logo = logos[randnum]
 	}
 
+	ar, _ := GetAdvRegionByRegionidAndPosid(adv.Region_id, adv.Pos)
+	vo.ARvo = ConvertAdvRegionToVo(ar)
+
 	return vo
+}
+
+func ConvertAdvToVos(advs []*Adv) []*AdvVo {
+	vos := []*AdvVo{}
+	for _, a := range advs {
+		vo := ConvertAdvToVo(a)
+		vos = append(vos, vo)
+	}
+
+	return vos
 }
