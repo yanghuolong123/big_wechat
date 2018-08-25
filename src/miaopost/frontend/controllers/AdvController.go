@@ -74,7 +74,9 @@ func (this *AdvController) ShowList() {
 		this.SendRes(-1, "请先登陆", nil)
 	}
 
-	advs := models.ShowListAdvByRegion(this.Rid)
+	size := this.Int("size")
+
+	advs := models.ShowListAdvByRegion(this.Rid, size)
 
 	this.SendRes(0, "success", advs)
 }
@@ -102,6 +104,7 @@ func (this *AdvController) View() {
 	if err != nil {
 		this.Tips(err.Error())
 	}
+	models.UpdateViews(adv.Id)
 
 	this.Data["adv"] = models.ConvertAdvToVo(adv)
 

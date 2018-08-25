@@ -1,3 +1,4 @@
+<div class="page">
 {{range .infos}}
 <div class="info">
 	<div class="row">
@@ -24,10 +25,11 @@
 {{else}}
 	<div class="alert alert-warning col-md-10" role="alert">亲，还没有数据哦！</div>
 {{end}}
+</div>
 
 <script type="text/javascript">
 $(function(){
-	$.post('/adv/showList', function(e){
+	$.post('/adv/showList', {size:$("#size").val()}, function(e){
 		if(e<=0) {
 			return false;
 		}
@@ -68,16 +70,16 @@ $(function(){
 
 			var pos  = item.Pos;
 			if(pos==1) {
-				$(".info-list .info").eq(4+i).after($c);
+				$(".info-list .page:last .info").eq(4+i).after($c);
 				i++;
 			} else if(pos == 2) {
-				$(".info-list .info").eq(14+i).after($c);
+				$(".info-list  .page:last .info").eq(14+i).after($c);
 				i++;
 			} else if(pos == 3) {
-				$(".info-list .info").eq(24+i).after($c);
+				$(".info-list .page:last  .info").eq(24+i).after($c);
 				i++;
 			} else if(pos ==4) {
-				$(".info-list .info").eq(34+i).after($c);
+				$(".info-list .page:last  .info").eq(34+i).after($c);
 				i++;
 			}
 			

@@ -274,8 +274,9 @@ $(function(){
 			$(".loading").empty();
 
 			//$(".info-list").append(e.data.listData);
-			$(".info-list .info:last").after(e.data.listData);
+			$(".info-list .page:last").after(e.data.listData);
 			$("#page").val(e.data.page);
+			$("#size").val(e.data.size);
 						
 			$("#hasMore").val(e.data.hasMore);
 			hasMore = e.data.hasMore;

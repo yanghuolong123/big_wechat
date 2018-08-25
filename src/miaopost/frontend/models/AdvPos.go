@@ -17,7 +17,14 @@ type AdvPos struct {
 }
 
 func GetAdvPosList() (plist []AdvPos) {
-	_, err := orm.NewOrm().QueryTable("tbl_adv_pos").Filter("status", 0).All(&plist)
+	_, err := orm.NewOrm().QueryTable("tbl_adv_pos").Filter("status", 0).OrderBy("id").All(&plist)
+	help.Error(err)
+
+	return
+}
+
+func GetAdvPosByType(ptype int) (plist []AdvPos) {
+	_, err := orm.NewOrm().QueryTable("tbl_adv_pos").Filter("type", ptype).Filter("status", 0).OrderBy("id").All(&plist)
 	help.Error(err)
 
 	return

@@ -34,7 +34,7 @@
                   <td>{{.ARvo.Pos.Name}}</td>
                   <td>{{.A.Display_times}}</td>
                   <td>{{.A.Display_count}}</td>
-                  <td></td>
+                  <td>{{.A.Views}}</td>
                   <td>{{.A.Amount}}</td>
                   <td>{{.A.Recom_code}}</td>
                   <td>{{.A.Total_amount}}</td>

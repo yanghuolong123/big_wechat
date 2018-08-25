@@ -34,6 +34,7 @@ type Adv struct {
 	Operator_income float64
 	Status          int
 	Display_count   int
+	Views           int
 	Valid_time      time.Time
 	Create_time     time.Time
 }
@@ -109,9 +110,13 @@ func GetAdvByTypeAndRegionAndPos(t, r, p int) []*Adv {
 	return advs
 }
 
-func ShowListAdvByRegion(r int) []*Adv {
+func UpdateViews(id int) {
+	orm.NewOrm().QueryTable("tbl_adv").Filter("id", id).Update(orm.Params{"views": orm.ColValue(orm.ColAdd, 1)})
+}
+
+func ShowListAdvByRegion(r, size int) []*Adv {
 	var advs []*Adv
-	aps := GetAdvPosList()
+	aps := GetAdvPosByType(1)
 	for _, p := range aps {
 		plist := GetAdvByTypeAndRegionAndPos(1, r, p.Id)
 		l := len(plist)
@@ -121,13 +126,38 @@ func ShowListAdvByRegion(r int) []*Adv {
 		}
 	}
 
+	new_advs := []*Adv{}
+	if size < 5 {
+		new_advs = advs[0:0]
+	} else if size < 15 {
+		for _, a := range advs {
+			if a.Pos <= 1 {
+				new_advs = append(new_advs, a)
+			}
+		}
+	} else if size < 25 {
+		for _, a := range advs {
+			if a.Pos <= 2 {
+				new_advs = append(new_advs, a)
+			}
+		}
+	} else if size < 35 {
+		for _, a := range advs {
+			if a.Pos <= 3 {
+				new_advs = append(new_advs, a)
+			}
+		}
+	} else if size <= 40 {
+		new_advs = advs
+	}
+
 	go func(advs []*Adv) {
 		for _, adv := range advs {
 			orm.NewOrm().QueryTable("tbl_adv").Filter("id", adv.Id).Update(orm.Params{"display_count": orm.ColValue(orm.ColAdd, 1)})
 		}
-	}(advs)
+	}(new_advs)
 
-	return advs
+	return new_advs
 }
 
 func ShowViewAdvByRegion(r int) *Adv {
