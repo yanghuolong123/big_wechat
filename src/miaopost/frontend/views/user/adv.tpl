@@ -17,6 +17,7 @@
 		          <th>广告位置</th>
 		          <th>计划投放量</th>
 		          <th>已投放量</th>
+		          <th>操作</th>
 		        </tr>
 		      </thead>
 		      <tbody>
@@ -27,6 +28,7 @@
 		          <td>{{.ARvo.Pos.Name}}</td>
 		          <td>{{.A.Display_times}}千次</td>
 		          <td>{{.A.Display_count}}</td>
+		          <td><a href="/adv/edit?id={{.A.Id}}" class="btn btn-primary">编辑</a></td>
 		        </tr>
 		        {{end}}
 		      </tbody>

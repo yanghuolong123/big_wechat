@@ -76,11 +76,15 @@
 	    			<select name="Pos" class="form-control" id="adv_pos">
 	    				<option value="">请选择</option>
 		      		{{range .posList}}
+		      			{{if eq $.tid .Pos.Type }}
 		      			<option value="{{.Pos.Id}}">{{.Pos.Name}} (￥{{.AdvRe.Price}}/千次)</option>
+		      			{{end}}
 		      		{{end}}
 				</select>
 				{{range .posList}}
+					{{if eq $.tid .Pos.Type }}
 					<input type="hidden" id="pos_price_{{.Pos.Id}}" value="{{.AdvRe.Price}}">
+					{{end}}
 		      		{{end}}
 	    		</div>
 	    		<div class="col-sm-3">

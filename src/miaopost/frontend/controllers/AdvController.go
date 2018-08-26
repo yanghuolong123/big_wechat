@@ -111,3 +111,50 @@ func (this *AdvController) View() {
 	this.Layout = "layout/main.tpl"
 	this.TplName = "adv/view.tpl"
 }
+
+func (this *AdvController) EditGet() {
+	if this.User == nil {
+		this.Tips("请先登陆")
+	}
+
+	id := this.Int("id")
+	adv, err := models.GetAdvById(id)
+	if err != nil {
+		help.Error(err)
+		this.Tips(err.Error())
+	}
+	vo := models.ConvertAdvToVo(adv)
+
+	this.Data["vo"] = vo
+	this.Data["tid"] = adv.Type
+
+	posList := models.GetAdvRegionByRegionId(this.Rid)
+	this.Data["posList"] = models.ConvertAdvRegionToVos(posList)
+	this.Layout = "layout/main.tpl"
+	this.TplName = "adv/edit.tpl"
+}
+
+func (this *AdvController) EditPost() {
+	if this.User == nil {
+		this.SendRes(-1, "请先登陆", nil)
+	}
+	id := this.Int("id")
+	adv, err := models.GetAdvById(id)
+	if err != nil {
+		help.Error(err)
+		this.SendRes(-1, err.Error(), nil)
+	}
+
+	if err := this.ParseForm(adv); err != nil {
+		help.Error(err)
+		this.SendRes(-1, err.Error(), nil)
+	}
+
+	err = models.UpdateAdv(adv)
+	if err != nil {
+		help.Error(err)
+		this.SendRes(-1, err.Error(), nil)
+	}
+
+	this.SendRes(0, "success", nil)
+}
