@@ -37,18 +37,18 @@ $(function(){
 		advs = e.data;
 		var i = 0;
 		$.each(advs, function(i,item){
-			var tag = item.Tag;
+			var tag = item.A.Tag;
 			if(tag == '') {
 				tag = '推广';
 			}
 
-			var link = '/adv/view?id='+item.Id;
+			var link = '/adv/view?id='+item.A.Id;
 			if(item.Target!="") {
-				link = item.Target;
+				link = item.A.Target;
 			}
 
 			var icon = "";
-			if(item.Potos!="") {
+			if(item.A.Potos!="") {
 				icon = '<img class="img_tip" src="/static/img/image_s.png"/>';
 			}
 
@@ -62,13 +62,13 @@ $(function(){
 			$c += '	</div>';
 			$c += '	<div class="row">';
 			$c += ' 		<div class="info-content col-md-12">	' ;
-			$c += '			<a href="'+link+'" class="list_content">'+item.Content+icon+'</a>';
+			$c += '			<a href="'+link+'" class="list_content">'+item.Desc+icon+'</a>';
 			$c += '			<div class="line"></div>';
 			$c += '		</div>';
 			$c += '	</div>';
 			$c += '</div>';
 
-			var pos  = item.Pos;
+			var pos  = item.A.Pos;
 			if(pos==1) {
 				$(".info-list .page:last .info").eq(4+i).after($c);
 				i++;

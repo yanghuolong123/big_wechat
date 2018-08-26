@@ -77,8 +77,9 @@ func (this *AdvController) ShowList() {
 	size := this.Int("size")
 
 	advs := models.ShowListAdvByRegion(this.Rid, size)
+	vos := models.ConvertAdvToVos(advs)
 
-	this.SendRes(0, "success", advs)
+	this.SendRes(0, "success", vos)
 }
 
 func (this *AdvController) ShowView() {

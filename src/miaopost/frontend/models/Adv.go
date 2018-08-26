@@ -47,6 +47,7 @@ type AdvVo struct {
 	StatusLabel     string
 	Head_income     float64
 	Operator_income float64
+	Desc            string
 }
 
 func CreateAdv(av *Adv) error {
@@ -190,6 +191,7 @@ func ConvertAdvToVo(adv *Adv) *AdvVo {
 		vo.Logo = logos[randnum]
 	}
 	vo.StatusLabel = AdvStatusArr()[adv.Status]
+	vo.Desc = help.SubStr(help.HtmlToStr(adv.Content), 0, 300)
 
 	ar, _ := GetAdvRegionByRegionidAndPosid(adv.Region_id, adv.Pos)
 	vo.ARvo = ConvertAdvRegionToVo(ar)
