@@ -195,6 +195,7 @@ $(function(){
 	});
 
 	$(".btn-adv").click(function(){
+		$this = $(this);
 
 		var obj = $("#adv-form").serializeObject();
 		if($.trim(obj.Merch_name)=="") {
