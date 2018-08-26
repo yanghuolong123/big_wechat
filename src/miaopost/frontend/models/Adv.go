@@ -133,23 +133,45 @@ func ShowListAdvByRegion(r, size int) []*Adv {
 	} else if size < 15 {
 		for _, a := range advs {
 			if a.Pos <= 1 {
-				new_advs = append(new_advs, a)
+				key := "adv_day_show_times:" + help.TimeToStr(time.Now(), help.DateFormat) + ":" + help.ToStr(a.Id)
+				day_limit := help.StrToInt(help.Redis.Get(key))
+				if day_limit < a.Day_limit {
+					help.Redis.Incr(key, 1, 24*3600)
+					new_advs = append(new_advs, a)
+				}
 			}
 		}
 	} else if size < 25 {
 		for _, a := range advs {
 			if a.Pos <= 2 {
-				new_advs = append(new_advs, a)
+				key := "adv_day_show_times:" + help.TimeToStr(time.Now(), help.DateFormat) + ":" + help.ToStr(a.Id)
+				day_limit := help.StrToInt(help.Redis.Get(key))
+				if day_limit < a.Day_limit {
+					help.Redis.Incr(key, 1, 24*3600)
+					new_advs = append(new_advs, a)
+				}
 			}
 		}
 	} else if size < 35 {
 		for _, a := range advs {
 			if a.Pos <= 3 {
-				new_advs = append(new_advs, a)
+				key := "adv_day_show_times:" + help.TimeToStr(time.Now(), help.DateFormat) + ":" + help.ToStr(a.Id)
+				day_limit := help.StrToInt(help.Redis.Get(key))
+				if day_limit < a.Day_limit {
+					help.Redis.Incr(key, 1, 24*3600)
+					new_advs = append(new_advs, a)
+				}
 			}
 		}
 	} else if size <= 40 {
-		new_advs = advs
+		for _, a := range advs {
+			key := "adv_day_show_times:" + help.TimeToStr(time.Now(), help.DateFormat) + ":" + help.ToStr(a.Id)
+			day_limit := help.StrToInt(help.Redis.Get(key))
+			if day_limit < a.Day_limit {
+				help.Redis.Incr(key, 1, 24*3600)
+				new_advs = append(new_advs, a)
+			}
+		}
 	}
 
 	go func(advs []*Adv) {
