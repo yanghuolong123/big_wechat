@@ -246,12 +246,14 @@ $(function(){
 			return;
 		}
 
+		 $this.attr("disabled","disabled");
 
 		//var data = $("#adv-form").serialize();
 		//alert(data);
 		$.post("/adv/create",obj,function(e){
 			if(e.code<0) {
                                 		prompt(e.msg);
+                                		$this.removeAttr("disabled");
                                 		return false;
                         	}
 
