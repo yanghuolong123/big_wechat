@@ -135,6 +135,7 @@
 	  </div>
 	</form>
 </div>
+{{template "pay/qrcode.tpl" .}} 
 
 <style type="text/css">
 	form label{color: #777;}

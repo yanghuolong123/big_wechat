@@ -7,6 +7,7 @@
 <div class="row">
 	<div class="col-md-8">
 		{{str2html .adv.A.Content}}
+		<br><br>
 	</div>
 	<div class="col-md-8 photos">
 		{{range  .adv.Photos}}

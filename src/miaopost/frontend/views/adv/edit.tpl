@@ -265,7 +265,7 @@ $(function(){
                         	}  
 
                         	greeting({msg:"您发布的广告修改成功！",confirm:function(){
-		               // location.href  = "/info";
+		               location.href  = "/info";
 		          	}});
 
 		});
