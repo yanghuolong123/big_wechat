@@ -85,7 +85,7 @@ $(function(){
 <script type="text/javascript">
 $(function(){
 	$.post("/adv/showView",function(e){
-		if(e<=0) {
+		if(e.code<=0) {
 			return false;
 		}
 
