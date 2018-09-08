@@ -35,6 +35,7 @@
 	<div class="row">
 		<input type="hidden" id="hasMore"  value="{{.hasMore}}" />
 		<input type="hidden" id="page"  value="{{.page}}" />
+		<input type="hidden" id="size"  value="{{.size}}" />
 		{{if .cid}}
 		<input type="hidden" id="cid"  value="{{.cid}}" />
 		{{end}}

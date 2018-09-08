@@ -37,6 +37,7 @@ func init() {
 	beego.Router("/user/edit", &controllers.UserController{}, "post:EditPost")
 	beego.Router("/user/my", &controllers.UserController{}, "*:My")
 	beego.Router("/user/account", &controllers.UserController{}, "*:Account")
+	beego.Router("/user/adv", &controllers.UserController{}, "*:Adv")
 
 	// 信息
 	beego.Router("/info", &controllers.InfoController{})
@@ -63,6 +64,7 @@ func init() {
 
 	// 文章
 	beego.Router("/article/view", &controllers.ArticleController{}, "*:View")
+	beego.Router("/article/advEntry", &controllers.ArticleController{}, "*:AdvEntry")
 
 	// 支付
 	beego.Router("/pay/confirm", &controllers.PayController{}, "get,post:Confirm")
@@ -72,4 +74,13 @@ func init() {
 	beego.Router("/pay/check", &controllers.PayController{}, "post:Check")
 	beego.Router("/pay/withdraw", &controllers.PayController{}, "post:Withdraw")
 	beego.Router("/pay/balance", &controllers.PayController{}, "post:Balance")
+
+	// 广告
+	beego.Router("/adv/create", &controllers.AdvController{}, "get:CreateGet")
+	beego.Router("/adv/create", &controllers.AdvController{}, "post:CreatePost")
+	beego.Router("/adv/edit", &controllers.AdvController{}, "get:EditGet")
+	beego.Router("/adv/edit", &controllers.AdvController{}, "post:EditPost")
+	beego.Router("/adv/showList", &controllers.AdvController{}, "post:ShowList")
+	beego.Router("/adv/showView", &controllers.AdvController{}, "post:ShowView")
+	beego.Router("/adv/view", &controllers.AdvController{}, "get,post:View")
 }

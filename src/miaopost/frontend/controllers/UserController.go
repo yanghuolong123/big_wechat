@@ -95,3 +95,13 @@ func (this *UserController) Account() {
 	this.Layout = "layout/main.tpl"
 	this.TplName = "user/account.tpl"
 }
+
+// 我的广告
+func (this *UserController) Adv() {
+	advs := models.GetAdvByUid(this.User.Id)
+
+	this.Data["advs"] = models.ConvertAdvToVos(advs)
+
+	this.Layout = "layout/main.tpl"
+	this.TplName = "user/adv.tpl"
+}

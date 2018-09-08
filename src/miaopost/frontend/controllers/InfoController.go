@@ -24,6 +24,7 @@ func (this *InfoController) Get() {
 	count := models.GetInfoCount(0, this.Rid)
 	this.Data["hasMore"] = 0
 	this.Data["page"] = 0
+	this.Data["size"] = len(infos)
 	if 1*pageSize < count {
 		this.Data["hasMore"] = 1
 	}
@@ -65,6 +66,7 @@ func (this *InfoController) List() {
 
 	this.Data["cid"] = int(cid)
 	this.Data["infos"] = models.ConvertInfosToVo(infos)
+	this.Data["size"] = len(infos)
 
 	adv := models.GetArticleByTypeAndGroup(this.Rid, models.Type_Adv, models.Adv_List_Bottom)
 	this.Data["adv_list"] = models.RandAdv(adv, 1)
@@ -314,7 +316,7 @@ func (this *InfoController) ListPage() {
 	q.OrderBy = []string{"-update_time"}
 	var slice []*models.Info
 	q.ReturnModelList = &slice
-	p := help.GetPageList(q, int(page), 30)
+	p := help.GetPageList(q, int(page), pageSize)
 	data := p.DataList
 	infos := data.(*[]*models.Info)
 
@@ -326,6 +328,7 @@ func (this *InfoController) ListPage() {
 	m["listData"] = s
 	m["page"] = p.CurrentPage
 	m["hasMore"] = p.HasMore
+	m["size"] = p.CurrentSize
 
 	this.SendRes(0, "success", m)
 }

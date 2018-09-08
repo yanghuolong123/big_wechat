@@ -28,6 +28,7 @@
 	{{template "info/infoMsg.tpl" .}}
 	{{end}}
 	
+	<!--
 	<div class="adv row">
 		{{if .adv}}
 		<ul>
@@ -37,6 +38,8 @@
 		</ul>
 		{{end}}
 	</div>
+	-->
+
 </div>
 
 {{if  .reward_type}}
@@ -78,3 +81,28 @@ $(function(){
 });
 </script>
 {{end}}
+
+<script type="text/javascript">
+$(function(){
+	$.post("/adv/showView",function(e){
+		if(e.code<=0) {
+			return false;
+		}
+
+		var vo = e.data;
+		var link = "/adv/view?id="+vo.A.Id;
+		if(vo.A.Target!="") {
+			link = vo.A.Target;
+		}
+
+		$c = "";
+		$c += '<div class="adv row"> ';
+		$c += '<ul>';
+		$c += '<li><a href="'+link+'"><img src="'+vo.Logo+'!800!800" /></a></li> ';
+		$c += '</ul>';
+		$c += '</div>';
+		$(".view").append($c);
+
+	});
+});
+</script>

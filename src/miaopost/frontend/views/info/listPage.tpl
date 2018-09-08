@@ -1,3 +1,4 @@
+<div class="page">
 {{range .infos}}
 <div class="info">
 	<div class="row">
@@ -24,3 +25,66 @@
 {{else}}
 	<div class="alert alert-warning col-md-10" role="alert">亲，还没有数据哦！</div>
 {{end}}
+</div>
+
+<script type="text/javascript">
+$(function(){
+	$.post('/adv/showList', {size:$("#size").val()}, function(e){
+		if(e<=0) {
+			return false;
+		}
+
+		advs = e.data;
+		var i = 0;
+		$.each(advs, function(i,item){
+			var tag = item.A.Tag;
+			if(tag == '') {
+				tag = '推广';
+			}
+
+			var link = '/adv/view?id='+item.A.Id;
+			if(item.Target!="") {
+				link = item.A.Target;
+			}
+
+			var icon = "";
+			if(item.A.Potos!="") {
+				icon = '<img class="img_tip" src="/static/img/image_s.png"/>';
+			}
+
+			$c = '';
+			$c += '<div class="info">';
+			$c += '	<div class="row">';
+			$c += '		<div class="col-md-8 col-xs-3 cat"><span class="label label-warning">'+tag+'</span></div>';
+			$c += '		<div class="col-md-4 col-xs- 9 meta text-right">';
+			//$c += '			<span>展示数('+item.Display_count+')</span>';
+			$c += '		</div>';
+			$c += '	</div>';
+			$c += '	<div class="row">';
+			$c += ' 		<div class="info-content col-md-12">	' ;
+			$c += '			<a href="'+link+'" class="list_content">'+item.Desc+icon+'</a>';
+			$c += '			<div class="line"></div>';
+			$c += '		</div>';
+			$c += '	</div>';
+			$c += '</div>';
+
+			var pos  = item.A.Pos;
+			if(pos==1) {
+				$(".info-list .page:last .info").eq(4+i).after($c);
+				i++;
+			} else if(pos == 2) {
+				$(".info-list  .page:last .info").eq(14+i).after($c);
+				i++;
+			} else if(pos == 3) {
+				$(".info-list .page:last  .info").eq(24+i).after($c);
+				i++;
+			} else if(pos ==4) {
+				$(".info-list .page:last  .info").eq(34+i).after($c);
+				i++;
+			}
+			
+
+		});
+	});
+});
+</script>
