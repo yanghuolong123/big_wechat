@@ -562,7 +562,7 @@ $(function(){
 				prompt(e.msg);
 				return false;
 			}
-			
+			window.location = location.href;
 		});
 	});
 });

@@ -269,6 +269,14 @@ func (this *PayController) Withdraw() {
 	u := this.GetSession("user")
 	user := u.(*models.User)
 
+	ua, err := models.GetUserAccountByUid(user.Id)
+	if err != nil {
+		this.SendRes(-1, "obtain balance failed", nil)
+	}
+	if amount > ua.Amount || ua.Amount <= 0 {
+		this.SendRes(-1, "余额不足", nil)
+	}
+
 	order, _ := models.GenWithdrawOrder(user.Id, amount)
 	//partnerTradeNo := help.GenOrderNo()
 	certDir := beego.AppConfig.String("wx.pay.cert.dir")

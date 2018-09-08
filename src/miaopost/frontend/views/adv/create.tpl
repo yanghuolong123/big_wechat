@@ -17,7 +17,7 @@
 	  <div class="form-group">
 	    <label for="tag" class="col-sm-2 control-label">广告标签</label>
 	    <div class="col-sm-6">
-	      <input type="text" class="form-control" name="Tag" placeholder="最多4个汉字，如美食、手机、留学等，不填则默认显示“推广”">
+	      <input type="text" class="form-control" name="Tag" placeholder="例：美食，礼品，英语课程，Education">
 	    </div>
 	  </div>
 	  {{else }}
