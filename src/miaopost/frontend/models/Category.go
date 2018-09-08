@@ -54,7 +54,7 @@ func GetAllCategory() []Category {
 
 func GetCatsByRid(rid int) []Category {
 	var clist []Category
-	_, err := orm.NewOrm().QueryTable("tbl_category").Filter("status", 0).Filter("rid", rid).OrderBy("-sort").All(&clist)
+	_, err := orm.NewOrm().QueryTable("tbl_category").Filter("status", 0).Filter("rid", rid).OrderBy("-sort", "id").All(&clist)
 	if err != nil {
 		help.Log("error", err.Error())
 	}
