@@ -47,6 +47,14 @@ func (this *BaseController) Prepare() {
 			}
 
 			userinfo := wechat.GetWxUserinfo(openid, "")
+			if sc, ok := userinfo["subscribe"]; ok {
+				if sc.(float64) == 0 {
+					msg := "请先关注秒Po公众号"
+					this.Redirect("/tips?msg="+msg+"&tpl=follow", 302)
+					//this.StopRun()
+					return
+				}
+			}
 			if v, ok := userinfo["nickname"]; ok {
 				rid := 1
 				if this.Rid > 0 {
@@ -97,6 +105,7 @@ func (this *BaseController) Prepare() {
 			}
 		}
 
+		fmt.Println("***************** setRegion:", setRegion)
 		if subDomain != "" {
 			uri := this.Ctx.Input.URI()
 			if uri == "/" || uri == "" {
